@@ -52,6 +52,11 @@ final class Highlighter
         }
     }
 
+    public function isSupportedLanguage(string $language): bool
+    {
+        return array_key_exists(strtolower($language), $this->languages);
+    }
+
     public function setLanguage(string $name, Language $language): self
     {
         $this->languages[$name] = $language;

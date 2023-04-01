@@ -41,4 +41,16 @@ class HighlighterTest extends TestCase
             ['02', 'html'], // deep injections
         ];
     }
+
+    public function test_is_supported_language(): void
+    {
+        $highlight = new Highlighter();
+
+        self::assertTrue($highlight->isSupportedLanguage('php'));
+        self::assertTrue($highlight->isSupportedLanguage('PHP'));
+        self::assertTrue($highlight->isSupportedLanguage('Php'));
+
+        self::assertFalse($highlight->isSupportedLanguage('DoesNotExist'));
+        self::assertFalse($highlight->isSupportedLanguage('DOESNOTEXIST'));
+    }
 }

@@ -84,13 +84,40 @@ This package makes it easy for developers to add new languages or extend existin
 
 In order to build your own highlighter functionality, you need to understand two concepts of how code is highlighted.
 
-**1. Tokens**
+**1. Patterns**
 
-A `token` represents part of your code that should be highlighted. A `token` can be a single keyword like `return` or `class`, or it could be any part of your code, like for example a comment: `/* this is a comment */` or an attribute: `#[Get(uri: '/')]`.
+A _pattern_ represents part of your code that should be highlighted. A _pattern_ can target a single keyword like `return` or `class`, or it could be any part of your code, like for example a comment: `/* this is a comment */` or an attribute: `#[Get(uri: '/')]`.
 
-A `token` is represented by a simple class that provides a regex pattern, and a `TokenType`. The regex pattern will find the relevant content, while the `TokenType` is an enum that will determine how that specific token is colored.
+Each _pattern_ is represented by a simple class that provides a regex pattern, and a `TokenType`. The regex pattern is used to match relevant content to this specific _pattern_, while the `TokenType` is an enum value that will determine how that specific _pattern_ is colored.
 
+Here's an example of a simple _pattern_ to match the namespace of a PHP file:
 
+```php
+use Tempest\Highlight\Pattern;
+use Tempest\Highlight\Patterns\IsPattern;
+use Tempest\Highlight\Tokens\TokenType;
+
+final readonly class NamespacePattern implements Pattern
+{
+    use IsPattern;
+
+    public function getPattern(): string
+    {
+        return 'namespace (?<match>[\w\\\\]+)';
+    }
+
+    public function getTokenType(): TokenType
+    {
+        return TokenType::TYPE;
+    }
+}
+```
+
+Note that each pattern must include a regex capture group that's named `match`. The content that matched within this group will be highlighted.
+
+For example, this regex `namespace (?<match>[\w\\\\]+)` says that every line starting with `namespace` should be taken into account, but only the part within the named group `(?<match>…)` will actually be colored. In practice that means that the namespace name matching `[\w\\\\]+`, will be colored.
+
+Yes, you'll need some basic knowledge of regex.
 
 **2. Injections**
 

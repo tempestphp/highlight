@@ -18,7 +18,7 @@
 }
 
 .hl-attribute {
-    font-family: "Radon", serif;
+    font-family: "Radon", inherit, monospace;
 }
 
 .hl-type {

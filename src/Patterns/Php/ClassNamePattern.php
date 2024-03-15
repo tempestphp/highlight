@@ -14,7 +14,7 @@ final readonly class ClassNamePattern implements Pattern
 
     public function getPattern(): string
     {
-        return 'class (?<match>[\w]+)';
+        return '(class|interface) (?<match>[\w]+)';
     }
 
     public function getTokenType(): TokenType

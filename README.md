@@ -82,7 +82,7 @@ composer require league/commonmark;
 
 This package makes it easy for developers to add new languages or extend existing languages. Right now, these languages are supported: `php`, `html`, `css`. More will be added.
 
-In order to build your own highlighter functionality, you need to understand _two_ concepts of how code is highlighted.
+In order to build your own highlighter functionality, you need to understand _three_ concepts of how code is highlighted: _patterns_, _injections_, and _languages_.
 
 ### 1. Patterns
 
@@ -178,14 +178,46 @@ The second step in providing an _injection_ is to parse the matched content into
 - Just like patterns, injection regexes should contain a group named `match`, which is written like so `(?<match>…)`
 - Finally, an injection will use the highlighter to parse its matched content into another language
 
-### Extending existing languages
+### 3. Languages
 
-Instead of starting from scratch, the best approach to adding new languages is by extending existing ones. For example, let's add support for `blade`:
+The last concept to understand, although it doesn't mean much. _Languages_ are classes that bring these two concepts together. They are nothing more than a collection of patterns and injections. Take a look at the `HtmlLanguage`, for example:
 
 ```php
-class BladeLanguage extends HtmlLanguage
+class HtmlLanguage implements Language
 {
+    public function getInjections(): array
+    {
+        return [
+            new PhpInjection(),
+            new PhpShortEchoInjection(),
+            new CssInjection(),
+        ];
+    }
+
+    public function getPatterns(): array
+    {
+        return [
+            new OpenTagPattern(),
+            new CloseTagPattern(),
+            new TagAttributePattern(),
+            new HtmlCommentPattern(),
+        ];
+    }
 }
 ```
 
-// TODO
+This `HtmlLanguage` class specifies the following things:
+
+- PHP can be injected within HTML, both with the short echo tag `<?=` and longer `<?php` tags
+- CSS can be injected as well, JavaScript support is still work in progress
+- There are a bunch of patterns to highlight HTML tags properly
+
+So, let's bring everything together to explain how you can add your own languages.
+
+### Adding custom languages
+
+Let's say you're adding `blade` support. You could create a plain language file and start from there, but it'd probably be easier to extend an existing language.
+
+```php
+
+```

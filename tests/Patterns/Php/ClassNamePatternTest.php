@@ -19,5 +19,11 @@ class ClassNamePatternTest extends TestCase
             content: 'class Foo implements Bar',
             expected: 'Foo',
         );
+        
+        $this->assertMatches(
+            pattern: new ClassNamePattern(),
+            content: 'interface Foo implements Bar',
+            expected: 'Foo',
+        );
     }
 }

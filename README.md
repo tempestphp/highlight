@@ -82,9 +82,9 @@ composer require league/commonmark;
 
 This package makes it easy for developers to add new languages or extend existing languages. Right now, these languages are supported: `php`, `html`, `css`. More will be added.
 
-In order to build your own highlighter functionality, you need to understand two concepts of how code is highlighted.
+In order to build your own highlighter functionality, you need to understand _two_ concepts of how code is highlighted.
 
-**1. Patterns**
+### 1. Patterns
 
 A _pattern_ represents part of your code that should be highlighted. A _pattern_ can target a single keyword like `return` or `class`, or it could be any part of your code, like for example a comment: `/* this is a comment */` or an attribute: `#[Get(uri: '/')]`.
 
@@ -119,15 +119,64 @@ For example, this regex `namespace (?<match>[\w\\\\]+)` says that every line sta
 
 Yes, you'll need some basic knowledge of regex. Head over to [https://regexr.com/](https://regexr.com/) if you need help, or take a look at the existing patterns in this repository.
 
-In summary:
+**In summary:**
 
 - Patterns provide a regex that matches parts of your code
 - Those regexes should contain a group named `match`, which is written like so `(?<match>…)`
 - Finally, a pattern provides a `TokenType`, which is used to determine the highlight style for the specific match
 
-**2. Injections**
+### 2. Injections
 
-// TODO
+Once you've understood patterns, the next step is to understand _injections_. _Injections_ are used to highlight different languages within one code block. For example: HTML could contain CSS, which should be styled properly as well.
+
+An _injection_ class will tell the highlighter that it should treat a block of code as a different language. For example:
+
+```html
+<div>
+    <x-slot name="styles">
+        <style>
+            body {
+                background-color: red;
+            }
+        </style>
+    </x-slot>
+</div>
+```
+
+Everything within these `<style></style>` tags should be treated as CSS. That's done by this class:
+
+```php
+use Tempest\Highlight\Highlighter;
+use Tempest\Highlight\Injection;
+use Tempest\Highlight\Injections\IsInjection;
+
+final readonly class CssInjection implements Injection
+{
+    use IsInjection;
+
+    public function getPattern(): string
+    {
+        return '&lt;style&gt;(?<match>(.|\n)*)&lt;\/style&gt;';
+    }
+
+    public function parseContent(string $content, Highlighter $highlighter): string
+    {
+        return $highlighter->parse($content, 'css');
+    }
+}
+```
+
+Just like patterns, an _injection_ must provide a pattern. This pattern, for example, will match anything between style tags: `&lt;style&gt;(?<match>(.|\n)*)&lt;\/style&gt;`.
+
+**Keep in mind that we're always dealing with escaped code!**
+
+The second step in providing an _injection_ is to parse the matched content into another language. That's what the `parseContent` method is for. In this case, we'll get all the code between the style tags that was matched with the named `(?<match>…)` group, and parse that content as CSS instead of whatever language we're currently dealing with.
+
+**In summary:**
+
+- Injections provide a regex that matches a blob of code of language A, while in language B
+- Just like patterns, injection regexes should contain a group named `match`, which is written like so `(?<match>…)`
+- Finally, an injection will use the highlighter to parse its matched content into another language
 
 ### Extending existing languages
 

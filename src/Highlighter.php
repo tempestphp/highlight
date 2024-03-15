@@ -16,9 +16,17 @@ final class Highlighter
 
     public function __construct()
     {
-        $this->languages['php'] = new PhpLanguage();
-        $this->languages['html'] = new HtmlLanguage();
-        $this->languages['css'] = new CssLanguage();
+        $this
+            ->setLanguage('php', new PhpLanguage())
+            ->setLanguage('html', new HtmlLanguage())
+            ->setLanguage('css', new CssLanguage());
+    }
+
+    public function setLanguage(string $name, Language $language): self
+    {
+        $this->languages[$name] = $language;
+
+        return $this;
     }
 
     public function parse(string $content, string $language): string

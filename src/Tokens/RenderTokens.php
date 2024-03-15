@@ -8,7 +8,7 @@ final class RenderTokens
 {
     /**
      * @param string $content
-     * @param \App\Tokens\Token[] $tokens
+     * @param \Tempest\Highlight\Tokens\Token[] $tokens
      * @param int $parsedOffset
      * @return string
      */

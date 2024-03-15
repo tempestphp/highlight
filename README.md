@@ -77,3 +77,31 @@ Keep in mind that you need to manually install `league/commonmark`:
 ```php
 composer require league/commonmark;
 ```
+
+## Language support
+
+This package makes it easy for developers to add new languages or extend existing languages. Right now, these languages are supported: `php`, `html`, `css`. More will be added.
+
+In order to build your own highlighter functionality, you need to understand two concepts of how code is highlighted.
+
+**1. Tokens**
+
+A `token` represents part of your code that should be highlighted. A `token` can be a single keyword like `return` or `class`, or it could be any part of your code, like for example a comment: `/* this is a comment */` or an attribute: `#[Get(uri: '/')]`.
+
+A `token` is represented by a simple class that provides a regex pattern, and a `TokenType`. The regex pattern will find the relevant content, while the `TokenType` is an enum that will determine how that specific token is colored.
+
+
+
+**2. Injections**
+
+### Extending existing languages
+
+Instead of starting from scratch, the best approach to adding new languages is by extending existing ones. For example, let's add support for `blade`:
+
+```php
+class BladeLanguage extends HtmlLanguage
+{
+}
+```
+
+### Adding your own languages

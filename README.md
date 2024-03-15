@@ -51,3 +51,29 @@ Or you can build your own with just a couple of classes:
 ```
 
 You should style your any pre tags yourself.
+
+## CommonMark integration
+
+If you're using `league/commonmark`, you can add highlight support to codeblocks like so:
+
+```php
+use League\CommonMark\Environment\Environment;
+use League\CommonMark\Extension\CommonMark\CommonMarkCoreExtension;
+use League\CommonMark\Extension\CommonMark\Node\Block\FencedCode;
+use League\CommonMark\MarkdownConverter;
+use Tempest\Highlight\CommonMark\HighlightCodeBlockRenderer;
+
+$environment = new Environment();
+
+$environment
+    ->addExtension(new CommonMarkCoreExtension())
+    ->addRenderer(FencedCode::class, new HighlightCodeBlockRenderer());
+
+$markdown = new MarkdownConverter($environment);
+```
+
+Keep in mind that you need to manually install `league/commonmark`:
+
+```php
+composer require league/commonmark;
+```

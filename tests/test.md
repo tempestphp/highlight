@@ -1,5 +1,4 @@
 ```php
-#[Attribute]
-final readonly class AdminRoute extends Route
+class AdminRoute extends Route
 {
 ```

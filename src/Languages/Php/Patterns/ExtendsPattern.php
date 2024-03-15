@@ -14,7 +14,7 @@ final readonly class ExtendsPattern implements Pattern
 
     public function getPattern(): string
     {
-        return 'extends\s(?<match>.*)$';
+        return 'extends\s(?<match>.*)';
     }
 
     public function getTokenType(): TokenType

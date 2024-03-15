@@ -1,0 +1,38 @@
+{
+    "name": "tempest/highlight",
+    "description": "Fast, extensible, server-side code highlighting",
+    "autoload": {
+        "psr-4": {
+            "Tempest\\Highlight\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tempest\\Highlight\\Tests\\": "tests/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Brent Roose",
+            "email": "brendt@stitcher.io"
+        }
+    ],
+    "require": {
+        "php": "^8.3"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^11.0",
+        "phpstan/phpstan": "^1.10.0",
+        "friendsofphp/php-cs-fixer": "^3.21"
+    },
+    "scripts": {
+        "phpunit": "vendor/bin/phpunit --display-warnings --display-skipped --display-deprecations --display-errors --display-notices",
+        "csfixer": "vendor/bin/php-cs-fixer fix --allow-risky=yes",
+        "phpstan": "vendor/bin/phpstan analyse src tests",
+        "qa": [
+            "composer csfixer",
+            "composer phpstan",
+            "composer phpunit"
+        ]
+    }
+}

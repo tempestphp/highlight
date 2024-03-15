@@ -1,0 +1,52 @@
+:root {
+    --background-color: #f3f3f3;
+    --text-color: #000;
+    --keyword-color: #4F95D1;
+    --property-color: #46b98d;
+    --type-color: #D14F57;
+    --generic-color: #9D3AF6;
+    --value-color: #515248;
+    --comment-color: #888888;
+}
+
+.prose pre {
+    background-color: var(--background-color);
+    color: var(--text-color);
+    max-width: 100%;
+    overflow-x: auto;
+    width: 100%;
+}
+
+.hl-keyword {
+    color: var(--keyword-color);
+}
+
+.hl-property {
+    color: var(--property-color);
+}
+
+.hl-attribute {
+    font-family: "Radon", serif;
+}
+
+.hl-type {
+    color: var(--type-color);
+}
+
+.hl-generic {
+    color: var(--generic-color);
+}
+
+.hl-value {
+    color: var(--value-color);
+}
+
+.hl-comment {
+    color: var(--comment-color);
+    font-style: italic;
+    font-family: "Radon", serif;
+}
+
+.hl-blur {
+    filter: blur(2px);
+}

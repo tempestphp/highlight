@@ -1,0 +1,7 @@
+/** @var \Tempest\View\GenericView $this */
+
+final readonly class HomeController
+===
+<span class="hl-comment">/** @var \Tempest\View\<span class="hl-type">GenericView</span> $this */</span>
+
+<span class="hl-keyword">final</span> <span class="hl-keyword">readonly</span> <span class="hl-keyword">class</span> <span class="hl-type">HomeController</span>

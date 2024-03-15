@@ -328,5 +328,28 @@ Let's add these to our `BladeLanguage` class as well:
 And, finally, you can write `{{ … }}` and `{!! … !!}` to echo output. Whatever is between these brackets is also considered PHP, so, one more injection:
 
 ```php
+final readonly class BladeEchoInjection implements Injection
+{
+    use IsInjection;
 
+    public function getPattern(): string
+    {
+        return '({{|{!!)(?<match>.*)(}}|!!})';
+    }
+
+    public function parseContent(string $content, Highlighter $highlighter): string
+    {
+        return $highlighter->parse($content, 'php');
+    }
+}
 ```
+
+With all of that in place, the only thing left to do is to add our language to the highlighter:
+
+```php
+$highlighter->addLanguage('blade', new BladeLanguage());
+```
+
+And you're done! Blade support with just a handful of patterns and injections. 
+
+**You're free to send pull requests with additional language support! Take a look at the [tests](./tests/Languages) to learn how to write tests for patterns and injections.**

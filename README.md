@@ -24,7 +24,7 @@ $code = $highlighter->parse($escapedCode, 'php');
 $code = $highlighter->parse(htmlentities($raw), 'php');
 ```
 
-Next, you can import one of the provided themes:
+Next, you can use one of the provided themes via a CSS import:
 
 ```css
 @import "../vendor/tempest/highlight/src/Themes/highlight-light-lite.css";

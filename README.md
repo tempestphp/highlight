@@ -50,7 +50,7 @@ Or you can build your own with just a couple of classes:
 }
 ```
 
-You should style your any pre tags yourself.
+You should style `<pre>` tags yourself.
 
 ## CommonMark integration
 

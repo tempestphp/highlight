@@ -2,7 +2,7 @@
 
 ## Quickstart
 
-Highlight code like this
+Highlight code like this:
 
 ```php
 $highlighter = new \Tempest\Highlight\Highlighter();

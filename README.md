@@ -127,6 +127,8 @@ In summary:
 
 **2. Injections**
 
+// TODO
+
 ### Extending existing languages
 
 Instead of starting from scratch, the best approach to adding new languages is by extending existing ones. For example, let's add support for `blade`:
@@ -137,4 +139,4 @@ class BladeLanguage extends HtmlLanguage
 }
 ```
 
-### Adding your own languages
+// TODO

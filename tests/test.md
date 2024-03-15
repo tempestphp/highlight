@@ -1,11 +1,22 @@
 ```blade
-<div class="test">
-    @if (count($records) === 1)
-        I have one record!
-    @elseif (count($records) > 1)
-        I have multiple records!
-    @else
-        I don't have any records!
-    @endif
-</div>
+@php
+    $isActive = true;
+    function foo(Type $prop) {
+    }
+@endphp
+ 
+<span @style([
+    'background-color: red',
+    'font-weight: bold' => $isActive,
+])></span>
+ 
+<span style="background-color: red; font-weight: bold;"></span>
+
+<select name="version">
+    @foreach ($product->versions as $version)
+        <option value="{{ $version }}" @selected(old('version') == $version)>
+            {{ $version }}
+        </option>
+    @endforeach
+</select>
 ```

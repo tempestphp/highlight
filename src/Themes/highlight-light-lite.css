@@ -9,14 +9,6 @@
     --comment-color: #888888;
 }
 
-.prose pre {
-    background-color: var(--background-color);
-    color: var(--text-color);
-    max-width: 100%;
-    overflow-x: auto;
-    width: 100%;
-}
-
 .hl-keyword {
     color: var(--keyword-color);
 }

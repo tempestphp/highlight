@@ -19,7 +19,6 @@ $code = $highlighter->parse(htmlentities($raw), 'php');
 Next, you can import one of the provided themes:
 
 ```css
-@import "../vendor/tempest/highlight/src/Themes/highlight-tempest.css";
 @import "../vendor/tempest/highlight/src/Themes/highlight-light-lite.css";
 ```
 
@@ -50,3 +49,5 @@ Or you can build your own with just a couple of classes:
     color: #888888;
 }
 ```
+
+You should style your any pre tags yourself.

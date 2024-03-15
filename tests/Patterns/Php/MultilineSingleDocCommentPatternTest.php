@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Tempest\Highlight\Tests\Patterns\Php;
 
 use PHPUnit\Framework\TestCase;
-use Tempest\Highlight\Patterns\Php\MultilineSingleDocCommentPattern;
+use Tempest\Highlight\Languages\Php\Patterns\MultilineSingleDocCommentPattern;
 use Tempest\Highlight\Tests\Patterns\TestsPatterns;
 
 class MultilineSingleDocCommentPatternTest extends TestCase

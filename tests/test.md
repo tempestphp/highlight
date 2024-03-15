@@ -1,10 +1,11 @@
-```php
-declare(strict_types=1);
-
-namespace Tempest\Highlight;
-
-interface Injection
-{
-    public function parse(string $content, Highlighter $highlighter): string;
-}
+```blade
+<div class="test">
+    @if (count($records) === 1)
+        I have one record!
+    @elseif (count($records) > 1)
+        I have multiple records!
+    @else
+        I don't have any records!
+    @endif
+</div>
 ```

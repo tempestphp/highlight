@@ -93,8 +93,8 @@ Each _pattern_ is represented by a simple class that provides a regex pattern, a
 Here's an example of a simple _pattern_ to match the namespace of a PHP file:
 
 ```php
+use Tempest\Highlight\IsPattern;
 use Tempest\Highlight\Pattern;
-use Tempest\Highlight\Patterns\IsPattern;
 use Tempest\Highlight\Tokens\TokenType;
 
 final readonly class NamespacePattern implements Pattern
@@ -148,7 +148,7 @@ Everything within these `<style></style>` tags should be treated as CSS. That's 
 ```php
 use Tempest\Highlight\Highlighter;
 use Tempest\Highlight\Injection;
-use Tempest\Highlight\Injections\IsInjection;
+use Tempest\Highlight\IsInjection;
 
 final readonly class CssInjection implements Injection
 {

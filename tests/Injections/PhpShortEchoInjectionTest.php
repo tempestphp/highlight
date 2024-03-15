@@ -7,7 +7,7 @@ namespace Tempest\Highlight\Tests\Injections;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Tempest\Highlight\Highlighter;
-use Tempest\Highlight\Injections\PhpShortEchoInjection;
+use Tempest\Highlight\Languages\Php\Injections\PhpShortEchoInjection;
 
 class PhpShortEchoInjectionTest extends TestCase
 {

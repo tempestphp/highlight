@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Tempest\Highlight\Tests\Patterns\Php;
 
 use PHPUnit\Framework\TestCase;
-use Tempest\Highlight\Patterns\Php\NamedArgumentPattern;
+use Tempest\Highlight\Languages\Php\Patterns\NamedArgumentPattern;
 use Tempest\Highlight\Tests\Patterns\TestsPatterns;
 
 class NamedArgumentPatternTest extends TestCase

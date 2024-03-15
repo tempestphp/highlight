@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Tempest\Highlight\Tests\Patterns\Php;
 
 use PHPUnit\Framework\TestCase;
-use Tempest\Highlight\Patterns\Php\ReturnTypePattern;
+use Tempest\Highlight\Languages\Php\Patterns\ReturnTypePattern;
 use Tempest\Highlight\Tests\Patterns\TestsPatterns;
 
 class ReturnTypePatternTest extends TestCase

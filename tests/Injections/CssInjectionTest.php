@@ -7,7 +7,7 @@ namespace Tempest\Highlight\Tests\Injections;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Tempest\Highlight\Highlighter;
-use Tempest\Highlight\Injections\CssInjection;
+use Tempest\Highlight\Languages\Css\Injections\CssInjection;
 
 class CssInjectionTest extends TestCase
 {

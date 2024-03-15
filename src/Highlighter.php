@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace Tempest\Highlight;
 
-use Tempest\Highlight\Languages\CssLanguage;
-use Tempest\Highlight\Languages\HtmlLanguage;
-use Tempest\Highlight\Languages\PhpLanguage;
+use Tempest\Highlight\Languages\Blade\BladeLanguage;
+use Tempest\Highlight\Languages\Css\CssLanguage;
+use Tempest\Highlight\Languages\Html\HtmlLanguage;
+use Tempest\Highlight\Languages\Php\PhpLanguage;
 use Tempest\Highlight\Tokens\ParseTokens;
 use Tempest\Highlight\Tokens\RenderTokens;
 
@@ -19,6 +20,7 @@ final class Highlighter
         $this
             ->setLanguage('php', new PhpLanguage())
             ->setLanguage('html', new HtmlLanguage())
+            ->setLanguage('blade', new BladeLanguage())
             ->setLanguage('css', new CssLanguage());
     }
 

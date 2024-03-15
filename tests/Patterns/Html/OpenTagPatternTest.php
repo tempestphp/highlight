@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Tempest\Highlight\Tests\Patterns\Html;
 
 use PHPUnit\Framework\TestCase;
-use Tempest\Highlight\Patterns\Html\OpenTagPattern;
+use Tempest\Highlight\Languages\Html\Patterns\OpenTagPattern;
 use Tempest\Highlight\Tests\Patterns\TestsPatterns;
 
 class OpenTagPatternTest extends TestCase

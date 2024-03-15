@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Tempest\Highlight\Tests\Patterns\Html;
 
 use PHPUnit\Framework\TestCase;
-use Tempest\Highlight\Patterns\Html\CloseTagPattern;
+use Tempest\Highlight\Languages\Html\Patterns\CloseTagPattern;
 use Tempest\Highlight\Tests\Patterns\TestsPatterns;
 
 class CloseTagPatternTest extends TestCase

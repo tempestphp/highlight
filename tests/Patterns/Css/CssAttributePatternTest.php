@@ -6,7 +6,7 @@ namespace Tempest\Highlight\Tests\Patterns\Css;
 
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
-use Tempest\Highlight\Patterns\Css\CssAttributePattern;
+use Tempest\Highlight\Languages\Css\Patterns\CssAttributePattern;
 use Tempest\Highlight\Tests\Patterns\TestsPatterns;
 
 class CssAttributePatternTest extends TestCase

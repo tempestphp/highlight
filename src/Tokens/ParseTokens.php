@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Tempest\Highlight\Tokens;
 
 use Tempest\Highlight\Language;
-use Tempest\Highlight\Patterns\Php\GenericPattern;
+use Tempest\Highlight\Languages\Php\Patterns\GenericPattern;
 
 final readonly class ParseTokens
 {

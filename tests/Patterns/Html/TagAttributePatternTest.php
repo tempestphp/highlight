@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Tempest\Highlight\Tests\Patterns\Html;
 
 use PHPUnit\Framework\TestCase;
-use Tempest\Highlight\Patterns\Html\TagAttributePattern;
+use Tempest\Highlight\Languages\Html\Patterns\TagAttributePattern;
 use Tempest\Highlight\Tests\Patterns\TestsPatterns;
 
 class TagAttributePatternTest extends TestCase

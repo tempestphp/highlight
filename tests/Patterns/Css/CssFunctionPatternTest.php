@@ -6,7 +6,7 @@ namespace Tempest\Highlight\Tests\Patterns\Css;
 
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
-use Tempest\Highlight\Patterns\Css\CssFunctionPattern;
+use Tempest\Highlight\Languages\Css\Patterns\CssFunctionPattern;
 use Tempest\Highlight\Tests\Patterns\TestsPatterns;
 
 class CssFunctionPatternTest extends TestCase

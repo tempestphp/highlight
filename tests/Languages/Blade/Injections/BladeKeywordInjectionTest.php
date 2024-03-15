@@ -1,10 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tempest\Highlight\Tests\Languages\Blade\Injections;
 
 use PHPUnit\Framework\Attributes\Test;
-use Tempest\Highlight\Highlighter;
 use PHPUnit\Framework\TestCase;
+use Tempest\Highlight\Highlighter;
 use Tempest\Highlight\Languages\Blade\Injections\BladeKeywordInjection;
 
 class BladeKeywordInjectionTest extends TestCase

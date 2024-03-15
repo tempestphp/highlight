@@ -1,11 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tempest\Highlight\Tests\Languages\Css\Injections;
 
 use PHPUnit\Framework\Attributes\Test;
+use PHPUnit\Framework\TestCase;
 use Tempest\Highlight\Highlighter;
 use Tempest\Highlight\Languages\Css\Injections\CssAttributeInjection;
-use PHPUnit\Framework\TestCase;
 
 class CssAttributeInjectionTest extends TestCase
 {

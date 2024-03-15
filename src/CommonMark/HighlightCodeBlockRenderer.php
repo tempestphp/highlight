@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tempest\Highlight\CommonMark;
 
 use InvalidArgumentException;
@@ -8,6 +10,7 @@ use League\CommonMark\Extension\CommonMark\Renderer\Block\FencedCodeRenderer as 
 use League\CommonMark\Node\Node;
 use League\CommonMark\Renderer\ChildNodeRendererInterface;
 use League\CommonMark\Renderer\NodeRendererInterface;
+use League\CommonMark\Util\HtmlElement;
 use Tempest\Highlight\Highlighter;
 
 class HighlightCodeBlockRenderer implements NodeRendererInterface
@@ -24,7 +27,7 @@ class HighlightCodeBlockRenderer implements NodeRendererInterface
 
         $highlight = new Highlighter();
 
-        /** @var \League\CommonMark\Util\HtmlElement $codeBlock */
+        /** @var HtmlElement $codeBlock */
         $codeBlock = $renderer->render($node, $childRenderer);
 
         /** @var string $codeText */

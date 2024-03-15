@@ -43,8 +43,6 @@
 
 .hl-comment {
     color: var(--comment-color);
-    font-style: italic;
-    font-family: "Radon", serif;
 }
 
 .hl-blur {

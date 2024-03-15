@@ -117,7 +117,13 @@ Note that each pattern must include a regex capture group that's named `match`. 
 
 For example, this regex `namespace (?<match>[\w\\\\]+)` says that every line starting with `namespace` should be taken into account, but only the part within the named group `(?<match>…)` will actually be colored. In practice that means that the namespace name matching `[\w\\\\]+`, will be colored.
 
-Yes, you'll need some basic knowledge of regex.
+Yes, you'll need some basic knowledge of regex. Head over to [https://regexr.com/](https://regexr.com/) if you need help, or take a look at the existing patterns in this repository.
+
+In summary:
+
+- Patterns provide a regex that matches parts of your code
+- Those regexes should contain a group named `match`, which is written like so `(?<match>…)`
+- Finally, a pattern provides a `TokenType`, which is used to determine the highlight style for the specific match
 
 **2. Injections**
 

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tempest\Highlight\CommonMark;
 
 use League\CommonMark\Environment\Environment;
@@ -18,10 +20,10 @@ class HighlightCodeBlockRendererTest extends TestCase
         $environment
             ->addExtension(new CommonMarkCoreExtension())
             ->addExtension(new FrontMatterExtension())
-            ->addRenderer(FencedCode::class, new \Tempest\Highlight\CommonMark\HighlightCodeBlockRenderer());
+            ->addRenderer(FencedCode::class, new HighlightCodeBlockRenderer());
 
         $markdown = new MarkdownConverter($environment);
-        
+
         $parsed = $markdown->convert("```php
         class Foo {}
         ```");

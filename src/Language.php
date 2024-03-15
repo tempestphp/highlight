@@ -7,12 +7,12 @@ namespace Tempest\Highlight;
 interface Language
 {
     /**
-     * @return \App\Injection[]
+     * @return \Tempest\Highlight\Injection[]
      */
     public function getInjections(): array;
 
     /**
-     * @return \App\Pattern[]
+     * @return \Tempest\Highlight\Pattern[]
      */
     public function getPatterns(): array;
 }

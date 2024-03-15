@@ -19,7 +19,7 @@ final class RenderTokens
     ): string {
         usort($tokens, fn (Token $a, Token $b) => $a->offset <=> $b->offset);
 
-        /** @var \App\Tokens\Token[] $groupedTokens */
+        /** @var \Tempest\Highlight\Tokens\Token[] $groupedTokens */
         $groupedTokens = [];
 
         while($token = current($tokens)) {

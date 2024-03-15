@@ -1,3 +1,5 @@
-```blade
-{{ count($var) }}
+```php
+#[Attribute]
+final readonly class AdminRoute extends Route
+{
 ```

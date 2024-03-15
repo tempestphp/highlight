@@ -39,35 +39,6 @@ class PhpLanguage implements Language
     public function getPatterns(): array
     {
         return [
-            // ATTRIBUTES
-            new AttributePattern(),
-
-            // COMMENTS
-            new MultilineDoubleDocCommentPattern(),
-            new MultilineSingleDocCommentPattern(),
-            new SinglelineDocCommentPattern(),
-
-            // TYPES
-            new AttributeTypePattern(),
-            new ImplementsPattern(),
-            new ExtendsPattern(),
-            new UsePattern(),
-            new NamespacePattern(),
-            new PropertyTypesPattern(),
-            new ClassNamePattern(),
-            new ReturnTypePattern(),
-            new StaticClassCallPattern(),
-            new ParameterTypePattern(),
-            new NewObjectPattern(),
-
-            // PROPERTIES
-            new ClassPropertyPattern(),
-            new NamedArgumentPattern(),
-            new PropertyAccessPattern(),
-            new FunctionNamePattern(),
-            new NestedFunctionCallPattern(),
-            new FunctionCallPattern(),
-            new ConstantPropertyPattern(),
 
             // KEYWORDS
             new KeywordPattern('__halt_compiler'),
@@ -140,6 +111,36 @@ class PhpLanguage implements Language
             new KeywordPattern('xor'),
             new KeywordPattern('yield'),
             new KeywordPattern('yield from'),
+
+            // ATTRIBUTES
+            new AttributePattern(),
+
+            // COMMENTS
+            new MultilineDoubleDocCommentPattern(),
+            new MultilineSingleDocCommentPattern(),
+            new SinglelineDocCommentPattern(),
+
+            // TYPES
+            new AttributeTypePattern(),
+            new ImplementsPattern(),
+            new ExtendsPattern(),
+            new UsePattern(),
+            new NamespacePattern(),
+            new PropertyTypesPattern(),
+            new ClassNamePattern(),
+            new ReturnTypePattern(),
+            new StaticClassCallPattern(),
+            new ParameterTypePattern(),
+            new NewObjectPattern(),
+
+            // PROPERTIES
+            new ClassPropertyPattern(),
+            new NamedArgumentPattern(),
+            new PropertyAccessPattern(),
+            new FunctionNamePattern(),
+            new NestedFunctionCallPattern(),
+            new FunctionCallPattern(),
+            new ConstantPropertyPattern(),
         ];
     }
 }

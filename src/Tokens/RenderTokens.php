@@ -17,7 +17,6 @@ final class RenderTokens
         array $tokens,
         int $parsedOffset = 0
     ): string {
-        dump($tokens);
         usort($tokens, fn (Token $a, Token $b) => $a->offset <=> $b->offset);
 
         /** @var \Tempest\Highlight\Tokens\Token[] $groupedTokens */

@@ -1,5 +1,13 @@
 # Fast, extensible, server-side code highlighting
 
+TODO:
+
+- [ ] Add JS support
+- [ ] Add SQL support
+- [ ] Add Twig support
+- [ ] Add YAML support
+- [ ] Add JSON support
+
 ## Quickstart
 
 Highlight code like this:
@@ -216,7 +224,108 @@ So, let's bring everything together to explain how you can add your own language
 
 ### Adding custom languages
 
-Let's say you're adding `blade` support. You could create a plain language file and start from there, but it'd probably be easier to extend an existing language.
+Let's say you're adding [Blade](https://laravel.com/docs/11.x/blade) support. You could create a plain language file and start from there, but it'd probably be easier to extend an existing language, `HtmlLanguage` is probably the best. Let create a new `BladeLanguage` class that extends from `HtmlLanguage`:
+
+```php
+class BladeLanguage extends HtmlLanguage
+{
+    public function getInjections(): array
+    {
+        return [
+            ...parent::getInjections(),
+        ];
+    }
+
+    public function getPatterns(): array
+    {
+        return [
+            ...parent::getPatterns(),
+        ];
+    }
+}
+```
+
+With this class in place, we can start adding our own patterns and injections. Let's start with adding a pattern that matches all Blade keywords, which are always prepended with the `@` sign. Let's add it:
+
+```php
+final readonly class BladeKeywordPattern implements Pattern
+{
+    use IsPattern;
+
+    public function getPattern(): string
+    {
+        return '(?<match>\@[\w]+)\b';
+    }
+
+    public function getTokenType(): TokenType
+    {
+        return TokenType::KEYWORD;
+    }
+}
+```
+
+And register it in our `BladeLanguage` class:
+
+```php
+    public function getPatterns(): array
+    {
+        return [
+            ...parent::getPatterns(),
+            new BladeKeywordPattern(),
+        ];
+    }
+```
+
+Next, there are a couple of places within Blade where you can write PHP code: within the `@php` keyword, as well as within keyword brackets: `@if (count(…))`. Let's write two injections for that:
+
+```php
+final readonly class BladeKeywordInjection implements Injection
+{
+    use IsInjection;
+
+    public function getPattern(): string
+    {
+        return '(\@[\w]+)\s?\((?<match>.*)\)';
+    }
+
+    public function parseContent(string $content, Highlighter $highlighter): string
+    {
+        return $highlighter->parse($content, 'php');
+    }
+}
+```
+
+```php
+final readonly class BladePhpInjection implements Injection
+{
+    use IsInjection;
+
+    public function getPattern(): string
+    {
+        return '\@php(?<match>(.|\n)*?)\@endphp';
+    }
+
+    public function parseContent(string $content, Highlighter $highlighter): string
+    {
+        return $highlighter->parse($content, 'php');
+    }
+}
+```
+
+Let's add these to our `BladeLanguage` class as well:
+
+```php
+    public function getInjections(): array
+    {
+        return [
+            ...parent::getInjections(),
+            new BladePhpInjection(),
+            new BladeKeywordInjection(),
+        ];
+    }
+```
+
+And, finally, you can write `{{ … }}` and `{!! … !!}` to echo output. Whatever is between these brackets is also considered PHP, so, one more injection:
 
 ```php
 

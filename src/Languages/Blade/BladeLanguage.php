@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tempest\Highlight\Languages\Blade;
 
+use Tempest\Highlight\Languages\Blade\Injections\BladeEchoInjection;
 use Tempest\Highlight\Languages\Blade\Injections\BladeKeywordInjection;
 use Tempest\Highlight\Languages\Blade\Injections\BladePhpInjection;
 use Tempest\Highlight\Languages\Blade\Patterns\BladeKeywordPattern;
@@ -17,6 +18,7 @@ class BladeLanguage extends HtmlLanguage
             ...parent::getInjections(),
             new BladeKeywordInjection(),
             new BladePhpInjection(),
+            new BladeEchoInjection(),
         ];
     }
 

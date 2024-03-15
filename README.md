@@ -88,7 +88,7 @@ composer require league/commonmark;
 
 ## Language support
 
-This package makes it easy for developers to add new languages or extend existing languages. Right now, these languages are supported: `php`, `html`, `css`. More will be added.
+This package makes it easy for developers to add new languages or extend existing languages. Right now, these languages are supported: `php`, `html`, `css`, and `blade`. More will be added.
 
 In order to build your own highlighter functionality, you need to understand _three_ concepts of how code is highlighted: _patterns_, _injections_, and _languages_.
 

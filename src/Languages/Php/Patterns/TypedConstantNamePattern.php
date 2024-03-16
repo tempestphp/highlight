@@ -10,7 +10,7 @@ use Tempest\Highlight\PatternTest;
 use Tempest\Highlight\Tokens\TokenType;
 
 #[PatternTest(
-    input: 'private const string BAR',
+    input: 'private const string BAR = ""',
     output: 'BAR',
 )]
 final readonly class TypedConstantNamePattern implements Pattern

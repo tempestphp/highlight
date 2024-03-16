@@ -4,9 +4,12 @@ declare(strict_types=1);
 
 namespace Tempest\Highlight\Tests;
 
+use Generator;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use ReflectionClass;
+use Tempest\Highlight\Pattern;
 use Tempest\Highlight\PatternTest;
 
 final class PatternsTest extends TestCase
@@ -14,7 +17,17 @@ final class PatternsTest extends TestCase
     use TestsPatterns;
 
     #[Test]
-    public function test_patterns_with_attribute()
+    #[DataProvider('patterns')]
+    public function test_patterns_with_attribute(Pattern $pattern, PatternTest $patternTest)
+    {
+        $this->assertMatches(
+            pattern: $pattern,
+            content: htmlentities($patternTest->input),
+            expected: $patternTest->output,
+        );
+    }
+
+    public static function patterns(): Generator
     {
         $patternFiles = glob(__DIR__ . '/../src/Languages/*/Patterns/**.php');
 
@@ -29,19 +42,11 @@ final class PatternsTest extends TestCase
 
             $attributes = $reflectionClass->getAttributes(PatternTest::class);
 
-            //            if ($attributes === []) {
-            //                $this->fail("No #[PatternTest] attribute found on {$reflectionClass->getName()}");
-            //            }
-
             foreach ($attributes as $attribute) {
                 /** @var PatternTest $patternTest */
                 $patternTest = $attribute->newInstance();
 
-                $this->assertMatches(
-                    pattern: $reflectionClass->newInstance(),
-                    content: htmlentities($patternTest->input),
-                    expected: $patternTest->output,
-                );
+                yield [$reflectionClass->newInstance(), $patternTest];
             }
         }
     }

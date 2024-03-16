@@ -10,16 +10,24 @@ use Tempest\Highlight\PatternTest;
 use Tempest\Highlight\Tokens\TokenType;
 
 #[PatternTest(
+    input: 'int $pad_type = STR_PAD_RIGHT,',
+    output: 'STR_PAD_RIGHT',
+)]
+#[PatternTest(
+    input: 'private const BAR = "bar";',
+    output: 'BAR',
+)]
+#[PatternTest(
     input: 'private const string BAR = ""',
     output: 'BAR',
 )]
-final readonly class TypedConstantNamePattern implements Pattern
+final readonly class ConstantNamePattern implements Pattern
 {
     use IsPattern;
 
     public function getPattern(): string
     {
-        return 'const\s[\w]+\s(?<match>[\w]+)\s=';
+        return '\b(?<match>[A-Z_]+)\b';
     }
 
     public function getTokenType(): TokenType

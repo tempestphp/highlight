@@ -9,6 +9,7 @@ use Tempest\Highlight\Languages\Php\Patterns\AttributePattern;
 use Tempest\Highlight\Languages\Php\Patterns\AttributeTypePattern;
 use Tempest\Highlight\Languages\Php\Patterns\ClassNamePattern;
 use Tempest\Highlight\Languages\Php\Patterns\ClassPropertyPattern;
+use Tempest\Highlight\Languages\Php\Patterns\ConstantNamePattern;
 use Tempest\Highlight\Languages\Php\Patterns\ConstantPropertyPattern;
 use Tempest\Highlight\Languages\Php\Patterns\ExtendsPattern;
 use Tempest\Highlight\Languages\Php\Patterns\FunctionCallPattern;
@@ -27,8 +28,6 @@ use Tempest\Highlight\Languages\Php\Patterns\PropertyTypesPattern;
 use Tempest\Highlight\Languages\Php\Patterns\ReturnTypePattern;
 use Tempest\Highlight\Languages\Php\Patterns\SinglelineDocCommentPattern;
 use Tempest\Highlight\Languages\Php\Patterns\StaticClassCallPattern;
-use Tempest\Highlight\Languages\Php\Patterns\TypedConstantNamePattern;
-use Tempest\Highlight\Languages\Php\Patterns\UntypedConstantNamePattern;
 use Tempest\Highlight\Languages\Php\Patterns\UsePattern;
 
 class PhpLanguage implements Language
@@ -142,8 +141,7 @@ class PhpLanguage implements Language
             new NestedFunctionCallPattern(),
             new FunctionCallPattern(),
             new ConstantPropertyPattern(),
-            new UntypedConstantNamePattern(),
-            new TypedConstantNamePattern(),
+            new ConstantNamePattern(),
         ];
     }
 }

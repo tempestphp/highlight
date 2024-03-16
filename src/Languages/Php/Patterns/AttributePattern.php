@@ -6,8 +6,21 @@ namespace Tempest\Highlight\Languages\Php\Patterns;
 
 use Tempest\Highlight\IsPattern;
 use Tempest\Highlight\Pattern;
+use Tempest\Highlight\PatternTest;
 use Tempest\Highlight\Tokens\TokenType;
 
+#[
+    PatternTest(input: '#[Foo(prop: hi)]', output: '#[Foo(prop: hi)]'),
+    PatternTest(
+        input:
+'#[Foo(
+    prop: hi,
+)]',
+        output:
+'#[Foo(
+    prop: hi,
+)]'),
+]
 final readonly class AttributePattern implements Pattern
 {
     use IsPattern;

@@ -1,6 +1,7 @@
 <?php
 
-namespace Tempest\Highlight\Languages\Blade\Patterns;
+namespace Tempest\Highlight\Languages\Php\Patterns;
+
 
 use Tempest\Highlight\IsPattern;
 use Tempest\Highlight\Pattern;
@@ -8,20 +9,20 @@ use Tempest\Highlight\PatternTest;
 use Tempest\Highlight\Tokens\TokenType;
 
 #[PatternTest(
-    input: '{{-- test --}} content',
-    output: '{{-- test --}}',
+    input: 'private const string BAR',
+    output: 'BAR',
 )]
-final readonly class BladeCommentPattern implements Pattern
+final readonly class TypedConstantNamePattern implements Pattern
 {
     use IsPattern;
 
     public function getPattern(): string
     {
-        return '(?<match>\{\{\-\-(.|\n)*?\-\-\}\})';
+        return 'const\s[\w]+\s(?<match>[\w]+)\s=';
     }
 
     public function getTokenType(): TokenType
     {
-        return TokenType::COMMENT;
+        return TokenType::PROPERTY;
     }
 }

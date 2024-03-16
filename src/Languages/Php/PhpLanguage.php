@@ -27,6 +27,8 @@ use Tempest\Highlight\Languages\Php\Patterns\PropertyTypesPattern;
 use Tempest\Highlight\Languages\Php\Patterns\ReturnTypePattern;
 use Tempest\Highlight\Languages\Php\Patterns\SinglelineDocCommentPattern;
 use Tempest\Highlight\Languages\Php\Patterns\StaticClassCallPattern;
+use Tempest\Highlight\Languages\Php\Patterns\TypedConstantNamePattern;
+use Tempest\Highlight\Languages\Php\Patterns\UntypedConstantNamePattern;
 use Tempest\Highlight\Languages\Php\Patterns\UsePattern;
 
 class PhpLanguage implements Language
@@ -39,7 +41,6 @@ class PhpLanguage implements Language
     public function getPatterns(): array
     {
         return [
-
             // KEYWORDS
             new KeywordPattern('__halt_compiler'),
             new KeywordPattern('abstract'),
@@ -141,6 +142,8 @@ class PhpLanguage implements Language
             new NestedFunctionCallPattern(),
             new FunctionCallPattern(),
             new ConstantPropertyPattern(),
+            new UntypedConstantNamePattern(),
+            new TypedConstantNamePattern(),
         ];
     }
 }

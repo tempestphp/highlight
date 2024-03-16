@@ -6,8 +6,21 @@ namespace Tempest\Highlight\Languages\Css\Patterns;
 
 use Tempest\Highlight\IsPattern;
 use Tempest\Highlight\Pattern;
+use Tempest\Highlight\PatternTest;
 use Tempest\Highlight\Tokens\TokenType;
 
+#[PatternTest(
+    input: 'code, .asd, #id,
+.hl-blur, @font-face,
+kbd, samp,
+pre {
+    font-family: ui-monospace, monospace;
+}',
+    output: 'code, .asd, #id,
+.hl-blur, @font-face,
+kbd, samp,
+pre ',
+)]
 final readonly class CssSelectorPattern implements Pattern
 {
     use IsPattern;

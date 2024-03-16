@@ -12,7 +12,8 @@ trait TestsPatterns
         Pattern $pattern,
         string $content,
         string|array $expected,
-    ): void {
+    ): void
+    {
         $matches = $pattern->match($content);
 
         if (is_string($expected)) {
@@ -20,7 +21,16 @@ trait TestsPatterns
         }
 
         foreach ($expected as $key => $expectedValue) {
-            $this->assertSame($expectedValue, $matches['match'][$key][0]);
+            $this->assertSame(
+                expected: $expectedValue,
+                actual: $matches['match'][$key][0],
+                message: sprintf(
+                    "Pattern %s did not match `%s` but matched `%s` instead.",
+                    $pattern::class,
+                    $expectedValue,
+                    $matches['match'][$key][0],
+                ),
+            );
         }
     }
 }

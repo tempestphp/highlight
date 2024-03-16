@@ -6,8 +6,14 @@ namespace Tempest\Highlight\Languages\Blade\Patterns;
 
 use Tempest\Highlight\IsPattern;
 use Tempest\Highlight\Pattern;
+use Tempest\Highlight\PatternTest;
 use Tempest\Highlight\Tokens\TokenType;
 
+#[PatternTest(
+    input: '@if()
+        @endif()',
+    output: ['@if', '@endif'],
+)]
 final readonly class BladeKeywordPattern implements Pattern
 {
     use IsPattern;

@@ -1,9 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tempest\Highlight\Tests\Languages\Global\Injections;
 
-use Tempest\Highlight\Highlighter;
 use PHPUnit\Framework\TestCase;
+use Tempest\Highlight\Highlighter;
 use Tempest\Highlight\Languages\Global\Injections\StrongInjection;
 use Tempest\Highlight\Languages\Php\PhpLanguage;
 

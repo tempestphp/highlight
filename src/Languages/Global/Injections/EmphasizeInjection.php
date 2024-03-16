@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tempest\Highlight\Languages\Global\Injections;
 
 use Tempest\Highlight\Highlighter;
@@ -29,5 +31,4 @@ final readonly class EmphasizeInjection implements Injection
 
         return $highlighter->parse($content, $highlighter->getCurrentLanguage());
     }
-
 }

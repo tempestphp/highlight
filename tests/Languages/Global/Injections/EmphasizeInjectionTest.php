@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Languages\Global\Injections;
 
 use PHPUnit\Framework\TestCase;

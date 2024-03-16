@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Tempest\Highlight\Languages\Php;
 
-use Tempest\Highlight\Language;
 use Tempest\Highlight\Languages\Global\BaseLanguage;
 use Tempest\Highlight\Languages\Php\Patterns\AttributePattern;
 use Tempest\Highlight\Languages\Php\Patterns\AttributeTypePattern;

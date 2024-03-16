@@ -40,3 +40,11 @@
 .hl-blur {
     filter: blur(2px);
 }
+
+.hl-strong {
+    font-weight: bold;
+}
+
+.hl-em {
+    font-style: italic;
+}

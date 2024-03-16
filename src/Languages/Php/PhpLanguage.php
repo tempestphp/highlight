@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Tempest\Highlight\Languages\Php;
 
 use Tempest\Highlight\Language;
+use Tempest\Highlight\Languages\Global\BaseLanguage;
 use Tempest\Highlight\Languages\Php\Patterns\AttributePattern;
 use Tempest\Highlight\Languages\Php\Patterns\AttributeTypePattern;
 use Tempest\Highlight\Languages\Php\Patterns\ClassNamePattern;
@@ -30,16 +31,20 @@ use Tempest\Highlight\Languages\Php\Patterns\SinglelineDocCommentPattern;
 use Tempest\Highlight\Languages\Php\Patterns\StaticClassCallPattern;
 use Tempest\Highlight\Languages\Php\Patterns\UsePattern;
 
-class PhpLanguage implements Language
+class PhpLanguage extends BaseLanguage
 {
     public function getInjections(): array
     {
-        return [];
+        return [
+            ...parent::getInjections(),
+        ];
     }
 
     public function getPatterns(): array
     {
         return [
+            ...parent::getPatterns(),
+
             // KEYWORDS
             new KeywordPattern('__halt_compiler'),
             new KeywordPattern('abstract'),

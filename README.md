@@ -10,6 +10,10 @@ TODO:
 
 ## Quickstart
 
+```php
+composer require tempest/highlight:dev-main
+```
+
 Highlight code like this:
 
 ```php
@@ -56,9 +60,58 @@ Or you can build your own with just a couple of classes:
 .hl-comment {
     color: #888888;
 }
+
+.hl-blur {
+    filter: blur(2px);
+}
+
+.hl-strong {
+    font-weight: bold;
+}
+
+.hl-em {
+    font-style: italic;
+}
 ```
 
 You should style `<pre>` tags yourself.
+
+## Special highlight tags
+
+You can add these tags within your code to emphasize or blur parts:
+
+- `{_ content _}` adds the `.hl-em` class
+- `{* content *}` adds the `.hl-strong` class
+- `{~ content ~}` adds the `.hl-blur` class
+
+```php
+{~public function parse(string $content, Highlighter $highlighter): string
+{
+    $pattern = '/\{\~(?<match>(.|\n)*)\~\}/';
+    
+    preg_match($pattern, $content, $matches);
+
+    if ($matches === []) {
+        return $content;
+    }~} // This part is blurred
+
+    {*$content = preg_replace_callback(*} // This line is bold
+        $pattern,
+        function (array $matches) use ($highlighter) {
+            $parsed = $highlighter->parse($matches['match'], $highlighter->getCurrentLanguage());
+            
+            return '<span class="hl-blur">' . $parsed . '</span>';
+        },
+        {_$content_} // This line is cursive
+    );
+    
+    {~return $highlighter->parse($content, $highlighter->getCurrentLanguage());
+}~}
+```
+
+This is the end result:
+
+![](./.github/highlight.png)
 
 ## CommonMark integration
 

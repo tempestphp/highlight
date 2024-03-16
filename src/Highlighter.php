@@ -14,6 +14,7 @@ use Tempest\Highlight\Tokens\RenderTokens;
 final class Highlighter
 {
     private array $languages = [];
+    private ?Language $currentLanguage = null;
 
     public function __construct()
     {
@@ -31,22 +32,36 @@ final class Highlighter
         return $this;
     }
 
-    public function parse(string $content, string $language): string
+    public function parse(string $content, string|Language $language): string
     {
-        $language = $this->languages[$language] ?? null;
+        if (is_string($language)) {
+            $language = $this->languages[$language] ?? null;
+        }
 
         if (! $language) {
             return $content;
         }
 
+        $this->currentLanguage = $language;
+
         return $this->parseContent($content, $language);
+    }
+
+    public function getCurrentLanguage(): ?Language
+    {
+        return $this->currentLanguage;
+    }
+
+    public function setCurrentLanguage(Language $language): void
+    {
+        $this->currentLanguage = $language;
     }
 
     private function parseContent(string $content, Language $language): string
     {
         // Injections
         foreach ($language->getInjections() as $injection) {
-            $content = $injection->parse($content, $this);
+            $content = $injection->parse($content, clone $this);
         }
 
         // Patterns

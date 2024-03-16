@@ -1,11 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tempest\Highlight\Tests;
 
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use ReflectionClass;
-use Tempest\Highlight\Pattern;
 use Tempest\Highlight\PatternTest;
 
 final class PatternsTest extends TestCase
@@ -13,10 +14,10 @@ final class PatternsTest extends TestCase
     use TestsPatterns;
 
     #[Test]
-    public function test_patterns_with_attribute() 
+    public function test_patterns_with_attribute()
     {
         $patternFiles = glob(__DIR__ . '/../src/Languages/*/Patterns/**.php');
-        
+
         foreach ($patternFiles as $patternFile) {
             $className = str_replace(
                 search: [__DIR__ . '/../src/', '/', '.php'],
@@ -28,9 +29,9 @@ final class PatternsTest extends TestCase
 
             $attributes = $reflectionClass->getAttributes(PatternTest::class);
 
-//            if ($attributes === []) {
-//                $this->fail("No #[PatternTest] attribute found on {$reflectionClass->getName()}");
-//            }
+            //            if ($attributes === []) {
+            //                $this->fail("No #[PatternTest] attribute found on {$reflectionClass->getName()}");
+            //            }
 
             foreach ($attributes as $attribute) {
                 /** @var PatternTest $patternTest */

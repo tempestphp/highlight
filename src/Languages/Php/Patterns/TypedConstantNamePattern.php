@@ -1,7 +1,8 @@
 <?php
 
-namespace Tempest\Highlight\Languages\Php\Patterns;
+declare(strict_types=1);
 
+namespace Tempest\Highlight\Languages\Php\Patterns;
 
 use Tempest\Highlight\IsPattern;
 use Tempest\Highlight\Pattern;

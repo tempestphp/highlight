@@ -19,7 +19,8 @@ use Tempest\Highlight\Tokens\TokenType;
         output:
 '#[Foo(
     prop: hi,
-)]'),
+)]'
+    ),
 ]
 final readonly class AttributePattern implements Pattern
 {

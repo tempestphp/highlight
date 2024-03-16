@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tempest\Highlight;
 
 use Attribute;
@@ -10,5 +12,6 @@ final readonly class PatternTest
     public function __construct(
         public string $input,
         public string|array $output,
-    ) {}
+    ) {
+    }
 }

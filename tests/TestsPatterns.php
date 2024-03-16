@@ -12,8 +12,7 @@ trait TestsPatterns
         Pattern $pattern,
         string $content,
         string|array $expected,
-    ): void
-    {
+    ): void {
         $matches = $pattern->match($content);
 
         if (is_string($expected)) {

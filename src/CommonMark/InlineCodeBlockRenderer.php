@@ -22,10 +22,10 @@ class InlineCodeBlockRenderer implements NodeRendererInterface
         preg_match('/^\{(?<match>[\w]+)\}(?<code>.*)/', $node->getLiteral(), $match);
 
         $language = $match['match'] ?? 'txt';
-        $code = $match['code'] ?? '';
+        $code = $match['code'] ?? $node->getLiteral();
 
         $highlighter = new Highlighter();
 
-        return '<code>' . $highlighter->parse($code, $language) . '</code>';
+        return '<code>' . $highlighter->parse(htmlentities($code), $language) . '</code>';
     }
 }

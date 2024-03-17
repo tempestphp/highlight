@@ -10,7 +10,8 @@ final class RenderTokens
 {
     public function __construct(
         private Theme $theme,
-    ) {}
+    ) {
+    }
 
     /**
      * @param string $content

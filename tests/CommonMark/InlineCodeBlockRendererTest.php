@@ -1,20 +1,19 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tempest\Highlight\Tests\CommonMark;
 
 use League\CommonMark\Environment\Environment;
 use League\CommonMark\Extension\CommonMark\CommonMarkCoreExtension;
-use League\CommonMark\Extension\CommonMark\Node\Block\FencedCode;
 use League\CommonMark\Extension\CommonMark\Node\Inline\Code;
 use League\CommonMark\Extension\FrontMatter\FrontMatterExtension;
 use League\CommonMark\MarkdownConverter;
-use Tempest\Highlight\CommonMark\CodeBlockRenderer;
-use Tempest\Highlight\CommonMark\InlineCodeBlockRenderer;
 use PHPUnit\Framework\TestCase;
+use Tempest\Highlight\CommonMark\InlineCodeBlockRenderer;
 
 class InlineCodeBlockRendererTest extends TestCase
 {
-    /** @test */
     public function test_inline_code_renderer()
     {
         $environment = new Environment();

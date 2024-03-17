@@ -1,10 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tempest\Highlight\Tests\Themes;
 
+use PHPUnit\Framework\TestCase;
 use Tempest\Highlight\Highlighter;
 use Tempest\Highlight\Themes\TerminalTheme;
-use PHPUnit\Framework\TestCase;
 
 class TerminalThemeTest extends TestCase
 {

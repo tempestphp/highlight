@@ -72,6 +72,18 @@ Or you can build your own with just a couple of classes:
 .hl-em {
     font-style: italic;
 }
+
+.hl-addition {
+    display: inline-block;
+    min-width: 100%;
+    background-color: #00FF0033;
+}
+
+.hl-deletion {
+    display: inline-block;
+    min-width: 100%;
+    background-color: #FF000022;
+}
 ```
 
 You should style `<pre>` tags yourself.
@@ -112,6 +124,19 @@ You can add these tags within your code to emphasize or blur parts:
 This is the end result:
 
 ![](./.github/highlight.png)
+
+Furthermore, you can use these two tags to mark lines as additions and deletions:
+
+
+- `{+ content +}` adds the `.hl-addition` class
+- `{- content -}` adds the `.hl-deletion` class
+
+```php
+{-public class Foo {}-}
+{+public class Bar {}+}
+```
+
+![](./.github/highlight-2.png)
 
 ## CommonMark integration
 

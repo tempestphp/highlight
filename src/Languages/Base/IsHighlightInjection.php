@@ -1,17 +1,20 @@
 <?php
 
-declare(strict_types=1);
-
-namespace Tempest\Highlight\Languages\Global\Injections;
+namespace Tempest\Highlight\Languages\Base;
 
 use Tempest\Highlight\Highlighter;
-use Tempest\Highlight\Injection;
 
-final readonly class EmphasizeInjection implements Injection
+trait IsHighlightInjection
 {
+    abstract private function getToken(): string;
+
+    abstract private function getClassname(): string;
+
     public function parse(string $content, Highlighter $highlighter): string
     {
-        $pattern = '/\{\_(?<match>(.|\n)*?)\_\}/';
+        $token = '\\' . $this->getToken();
+
+        $pattern = '/\{' . $token . '(?<match>(.|\n)*?)' . $token . '}/';
 
         preg_match($pattern, $content, $matches);
 
@@ -24,7 +27,7 @@ final readonly class EmphasizeInjection implements Injection
             function (array $matches) use ($highlighter) {
                 $parsed = $highlighter->parse($matches['match'], $highlighter->getCurrentLanguage());
 
-                return '<span class="hl-em">' . $parsed . '</span>';
+                return '<span class="'. $this->getClassname() .'">' . $parsed . '</span>';
             },
             $content
         );

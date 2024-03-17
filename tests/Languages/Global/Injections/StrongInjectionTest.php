@@ -6,7 +6,7 @@ namespace Tempest\Highlight\Tests\Languages\Global\Injections;
 
 use PHPUnit\Framework\TestCase;
 use Tempest\Highlight\Highlighter;
-use Tempest\Highlight\Languages\Global\Injections\StrongInjection;
+use Tempest\Highlight\Languages\Base\Injections\StrongInjection;
 use Tempest\Highlight\Languages\Php\PhpLanguage;
 
 class StrongInjectionTest extends TestCase

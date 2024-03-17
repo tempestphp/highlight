@@ -48,3 +48,15 @@
 .hl-em {
     font-style: italic;
 }
+
+.hl-addition {
+    display: inline-block;
+    min-width: 100%;
+    background-color: #00FF0033;
+}
+
+.hl-deletion {
+    display: inline-block;
+    min-width: 100%;
+    background-color: #FF000022;
+}

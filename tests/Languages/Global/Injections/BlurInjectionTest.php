@@ -6,7 +6,7 @@ namespace Languages\Global\Injections;
 
 use PHPUnit\Framework\TestCase;
 use Tempest\Highlight\Highlighter;
-use Tempest\Highlight\Languages\Global\Injections\BlurInjection;
+use Tempest\Highlight\Languages\Base\Injections\BlurInjection;
 use Tempest\Highlight\Languages\Php\PhpLanguage;
 
 final class BlurInjectionTest extends TestCase

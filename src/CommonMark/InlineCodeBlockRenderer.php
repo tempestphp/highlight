@@ -6,11 +6,9 @@ namespace Tempest\Highlight\CommonMark;
 
 use InvalidArgumentException;
 use League\CommonMark\Extension\CommonMark\Node\Inline\Code;
-use League\CommonMark\Extension\CommonMark\Renderer\Inline\CodeRenderer as BaseCodeRenderer;
 use League\CommonMark\Node\Node;
 use League\CommonMark\Renderer\ChildNodeRendererInterface;
 use League\CommonMark\Renderer\NodeRendererInterface;
-use League\CommonMark\Util\HtmlElement;
 use Tempest\Highlight\Highlighter;
 
 class InlineCodeBlockRenderer implements NodeRendererInterface
@@ -22,7 +20,7 @@ class InlineCodeBlockRenderer implements NodeRendererInterface
         }
 
         preg_match('/^\{(?<match>[\w]+)\}(?<code>.*)/', $node->getLiteral(), $match);
-        
+
         $language = $match['match'] ?? 'txt';
         $code = $match['code'] ?? '';
 

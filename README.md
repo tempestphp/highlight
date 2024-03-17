@@ -1,5 +1,13 @@
 # Fast, extensible, server-side code highlighting
 
+Jump to:
+
+- [Quickstart](#quickstart)
+- [Special highlight tags](#special-highlight-tags)
+- [Special highlight tags](#special-highlight-tags)
+- [Commonmark integration](#commonmark-integration)
+- [Adding or extending languages](#adding-or-extending-languages)
+
 TODO:
 
 - [ ] Add JS support
@@ -185,7 +193,7 @@ Keep in mind that you need to manually install `league/commonmark`:
 composer require league/commonmark;
 ```
 
-## Language support
+## Adding or extending languages
 
 This package makes it easy for developers to add new languages or extend existing languages. Right now, these languages are supported: `php`, `html`, `css`, and `blade`. More will be added.
 

@@ -60,14 +60,4 @@ final class Token
 
         return $clone;
     }
-
-    public function before(): string
-    {
-        return $this->type->before();
-    }
-
-    public function after(): string
-    {
-        return $this->type->after();
-    }
 }

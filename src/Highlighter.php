@@ -8,6 +8,7 @@ use Tempest\Highlight\Languages\Blade\BladeLanguage;
 use Tempest\Highlight\Languages\Css\CssLanguage;
 use Tempest\Highlight\Languages\Html\HtmlLanguage;
 use Tempest\Highlight\Languages\Php\PhpLanguage;
+use Tempest\Highlight\Themes\CssTheme;
 use Tempest\Highlight\Tokens\ParseTokens;
 use Tempest\Highlight\Tokens\RenderTokens;
 
@@ -16,7 +17,9 @@ final class Highlighter
     private array $languages = [];
     private ?Language $currentLanguage = null;
 
-    public function __construct()
+    public function __construct(
+        private Theme $theme = new CssTheme(),
+    )
     {
         $this
             ->setLanguage('php', new PhpLanguage())
@@ -67,6 +70,6 @@ final class Highlighter
         // Patterns
         $tokens = (new ParseTokens())($content, $language);
 
-        return (new RenderTokens())($content, $tokens);
+        return (new RenderTokens($this->theme))($content, $tokens);
     }
 }

@@ -4,8 +4,14 @@ declare(strict_types=1);
 
 namespace Tempest\Highlight\Tokens;
 
+use Tempest\Highlight\Theme;
+
 final class RenderTokens
 {
+    public function __construct(
+        private Theme $theme,
+    ) {}
+
     /**
      * @param string $content
      * @param \Tempest\Highlight\Tokens\Token[] $tokens
@@ -50,7 +56,10 @@ final class RenderTokens
                 )
                 : $currentToken->value;
 
-            $renderedToken = $currentToken->before() . $value . $currentToken->after();
+            $renderedToken =
+                $this->theme->before($currentToken->type)
+                . $value
+                . $this->theme->after($currentToken->type);
 
             $output = substr_replace(
                 $output,
@@ -60,13 +69,15 @@ final class RenderTokens
             );
 
             foreach ($currentToken->children as $childToken) {
-                $parsedOffset += strlen($childToken->before()) + strlen($childToken->after());
+                $parsedOffset +=
+                    strlen($this->theme->before($childToken->type))
+                    + strlen($this->theme->after($childToken->type));
             }
 
-            $parsedOffset += strlen($currentToken->before()) + strlen($currentToken->after());
+            $parsedOffset +=
+                strlen($this->theme->before($currentToken->type))
+                + strlen($this->theme->after($currentToken->type));
         }
-
-        //        dd($output);
 
         return $output;
     }

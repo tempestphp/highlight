@@ -7,6 +7,7 @@ namespace Tempest\Highlight\Languages\Base;
 use Tempest\Highlight\Language;
 use Tempest\Highlight\Languages\Base\Injections\AdditionInjection;
 use Tempest\Highlight\Languages\Base\Injections\BlurInjection;
+use Tempest\Highlight\Languages\Base\Injections\CustomClassInjection;
 use Tempest\Highlight\Languages\Base\Injections\DeletionInjection;
 use Tempest\Highlight\Languages\Base\Injections\EmphasizeInjection;
 use Tempest\Highlight\Languages\Base\Injections\StrongInjection;
@@ -21,6 +22,7 @@ class BaseLanguage implements Language
             new StrongInjection(),
             new AdditionInjection(),
             new DeletionInjection(),
+            new CustomClassInjection(),
         ];
     }
 

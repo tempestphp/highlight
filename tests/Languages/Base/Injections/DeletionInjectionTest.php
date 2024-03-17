@@ -2,35 +2,31 @@
 
 declare(strict_types=1);
 
-namespace Languages\Global\Injections;
+namespace Tempest\Highlight\Tests\Languages\Base\Injections;
 
 use PHPUnit\Framework\TestCase;
 use Tempest\Highlight\Highlighter;
-use Tempest\Highlight\Languages\Base\Injections\BlurInjection;
+use Tempest\Highlight\Languages\Base\Injections\DeletionInjection;
 use Tempest\Highlight\Languages\Php\PhpLanguage;
 
-final class BlurInjectionTest extends TestCase
+class DeletionInjectionTest extends TestCase
 {
-    public function test_blur_injection()
+    public function test_deletion_injection()
     {
         $content = <<<TXT
-class {~Foo
-
-test~} extends{~ Bar ~}
+{- class Foo -}
 TXT;
 
         $highlighter = new Highlighter();
         $highlighter->setCurrentLanguage(new PhpLanguage());
 
-        $injection = new BlurInjection();
+        $injection = new DeletionInjection();
 
         $output = $injection->parse($content, $highlighter);
 
         $this->assertSame(
             trim(<<<TXT
-<span class="hl-keyword">class</span> <span class="hl-blur"><span class="hl-type">Foo</span>
-
-test</span> extends<span class="hl-blur"> <span class="hl-type">Bar</span> </span>
+<span class="hl-deletion"> <span class="hl-keyword">class</span> <span class="hl-type">Foo</span> </span>
 TXT),
             trim($output),
         );

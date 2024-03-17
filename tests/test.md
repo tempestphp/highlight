@@ -1,4 +1,14 @@
+<style>
+.hl-a {
+    background-color: #FFFF0077;
+}
+
+.hl-b {
+    background-color: #FF00FF33;
+}
+</style>
+
 ```php
-{-public class Foo {}-}
-{+public class Bar {}+}
+{`hl-a`public class Foo {}`}
+{`hl-b`public class Bar {}`}
 ```

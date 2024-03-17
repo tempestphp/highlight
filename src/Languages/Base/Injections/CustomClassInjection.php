@@ -2,21 +2,16 @@
 
 declare(strict_types=1);
 
-namespace Tempest\Highlight\Languages\Base;
+namespace Tempest\Highlight\Languages\Base\Injections;
 
 use Tempest\Highlight\Highlighter;
+use Tempest\Highlight\Injection;
 
-trait IsHighlightInjection
+final readonly class CustomClassInjection implements Injection
 {
-    abstract private function getToken(): string;
-
-    abstract private function getClassname(): string;
-
     public function parse(string $content, Highlighter $highlighter): string
     {
-        $token = '\\' . $this->getToken();
-
-        $pattern = '/\{' . $token . '(?<match>(.|\n)*?)' . $token . '}/';
+        $pattern = '/\{\`(?<class>[\w-]+)\`(?<match>(.|\n)*?)\`\}/';
 
         preg_match_all($pattern, $content, $matches);
 
@@ -26,7 +21,7 @@ trait IsHighlightInjection
 
         foreach ($matches[0] as $key => $match) {
             $contentForMatch = $matches['match'][$key];
-            $classForMatch = $this->getClassname();
+            $classForMatch = $matches['class'][$key];
 
             $parsed = $highlighter->parse($contentForMatch, $highlighter->getCurrentLanguage());
 

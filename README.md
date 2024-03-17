@@ -138,6 +138,27 @@ Furthermore, you can use these two tags to mark lines as additions and deletions
 
 ![](./.github/highlight-2.png)
 
+Finally, you can add whatever class you'd like by using the <code>{&#96;classname&#96; content &#96;}</code> syntax:
+
+<pre>
+&lt;style&gt;
+.hl-a {
+    background-color: #FFFF0077;
+}
+
+.hl-b {
+    background-color: #FF00FF33;
+}
+&lt;/style&gt;
+
+&#96;&#96;&#96;php
+{&#96;hl-a&#96;public class Foo {}&#96;}
+{&#96;hl-b&#96;public class Bar {}&#96;}
+&#96;&#96;&#96;
+</pre>
+
+![](./.github/highlight-3.png)
+
 ## CommonMark integration
 
 If you're using `league/commonmark`, you can add highlight support to codeblocks like so:

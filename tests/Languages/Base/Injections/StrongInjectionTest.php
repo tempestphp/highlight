@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tempest\Highlight\Tests\Languages\Global\Injections;
+namespace Tempest\Highlight\Tests\Languages\Base\Injections;
 
 use PHPUnit\Framework\TestCase;
 use Tempest\Highlight\Highlighter;

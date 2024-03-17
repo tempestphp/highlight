@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Tempest\Highlight\Languages\Base\Injections;
 
-use Tempest\Highlight\Highlighter;
 use Tempest\Highlight\Injection;
 use Tempest\Highlight\Languages\Base\IsHighlightInjection;
 

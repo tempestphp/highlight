@@ -19,8 +19,7 @@ final class Highlighter
 
     public function __construct(
         private Theme $theme = new CssTheme(),
-    )
-    {
+    ) {
         $this
             ->setLanguage('php', new PhpLanguage())
             ->setLanguage('html', new HtmlLanguage())

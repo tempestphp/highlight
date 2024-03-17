@@ -3,6 +3,7 @@
 Jump to:
 
 - [Quickstart](#quickstart)
+- [Themes](#themes)
 - [Special highlight tags](#special-highlight-tags)
 - [Special highlight tags](#special-highlight-tags)
 - [Commonmark integration](#commonmark-integration)
@@ -36,13 +37,17 @@ $code = $highlighter->parse($escapedCode, 'php');
 $code = $highlighter->parse(htmlentities($raw), 'php');
 ```
 
-Next, you can use one of the provided themes via a CSS import:
+## Themes
+
+### For the web
+
+For HTML rendering, you can use one of the provided themes that comes with this package:
 
 ```css
 @import "../vendor/tempest/highlight/src/Themes/highlight-light-lite.css";
 ```
 
-Or you can build your own with just a couple of classes:
+You can build your own CSS theme with just a couple of classes:
 
 ```css
 .hl-keyword {
@@ -94,7 +99,11 @@ Or you can build your own with just a couple of classes:
 }
 ```
 
-You should style `<pre>` tags yourself.
+Note that `pre` tag styling isn't included in this package.
+
+### For the terminal
+
+WIP
 
 ## Special highlight tags
 

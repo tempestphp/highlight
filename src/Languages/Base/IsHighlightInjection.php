@@ -30,9 +30,11 @@ trait IsHighlightInjection
 
             $parsed = $highlighter->parse($contentForMatch, $highlighter->getCurrentLanguage());
 
+            $theme = $highlighter->getTheme();
+
             $content = str_replace(
                 search: $match,
-                replace: "<span class=\"{$classForMatch}\">{$parsed}</span>",
+                replace: $theme->before($classForMatch) . $parsed . $theme->after($classForMatch),
                 subject: $content,
             );
         }

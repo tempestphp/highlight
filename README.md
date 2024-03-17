@@ -4,7 +4,8 @@ Jump to:
 
 - [Quickstart](#quickstart)
 - [Themes](#themes)
-- [Special highlight tags](#special-highlight-tags)
+  - [For the web](#for-the-web)
+  - [For the terminal](#for-the-terminal)
 - [Special highlight tags](#special-highlight-tags)
 - [Commonmark integration](#commonmark-integration)
 - [Adding or extending languages](#adding-or-extending-languages)
@@ -103,7 +104,16 @@ Note that `pre` tag styling isn't included in this package.
 
 ### For the terminal
 
-WIP
+```php
+use Tempest\Highlight\Highlighter;
+use Tempest\Highlight\Themes\TerminalTheme;
+
+$highlighter = new Highlighter(new TerminalTheme());
+
+echo html_entity_decode($highlighter->parse(htmlentities($code), 'php'));
+```
+
+![](./.github/terminal.png)
 
 ## Special highlight tags
 

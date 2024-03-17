@@ -18,7 +18,7 @@ final class Highlighter
     private ?Language $currentLanguage = null;
 
     public function __construct(
-        private Theme $theme = new CssTheme(),
+        private readonly Theme $theme = new CssTheme(),
     )
     {
         $this
@@ -48,6 +48,11 @@ final class Highlighter
         $this->currentLanguage = $language;
 
         return $this->parseContent($content, $language);
+    }
+
+    public function getTheme(): Theme
+    {
+        return $this->theme;
     }
 
     public function getCurrentLanguage(): ?Language

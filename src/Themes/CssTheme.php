@@ -7,7 +7,7 @@ use Tempest\Highlight\Tokens\TokenType;
 
 final readonly class CssTheme implements Theme
 {
-    public function before(TokenType $tokenType): string
+    public function before(string|TokenType $tokenType): string
     {
         $class = match ($tokenType) {
             TokenType::KEYWORD => 'hl-keyword',
@@ -17,12 +17,13 @@ final readonly class CssTheme implements Theme
             TokenType::VALUE => 'hl-value',
             TokenType::COMMENT => 'hl-comment',
             TokenType::ATTRIBUTE => 'hl-attribute',
+            default => $tokenType,
         };
 
         return "<span class=\"{$class}\">";
     }
 
-    public function after(TokenType $tokenType): string
+    public function after(string|TokenType $tokenType): string
     {
         return "</span>";
     }

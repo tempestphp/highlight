@@ -1,7 +1,5 @@
 # Fast, extensible, server-side code highlighting
 
-Jump to:
-
 - [Quickstart](#quickstart)
 - [Themes](#themes)
   - [For the web](#for-the-web)

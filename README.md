@@ -6,7 +6,11 @@ Jump to:
 - [Themes](#themes)
   - [For the web](#for-the-web)
   - [For the terminal](#for-the-terminal)
-- [Special highlight tags](#special-highlight-tags)
+- [Special highlighting tags](#special-highlighting-tags)
+  - [Emphasize strong and blur](#emphasize-strong-and-blur)
+  - [Additions and deletions](#additions-and-deletions)
+  - [Custom classes](#custom-classes)
+  - [Inline languages](#inline-languages)
 - [Commonmark integration](#commonmark-integration)
 - [Adding or extending languages](#adding-or-extending-languages)
 
@@ -115,13 +119,19 @@ echo html_entity_decode($highlighter->parse(htmlentities($code), 'php'));
 
 ![](./.github/terminal.png)
 
-## Special highlight tags
+## Special highlighting tags
+
+This package offers a collection of special tags that you can use within your code snippets. These tags won't be shown in the final output, but rather adjust the highlighter's default styling. All these tags work multi-line, and will still properly render its wrapped content.
+
+### Emphasize, strong, and blur
 
 You can add these tags within your code to emphasize or blur parts:
 
 - `{_ content _}` adds the `.hl-em` class
 - `{* content *}` adds the `.hl-strong` class
 - `{~ content ~}` adds the `.hl-blur` class
+
+Here's an example:
 
 ```php
 {~public function parse(string $content, Highlighter $highlighter): string
@@ -152,8 +162,9 @@ This is the end result:
 
 ![](./.github/highlight.png)
 
-Furthermore, you can use these two tags to mark lines as additions and deletions:
+### Additions and deletions
 
+You can use these two tags to mark lines as additions and deletions:
 
 - `{+ content +}` adds the `.hl-addition` class
 - `{- content -}` adds the `.hl-deletion` class
@@ -165,7 +176,29 @@ Furthermore, you can use these two tags to mark lines as additions and deletions
 
 ![](./.github/highlight-2.png)
 
-Finally, you can add whatever class you'd like by using the <code>{&#96;classname&#96; content &#96;}</code> syntax:
+As a reminder: all these tags work multi-line as well:
+
+
+```php
+  public function before(TokenType $tokenType): string
+  {
+      $style = match ($tokenType) {
+          {-TokenType::KEYWORD => TerminalStyle::FG_DARK_BLUE,
+          TokenType::PROPERTY => TerminalStyle::FG_DARK_GREEN,
+          TokenType::TYPE => TerminalStyle::FG_DARK_RED,
+          TokenType::GENERIC => TerminalStyle::FG_DARK_CYAN,
+          TokenType::VALUE => TerminalStyle::FG_BLACK,
+          TokenType::COMMENT => TerminalStyle::FG_GRAY,
+          TokenType::ATTRIBUTE => TerminalStyle::RESET,-}
+      };
+  
+      return TerminalStyle::ESC->value . $style->value;
+  }
+```
+
+### Custom classes
+
+You can add any class you'd like by using the <code>{&#96;classname&#96; content &#96;}</code> tag:
 
 <pre>
 &lt;style&gt;
@@ -186,22 +219,35 @@ Finally, you can add whatever class you'd like by using the <code>{&#96;classnam
 
 ![](./.github/highlight-3.png)
 
+### Inline languages
+
+Within inline Markdown code tags, you can specify the language by prepending it between curly brackets: 
+
+<pre>
+&#96;{php}public function before(TokenType $tokenType): string&#96;
+</pre>
+
+You'll need to set up [commonmark](#commonmark-integration) properly to get this to work.
+
 ## CommonMark integration
 
-If you're using `league/commonmark`, you can add highlight support to codeblocks like so:
+If you're using `league/commonmark`, you can highlight codeblocks and inline code like so:
 
 ```php
 use League\CommonMark\Environment\Environment;
 use League\CommonMark\Extension\CommonMark\CommonMarkCoreExtension;
 use League\CommonMark\Extension\CommonMark\Node\Block\FencedCode;
 use League\CommonMark\MarkdownConverter;
-use Tempest\Highlight\CommonMark\HighlightCodeBlockRenderer;
+use Tempest\Highlight\CommonMark\CodeBlockRenderer;
+use Tempest\Highlight\CommonMark\InlineCodeBlockRenderer;
 
 $environment = new Environment();
 
 $environment
     ->addExtension(new CommonMarkCoreExtension())
-    ->addRenderer(FencedCode::class, new HighlightCodeBlockRenderer());
+    ->addRenderer(FencedCode::class, new CodeBlockRenderer())
+    ->addRenderer(Code::class, new InlineCodeBlockRenderer())
+    ;
 
 $markdown = new MarkdownConverter($environment);
 ```

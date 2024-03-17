@@ -10,7 +10,7 @@ use League\CommonMark\Extension\CommonMark\Node\Block\FencedCode;
 use League\CommonMark\Extension\FrontMatter\FrontMatterExtension;
 use League\CommonMark\MarkdownConverter;
 use PHPUnit\Framework\TestCase;
-use Tempest\Highlight\CommonMark\HighlightCodeBlockRenderer;
+use Tempest\Highlight\CommonMark\CodeBlockRenderer;
 
 class HighlightCodeBlockRendererTest extends TestCase
 {
@@ -21,7 +21,7 @@ class HighlightCodeBlockRendererTest extends TestCase
         $environment
             ->addExtension(new CommonMarkCoreExtension())
             ->addExtension(new FrontMatterExtension())
-            ->addRenderer(FencedCode::class, new HighlightCodeBlockRenderer());
+            ->addRenderer(FencedCode::class, new CodeBlockRenderer());
 
         $markdown = new MarkdownConverter($environment);
 

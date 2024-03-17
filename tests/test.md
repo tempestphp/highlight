@@ -1,3 +1,5 @@
+`{php}public function before(TokenType $tokenType): string`
+
 ```php
         public function before(TokenType $tokenType): string
         {

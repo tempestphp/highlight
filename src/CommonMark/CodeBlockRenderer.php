@@ -13,7 +13,7 @@ use League\CommonMark\Renderer\NodeRendererInterface;
 use League\CommonMark\Util\HtmlElement;
 use Tempest\Highlight\Highlighter;
 
-class HighlightCodeBlockRenderer implements NodeRendererInterface
+class CodeBlockRenderer implements NodeRendererInterface
 {
     public function render(Node $node, ChildNodeRendererInterface $childRenderer)
     {

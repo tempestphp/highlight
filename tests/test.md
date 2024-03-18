@@ -1,3 +1,4 @@
 ```php
-return '\@php(?<match>(.|\n)*?)\@endphp';
+public string|\Stringable $message,
+public const string|\Stringable MESSAGE = 'hi',
 ```

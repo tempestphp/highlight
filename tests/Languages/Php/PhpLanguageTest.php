@@ -11,13 +11,13 @@ use Tempest\Highlight\Highlighter;
 class PhpLanguageTest extends TestCase
 {
     #[DataProvider('data')]
-    public function test_highlight(string $input, string $output): void
+    public function test_highlight(string $content, string $expected): void
     {
         $highlighter = new Highlighter();
 
         $this->assertSame(
-            $highlighter->parse($input, 'php'),
-            $output,
+            $expected,
+            $highlighter->parse($content, 'php'),
         );
     }
 
@@ -25,6 +25,8 @@ class PhpLanguageTest extends TestCase
     {
         return [
             ["'php()'", "'<span class=\"hl-value\">php()</span>'"],
+            ["public const string|\Stringable MESSAGE = 'hi';", '<span class="hl-keyword">public</span> <span class="hl-keyword">const</span> <span class="hl-type">string|\Stringable</span> <span class="hl-property">MESSAGE</span> = \'<span class="hl-value">hi</span>\';'],
+            ["public string|\Stringable \$message;", '<span class="hl-keyword">public</span> <span class="hl-type">string|\<span class="hl-type">Stringable</span></span> <span class="hl-property">$message</span>;'],
         ];
     }
 }

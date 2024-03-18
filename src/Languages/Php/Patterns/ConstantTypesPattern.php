@@ -5,29 +5,21 @@ declare(strict_types=1);
 namespace Tempest\Highlight\Languages\Php\Patterns;
 
 use Tempest\Highlight\IsPattern;
+use Tempest\Highlight\Languages\Php\PhpLanguage;
 use Tempest\Highlight\Pattern;
 use Tempest\Highlight\PatternTest;
 use Tempest\Highlight\Tokens\TokenType;
 
-#[PatternTest(
-    input: 'const string BAR_FOO = \'baz\'',
-    output: 'string',
-)]
-#[PatternTest(
-    input: 'const BAR = \'baz\'',
-    output: null,
-)]
-#[PatternTest(
-    input: 'const (Foo&Bar)|null BAR = \'baz\'',
-    output: '(Foo&Bar)|null',
-)]
+#[PatternTest(input: 'const string BAR_FOO = \'baz\'', output: 'string')]
+#[PatternTest(input: 'const BAR = \'baz\'', output: null)]
+#[PatternTest(input: 'const (Foo&Bar)|null BAR = \'baz\'', output: '(Foo&Bar)|null')]
 final readonly class ConstantTypesPattern implements Pattern
 {
     use IsPattern;
 
     public function getPattern(): string
     {
-        return 'const\s(?<match>[\(\)\|\&\?\w]+)\s[\w]+\s=';
+        return 'const\s(?<match>' . PhpLanguage::TYPE_REGEX .')\s[\w]+\s=';
     }
 
     public function getTokenType(): TokenType

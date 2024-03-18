@@ -35,6 +35,8 @@ use Tempest\Highlight\Languages\Php\Patterns\UsePattern;
 
 class PhpLanguage extends BaseLanguage
 {
+    public const string TYPE_REGEX = '[\\\(\)\|\&\?\w]+';
+
     public function getInjections(): array
     {
         return [

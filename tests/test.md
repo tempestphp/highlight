@@ -1,6 +1,7 @@
 ```php
-class Foo
-{
-    const string BAR = 'baz'; 
-} 
+$class = new readonly class {
+    public function __construct(
+        public string $foo = 'bar',
+    ) {}
+};
 ```

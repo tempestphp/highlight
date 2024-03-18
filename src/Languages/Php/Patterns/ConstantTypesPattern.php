@@ -21,7 +21,7 @@ use Tempest\Highlight\Tokens\TokenType;
     input: 'const (Foo&Bar)|null BAR = \'baz\'',
     output: '(Foo&Bar)|null',
 )]
-final readonly class ConstTypesPattern implements Pattern
+final readonly class ConstantTypesPattern implements Pattern
 {
     use IsPattern;
 

@@ -11,6 +11,7 @@ use Tempest\Highlight\Languages\Php\Patterns\ClassNamePattern;
 use Tempest\Highlight\Languages\Php\Patterns\ClassPropertyPattern;
 use Tempest\Highlight\Languages\Php\Patterns\ConstantNamePattern;
 use Tempest\Highlight\Languages\Php\Patterns\ConstantPropertyPattern;
+use Tempest\Highlight\Languages\Php\Patterns\ConstantTypesPattern;
 use Tempest\Highlight\Languages\Php\Patterns\ExtendsPattern;
 use Tempest\Highlight\Languages\Php\Patterns\FunctionCallPattern;
 use Tempest\Highlight\Languages\Php\Patterns\FunctionNamePattern;
@@ -131,6 +132,7 @@ class PhpLanguage extends BaseLanguage
             new UsePattern(),
             new NamespacePattern(),
             new PropertyTypesPattern(),
+            new ConstantTypesPattern(),
             new ClassNamePattern(),
             new ReturnTypePattern(),
             new StaticClassCallPattern(),

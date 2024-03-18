@@ -1,1 +1,6 @@
-`{php}class Foo/*<>*/ {}`
+```php
+class Foo
+{
+    const string BAR = 'baz'; 
+} 
+```

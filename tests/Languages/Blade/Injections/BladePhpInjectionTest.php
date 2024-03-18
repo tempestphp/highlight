@@ -14,11 +14,11 @@ class BladePhpInjectionTest extends TestCase
     #[Test]
     public function test_injection(): void
     {
-        $content = htmlentities('
+        $content = '
         @php
         count($foo)
         @endphp
-        ');
+        ';
 
         $highlighter = new Highlighter();
         $injection = new BladePhpInjection();

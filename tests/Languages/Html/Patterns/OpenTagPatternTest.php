@@ -16,19 +16,19 @@ class OpenTagPatternTest extends TestCase
     {
         $this->assertMatches(
             pattern: new OpenTagPattern(),
-            content: htmlentities('<x-hello attr="">'),
+            content: '<x-hello attr="">',
             expected: 'x-hello',
         );
 
         $this->assertMatches(
             pattern: new OpenTagPattern(),
-            content: htmlentities('<a href="">'),
+            content: '<a href="">',
             expected: 'a',
         );
 
         $this->assertMatches(
             pattern: new OpenTagPattern(),
-            content: htmlentities('<br/>'),
+            content: '<br/>',
             expected: 'br',
         );
     }

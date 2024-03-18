@@ -14,7 +14,7 @@ final readonly class CssAttributeInjection implements Injection
 
     public function getPattern(): string
     {
-        return 'style=&quot;(?<match>(.|\n)*?)&quot;';
+        return 'style="(?<match>(.|\n)*?)"';
     }
 
     public function parseContent(string $content, Highlighter $highlighter): string

@@ -6,37 +6,30 @@ namespace Tempest\Highlight\Tests\Languages\Php\Injections;
 
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
-use Tempest\Highlight\Highlighter;
 use Tempest\Highlight\Languages\Php\Injections\PhpShortEchoInjection;
+use Tempest\Highlight\Tests\TestsInjections;
 
 class PhpShortEchoInjectionTest extends TestCase
 {
+    use TestsInjections;
+
     #[Test]
     public function test_injection(): void
     {
-        $content = htmlentities('
-<?php 
-    /** @var \Tempest\View\GenericView $this */
-    $var = new Foo(); 
-?>
-
+        $content = '
 Hello, <?= $this->name ?>
 Hello, <?= $this->other ?>
-        ');
+        ';
 
-        $highlighter = new Highlighter();
-        $injection = new PhpShortEchoInjection();
+        $expected = '
+Hello, &lt;?= $this-&gt;<span class="hl-property">name</span> ?&gt;
+Hello, &lt;?= $this-&gt;<span class="hl-property">other</span> ?&gt;
+        ';
 
-        $output = $injection->parse($content, $highlighter);
-
-        $this->assertStringContainsString(
-            '<span class="hl-property">name</span>',
-            $output,
-        );
-
-        $this->assertStringContainsString(
-            '<span class="hl-property">other</span>',
-            $output,
+        $this->assertMatches(
+            injection: new PhpShortEchoInjection(),
+            content: $content,
+            expected: $expected,
         );
     }
 }

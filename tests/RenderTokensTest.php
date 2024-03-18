@@ -6,6 +6,7 @@ namespace Tempest\Highlight\Tests;
 
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
+use Tempest\Highlight\Escape;
 use Tempest\Highlight\Themes\CssTheme;
 use Tempest\Highlight\Tokens\RenderTokens;
 use Tempest\Highlight\Tokens\Token;
@@ -31,7 +32,7 @@ class RenderTokensTest extends TestCase
             ),
         ];
 
-        $parsed = (new RenderTokens(new CssTheme()))($content, $tokens);
+        $parsed = Escape::html((new RenderTokens(new CssTheme()))($content, $tokens));
 
         $this->assertSame(
             '<span class="hl-comment">/** @var \Tempest\View\<span class="hl-type">GenericView</span> $this */</span>',
@@ -60,7 +61,7 @@ class RenderTokensTest extends TestCase
             ),
         ];
 
-        $output = (new RenderTokens(new CssTheme()))("#[Get(hi: '/')]", $tokens);
+        $output = Escape::html((new RenderTokens(new CssTheme()))("#[Get(hi: '/')]", $tokens));
 
         $this->assertSame(
             "<span class=\"hl-attribute\">#[<span class=\"hl-type\">get</span>(<span class=\"hl-property\">hi</span>: '/')]</span>",
@@ -97,7 +98,7 @@ class RenderTokensTest extends TestCase
             ),
         ];
 
-        $output = (new RenderTokens(new CssTheme()))($content, $tokens);
+        $output = Escape::html((new RenderTokens(new CssTheme()))($content, $tokens));
 
         $this->assertSame(
             "    <span class=\"hl-attribute\">#[<span class=\"hl-type\">get</span>(<span class=\"hl-property\">hi</span>: '/')]</span>

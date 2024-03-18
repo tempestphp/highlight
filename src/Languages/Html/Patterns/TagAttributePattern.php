@@ -14,7 +14,7 @@ final readonly class TagAttributePattern implements Pattern
 
     public function getPattern(): string
     {
-        return '(?<match>[\w]+)=&quot;';
+        return '(?<match>[\w]+)="';
     }
 
     public function getTokenType(): TokenType

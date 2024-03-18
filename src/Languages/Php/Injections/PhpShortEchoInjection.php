@@ -14,7 +14,7 @@ final readonly class PhpShortEchoInjection implements Injection
 
     public function getPattern(): string
     {
-        return '/&lt;\?=\s(?<match>.*)\s\?&gt;/';
+        return '/<\?=\s(?<match>.*)\s\?>/';
     }
 
     public function parseContent(string $content, Highlighter $highlighter): string

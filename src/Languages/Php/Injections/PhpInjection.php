@@ -14,7 +14,7 @@ final readonly class PhpInjection implements Injection
 
     public function getPattern(): string
     {
-        return '\&lt;\?php(?<match>(.|\n)*?)\?&gt;';
+        return '\<\?php(?<match>(.|\n)*?)\?>';
     }
 
     public function parseContent(string $content, Highlighter $highlighter): string

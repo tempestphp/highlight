@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tempest\Highlight\Languages\Base\Injections;
 
+use Tempest\Highlight\Escape;
 use Tempest\Highlight\Highlighter;
 use Tempest\Highlight\Injection;
 
@@ -29,7 +30,10 @@ final readonly class CustomClassInjection implements Injection
 
             $content = str_replace(
                 search: $match,
-                replace: $theme->before($classForMatch) . $parsed . $theme->after($classForMatch),
+                replace:
+                Escape::tokens($theme->before($classForMatch))
+                . $parsed
+                . Escape::tokens($theme->after($classForMatch)),
                 subject: $content,
             );
         }

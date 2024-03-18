@@ -16,13 +16,13 @@ class CloseTagPatternTest extends TestCase
     {
         $this->assertMatches(
             pattern: new CloseTagPattern(),
-            content: htmlentities('</x-hello>'),
+            content: '</x-hello>',
             expected: 'x-hello',
         );
 
         $this->assertMatches(
             pattern: new CloseTagPattern(),
-            content: htmlentities('</a>'),
+            content: '</a>',
             expected: 'a',
         );
     }

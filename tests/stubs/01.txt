@@ -22,7 +22,7 @@ final readonly class HomeController
     <span class="hl-keyword">public</span> <span class="hl-keyword">function</span> <span class="hl-property">__invoke</span>(): <span class="hl-type">View</span>
     {
         <span class="hl-keyword">return</span> <span class="hl-property">view</span>('Views/home.view.php')
-            -><span class="hl-property">data</span>(
+            -&gt;<span class="hl-property">data</span>(
                 <span class="hl-property">name</span>: 'Brent',
                 <span class="hl-property">date</span>: <span class="hl-keyword">new</span> <span class="hl-type">DateTime</span>(),
             );

@@ -14,7 +14,7 @@ final readonly class OpenTagPattern implements Pattern
 
     public function getPattern(): string
     {
-        return '&lt;(?<match>[\w\-]+)';
+        return '<(?<match>[\w\-]+)';
     }
 
     public function getTokenType(): TokenType

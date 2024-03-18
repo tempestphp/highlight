@@ -16,16 +16,16 @@ class HtmlCommentPatternTest extends TestCase
     {
         $this->assertMatches(
             pattern: new HtmlCommentPattern(),
-            content: htmlentities('
+            content: '
             test
             <!-- 
             foo
             -->
             test
-            >'),
-            expected: htmlentities('<!-- 
+            >',
+            expected: '<!-- 
             foo
-            -->'),
+            -->',
         );
     }
 }

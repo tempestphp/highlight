@@ -16,6 +16,7 @@ final class Highlighter
 {
     private array $languages = [];
     private ?Language $currentLanguage = null;
+    private bool $shouldEscape = true;
 
     public function __construct(
         private readonly Theme $theme = new CssTheme(),
@@ -64,16 +65,29 @@ final class Highlighter
         $this->currentLanguage = $language;
     }
 
+    public function withoutEscaping(): self
+    {
+        $clone = clone $this;
+
+        $clone->shouldEscape = false;
+
+        return $clone;
+    }
+
     private function parseContent(string $content, Language $language): string
     {
         // Injections
         foreach ($language->getInjections() as $injection) {
-            $content = $injection->parse($content, clone $this);
+            $content = $injection->parse($content, $this->withoutEscaping());
         }
 
         // Patterns
         $tokens = (new ParseTokens())($content, $language);
 
-        return (new RenderTokens($this->theme))($content, $tokens);
+        $output = (new RenderTokens($this->theme))($content, $tokens);
+
+        return $this->shouldEscape
+            ? Escape::html($output)
+            : $output;
     }
 }

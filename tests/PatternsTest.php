@@ -22,7 +22,7 @@ final class PatternsTest extends TestCase
     {
         $this->assertMatches(
             pattern: $pattern,
-            content: htmlentities($patternTest->input),
+            content: $patternTest->input,
             expected: $patternTest->output,
         );
     }

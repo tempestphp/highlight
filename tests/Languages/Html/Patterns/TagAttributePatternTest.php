@@ -16,13 +16,13 @@ class TagAttributePatternTest extends TestCase
     {
         $this->assertMatches(
             pattern: new TagAttributePattern(),
-            content: htmlentities('<x-hello attr="">'),
+            content: '<x-hello attr="">',
             expected: 'attr',
         );
 
         $this->assertMatches(
             pattern: new TagAttributePattern(),
-            content: htmlentities('<a href="">'),
+            content: '<a href="">',
             expected: 'href',
         );
     }

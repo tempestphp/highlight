@@ -6,40 +6,30 @@ namespace Tempest\Highlight\Tests\Languages\Blade\Injections;
 
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
-use Tempest\Highlight\Highlighter;
 use Tempest\Highlight\Languages\Blade\Injections\BladeEchoInjection;
+use Tempest\Highlight\Tests\TestsInjections;
 
 class BladeEchoInjectionTest extends TestCase
 {
+    use TestsInjections;
+
     #[Test]
     public function test_injection(): void
     {
-        $content = htmlentities('{{ count($foo) }}');
-
-        $highlighter = new Highlighter();
-        $injection = new BladeEchoInjection();
-
-        $output = $injection->parse($content, $highlighter);
-
-        $this->assertStringContainsString(
-            '<span class="hl-property">count',
-            $output,
+        $this->assertMatches(
+            injection: new BladeEchoInjection(),
+            content: '{{ count($foo) }}',
+            expected: '{{ <span class="hl-property">count</span>($foo) }}',
         );
     }
 
     #[Test]
     public function test_injection_raw_echo(): void
     {
-        $content = htmlentities('{!! count($foo) !!}');
-
-        $highlighter = new Highlighter();
-        $injection = new BladeEchoInjection();
-
-        $output = $injection->parse($content, $highlighter);
-
-        $this->assertStringContainsString(
-            '<span class="hl-property">count',
-            $output,
+        $this->assertMatches(
+            injection: new BladeEchoInjection(),
+            content: '{!! count($foo) !!}',
+            expected: '{!! <span class="hl-property">count</span>($foo) !!}',
         );
     }
 }

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tempest\Highlight\Languages\Base;
 
+use Tempest\Highlight\Escape;
 use Tempest\Highlight\Highlighter;
 
 trait IsHighlightInjection
@@ -34,7 +35,10 @@ trait IsHighlightInjection
 
             $content = str_replace(
                 search: $match,
-                replace: $theme->before($classForMatch) . $parsed . $theme->after($classForMatch),
+                replace:
+                    Escape::tokens($theme->before($classForMatch))
+                    . $parsed
+                    . Escape::tokens($theme->after($classForMatch)),
                 subject: $content,
             );
         }

@@ -9,6 +9,7 @@ use League\CommonMark\Extension\CommonMark\Node\Inline\Code;
 use League\CommonMark\Node\Node;
 use League\CommonMark\Renderer\ChildNodeRendererInterface;
 use League\CommonMark\Renderer\NodeRendererInterface;
+use League\CommonMark\Util\Xml;
 use Tempest\Highlight\Highlighter;
 
 class InlineCodeBlockRenderer implements NodeRendererInterface
@@ -26,6 +27,6 @@ class InlineCodeBlockRenderer implements NodeRendererInterface
 
         $highlighter = new Highlighter();
 
-        return '<code>' . $highlighter->parse(htmlentities($code), $language) . '</code>';
+        return '<code>' . $highlighter->parse(Xml::escape($code), $language) . '</code>';
     }
 }

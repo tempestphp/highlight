@@ -14,7 +14,7 @@ final readonly class PropertyAccessPattern implements Pattern
 
     public function getPattern(): string
     {
-        return '-\&gt\;(?<match>[\w]+)';
+        return '->(?<match>[\w]+)';
     }
 
     public function getTokenType(): TokenType

@@ -14,7 +14,7 @@ class BladeKeywordInjectionTest extends TestCase
     #[Test]
     public function test_injection(): void
     {
-        $content = htmlentities('@if(count($foo))');
+        $content = '@if(count($foo))';
 
         $highlighter = new Highlighter();
         $injection = new BladeKeywordInjection();

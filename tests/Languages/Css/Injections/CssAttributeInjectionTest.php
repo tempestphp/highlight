@@ -6,26 +6,20 @@ namespace Tempest\Highlight\Tests\Languages\Css\Injections;
 
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
-use Tempest\Highlight\Highlighter;
 use Tempest\Highlight\Languages\Css\Injections\CssAttributeInjection;
+use Tempest\Highlight\Tests\TestsInjections;
 
 class CssAttributeInjectionTest extends TestCase
 {
+    use TestsInjections;
+
     #[Test]
     public function test_injection(): void
     {
-        $content = htmlentities('
-<x-slot style="color: green">
-        ');
-
-        $highlighter = new Highlighter();
-        $injection = new CssAttributeInjection();
-
-        $output = $injection->parse($content, $highlighter);
-
-        $this->assertStringContainsString(
-            '<span class="hl-property">color</span>',
-            $output,
+        $this->assertMatches(
+            injection: new CssAttributeInjection(),
+            content: '<x-slot style="color: green">',
+            expected: '&lt;x-slot style=&quot;<span class="hl-property">color</span>: green&quot;&gt;'
         );
     }
 }

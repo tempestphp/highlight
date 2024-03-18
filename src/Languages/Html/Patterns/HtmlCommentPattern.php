@@ -14,7 +14,7 @@ final readonly class HtmlCommentPattern implements Pattern
 
     public function getPattern(): string
     {
-        return '(?<match>\&lt;!--(.|\n)*--&gt;)';
+        return '(?<match>\<!--(.|\n)*-->)';
     }
 
     public function getTokenType(): TokenType

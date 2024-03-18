@@ -11,7 +11,7 @@ final readonly class PatternTest
 {
     public function __construct(
         public string $input,
-        public string|array $output,
+        public string|array|null $output,
     ) {
     }
 }

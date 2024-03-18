@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tempest\Highlight\Tokens;
 
+use Tempest\Highlight\Escape;
 use Tempest\Highlight\Theme;
 
 final class RenderTokens
@@ -58,9 +59,9 @@ final class RenderTokens
                 : $currentToken->value;
 
             $renderedToken =
-                $this->theme->before($currentToken->type)
+                Escape::tokens($this->theme->before($currentToken->type))
                 . $value
-                . $this->theme->after($currentToken->type);
+                . Escape::tokens($this->theme->after($currentToken->type));
 
             $output = substr_replace(
                 $output,
@@ -71,13 +72,13 @@ final class RenderTokens
 
             foreach ($currentToken->children as $childToken) {
                 $parsedOffset +=
-                    strlen($this->theme->before($childToken->type))
-                    + strlen($this->theme->after($childToken->type));
+                    strlen(Escape::tokens($this->theme->before($childToken->type)))
+                    + strlen(Escape::tokens($this->theme->after($childToken->type)));
             }
 
             $parsedOffset +=
-                strlen($this->theme->before($currentToken->type))
-                + strlen($this->theme->after($currentToken->type));
+                strlen(Escape::tokens($this->theme->before($currentToken->type)))
+                + strlen(Escape::tokens($this->theme->after($currentToken->type)));
         }
 
         return $output;

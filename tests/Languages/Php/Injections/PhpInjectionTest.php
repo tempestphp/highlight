@@ -6,31 +6,38 @@ namespace Tempest\Highlight\Tests\Languages\Php\Injections;
 
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
-use Tempest\Highlight\Highlighter;
 use Tempest\Highlight\Languages\Php\Injections\PhpInjection;
+use Tempest\Highlight\Tests\TestsInjections;
 
 class PhpInjectionTest extends TestCase
 {
+    use TestsInjections;
+
     #[Test]
     public function test_injection(): void
     {
-        $content = htmlentities('
+        $content = '
 <?php 
     /** @var \Tempest\View\GenericView $this */
     $var = new Foo(); 
 ?>
 
 Hello, <?= $this->name ?>
-        ');
+        ';
 
-        $highlighter = new Highlighter();
-        $injection = new PhpInjection();
+        $expected = '
+&lt;?php 
+    <span class="hl-comment">/** @var \Tempest\View\<span class="hl-type">GenericView</span> $this */</span>
+    $var = <span class="hl-keyword">new</span> <span class="hl-type">Foo</span>(); 
+?&gt;
 
-        $output = $injection->parse($content, $highlighter);
+Hello, &lt;?= $this-&gt;name ?&gt;
+        ';
 
-        $this->assertStringContainsString(
-            '<span class="hl-comment">/** @var',
-            $output,
+        $this->assertMatches(
+            injection: new PhpInjection(),
+            content: $content,
+            expected: $expected,
         );
     }
 }

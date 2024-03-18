@@ -16,19 +16,19 @@ class PropertyAccessPatternTest extends TestCase
     {
         $this->assertMatches(
             pattern: new PropertyAccessPattern(),
-            content: htmlentities('$this->foo'),
+            content: '$this->foo',
             expected: 'foo',
         );
 
         $this->assertMatches(
             pattern: new PropertyAccessPattern(),
-            content: htmlentities('$this->foo()'),
+            content: '$this->foo()',
             expected: 'foo',
         );
 
         $this->assertMatches(
             pattern: new PropertyAccessPattern(),
-            content: htmlentities('$obj->foo'),
+            content: '$obj->foo',
             expected: 'foo',
         );
     }

@@ -7,6 +7,7 @@ namespace Tempest\Highlight\Languages\Blade;
 use Tempest\Highlight\Languages\Blade\Injections\BladeEchoInjection;
 use Tempest\Highlight\Languages\Blade\Injections\BladeKeywordInjection;
 use Tempest\Highlight\Languages\Blade\Injections\BladePhpInjection;
+use Tempest\Highlight\Languages\Blade\Injections\BladeRawEchoInjection;
 use Tempest\Highlight\Languages\Blade\Patterns\BladeCommentPattern;
 use Tempest\Highlight\Languages\Blade\Patterns\BladeKeywordPattern;
 use Tempest\Highlight\Languages\Html\HtmlLanguage;
@@ -20,6 +21,7 @@ class BladeLanguage extends HtmlLanguage
             new BladeKeywordInjection(),
             new BladePhpInjection(),
             new BladeEchoInjection(),
+            new BladeRawEchoInjection(),
         ];
     }
 

@@ -1,4 +1,3 @@
 ```php
-public string|\Stringable $message,
-public const string|\Stringable MESSAGE = 'hi',
+for($x = 0; $x < 150; $x++) {
 ```

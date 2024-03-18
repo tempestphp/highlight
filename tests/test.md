@@ -1,3 +1,6 @@
 ```php
-for($x = 0; $x < 150; $x++) {
+public function __construct(
+    ?string $encoding = null,
+) {}
+
 ```

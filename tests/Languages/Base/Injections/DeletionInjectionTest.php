@@ -8,7 +8,6 @@ use PHPUnit\Framework\TestCase;
 use Tempest\Highlight\Highlighter;
 use Tempest\Highlight\Languages\Base\Injections\DeletionInjection;
 use Tempest\Highlight\Languages\Blade\BladeLanguage;
-use Tempest\Highlight\Languages\Php\PhpLanguage;
 
 class DeletionInjectionTest extends TestCase
 {

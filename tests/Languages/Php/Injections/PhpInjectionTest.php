@@ -27,7 +27,7 @@ Hello, <?= $this->name ?>
 
         $expected = '
 &lt;?php 
-    <span class="hl-comment">/** @var \Tempest\View\<span class="hl-type">GenericView</span> $this */</span>
+    <span class="hl-comment">/** @var \Tempest\View\GenericView $this */</span>
     $var = <span class="hl-keyword">new</span> <span class="hl-type">Foo</span>(); 
 ?&gt;
 

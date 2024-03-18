@@ -12,6 +12,7 @@ use Tempest\Highlight\Languages\Php\Patterns\ClassPropertyPattern;
 use Tempest\Highlight\Languages\Php\Patterns\ConstantNamePattern;
 use Tempest\Highlight\Languages\Php\Patterns\ConstantPropertyPattern;
 use Tempest\Highlight\Languages\Php\Patterns\ConstantTypesPattern;
+use Tempest\Highlight\Languages\Php\Patterns\DoubleQuoteValuePattern;
 use Tempest\Highlight\Languages\Php\Patterns\ExtendsPattern;
 use Tempest\Highlight\Languages\Php\Patterns\FunctionCallPattern;
 use Tempest\Highlight\Languages\Php\Patterns\FunctionNamePattern;
@@ -28,6 +29,7 @@ use Tempest\Highlight\Languages\Php\Patterns\PropertyAccessPattern;
 use Tempest\Highlight\Languages\Php\Patterns\PropertyTypesPattern;
 use Tempest\Highlight\Languages\Php\Patterns\ReturnTypePattern;
 use Tempest\Highlight\Languages\Php\Patterns\SinglelineDocCommentPattern;
+use Tempest\Highlight\Languages\Php\Patterns\SingleQuoteValuePattern;
 use Tempest\Highlight\Languages\Php\Patterns\StaticClassCallPattern;
 use Tempest\Highlight\Languages\Php\Patterns\UsePattern;
 
@@ -124,6 +126,10 @@ class PhpLanguage extends BaseLanguage
             new MultilineDoubleDocCommentPattern(),
             new MultilineSingleDocCommentPattern(),
             new SinglelineDocCommentPattern(),
+
+            // VALUES
+            new SingleQuoteValuePattern(),
+            new DoubleQuoteValuePattern(),
 
             // TYPES
             new AttributeTypePattern(),

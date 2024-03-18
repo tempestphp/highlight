@@ -35,7 +35,9 @@ final class RenderTokens
 
             foreach ($tokens as $compareKey => $compareToken) {
                 if ($token->contains($compareToken)) {
-                    $token->addChild($compareToken);
+                    if ($token->canContain($compareToken)) {
+                        $token->addChild($compareToken);
+                    }
                     unset($tokens[$compareKey]);
                 }
             }

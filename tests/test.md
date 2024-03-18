@@ -1,1 +1,3 @@
-`{html}<style></style>`
+```php
+return '\@php(?<match>(.|\n)*?)\@endphp';
+```

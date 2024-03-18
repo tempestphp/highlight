@@ -60,4 +60,9 @@ final class Token
 
         return $clone;
     }
+
+    public function canContain(Token $otherToken): bool
+    {
+        return $this->type->canContain($otherToken->type);
+    }
 }

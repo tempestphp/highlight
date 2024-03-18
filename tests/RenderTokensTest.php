@@ -35,7 +35,7 @@ class RenderTokensTest extends TestCase
         $parsed = Escape::html((new RenderTokens(new CssTheme()))($content, $tokens));
 
         $this->assertSame(
-            '<span class="hl-comment">/** @var \Tempest\View\<span class="hl-type">GenericView</span> $this */</span>',
+            '<span class="hl-comment">/** @var \Tempest\View\GenericView $this */</span>',
             $parsed,
         );
     }

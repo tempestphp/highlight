@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tempest\Highlight\Tests\Languages\Blade\Injections;
 
 use PHPUnit\Framework\Attributes\Test;

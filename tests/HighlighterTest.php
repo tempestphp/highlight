@@ -26,6 +26,14 @@ class HighlighterTest extends TestCase
         );
     }
 
+    public function test_escaped_with_unknown_language(): void
+    {
+        $highlight = new Highlighter();
+
+        $output = $highlight->parse('<style>', 'unknown');
+        $this->assertSame('&lt;style&gt;', $output);
+    }
+
     public static function data(): array
     {
         return [

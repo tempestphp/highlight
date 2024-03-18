@@ -42,7 +42,9 @@ final class Highlighter
         }
 
         if (! $language) {
-            return $content;
+            return $this->shouldEscape ?
+                Escape::html($content)
+                : $content;
         }
 
         $this->currentLanguage = $language;

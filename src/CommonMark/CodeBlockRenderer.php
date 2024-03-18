@@ -21,7 +21,6 @@ class CodeBlockRenderer implements NodeRendererInterface
         }
 
         $highlight = new Highlighter();
-
         $code = $node->getLiteral();
         $language = $node->getInfoWords()[0] ?? 'txt';
 

@@ -1,3 +1,1 @@
-```php
-$this->name
-```
+`{php}class Foo/*<>*/ {}`

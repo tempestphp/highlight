@@ -25,8 +25,11 @@ class InlineCodeBlockRendererTest extends TestCase
 
         $markdown = new MarkdownConverter($environment);
 
-        $parsed = $markdown->convert("`{php}class Foo {}`");
+        $parsed = $markdown->convert("`{php}class Foo/*<>*/ {}`");
 
-        $this->assertStringContainsString('hl-keyword', $parsed->getContent());
+        $this->assertSame(
+            trim('<p><code><span class="hl-keyword">class</span> <span class="hl-type">Foo</span><span class="hl-comment">/*&lt;&gt;*/</span> {}</code></p>'),
+            trim($parsed->getContent()),
+        );
     }
 }

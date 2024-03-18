@@ -9,7 +9,6 @@ use League\CommonMark\Extension\CommonMark\Node\Inline\Code;
 use League\CommonMark\Node\Node;
 use League\CommonMark\Renderer\ChildNodeRendererInterface;
 use League\CommonMark\Renderer\NodeRendererInterface;
-use League\CommonMark\Util\Xml;
 use Tempest\Highlight\Highlighter;
 
 class InlineCodeBlockRenderer implements NodeRendererInterface
@@ -20,13 +19,12 @@ class InlineCodeBlockRenderer implements NodeRendererInterface
             throw new InvalidArgumentException('Block must be instance of ' . Code::class);
         }
 
-        preg_match('/^\{(?<match>[\w]+)\}(?<code>.*)/', $node->getLiteral(), $match);
+        preg_match('/^\{(?<match>[\w]+)}(?<code>.*)/', $node->getLiteral(), $match);
 
+        $highlighter = new Highlighter();
         $language = $match['match'] ?? 'txt';
         $code = $match['code'] ?? $node->getLiteral();
 
-        $highlighter = new Highlighter();
-
-        return '<code>' . $highlighter->parse(Xml::escape($code), $language) . '</code>';
+        return '<code>' . $highlighter->parse($code, $language) . '</code>';
     }
 }

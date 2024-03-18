@@ -8,13 +8,13 @@ use Tempest\Highlight\Highlighter;
 use Tempest\Highlight\Injection;
 use Tempest\Highlight\IsInjection;
 
-final readonly class BladeEchoInjection implements Injection
+final readonly class BladeRawEchoInjection implements Injection
 {
     use IsInjection;
 
     public function getPattern(): string
     {
-        return '({{)(?<match>.*)(}})';
+        return '({!!)(?<match>.*)(!!})';
     }
 
     public function parseContent(string $content, Highlighter $highlighter): string

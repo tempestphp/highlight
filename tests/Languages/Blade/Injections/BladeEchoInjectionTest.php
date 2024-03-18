@@ -22,14 +22,4 @@ class BladeEchoInjectionTest extends TestCase
             expected: '{{ <span class="hl-property">count</span>($foo) }}',
         );
     }
-
-    #[Test]
-    public function test_injection_raw_echo(): void
-    {
-        $this->assertMatches(
-            injection: new BladeEchoInjection(),
-            content: '{!! count($foo) !!}',
-            expected: '{!! <span class="hl-property">count</span>($foo) !!}',
-        );
-    }
 }

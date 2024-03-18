@@ -11,7 +11,7 @@ final readonly class CustomClassInjection implements Injection
 {
     public function parse(string $content, Highlighter $highlighter): string
     {
-        $pattern = '/\{\`(?<class>[\w-]+)\`(?<match>(.|\n)*?)\`\}/';
+        $pattern = '/\{\:(?<class>[\w-]+)\:(?<match>(.|\n)*?)\:\}/';
 
         preg_match_all($pattern, $content, $matches);
 

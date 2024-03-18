@@ -14,8 +14,8 @@ class CustomClassInjectionTest extends TestCase
     public function test_custom_class_injection()
     {
         $content = <<<TXT
-{`hl-a`public class Foo {}`}
-{`hl-b`public class Bar {}`}
+{:hl-a:public class Foo {}:}
+{:hl-b:public class Bar {}:}
 TXT;
 
         $highlighter = new Highlighter();

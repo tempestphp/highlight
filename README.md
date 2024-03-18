@@ -198,7 +198,7 @@ As a reminder: all these tags work multi-line as well:
 
 ### Custom classes
 
-You can add any class you'd like by using the <code>{&#96;classname&#96; content &#96;}</code> tag:
+You can add any class you'd like by using the <code>{:classname: content :}</code> tag:
 
 <pre>
 &lt;style&gt;
@@ -212,8 +212,8 @@ You can add any class you'd like by using the <code>{&#96;classname&#96; content
 &lt;/style&gt;
 
 &#96;&#96;&#96;php
-{&#96;hl-a&#96;public class Foo {}&#96;}
-{&#96;hl-b&#96;public class Bar {}&#96;}
+{:hl-a:public class Foo {}:}
+{:hl-b:public class Bar {}:}
 &#96;&#96;&#96;
 </pre>
 

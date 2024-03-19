@@ -6,6 +6,8 @@ namespace Tempest\Highlight;
 
 final readonly class Escape
 {
+    public const string INJECTION_TOKEN = '❿';
+
     private const array TOKENS = [
         '❶' => '&',
         '❷' => '<',
@@ -16,8 +18,13 @@ final readonly class Escape
         // ❼
         // ❽
         // ❾
-        // ❿
+        self::INJECTION_TOKEN => '', // injection token
     ];
+
+    public static function injection(string $input): string
+    {
+        return self::INJECTION_TOKEN . $input . self::INJECTION_TOKEN;
+    }
 
     public static function html(string $input): string
     {

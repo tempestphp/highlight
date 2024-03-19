@@ -13,12 +13,12 @@ enum TokenType: string
     case GENERIC = 'generic';
     case VALUE = 'value';
     case COMMENT = 'comment';
+    case INJECTION = 'injection';
 
     public function canContain(self $other): bool
     {
         return match ($this) {
-            self::VALUE => false,
-            self::COMMENT => false,
+            self::VALUE, self::INJECTION, self::COMMENT => false,
             default => true,
         };
     }

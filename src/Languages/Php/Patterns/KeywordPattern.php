@@ -8,17 +8,32 @@ use Tempest\Highlight\IsPattern;
 use Tempest\Highlight\Pattern;
 use Tempest\Highlight\Tokens\TokenType;
 
-final readonly class KeywordPattern implements Pattern
+final class KeywordPattern implements Pattern
 {
     use IsPattern;
+
+    private bool $caseInsensitive = false;
 
     public function __construct(private string $keyword)
     {
     }
 
+    public function caseInsensitive(): self
+    {
+        $this->caseInsensitive = true;
+
+        return $this;
+    }
+
     public function getPattern(): string
     {
-        return "(?<!\$)(?<match>{$this->keyword})(\s|\()";
+        $pattern = "/\b(?<!\$)(?<match>{$this->keyword})(\s|\()/";
+
+        if ($this->caseInsensitive) {
+            $pattern .= 'i';
+        }
+
+        return $pattern;
     }
 
     public function getTokenType(): TokenType

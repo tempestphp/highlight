@@ -11,6 +11,7 @@ use Tempest\Highlight\Languages\Base\Injections\CustomClassInjection;
 use Tempest\Highlight\Languages\Base\Injections\DeletionInjection;
 use Tempest\Highlight\Languages\Base\Injections\EmphasizeInjection;
 use Tempest\Highlight\Languages\Base\Injections\StrongInjection;
+use Tempest\Highlight\Languages\Base\Patterns\InjectionTokenPattern;
 
 class BaseLanguage implements Language
 {
@@ -28,6 +29,8 @@ class BaseLanguage implements Language
 
     public function getPatterns(): array
     {
-        return [];
+        return [
+            new InjectionTokenPattern(),
+        ];
     }
 }

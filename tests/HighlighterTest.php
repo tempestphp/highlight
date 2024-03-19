@@ -37,9 +37,8 @@ class HighlighterTest extends TestCase
     public static function data(): array
     {
         return [
-            ['01', 'php'],
-//            ['02', 'php'],
-//            ['03', 'php'],
+            ['01', 'php'], // general
+            ['02', 'html'], // deep injections
         ];
     }
 }

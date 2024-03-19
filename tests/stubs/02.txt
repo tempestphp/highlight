@@ -1,7 +1,31 @@
-/** @var \Tempest\View\GenericView $this */
+<body>
+    <div>
+        <?php
+            $sql = <<<SQL
+            SELECT posts.*, authors.name
+            FROM posts
+                INNER JOIN authors ON posts.author_id = authors.id
+            SQL;
 
-final readonly class HomeController
+            $posts = DB::get($sql);
+
+            // Don't do this IRL :)
+        ?>
+    </div>
+</body>
 ===
-<span class="hl-comment">/** @var \Tempest\View\<span class="hl-type">GenericView</span> $this */</span>
+&lt;<span class="hl-keyword">body</span>&gt;
+    &lt;<span class="hl-keyword">div</span>&gt;
+        &lt;?php
+            $sql = &lt;&lt;&lt;<span class="hl-property"><span class="hl-property">SQL</span></span><span class="hl-injection"><span class="hl-injection">
+            <span class="hl-keyword">SELECT</span> <span class="hl-type">posts</span>.*, <span class="hl-type">authors</span>.<span class="hl-property">name</span>
+            <span class="hl-keyword">FROM</span> <span class="hl-type">posts</span>
+                <span class="hl-keyword">INNER <span class="hl-keyword">JOIN</span></span> <span class="hl-type">authors</span> <span class="hl-keyword">ON</span> <span class="hl-type">posts</span>.<span class="hl-property">author_id</span> = <span class="hl-type">authors</span>.<span class="hl-property">id</span>
+            </span></span><span class="hl-property"><span class="hl-property">SQL</span></span>;
 
-<span class="hl-keyword">final</span> <span class="hl-keyword">readonly</span> <span class="hl-keyword">class</span> <span class="hl-type">HomeController</span>
+            $posts = <span class="hl-type">DB</span>::<span class="hl-property">get</span>($sql);
+
+            <span class="hl-comment">// Don't do this IRL :)</span>
+        ?&gt;
+    &lt;/<span class="hl-keyword">div</span>&gt;
+&lt;/<span class="hl-keyword">body</span>&gt;

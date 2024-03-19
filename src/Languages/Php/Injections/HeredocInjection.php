@@ -28,15 +28,15 @@ final readonly class HeredocInjection implements Injection
 
                 $parsed = str_replace(
                     [
-                        $match,             // The Heredoc contents will be parsed with the language derived from the token
-                        "<<<{$language}",   // The open tag will be highlighted as a property
-                        "{$language};",      // The close tag will be highlighted as a property
-                    ],
+                            $match,             // The Heredoc contents will be parsed with the language derived from the token
+                            "<<<{$language}",   // The open tag will be highlighted as a property
+                            "{$language};",      // The close tag will be highlighted as a property
+                        ],
                     [
-                        $highlighter->parse($match, strtolower($language)),
-                        '<<<' . Escape::tokens($theme->before($heredocTokenType) . $language . $theme->after($heredocTokenType)),
-                        Escape::tokens($theme->before($heredocTokenType) . $language . $theme->after($heredocTokenType)) .';',
-                    ],
+                            Escape::injection($highlighter->parse($match, strtolower($language))),
+                            '<<<' . Escape::tokens($theme->before($heredocTokenType) . $language . $theme->after($heredocTokenType)),
+                            Escape::tokens($theme->before($heredocTokenType) . $language . $theme->after($heredocTokenType)) . ';',
+                        ],
                     $fullMatch,
                 );
 

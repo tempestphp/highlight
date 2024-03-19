@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Tempest\Highlight\Languages\Php;
 
 use Tempest\Highlight\Languages\Base\BaseLanguage;
+use Tempest\Highlight\Languages\Php\Injections\HeredocInjection;
 use Tempest\Highlight\Languages\Php\Patterns\AttributePattern;
 use Tempest\Highlight\Languages\Php\Patterns\AttributeTypePattern;
 use Tempest\Highlight\Languages\Php\Patterns\ClassNamePattern;
@@ -41,6 +42,7 @@ class PhpLanguage extends BaseLanguage
     {
         return [
             ...parent::getInjections(),
+            new HeredocInjection(),
         ];
     }
 

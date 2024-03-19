@@ -33,7 +33,7 @@ Highlight code like this:
 ```php
 $highlighter = new \Tempest\Highlight\Highlighter();
 
-$code = $highlighter->parse($escapedCode, 'php');
+$code = $highlighter->parse($code, 'php');
 ```
 
 ```php
@@ -113,7 +113,7 @@ use Tempest\Highlight\Themes\TerminalTheme;
 
 $highlighter = new Highlighter(new TerminalTheme());
 
-echo $highlighter->parse(($code), 'php');
+echo $highlighter->parse($code, 'php');
 ```
 
 ![](./.github/terminal.png)

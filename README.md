@@ -36,10 +36,8 @@ $highlighter = new \Tempest\Highlight\Highlighter();
 $code = $highlighter->parse($escapedCode, 'php');
 ```
 
-**Note: you should always pass the _escaped_ version of your code**:
-
 ```php
-$code = $highlighter->parse(htmlentities($raw), 'php');
+$code = $highlighter->parse(($raw), 'php');
 ```
 
 ## Themes

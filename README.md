@@ -30,10 +30,6 @@ $highlighter = new \Tempest\Highlight\Highlighter();
 $code = $highlighter->parse($code, 'php');
 ```
 
-```php
-$code = $highlighter->parse(($raw), 'php');
-```
-
 ## Supported languages
 
 - [x] PHP

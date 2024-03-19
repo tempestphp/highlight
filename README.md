@@ -43,7 +43,7 @@ $code = $highlighter->parse(($raw), 'php');
 - [x] CSS
 - [ ] JavaScript
 - [ ] Twig
-- [ ] YAML
+- [x] YAML
 - [ ] JSON
 
 ## Themes

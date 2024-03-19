@@ -8,6 +8,7 @@ use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Tempest\Highlight\Escape;
 use Tempest\Highlight\Themes\CssTheme;
+use Tempest\Highlight\Tokens\GroupTokens;
 use Tempest\Highlight\Tokens\RenderTokens;
 use Tempest\Highlight\Tokens\Token;
 use Tempest\Highlight\Tokens\TokenType;
@@ -19,7 +20,7 @@ class RenderTokensTest extends TestCase
     {
         $content = '/** @var \Tempest\View\GenericView $this */';
 
-        $tokens = [
+        $tokens = (new GroupTokens())([
             new Token(
                 offset: 0,
                 value: '/** @var \Tempest\View\GenericView $this */',
@@ -30,7 +31,7 @@ class RenderTokensTest extends TestCase
                 value: 'GenericView',
                 type: TokenType::TYPE,
             ),
-        ];
+        ]);
 
         $parsed = Escape::html((new RenderTokens(new CssTheme()))($content, $tokens));
 
@@ -43,7 +44,7 @@ class RenderTokensTest extends TestCase
     #[Test]
     public function test_nested_tokens_b()
     {
-        $tokens = [
+        $tokens = (new GroupTokens())([
             new Token(
                 offset: 0,
                 value: "#[Get(hi: '/')]",
@@ -59,7 +60,7 @@ class RenderTokensTest extends TestCase
                 value: 'hi',
                 type: TokenType::PROPERTY,
             ),
-        ];
+        ]);
 
         $output = Escape::html((new RenderTokens(new CssTheme()))("#[Get(hi: '/')]", $tokens));
 
@@ -75,7 +76,7 @@ class RenderTokensTest extends TestCase
         $content = "    #[Get(hi: '/')]
     public";
 
-        $tokens = [
+        $tokens = (new GroupTokens())([
             new Token(
                 offset: 4,
                 value: "#[Get(hi: '/')]",
@@ -96,7 +97,7 @@ class RenderTokensTest extends TestCase
                 value: 'public',
                 type: TokenType::KEYWORD,
             ),
-        ];
+        ]);
 
         $output = Escape::html((new RenderTokens(new CssTheme()))($content, $tokens));
 

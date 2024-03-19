@@ -9,6 +9,7 @@ use Tempest\Highlight\Languages\Css\CssLanguage;
 use Tempest\Highlight\Languages\Html\HtmlLanguage;
 use Tempest\Highlight\Languages\Php\PhpLanguage;
 use Tempest\Highlight\Themes\CssTheme;
+use Tempest\Highlight\Tokens\GroupTokens;
 use Tempest\Highlight\Tokens\ParseTokens;
 use Tempest\Highlight\Tokens\RenderTokens;
 
@@ -86,7 +87,9 @@ final class Highlighter
         // Patterns
         $tokens = (new ParseTokens())($content, $language);
 
-        $output = (new RenderTokens($this->theme))($content, $tokens);
+        $groupedTokens = (new GroupTokens())($tokens);
+
+        $output = (new RenderTokens($this->theme))($content, $groupedTokens);
 
         return $this->shouldEscape
             ? Escape::html($output)

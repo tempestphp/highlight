@@ -25,33 +25,9 @@ final class RenderTokens
         array $tokens,
         int $parsedOffset = 0
     ): string {
-        usort($tokens, fn (Token $a, Token $b) => $a->offset <=> $b->offset);
-
-        /** @var \Tempest\Highlight\Tokens\Token[] $groupedTokens */
-        $groupedTokens = [];
-
-        while($token = current($tokens)) {
-            $token = $token->cloneWithoutParent();
-
-            foreach ($tokens as $compareKey => $compareToken) {
-                if ($token->contains($compareToken)) {
-                    if ($token->canContain($compareToken)) {
-                        $token->addChild($compareToken);
-                    }
-                    unset($tokens[$compareKey]);
-                }
-            }
-
-            if ($token->parent === null) {
-                $groupedTokens[] = $token;
-            }
-
-            next($tokens);
-        }
-
         $output = $content;
 
-        foreach ($groupedTokens as $currentToken) {
+        foreach ($tokens as $currentToken) {
             $value = $currentToken->hasChildren()
                 ? ($this)(
                     content: $currentToken->value,

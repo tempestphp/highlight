@@ -28,6 +28,7 @@ class PhpLanguageTest extends TestCase
             ["public const string|\Stringable MESSAGE = 'hi';", '<span class="hl-keyword">public</span> <span class="hl-keyword">const</span> <span class="hl-type">string|\Stringable</span> <span class="hl-property">MESSAGE</span> = \'<span class="hl-value">hi</span>\';'],
             ["public string|\Stringable \$message;", '<span class="hl-keyword">public</span> <span class="hl-type">string|\<span class="hl-type">Stringable</span></span> <span class="hl-property">$message</span>;'],
             ['for($x = 0; $x < 150; $x++) {', '<span class="hl-keyword">f<span class="hl-keyword">or</span></span>($x = 0; $x &lt; 150; $x++) {'],
+            ["'namespace ';", "'<span class=\"hl-value\">namespace </span>';"]
         ];
     }
 }

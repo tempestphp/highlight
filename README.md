@@ -45,6 +45,7 @@ $code = $highlighter->parse(($raw), 'php');
 - [ ] Twig
 - [x] YAML
 - [x] JSON
+- [x] XML
 
 ## Themes
 

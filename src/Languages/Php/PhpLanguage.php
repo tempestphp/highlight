@@ -29,7 +29,7 @@ use Tempest\Highlight\Languages\Php\Patterns\ParameterTypePattern;
 use Tempest\Highlight\Languages\Php\Patterns\PropertyAccessPattern;
 use Tempest\Highlight\Languages\Php\Patterns\PropertyTypesPattern;
 use Tempest\Highlight\Languages\Php\Patterns\ReturnTypePattern;
-use Tempest\Highlight\Languages\Php\Patterns\SinglelineDocCommentPattern;
+use Tempest\Highlight\Languages\Php\Patterns\SinglelineCommentPattern;
 use Tempest\Highlight\Languages\Php\Patterns\SingleQuoteValuePattern;
 use Tempest\Highlight\Languages\Php\Patterns\StaticClassCallPattern;
 use Tempest\Highlight\Languages\Php\Patterns\UsePattern;
@@ -129,7 +129,7 @@ class PhpLanguage extends BaseLanguage
             // COMMENTS
             new MultilineDoubleDocCommentPattern(),
             new MultilineSingleDocCommentPattern(),
-            new SinglelineDocCommentPattern(),
+            new SinglelineCommentPattern(),
 
             // VALUES
             new SingleQuoteValuePattern(),

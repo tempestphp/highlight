@@ -3,6 +3,7 @@
 You can read about why I started this package [here](https://stitcher.io/blog/a-syntax-highlighter-that-doesnt-suck).
 
 - [Quickstart](#quickstart)
+- [Supported languages](#supported-languages)
 - [Themes](#themes)
   - [For the web](#for-the-web)
   - [For the terminal](#for-the-terminal)
@@ -14,13 +15,6 @@ You can read about why I started this package [here](https://stitcher.io/blog/a-
 - [Commonmark integration](#commonmark-integration)
 - [Adding or extending languages](#adding-or-extending-languages)
 
-TODO:
-
-- [ ] Add JS support
-- [ ] Add SQL support
-- [ ] Add Twig support
-- [ ] Add YAML support
-- [ ] Add JSON support
 
 ## Quickstart
 
@@ -39,6 +33,18 @@ $code = $highlighter->parse($code, 'php');
 ```php
 $code = $highlighter->parse(($raw), 'php');
 ```
+
+## Supported languages
+
+- [x] PHP
+- [x] HTML
+- [x] Blade
+- [x] SQL
+- [x] CSS
+- [ ] JavaScript
+- [ ] Twig
+- [ ] YAML
+- [ ] JSON
 
 ## Themes
 

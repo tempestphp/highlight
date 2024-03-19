@@ -38,9 +38,9 @@ trait TestsPatterns
                 expected: $expectedValue,
                 actual: $matches['match'][$key][0],
                 message: sprintf(
-                    "Pattern in %s did not match `%s`, found `%s` instead.",
+                    "Pattern in %s did not match %s, found %s instead.",
                     $pattern::class,
-                    $expectedValue,
+                    var_export($expectedValue, true),
                     var_export($matches['match'][$key][0], true),
                 ),
             );

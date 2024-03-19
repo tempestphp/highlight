@@ -10,6 +10,7 @@ use Tempest\Highlight\Languages\Html\HtmlLanguage;
 use Tempest\Highlight\Languages\Json\JsonLanguage;
 use Tempest\Highlight\Languages\Php\PhpLanguage;
 use Tempest\Highlight\Languages\Sql\SqlLanguage;
+use Tempest\Highlight\Languages\Xml\XmlLanguage;
 use Tempest\Highlight\Languages\Yaml\YamlLanguage;
 use Tempest\Highlight\Themes\CssTheme;
 use Tempest\Highlight\Tokens\GroupTokens;
@@ -27,6 +28,7 @@ final class Highlighter
     ) {
         $this
             ->setLanguage('php', new PhpLanguage())
+            ->setLanguage('xml', new XmlLanguage())
             ->setLanguage('html', new HtmlLanguage())
             ->setLanguage('sql', new SqlLanguage())
             ->setLanguage('blade', new BladeLanguage())

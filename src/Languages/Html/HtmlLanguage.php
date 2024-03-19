@@ -4,17 +4,13 @@ declare(strict_types=1);
 
 namespace Tempest\Highlight\Languages\Html;
 
-use Tempest\Highlight\Languages\Base\BaseLanguage;
 use Tempest\Highlight\Languages\Css\Injections\CssAttributeInjection;
 use Tempest\Highlight\Languages\Css\Injections\CssInjection;
-use Tempest\Highlight\Languages\Html\Patterns\CloseTagPattern;
-use Tempest\Highlight\Languages\Html\Patterns\HtmlCommentPattern;
-use Tempest\Highlight\Languages\Html\Patterns\OpenTagPattern;
-use Tempest\Highlight\Languages\Html\Patterns\TagAttributePattern;
 use Tempest\Highlight\Languages\Php\Injections\PhpInjection;
 use Tempest\Highlight\Languages\Php\Injections\PhpShortEchoInjection;
+use Tempest\Highlight\Languages\Xml\XmlLanguage;
 
-class HtmlLanguage extends BaseLanguage
+class HtmlLanguage extends XmlLanguage
 {
     public function getInjections(): array
     {
@@ -31,10 +27,6 @@ class HtmlLanguage extends BaseLanguage
     {
         return [
             ...parent::getPatterns(),
-            new OpenTagPattern(),
-            new CloseTagPattern(),
-            new TagAttributePattern(),
-            new HtmlCommentPattern(),
         ];
     }
 }

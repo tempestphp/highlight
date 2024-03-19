@@ -2,13 +2,24 @@
 
 declare(strict_types=1);
 
-namespace Tempest\Highlight\Languages\Html\Patterns;
+namespace Tempest\Highlight\Languages\Xml\Patterns;
 
 use Tempest\Highlight\IsPattern;
 use Tempest\Highlight\Pattern;
+use Tempest\Highlight\PatternTest;
 use Tempest\Highlight\Tokens\TokenType;
 
-final readonly class HtmlCommentPattern implements Pattern
+#[PatternTest(
+    input: 'test
+            <!-- 
+            foo
+            -->
+            test',
+    output: '<!-- 
+            foo
+            -->'
+)]
+final readonly class XmlCommentPattern implements Pattern
 {
     use IsPattern;
 

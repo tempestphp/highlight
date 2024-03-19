@@ -113,7 +113,7 @@ use Tempest\Highlight\Themes\TerminalTheme;
 
 $highlighter = new Highlighter(new TerminalTheme());
 
-echo html_entity_decode($highlighter->parse(htmlentities($code), 'php'));
+echo $highlighter->parse(($code), 'php');
 ```
 
 ![](./.github/terminal.png)

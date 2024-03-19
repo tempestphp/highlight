@@ -8,13 +8,13 @@ require_once __DIR__ . '/vendor/autoload.php';
 $highlighter = new Highlighter(new TerminalTheme());
 
 $code = str_replace(
-    ['```php', '```'],
+    ['```html', '```php', '```'],
     '',
     file_get_contents(__DIR__ . '/tests/test.md')
 );
 
 echo PHP_EOL;
 
-echo html_entity_decode($highlighter->parse(htmlentities($code), 'php'));
+echo html_entity_decode($highlighter->parse($code, 'html'));
 
 echo PHP_EOL.PHP_EOL;

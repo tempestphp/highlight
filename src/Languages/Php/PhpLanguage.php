@@ -161,7 +161,7 @@ class PhpLanguage extends BaseLanguage
             new NewObjectPattern(),
             new InstanceOfPattern(),
             new UseAsPattern(),
-            new GroupedTypePattern(),
+//            new GroupedTypePattern(),
 
             // PROPERTIES
             new ClassPropertyPattern(),

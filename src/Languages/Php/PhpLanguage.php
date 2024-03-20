@@ -61,6 +61,7 @@ class PhpLanguage extends BaseLanguage
             new OperatorPattern('&&'),
             new OperatorPattern('\|\|'),
             new OperatorPattern('<=>'),
+            new OperatorPattern('\?'),
 
             // KEYWORDS
             new KeywordPattern('__halt_compiler'),

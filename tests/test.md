@@ -1,3 +1,3 @@
 ```php
-static::$instance
+$foo ? $value : null
 ```

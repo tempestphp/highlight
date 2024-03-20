@@ -1,3 +1,3 @@
 ```php
-#[\AllowDynamicProperties]
+$this->extends('View/base.view.php');
 ```

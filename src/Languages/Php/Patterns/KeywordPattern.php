@@ -27,7 +27,7 @@ final class KeywordPattern implements Pattern
 
     public function getPattern(): string
     {
-        $pattern = "/\b(?<!\\$)(?<match>{$this->keyword})(\:|\s|\()/";
+        $pattern = "/\b(?<!\\$)(?<!\-\>)(?<match>{$this->keyword})(\:|\s|\()/";
 
         if ($this->caseInsensitive) {
             $pattern .= 'i';

@@ -1,4 +1,6 @@
 ```php
-$abstract;
-$class
+extends Foo implements ArrayAccess, ContainerContract
+{
+
+}
 ```

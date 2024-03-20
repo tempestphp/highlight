@@ -1,6 +1,3 @@
 ```php
-extends Foo implements ArrayAccess, ContainerContract
-{
-
-}
+use Illuminate\Contracts\Container\Container as ContainerContract
 ```

@@ -34,6 +34,7 @@ class PhpLanguageTest extends TestCase
             ['protected Foo $resolved = [];', '<span class="hl-keyword">protected</span> <span class="hl-type">Foo</span> <span class="hl-property">$resolved</span> = [];'],
             ['$concrete instanceof Closure', '$concrete <span class="hl-keyword">instanceof</span> <span class="hl-type">Closure</span>'],
             ['extends Foo implements ArrayAccess, ContainerContract', '<span class="hl-keyword">extends</span> <span class="hl-type">Foo</span> <span class="hl-keyword">implements</span><span class="hl-type"> ArrayAccess, ContainerContract</span>'],
+            ['use Illuminate\Contracts\Container\Container as ContainerContract', '<span class="hl-keyword">use</span> <span class="hl-type">Illuminate\Contracts\Container\Container</span> <span class="hl-keyword">as</span> <span class="hl-type">ContainerContract</span>'],
             [
                 "// We'll
 

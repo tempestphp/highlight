@@ -34,6 +34,7 @@ use Tempest\Highlight\Languages\Php\Patterns\SinglelineCommentPattern;
 use Tempest\Highlight\Languages\Php\Patterns\SingleQuoteValuePattern;
 use Tempest\Highlight\Languages\Php\Patterns\StaticClassCallPattern;
 use Tempest\Highlight\Languages\Php\Patterns\UntypedClassPropertyPattern;
+use Tempest\Highlight\Languages\Php\Patterns\UseAsPattern;
 use Tempest\Highlight\Languages\Php\Patterns\UsePattern;
 
 class PhpLanguage extends BaseLanguage
@@ -147,6 +148,7 @@ class PhpLanguage extends BaseLanguage
             new ParameterTypePattern(),
             new NewObjectPattern(),
             new InstanceOfPattern(),
+            new UseAsPattern(),
 
             // PROPERTIES
             new ClassPropertyPattern(),

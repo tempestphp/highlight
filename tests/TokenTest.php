@@ -26,7 +26,7 @@ class TokenTest extends TestCase
             type: TokenType::VALUE,
         );
 
-        $this->assertTrue($a->contains($b));
-        $this->assertFalse($b->contains($a));
+        $this->assertTrue($a->containsOrOverlaps($b));
+        $this->assertFalse($b->containsOrOverlaps($a));
     }
 }

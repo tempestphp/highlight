@@ -16,7 +16,7 @@ final readonly class JsonDoubleQuoteValuePattern implements Pattern
 
     public function getPattern(): string
     {
-        return '(?<match>\"(.|\n)*?\")';
+        return '(?<match>\".*?\")';
     }
 
     public function getTokenType(): TokenType

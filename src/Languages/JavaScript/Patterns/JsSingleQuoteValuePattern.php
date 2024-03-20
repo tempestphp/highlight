@@ -13,21 +13,13 @@ use Tempest\Highlight\Tokens\TokenType;
     input: "return 'hello';",
     output: 'hello',
 )]
-#[PatternTest(
-    input: "return 'hello
-    
-    world';",
-    output: 'hello
-    
-    world',
-)]
 final readonly class JsSingleQuoteValuePattern implements Pattern
 {
     use IsPattern;
 
     public function getPattern(): string
     {
-        return "'(?<match>(\n|.)*?)'";
+        return "'(?<match>.*?)'";
     }
 
     public function getTokenType(): TokenType

@@ -33,12 +33,12 @@ final class Token
         //            && $this->type === $other->type;
     }
 
-    public function contains(Token $other): bool
+    public function containsOrOverlaps(Token $other): bool
     {
         return
             ! $this->equals($other)
             && $this->start <= $other->start
-            && $this->end >= $other->end;
+            && $other->start < $this->end;
     }
 
     public function addChild(Token $child): void

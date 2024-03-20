@@ -131,10 +131,6 @@ class PhpLanguage extends BaseLanguage
             new MultilineSingleDocCommentPattern(),
             new SinglelineCommentPattern(),
 
-            // VALUES
-            new SingleQuoteValuePattern(),
-            new DoubleQuoteValuePattern(),
-
             // TYPES
             new AttributeTypePattern(),
             new ImplementsPattern(),
@@ -158,6 +154,10 @@ class PhpLanguage extends BaseLanguage
             new FunctionCallPattern(),
             new ConstantPropertyPattern(),
             new ConstantNamePattern(),
+
+            // VALUES
+            new SingleQuoteValuePattern(),
+            new DoubleQuoteValuePattern(),
         ];
     }
 }

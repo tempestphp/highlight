@@ -6,6 +6,10 @@ namespace Tempest\Highlight\Tokens;
 
 final readonly class GroupTokens
 {
+    /**
+     * @param \Tempest\Highlight\Tokens\Token[] $tokens
+     * @return \Tempest\Highlight\Tokens\Token[]
+     */
     public function __invoke(array $tokens): array
     {
         // Sort tokens in the right order
@@ -25,7 +29,7 @@ final readonly class GroupTokens
             $token = $token->cloneWithoutParent();
 
             foreach ($tokens as $compareKey => $compareToken) {
-                if ($token->contains($compareToken)) {
+                if ($token->containsOrOverlaps($compareToken)) {
                     if ($token->canContain($compareToken)) {
                         $token->addChild($compareToken);
                     }

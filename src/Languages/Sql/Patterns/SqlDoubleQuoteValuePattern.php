@@ -10,18 +10,13 @@ use Tempest\Highlight\PatternTest;
 use Tempest\Highlight\Tokens\TokenType;
 
 #[PatternTest(input: 'bar = "baz"', output: 'baz')]
-#[PatternTest(input: 'bar = "ba
-
-z"', output: 'ba
-
-z')]
 final readonly class SqlDoubleQuoteValuePattern implements Pattern
 {
     use IsPattern;
 
     public function getPattern(): string
     {
-        return '\"(?<match>(.|\n)*?)\"';
+        return '\"(?<match>.*?)\"';
     }
 
     public function getTokenType(): TokenType

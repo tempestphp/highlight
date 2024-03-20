@@ -16,6 +16,8 @@ use Tempest\Highlight\Languages\Php\Patterns\ConstantNamePattern;
 use Tempest\Highlight\Languages\Php\Patterns\ConstantPropertyPattern;
 use Tempest\Highlight\Languages\Php\Patterns\ConstantTypesPattern;
 use Tempest\Highlight\Languages\Php\Patterns\DoubleQuoteValuePattern;
+use Tempest\Highlight\Languages\Php\Patterns\EnumBackedTypePattern;
+use Tempest\Highlight\Languages\Php\Patterns\EnumCasePattern;
 use Tempest\Highlight\Languages\Php\Patterns\ExtendsPattern;
 use Tempest\Highlight\Languages\Php\Patterns\FunctionCallPattern;
 use Tempest\Highlight\Languages\Php\Patterns\FunctionNamePattern;
@@ -84,6 +86,7 @@ class PhpLanguage extends BaseLanguage
             new KeywordPattern('else'),
             new KeywordPattern('elseif'),
             new KeywordPattern('empty'),
+            new KeywordPattern('enum'),
             new KeywordPattern('enddeclare'),
             new KeywordPattern('endfor'),
             new KeywordPattern('endforeach'),
@@ -160,6 +163,7 @@ class PhpLanguage extends BaseLanguage
             new InstanceOfPattern(),
             new UseAsPattern(),
             new CatchTypePattern(),
+            new EnumBackedTypePattern(),
 //            new GroupedTypePattern(),
 
             // PROPERTIES
@@ -172,6 +176,7 @@ class PhpLanguage extends BaseLanguage
             new ConstantPropertyPattern(),
             new ConstantNamePattern(),
             new UntypedClassPropertyPattern(),
+            new EnumCasePattern(),
 
             // VARIABLES
             new VariablePattern(),

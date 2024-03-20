@@ -1,3 +1,6 @@
 ```php
-=& $bar
+enum Foo: string
+{
+    case Pending = 'hi';
+}
 ```

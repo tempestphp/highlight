@@ -1,0 +1,27 @@
+<?php
+
+namespace Tempest\Highlight\Languages\Php\Patterns;
+
+use Tempest\Highlight\IsPattern;
+use Tempest\Highlight\Pattern;
+use Tempest\Highlight\PatternTest;
+use Tempest\Highlight\Tokens\TokenType;
+
+#[PatternTest(input: 'case Foo = "";', output: 'Foo')]
+#[PatternTest(input: 'case Foo="";', output: 'Foo')]
+#[PatternTest(input: 'case Foo;', output: 'Foo')]
+#[PatternTest(input: 'case Foo ;', output: 'Foo')]
+final readonly class EnumCasePattern implements Pattern
+{
+    use IsPattern;
+
+    public function getPattern(): string
+    {
+        return 'case (?<match>[\w]+)(\s)*(=|;)';
+    }
+
+    public function getTokenType(): TokenType
+    {
+        return TokenType::PROPERTY;
+    }
+}

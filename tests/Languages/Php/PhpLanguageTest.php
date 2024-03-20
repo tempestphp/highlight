@@ -45,6 +45,8 @@ class PhpLanguageTest extends TestCase
             ['while (true) {', '<span class="hl-keyword">while</span> (true) {'],
             ['catch (Foo|Bar) {}', '<span class="hl-keyword">catch</span> (<span class="hl-type">Foo|Bar</span>) {}'],
             ['fn&(', '<span class="hl-keyword">fn</span>&amp;('],
+            ['enum Foo: string', '<span class="hl-keyword">enum</span> <span class="hl-type">Foo</span>: <span class="hl-type">string</span>'],
+            ['case Foo;', '<span class="hl-keyword">case</span> <span class="hl-property">Foo</span>;'],
             [
                 "// We'll
 

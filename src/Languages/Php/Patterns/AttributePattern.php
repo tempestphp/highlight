@@ -12,15 +12,15 @@ use Tempest\Highlight\Tokens\TokenType;
 #[PatternTest(input: '#[Foo(prop: hi)]', output: '#[Foo(prop: hi)]')]
 #[PatternTest(input: '#[\\AllowDynamicProperties]', output: '#[\\AllowDynamicProperties]')]
 #[PatternTest(
-        input:
+    input:
 '#[Foo(
     prop: hi,
 )]',
-        output:
+    output:
 '#[Foo(
     prop: hi,
 )]'
-    ),
+),
 ]
 final readonly class AttributePattern implements Pattern
 {

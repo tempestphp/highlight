@@ -19,7 +19,8 @@ use Tempest\Highlight\Tokens\TokenType;
     Bar(uri: "/books/create"),
     Baz,
 ]',
-    output: ['Foo', 'Bar', 'Baz'])]
+    output: ['Foo', 'Bar', 'Baz']
+)]
 final readonly class AttributeTypePattern implements Pattern
 {
     use IsPattern;

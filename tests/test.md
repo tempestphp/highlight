@@ -1,5 +1,3 @@
 ```php
-fn&($x) => $x
-fn ($x) => $x
-fn($x) => $x
+public function bar(mixed $input);
 ```

@@ -26,7 +26,7 @@ final class RenderTokens
         int $parsedOffset = 0
     ): string {
         $output = $content;
-
+//dump($tokens);
         foreach ($tokens as $currentToken) {
             $value = $currentToken->hasChildren()
                 ? ($this)(

@@ -17,13 +17,14 @@ use Tempest\Highlight\Tokens\TokenType;
 #[PatternTest(input: 'public (Bar&Baz)|null $bar', output: '(Bar&Baz)|null')]
 #[PatternTest(input: 'public ?Bar $bar', output: '?Bar')]
 #[PatternTest(input: 'public ?Bar|\Foo $bar', output: '?Bar|\Foo')]
+#[PatternTest(input: 'public function bar(mixed $input);', output: null)]
 final readonly class PropertyTypesPattern implements Pattern
 {
     use IsPattern;
 
     public function getPattern(): string
     {
-        return '(public|private|protected)(\s(?<match>.+?)) (\\$[\w]+)';
+        return '(public|private|protected)(\s(?<match>[^\s]*)) (\$[\w]+)';
     }
 
     public function getTokenType(): TokenType

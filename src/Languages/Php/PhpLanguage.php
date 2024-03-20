@@ -18,6 +18,7 @@ use Tempest\Highlight\Languages\Php\Patterns\ExtendsPattern;
 use Tempest\Highlight\Languages\Php\Patterns\FunctionCallPattern;
 use Tempest\Highlight\Languages\Php\Patterns\FunctionNamePattern;
 use Tempest\Highlight\Languages\Php\Patterns\ImplementsPattern;
+use Tempest\Highlight\Languages\Php\Patterns\InstanceOfPattern;
 use Tempest\Highlight\Languages\Php\Patterns\KeywordPattern;
 use Tempest\Highlight\Languages\Php\Patterns\MultilineDoubleDocCommentPattern;
 use Tempest\Highlight\Languages\Php\Patterns\MultilineSingleDocCommentPattern;
@@ -145,6 +146,7 @@ class PhpLanguage extends BaseLanguage
             new StaticClassCallPattern(),
             new ParameterTypePattern(),
             new NewObjectPattern(),
+            new InstanceOfPattern(),
 
             // PROPERTIES
             new ClassPropertyPattern(),

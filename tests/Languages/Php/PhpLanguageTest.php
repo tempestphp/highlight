@@ -32,6 +32,7 @@ class PhpLanguageTest extends TestCase
             ['$class', '$class'],
             ['protected $resolved = [];', '<span class="hl-keyword">protected</span> <span class="hl-property">$resolved</span> = [];'],
             ['protected Foo $resolved = [];', '<span class="hl-keyword">protected</span> <span class="hl-type">Foo</span> <span class="hl-property">$resolved</span> = [];'],
+            ['$concrete instanceof Closure', '$concrete <span class="hl-keyword">instanceof</span> <span class="hl-type">Closure</span>'],
             [
                 "// We'll
 

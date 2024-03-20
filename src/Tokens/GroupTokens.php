@@ -12,7 +12,7 @@ final readonly class GroupTokens
      */
     public function __invoke(array $tokens): array
     {
-//                dump($tokens);
+        //                dump($tokens);
         // Sort tokens in the right order
         usort($tokens, function (Token $a, Token $b) {
             if ($a->start === $b->start) {

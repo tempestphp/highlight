@@ -30,6 +30,8 @@ class PhpLanguageTest extends TestCase
             ['for($x = 0; $x < 150; $x++) {', '<span class="hl-keyword">for</span>($x = 0; $x &lt; 150; $x++) {'],
             ["'namespace ';", "'<span class=\"hl-value\">namespace </span>';"],
             ['$class', '$class'],
+            ['protected $resolved = [];', '<span class="hl-keyword">protected</span> <span class="hl-property">$resolved</span> = [];'],
+            ['protected Foo $resolved = [];', '<span class="hl-keyword">protected</span> <span class="hl-type">Foo</span> <span class="hl-property">$resolved</span> = [];'],
             [
                 "// We'll
 

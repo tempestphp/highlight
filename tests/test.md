@@ -1,3 +1,5 @@
 ```php
-$foo ? $value : null
+fn&($x) => $x
+fn ($x) => $x
+fn($x) => $x
 ```

@@ -33,6 +33,7 @@ use Tempest\Highlight\Languages\Php\Patterns\ParameterTypePattern;
 use Tempest\Highlight\Languages\Php\Patterns\PropertyAccessPattern;
 use Tempest\Highlight\Languages\Php\Patterns\PropertyTypesPattern;
 use Tempest\Highlight\Languages\Php\Patterns\ReturnTypePattern;
+use Tempest\Highlight\Languages\Php\Patterns\ShortFunctionReferencePattern;
 use Tempest\Highlight\Languages\Php\Patterns\SinglelineCommentPattern;
 use Tempest\Highlight\Languages\Php\Patterns\SingleQuoteValuePattern;
 use Tempest\Highlight\Languages\Php\Patterns\StaticClassCallPattern;
@@ -135,6 +136,7 @@ class PhpLanguage extends BaseLanguage
             new KeywordPattern('yield'),
             new KeywordPattern('yield from'),
             new ClassResolutionPattern(),
+            new ShortFunctionReferencePattern(),
 
             // ATTRIBUTES
             new AttributePattern(),

@@ -9,19 +9,18 @@ use Tempest\Highlight\Pattern;
 use Tempest\Highlight\PatternTest;
 use Tempest\Highlight\Tokens\TokenType;
 
-#[PatternTest(input: 'Foo::bar()', output: 'Foo')]
-#[PatternTest(input: 'Foo::BAR', output: 'Foo')]
-final readonly class StaticClassCallPattern implements Pattern
+#[PatternTest(input: '$foo::class', output: 'class')]
+final readonly class ClassResolutionPattern implements Pattern
 {
     use IsPattern;
 
     public function getPattern(): string
     {
-        return '(?<!\\$)(?<match>[\w]+)\:\:';
+        return '\:\:(?<match>class)';
     }
 
     public function getTokenType(): TokenType
     {
-        return TokenType::TYPE;
+        return TokenType::KEYWORD;
     }
 }

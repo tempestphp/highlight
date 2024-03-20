@@ -20,6 +20,7 @@ final readonly class CssTheme implements Theme
             TokenType::COMMENT => 'hl-comment',
             TokenType::ATTRIBUTE => 'hl-attribute',
             TokenType::INJECTION => 'hl-injection',
+            TokenType::VARIABLE => 'hl-variable',
             default => $tokenType,
         };
 

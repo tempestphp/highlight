@@ -19,7 +19,7 @@ class BladeRawEchoInjectionTest extends TestCase
         $this->assertMatches(
             injection: new BladeRawEchoInjection(),
             content: '{!! count($foo) !!}',
-            expected: '{!! <span class="hl-property">count</span>($foo) !!}',
+            expected: '{!! <span class="hl-property">count</span>(<span class="hl-variable">$foo</span>) !!}',
         );
     }
 }

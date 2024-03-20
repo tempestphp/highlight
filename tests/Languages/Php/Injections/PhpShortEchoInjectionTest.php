@@ -22,8 +22,8 @@ Hello, <?= $this->other ?>
         ';
 
         $expected = '
-Hello, &lt;?= $this-&gt;<span class="hl-property">name</span> ?&gt;
-Hello, &lt;?= $this-&gt;<span class="hl-property">other</span> ?&gt;
+Hello, &lt;?= <span class="hl-variable">$this</span>-&gt;<span class="hl-property">name</span> ?&gt;
+Hello, &lt;?= <span class="hl-variable">$this</span>-&gt;<span class="hl-property">other</span> ?&gt;
         ';
 
         $this->assertMatches(

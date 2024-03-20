@@ -27,14 +27,15 @@ class PhpLanguageTest extends TestCase
             ["'php()'", "'<span class=\"hl-value\">php()</span>'"],
             ["public const string|\Stringable MESSAGE = 'hi';", '<span class="hl-keyword">public</span> <span class="hl-keyword">const</span> <span class="hl-type">string|\Stringable</span> <span class="hl-property">MESSAGE</span> = \'<span class="hl-value">hi</span>\';'],
             ["public string|\Stringable \$message;", '<span class="hl-keyword">public</span> <span class="hl-type">string|\<span class="hl-type">Stringable</span></span> <span class="hl-property">$message</span>;'],
-            ['for($x = 0; $x < 150; $x++) {', '<span class="hl-keyword">for</span>($x = 0; $x &lt; 150; $x++) {'],
+            ['for($x = 0; $x < 150; $x++) {', '<span class="hl-keyword">for</span>(<span class="hl-variable">$x</span> = 0; <span class="hl-variable">$x</span> &lt; 150; <span class="hl-variable">$x</span>++) {'],
             ["'namespace ';", "'<span class=\"hl-value\">namespace </span>';"],
-            ['$class', '$class'],
+            ['$class', '<span class="hl-variable">$class</span>'],
             ['protected $resolved = [];', '<span class="hl-keyword">protected</span> <span class="hl-property">$resolved</span> = [];'],
             ['protected Foo $resolved = [];', '<span class="hl-keyword">protected</span> <span class="hl-type">Foo</span> <span class="hl-property">$resolved</span> = [];'],
-            ['$concrete instanceof Closure', '$concrete <span class="hl-keyword">instanceof</span> <span class="hl-type">Closure</span>'],
+            ['$concrete instanceof Closure', '<span class="hl-variable">$concrete</span> <span class="hl-keyword">instanceof</span> <span class="hl-type">Closure</span>'],
             ['extends Foo implements ArrayAccess, ContainerContract', '<span class="hl-keyword">extends</span> <span class="hl-type">Foo</span> <span class="hl-keyword">implements</span><span class="hl-type"> ArrayAccess, ContainerContract</span>'],
             ['use Illuminate\Contracts\Container\Container as ContainerContract', '<span class="hl-keyword">use</span> <span class="hl-type">Illuminate\Contracts\Container\Container</span> <span class="hl-keyword">as</span> <span class="hl-type">ContainerContract</span>'],
+            ['$foo::class;', '<span class="hl-variable">$foo</span>::<span class="hl-keyword">class</span>;'],
             [
                 "// We'll
 

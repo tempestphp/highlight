@@ -10,6 +10,7 @@ use Tempest\Highlight\Languages\Php\Patterns\AttributePattern;
 use Tempest\Highlight\Languages\Php\Patterns\AttributeTypePattern;
 use Tempest\Highlight\Languages\Php\Patterns\ClassNamePattern;
 use Tempest\Highlight\Languages\Php\Patterns\ClassPropertyPattern;
+use Tempest\Highlight\Languages\Php\Patterns\ClassResolutionPattern;
 use Tempest\Highlight\Languages\Php\Patterns\ConstantNamePattern;
 use Tempest\Highlight\Languages\Php\Patterns\ConstantPropertyPattern;
 use Tempest\Highlight\Languages\Php\Patterns\ConstantTypesPattern;
@@ -36,6 +37,7 @@ use Tempest\Highlight\Languages\Php\Patterns\StaticClassCallPattern;
 use Tempest\Highlight\Languages\Php\Patterns\UntypedClassPropertyPattern;
 use Tempest\Highlight\Languages\Php\Patterns\UseAsPattern;
 use Tempest\Highlight\Languages\Php\Patterns\UsePattern;
+use Tempest\Highlight\Languages\Php\Patterns\VariablePattern;
 
 class PhpLanguage extends BaseLanguage
 {
@@ -125,6 +127,7 @@ class PhpLanguage extends BaseLanguage
             new KeywordPattern('xor'),
             new KeywordPattern('yield'),
             new KeywordPattern('yield from'),
+            new ClassResolutionPattern(),
 
             // ATTRIBUTES
             new AttributePattern(),
@@ -160,6 +163,9 @@ class PhpLanguage extends BaseLanguage
             new ConstantPropertyPattern(),
             new ConstantNamePattern(),
             new UntypedClassPropertyPattern(),
+
+            // VARIABLES
+            new VariablePattern(),
 
             // VALUES
             new SingleQuoteValuePattern(),

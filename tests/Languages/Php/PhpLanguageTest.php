@@ -43,6 +43,7 @@ class PhpLanguageTest extends TestCase
             ['$foo::class;', '<span class="hl-variable">$foo</span>::<span class="hl-keyword">class</span>;'],
 //            ['function ((Foo&Bar)|null $bar)', '<span class="hl-keyword">function</span> (<span class="hl-type">(Foo&amp;Bar)</span><span class="hl-type">|null</span> <span class="hl-variable">$bar</span>)'],
             ['while (true) {', '<span class="hl-keyword">while</span> (true) {'],
+            ['catch (Foo|Bar) {}', '<span class="hl-keyword">catch</span> (<span class="hl-type">Foo|Bar</span>) {}'],
             ['fn&(', '<span class="hl-keyword">fn</span>&amp;('],
             [
                 "// We'll

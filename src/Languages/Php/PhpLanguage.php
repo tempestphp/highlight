@@ -8,6 +8,7 @@ use Tempest\Highlight\Languages\Base\BaseLanguage;
 use Tempest\Highlight\Languages\Php\Injections\HeredocInjection;
 use Tempest\Highlight\Languages\Php\Patterns\AttributePattern;
 use Tempest\Highlight\Languages\Php\Patterns\AttributeTypePattern;
+use Tempest\Highlight\Languages\Php\Patterns\CatchTypePattern;
 use Tempest\Highlight\Languages\Php\Patterns\ClassNamePattern;
 use Tempest\Highlight\Languages\Php\Patterns\ClassPropertyPattern;
 use Tempest\Highlight\Languages\Php\Patterns\ClassResolutionPattern;
@@ -161,6 +162,7 @@ class PhpLanguage extends BaseLanguage
             new NewObjectPattern(),
             new InstanceOfPattern(),
             new UseAsPattern(),
+            new CatchTypePattern(),
 //            new GroupedTypePattern(),
 
             // PROPERTIES

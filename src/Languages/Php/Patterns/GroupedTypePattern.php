@@ -14,7 +14,7 @@ use Tempest\Highlight\Tokens\TokenType;
 #[PatternTest(input: 'null|(Foo|Bar) $bar', output: '(Foo|Bar)')]
 #[PatternTest(input: 'null|(?Bar) $bar', output: '(?Bar)')]
 //#[PatternTest(input: 'while (true)', output: null)]
-// TODO: this rule is broken and disabled
+// TODO: this pattern is broken and disabled
 final readonly class GroupedTypePattern implements Pattern
 {
     use IsPattern;

@@ -25,6 +25,9 @@ class PhpLanguageTest extends TestCase
     {
         return [
             ["'php()'", "'<span class=\"hl-value\">php()</span>'"],
+            ['$foo && $bar', '<span class="hl-variable">$foo</span> <span class="hl-operator">&amp;&amp;</span> <span class="hl-variable">$bar</span>'],
+            ['$foo || $bar', '<span class="hl-variable">$foo</span> <span class="hl-operator">||</span> <span class="hl-variable">$bar</span>'],
+            ['$foo <=> $bar', '<span class="hl-variable">$foo</span> <span class="hl-operator">&lt;=&gt;</span> <span class="hl-variable">$bar</span>'],
             ["public const string|\Stringable MESSAGE = 'hi';", '<span class="hl-keyword">public</span> <span class="hl-keyword">const</span> <span class="hl-type">string|\Stringable</span> <span class="hl-property">MESSAGE</span> = \'<span class="hl-value">hi</span>\';'],
             ["public string|\Stringable \$message;", '<span class="hl-keyword">public</span> <span class="hl-type">string|\<span class="hl-type">Stringable</span></span> <span class="hl-property">$message</span>;'],
             ['for($x = 0; $x < 150; $x++) {', '<span class="hl-keyword">for</span>(<span class="hl-variable">$x</span> = 0; <span class="hl-variable">$x</span> &lt; 150; <span class="hl-variable">$x</span>++) {'],
@@ -36,6 +39,7 @@ class PhpLanguageTest extends TestCase
             ['extends Foo implements ArrayAccess, ContainerContract', '<span class="hl-keyword">extends</span> <span class="hl-type">Foo</span> <span class="hl-keyword">implements</span><span class="hl-type"> ArrayAccess, ContainerContract</span>'],
             ['use Illuminate\Contracts\Container\Container as ContainerContract', '<span class="hl-keyword">use</span> <span class="hl-type">Illuminate\Contracts\Container\Container</span> <span class="hl-keyword">as</span> <span class="hl-type">ContainerContract</span>'],
             ['$foo::class;', '<span class="hl-variable">$foo</span>::<span class="hl-keyword">class</span>;'],
+            ['function ((Foo&Bar)|null $bar)', '<span class="hl-keyword">function</span> (<span class="hl-type">(Foo&amp;Bar)</span><span class="hl-type">|null</span> <span class="hl-variable">$bar</span>)'],
             [
                 "// We'll
 

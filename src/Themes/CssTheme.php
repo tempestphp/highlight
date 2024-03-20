@@ -21,6 +21,7 @@ final readonly class CssTheme implements Theme
             TokenType::ATTRIBUTE => 'hl-attribute',
             TokenType::INJECTION => 'hl-injection',
             TokenType::VARIABLE => 'hl-variable',
+            TokenType::OPERATOR => 'hl-operator',
             default => $tokenType,
         };
 

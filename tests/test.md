@@ -1,3 +1,5 @@
 ```php
-$foo::class;
+$foo && $bar 
+$foo || $bar 
+$foo <=> $bar 
 ```

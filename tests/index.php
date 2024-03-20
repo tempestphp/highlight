@@ -53,6 +53,10 @@ $contents = $markdown->convert(file_get_contents(__DIR__ . '/test.md'))->getCont
             background-color: #fafafa;
             border-radius: 3px;
         }
+        
+        .hl-injection {
+            background-color: #00ffff22;
+        }
     </style>
 </head>
 <body>

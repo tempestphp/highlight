@@ -9,15 +9,17 @@ use Tempest\Highlight\Pattern;
 use Tempest\Highlight\PatternTest;
 use Tempest\Highlight\Tokens\TokenType;
 
-#[PatternTest(input: 'instanceof Closure', output: 'Closure')]
-#[PatternTest(input: 'instanceof \\Foo\\Bar', output: '\\Foo\\Bar')]
-final readonly class InstanceOfPattern implements Pattern
+#[PatternTest(input: '(Foo&Bar)|null $bar', output: '(Foo&Bar)')]
+#[PatternTest(input: 'null|(Foo&Bar) $bar', output: '(Foo&Bar)')]
+#[PatternTest(input: 'null|(Foo|Bar) $bar', output: '(Foo|Bar)')]
+#[PatternTest(input: 'null|(?Bar) $bar', output: '(?Bar)')]
+final readonly class GroupedTypePattern implements Pattern
 {
     use IsPattern;
 
     public function getPattern(): string
     {
-        return 'instanceof\s(?<match>[\w\\\\]+)';
+        return '(?<match>\([\w\&\|\?]+\))';
     }
 
     public function getTokenType(): TokenType

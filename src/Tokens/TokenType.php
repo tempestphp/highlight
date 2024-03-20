@@ -15,11 +15,12 @@ enum TokenType: string
     case VARIABLE = 'variable';
     case COMMENT = 'comment';
     case INJECTION = 'injection';
+    case OPERATOR = 'operator';
 
     public function canContain(self $other): bool
     {
         return match ($this) {
-            self::VARIABLE, self::VALUE, self::INJECTION, self::COMMENT => false,
+            self::OPERATOR, self::VARIABLE, self::VALUE, self::INJECTION, self::COMMENT => false,
             default => true,
         };
     }

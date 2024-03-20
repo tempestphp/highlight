@@ -9,6 +9,7 @@ use Tempest\Highlight\Languages\Css\Patterns\CssAttributePattern;
 use Tempest\Highlight\Languages\Css\Patterns\CssCommentPattern;
 use Tempest\Highlight\Languages\Css\Patterns\CssFunctionPattern;
 use Tempest\Highlight\Languages\Css\Patterns\CssSelectorPattern;
+use Tempest\Highlight\Languages\Css\Patterns\CssVariablePattern;
 
 class CssLanguage extends BaseLanguage
 {
@@ -27,6 +28,7 @@ class CssLanguage extends BaseLanguage
             new CssSelectorPattern(),
             new CssAttributePattern(),
             new CssFunctionPattern(),
+            new CssVariablePattern(),
         ];
     }
 }

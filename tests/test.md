@@ -1,3 +1,6 @@
-```php
-$this->extends('View/base.view.php');
+```css
+.foo {
+    --var: bar;
+    color: var(--var);
+}
 ```

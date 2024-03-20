@@ -32,6 +32,7 @@ class PhpLanguageTest extends TestCase
             ["public string|\Stringable \$message;", '<span class="hl-keyword">public</span> <span class="hl-type">string|\<span class="hl-type">Stringable</span></span> <span class="hl-property">$message</span>;'],
             ['for($x = 0; $x < 150; $x++) {', '<span class="hl-keyword">for</span>(<span class="hl-variable">$x</span> = 0; <span class="hl-variable">$x</span> &lt; 150; <span class="hl-variable">$x</span>++) {'],
             ["'namespace ';", "'<span class=\"hl-value\">namespace </span>';"],
+            ["static::foo()", '<span class="hl-keyword">static</span>::<span class="hl-property">foo</span>()'],
             ['$class', '<span class="hl-variable">$class</span>'],
             ['protected $resolved = [];', '<span class="hl-keyword">protected</span> <span class="hl-property">$resolved</span> = [];'],
             ['protected Foo $resolved = [];', '<span class="hl-keyword">protected</span> <span class="hl-type">Foo</span> <span class="hl-property">$resolved</span> = [];'],

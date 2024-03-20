@@ -1,5 +1,3 @@
 ```php
-$foo && $bar 
-$foo || $bar 
-$foo <=> $bar 
+static::$instance
 ```

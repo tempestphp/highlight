@@ -9,9 +9,9 @@ use Tempest\Highlight\Pattern;
 use Tempest\Highlight\PatternTest;
 use Tempest\Highlight\Tokens\TokenType;
 
-#[
-    PatternTest(input: '#[Foo(prop: hi)]', output: '#[Foo(prop: hi)]'),
-    PatternTest(
+#[PatternTest(input: '#[Foo(prop: hi)]', output: '#[Foo(prop: hi)]')]
+#[PatternTest(input: '#[\\AllowDynamicProperties]', output: '#[\\AllowDynamicProperties]')]
+#[PatternTest(
         input:
 '#[Foo(
     prop: hi,

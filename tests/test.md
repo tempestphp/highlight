@@ -1,11 +1,5 @@
 ```php
-    /**
-     * foo'
-     */
-    
-    foo() . ''
-    
-    /**
-     *  '
-     */
+$abstract;
+$class
+TypeError
 ```

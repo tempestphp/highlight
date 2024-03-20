@@ -15,7 +15,7 @@ final readonly class ClassPropertyPattern implements Pattern
 
     public function getPattern(): string
     {
-        return '(public|private|protected)\s(' . PhpLanguage::TYPE_REGEX .')\s(?<match>\$[\w]+)';
+        return '(public|private|protected)\s(' . PhpLanguage::TYPE_REGEX .')\s(?<match>\\$[\w]+)';
     }
 
     public function getTokenType(): TokenType

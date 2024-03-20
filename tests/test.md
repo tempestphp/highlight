@@ -1,3 +1,3 @@
 ```php
-catch (MySpecialException|Foo) {
+=& $bar
 ```

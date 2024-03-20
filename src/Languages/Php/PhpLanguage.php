@@ -19,7 +19,6 @@ use Tempest\Highlight\Languages\Php\Patterns\DoubleQuoteValuePattern;
 use Tempest\Highlight\Languages\Php\Patterns\ExtendsPattern;
 use Tempest\Highlight\Languages\Php\Patterns\FunctionCallPattern;
 use Tempest\Highlight\Languages\Php\Patterns\FunctionNamePattern;
-use Tempest\Highlight\Languages\Php\Patterns\GroupedTypePattern;
 use Tempest\Highlight\Languages\Php\Patterns\ImplementsPattern;
 use Tempest\Highlight\Languages\Php\Patterns\InstanceOfPattern;
 use Tempest\Highlight\Languages\Php\Patterns\KeywordPattern;
@@ -45,8 +44,6 @@ use Tempest\Highlight\Languages\Php\Patterns\VariablePattern;
 
 class PhpLanguage extends BaseLanguage
 {
-    public const string TYPE_REGEX = '(\([\?\w\&\|]+\)|[\?\w\|\&]+)';
-
     public function getInjections(): array
     {
         return [

@@ -1,11 +1,11 @@
-```json
-{
-    "name": "tempest/highlight",
-    "description": "Fast, extensible, server-side code highlighting",
-    "autoload": {
-        "psr-4": {
-            "Tempest\\Highlight\\": "src/"
-        }
-    }
-}
+```php
+$foo = null;
+$foo = true;
+$foo = false;
+while(true) {}
+
+function (Foo|null $bar);
+function (Foo|true $bar);
+function (Foo|false $bar);
+function ((Foo&Bar)|null $bar);
 ```

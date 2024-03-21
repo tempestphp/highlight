@@ -72,7 +72,6 @@ You can build your own CSS theme with just a couple of classes:
     color: #D14F57;
 }
 
-.hl-generic .hl-type,
 .hl-generic {
     color: #9D3AF6;
 }

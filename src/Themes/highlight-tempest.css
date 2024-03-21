@@ -26,7 +26,6 @@
     color: var(--type-color);
 }
 
-.hl-generic .hl-type,
 .hl-generic {
     color: var(--generic-color);
 }

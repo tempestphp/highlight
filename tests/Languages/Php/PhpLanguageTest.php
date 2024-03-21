@@ -42,12 +42,17 @@ class PhpLanguageTest extends TestCase
             ['use Illuminate\Contracts\Container\Container as ContainerContract', '<span class="hl-keyword">use</span> <span class="hl-type">Illuminate\Contracts\Container\Container</span> <span class="hl-keyword">as</span> <span class="hl-type">ContainerContract</span>'],
             ['$foo::class;', '<span class="hl-variable">$foo</span>::<span class="hl-keyword">class</span>;'],
             ['function ((Foo&Bar)|null $bar)', '<span class="hl-keyword">function</span> (<span class="hl-type">(Foo&amp;Bar)</span><span class="hl-type">|null</span> <span class="hl-variable">$bar</span>)'],
-            ['while (true) {', '<span class="hl-keyword">while</span> (true) {'],
+            ['function (Foo|false $bar)', '<span class="hl-keyword">function</span> (<span class="hl-type">Foo|false</span> <span class="hl-variable">$bar</span>)'],
+            ['function (Foo|true $bar)', '<span class="hl-keyword">function</span> (<span class="hl-type">Foo|true</span> <span class="hl-variable">$bar</span>)'],
+            ['while (true) {', '<span class="hl-keyword">while</span> (<span class="hl-keyword">true</span>) {'],
             ['catch (Foo|Bar) {}', '<span class="hl-keyword">catch</span> (<span class="hl-type">Foo|Bar</span>) {}'],
             ['fn&(', '<span class="hl-keyword">fn</span>&amp;('],
             ['enum Foo: string', '<span class="hl-keyword">enum</span> <span class="hl-type">Foo</span>: <span class="hl-type">string</span>'],
             ['case Foo;', '<span class="hl-keyword">case</span> <span class="hl-property">Foo</span>;'],
             ['$this->extends("View/base.view.php");', '<span class="hl-variable">$this</span>-&gt;<span class="hl-property">extends</span>(&quot;<span class="hl-value">View/base.view.php</span>&quot;);'],
+            ['$foo = null;', '<span class="hl-variable">$foo</span> = <span class="hl-keyword">null</span>;'],
+            ['$foo = true;', '<span class="hl-variable">$foo</span> = <span class="hl-keyword">true</span>;'],
+            ['$foo = false;', '<span class="hl-variable">$foo</span> = <span class="hl-keyword">false</span>;'],
             ['/** @var Foo $var */', '<span class="hl-comment">/** <span class="hl-value">@var</span> <span class="hl-type">Foo</span> <span class="hl-variable">$var</span> */</span>'],
             [
                 "// We'll

@@ -16,7 +16,7 @@ final readonly class JsonPropertyPattern implements Pattern
 
     public function getPattern(): string
     {
-        return '(?<match>\"[\w-]+\")(\s)*\:';
+        return '(?<match>\"[\w\\\-]+\")(\s)*\:';
     }
 
     public function getTokenType(): TokenType

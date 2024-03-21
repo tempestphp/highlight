@@ -16,7 +16,7 @@ use Tempest\Highlight\Tokens\TokenType;
     font-variation-settings: normal;',
     output: ['/* 1 */', '/* 2 */'],
 )]
-final readonly class CssCommentPattern implements Pattern
+final class CssCommentPattern implements Pattern
 {
     use IsPattern;
 

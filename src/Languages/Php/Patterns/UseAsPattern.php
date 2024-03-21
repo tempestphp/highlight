@@ -10,7 +10,7 @@ use Tempest\Highlight\PatternTest;
 use Tempest\Highlight\Tokens\TokenType;
 
 #[PatternTest('use Illuminate\Contracts\Container\Container as ContainerContract', 'ContainerContract')]
-final readonly class UseAsPattern implements Pattern
+final class UseAsPattern implements Pattern
 {
     use IsPattern;
 

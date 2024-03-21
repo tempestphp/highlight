@@ -10,7 +10,7 @@ use Tempest\Highlight\PatternTest;
 use Tempest\Highlight\Tokens\TokenType;
 
 #[PatternTest(input: '// language', output: '// language')]
-final readonly class JsSinglelineCommentPattern implements Pattern
+final class JsSinglelineCommentPattern implements Pattern
 {
     use IsPattern;
 

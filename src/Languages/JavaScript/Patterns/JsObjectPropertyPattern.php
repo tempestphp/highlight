@@ -13,7 +13,7 @@ use Tempest\Highlight\Tokens\TokenType;
     input: 'prop: false,',
     output: 'prop',
 )]
-final readonly class JsObjectPropertyPattern implements Pattern
+final class JsObjectPropertyPattern implements Pattern
 {
     use IsPattern;
 

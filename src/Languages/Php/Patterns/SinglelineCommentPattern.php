@@ -8,7 +8,7 @@ use Tempest\Highlight\IsPattern;
 use Tempest\Highlight\Pattern;
 use Tempest\Highlight\Tokens\TokenType;
 
-final readonly class SinglelineCommentPattern implements Pattern
+final class SinglelineCommentPattern implements Pattern
 {
     use IsPattern;
 

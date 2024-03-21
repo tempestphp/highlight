@@ -11,7 +11,7 @@ use Tempest\Highlight\Tokens\TokenType;
 
 #[PatternTest(input: '</x-hello>', output: 'x-hello')]
 #[PatternTest(input: '</a>', output: 'a')]
-final readonly class XmlCloseTagPattern implements Pattern
+final class XmlCloseTagPattern implements Pattern
 {
     use IsPattern;
 

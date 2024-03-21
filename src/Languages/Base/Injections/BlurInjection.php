@@ -7,7 +7,7 @@ namespace Tempest\Highlight\Languages\Base\Injections;
 use Tempest\Highlight\Injection;
 use Tempest\Highlight\Languages\Base\IsHighlightInjection;
 
-final readonly class BlurInjection implements Injection
+final class BlurInjection implements Injection
 {
     use IsHighlightInjection;
 

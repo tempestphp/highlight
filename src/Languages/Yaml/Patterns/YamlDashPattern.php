@@ -10,7 +10,7 @@ use Tempest\Highlight\PatternTest;
 use Tempest\Highlight\Tokens\TokenType;
 
 #[PatternTest(input: '- name: Setup problem matchers |', output: '-')]
-final readonly class YamlDashPattern implements Pattern
+final class YamlDashPattern implements Pattern
 {
     use IsPattern;
 

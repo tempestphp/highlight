@@ -10,7 +10,7 @@ use Tempest\Highlight\PatternTest;
 use Tempest\Highlight\Tokens\TokenType;
 
 #[PatternTest(input: 'SELECT foo, bar, c.baz', output:['foo', 'bar'])]
-final readonly class SqlPropertyPattern implements Pattern
+final class SqlPropertyPattern implements Pattern
 {
     use IsPattern;
 

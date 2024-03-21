@@ -12,7 +12,7 @@ use Tempest\Highlight\Tokens\TokenType;
 #[PatternTest(input: 'private $foo', output: '$foo')]
 #[PatternTest(input: 'protected $foo', output: '$foo')]
 #[PatternTest(input: 'public $foo', output: '$foo')]
-final readonly class UntypedClassPropertyPattern implements Pattern
+final class UntypedClassPropertyPattern implements Pattern
 {
     use IsPattern;
 

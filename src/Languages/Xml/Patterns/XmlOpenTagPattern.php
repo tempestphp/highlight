@@ -12,7 +12,7 @@ use Tempest\Highlight\Tokens\TokenType;
 #[PatternTest(input: '<x-hello attr="">', output: 'x-hello')]
 #[PatternTest(input: '<a href="">', output: 'a')]
 #[PatternTest(input: '<br/>', output: 'br')]
-final readonly class XmlOpenTagPattern implements Pattern
+final class XmlOpenTagPattern implements Pattern
 {
     use IsPattern;
 

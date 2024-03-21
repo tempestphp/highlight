@@ -13,7 +13,7 @@ use Tempest\Highlight\Tokens\TokenType;
     input: 'src: url("fonts/MonaspaceArgon-Bold.woff") format("woff");',
     output: ['url', 'format'],
 )]
-final readonly class CssFunctionPattern implements Pattern
+final class CssFunctionPattern implements Pattern
 {
     use IsPattern;
 

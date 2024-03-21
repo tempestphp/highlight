@@ -10,7 +10,7 @@ use Tempest\Highlight\PatternTest;
 use Tempest\Highlight\Tokens\TokenType;
 
 #[PatternTest(input: '"baz": "bar"', output: '"baz"')]
-final readonly class JsonPropertyPattern implements Pattern
+final class JsonPropertyPattern implements Pattern
 {
     use IsPattern;
 

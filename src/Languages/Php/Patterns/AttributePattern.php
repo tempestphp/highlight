@@ -22,7 +22,7 @@ use Tempest\Highlight\Tokens\TokenType;
 )]'
 ),
 ]
-final readonly class AttributePattern implements Pattern
+final class AttributePattern implements Pattern
 {
     use IsPattern;
 

@@ -10,7 +10,7 @@ use Tempest\Highlight\PatternTest;
 use Tempest\Highlight\Tokens\TokenType;
 
 #[PatternTest(input: '"foo": ["bar"]', output: ['[', ']'])]
-final readonly class JsonArrayBracketsPattern implements Pattern
+final class JsonArrayBracketsPattern implements Pattern
 {
     use IsPattern;
 

@@ -13,7 +13,7 @@ use Tempest\Highlight\Tokens\TokenType;
 #[PatternTest(input: 'interface Foo {}', output: 'Foo')]
 #[PatternTest(input: 'trait Foo {}', output: 'Foo')]
 #[PatternTest(input: 'enum Foo {}', output: 'Foo')]
-final readonly class ClassNamePattern implements Pattern
+final class ClassNamePattern implements Pattern
 {
     use IsPattern;
 

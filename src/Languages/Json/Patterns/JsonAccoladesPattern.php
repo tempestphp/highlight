@@ -10,7 +10,7 @@ use Tempest\Highlight\PatternTest;
 use Tempest\Highlight\Tokens\TokenType;
 
 #[PatternTest(input: '{"foo":"bar"}', output: ['{', '}'])]
-final readonly class JsonAccoladesPattern implements Pattern
+final class JsonAccoladesPattern implements Pattern
 {
     use IsPattern;
 

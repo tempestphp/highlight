@@ -7,7 +7,7 @@ namespace Tempest\Highlight\Languages\Base\Injections;
 use Tempest\Highlight\Injection;
 use Tempest\Highlight\Languages\Base\IsHighlightInjection;
 
-final readonly class AdditionInjection implements Injection
+final class AdditionInjection implements Injection
 {
     use IsHighlightInjection;
 

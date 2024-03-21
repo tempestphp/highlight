@@ -13,7 +13,7 @@ use Tempest\Highlight\Tokens\TokenType;
     input: 'return "hello"',
     output: 'hello',
 )]
-final readonly class JsDoubleQuoteValuePattern implements Pattern
+final class JsDoubleQuoteValuePattern implements Pattern
 {
     use IsPattern;
 

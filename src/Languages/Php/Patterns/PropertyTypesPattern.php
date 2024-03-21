@@ -18,7 +18,7 @@ use Tempest\Highlight\Tokens\TokenType;
 #[PatternTest(input: 'public ?Bar $bar', output: '?Bar')]
 #[PatternTest(input: 'public ?Bar|\Foo $bar', output: '?Bar|\Foo')]
 #[PatternTest(input: 'public function bar(mixed $input);', output: null)]
-final readonly class PropertyTypesPattern implements Pattern
+final class PropertyTypesPattern implements Pattern
 {
     use IsPattern;
 

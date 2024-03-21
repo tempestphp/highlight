@@ -10,7 +10,7 @@ use Tempest\Highlight\PatternTest;
 use Tempest\Highlight\Tokens\TokenType;
 
 #[PatternTest(input: '@template T', output: 'T')]
-final readonly class DocCommentTemplateTypePattern implements Pattern
+final class DocCommentTemplateTypePattern implements Pattern
 {
     use IsPattern;
 

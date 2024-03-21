@@ -8,7 +8,7 @@ use Tempest\Highlight\Highlighter;
 use Tempest\Highlight\Injection;
 use Tempest\Highlight\IsInjection;
 
-final readonly class DocCommentInjection implements Injection
+final class DocCommentInjection implements Injection
 {
     use IsInjection;
 

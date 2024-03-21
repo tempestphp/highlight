@@ -8,7 +8,7 @@ use Tempest\Highlight\Highlighter;
 use Tempest\Highlight\Injection;
 use Tempest\Highlight\IsInjection;
 
-final readonly class BladePhpInjection implements Injection
+final class BladePhpInjection implements Injection
 {
     use IsInjection;
 

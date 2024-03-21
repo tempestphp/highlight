@@ -10,7 +10,7 @@ use Tempest\Highlight\PatternTest;
 use Tempest\Highlight\Tokens\TokenType;
 
 #[PatternTest(input: "bar = 'baz'", output: 'baz')]
-final readonly class SqlSingleQuoteValuePattern implements Pattern
+final class SqlSingleQuoteValuePattern implements Pattern
 {
     use IsPattern;
 

@@ -8,7 +8,7 @@ use Tempest\Highlight\Highlighter;
 use Tempest\Highlight\Injection;
 use Tempest\Highlight\IsInjection;
 
-final readonly class BladeRawEchoInjection implements Injection
+final class BladeRawEchoInjection implements Injection
 {
     use IsInjection;
 

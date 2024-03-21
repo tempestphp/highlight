@@ -11,7 +11,7 @@ use Tempest\Highlight\Tokens\TokenType;
 
 #[PatternTest(input: '<x-hello attr="">', output: 'attr')]
 #[PatternTest(input: '<a href="">', output: 'href')]
-final readonly class XmlAttributePattern implements Pattern
+final class XmlAttributePattern implements Pattern
 {
     use IsPattern;
 

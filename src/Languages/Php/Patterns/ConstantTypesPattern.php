@@ -12,7 +12,7 @@ use Tempest\Highlight\Tokens\TokenType;
 #[PatternTest(input: 'const string BAR_FOO = \'baz\'', output: 'string')]
 #[PatternTest(input: 'const BAR = \'baz\'', output: null)]
 #[PatternTest(input: 'const (Foo&Bar)|null BAR = \'baz\'', output: '(Foo&Bar)|null')]
-final readonly class ConstantTypesPattern implements Pattern
+final class ConstantTypesPattern implements Pattern
 {
     use IsPattern;
 

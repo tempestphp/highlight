@@ -21,7 +21,7 @@ pre {
 kbd, samp,
 pre ',
 )]
-final readonly class CssSelectorPattern implements Pattern
+final class CssSelectorPattern implements Pattern
 {
     use IsPattern;
 

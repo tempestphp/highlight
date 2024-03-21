@@ -13,7 +13,7 @@ use Tempest\Highlight\Tokens\TokenType;
     input: '{{-- test --}} content',
     output: '{{-- test --}}',
 )]
-final readonly class BladeCommentPattern implements Pattern
+final class BladeCommentPattern implements Pattern
 {
     use IsPattern;
 

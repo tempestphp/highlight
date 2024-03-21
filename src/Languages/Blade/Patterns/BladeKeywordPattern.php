@@ -14,7 +14,7 @@ use Tempest\Highlight\Tokens\TokenType;
         @endif()',
     output: ['@if', '@endif'],
 )]
-final readonly class BladeKeywordPattern implements Pattern
+final class BladeKeywordPattern implements Pattern
 {
     use IsPattern;
 

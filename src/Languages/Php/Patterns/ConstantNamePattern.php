@@ -21,7 +21,7 @@ use Tempest\Highlight\Tokens\TokenType;
     input: 'private const string BAR = ""',
     output: 'BAR',
 )]
-final readonly class ConstantNamePattern implements Pattern
+final class ConstantNamePattern implements Pattern
 {
     use IsPattern;
 

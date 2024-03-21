@@ -10,7 +10,7 @@ use Tempest\Highlight\PatternTest;
 use Tempest\Highlight\Tokens\TokenType;
 
 #[PatternTest(input: 'branches: [main]', output: ['[', ']'])]
-final readonly class YamlArrayBracketsPattern implements Pattern
+final class YamlArrayBracketsPattern implements Pattern
 {
     use IsPattern;
 

@@ -11,7 +11,7 @@ use Tempest\Highlight\Tokens\TokenType;
 
 #[PatternTest(input: 'enum Foo: string', output: 'string')]
 #[PatternTest(input: 'enum Foo: int', output: 'int')]
-final readonly class EnumBackedTypePattern implements Pattern
+final class EnumBackedTypePattern implements Pattern
 {
     use IsPattern;
 

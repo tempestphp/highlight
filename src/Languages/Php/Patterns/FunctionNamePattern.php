@@ -8,7 +8,7 @@ use Tempest\Highlight\IsPattern;
 use Tempest\Highlight\Pattern;
 use Tempest\Highlight\Tokens\TokenType;
 
-final readonly class FunctionNamePattern implements Pattern
+final class FunctionNamePattern implements Pattern
 {
     use IsPattern;
 

@@ -10,7 +10,7 @@ use Tempest\Highlight\PatternTest;
 use Tempest\Highlight\Tokens\TokenType;
 
 #[PatternTest(input: 'calcArea() {', output: 'calcArea')]
-final readonly class JsMethodPattern implements Pattern
+final class JsMethodPattern implements Pattern
 {
     use IsPattern;
 

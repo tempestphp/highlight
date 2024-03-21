@@ -11,7 +11,7 @@ use Tempest\Highlight\Tokens\TokenType;
 
 #[PatternTest(input: 'Foo::bar()', output: 'Foo')]
 #[PatternTest(input: 'Foo::BAR', output: 'Foo')]
-final readonly class StaticClassCallPattern implements Pattern
+final class StaticClassCallPattern implements Pattern
 {
     use IsPattern;
 

@@ -10,7 +10,7 @@ use Tempest\Highlight\PatternTest;
 use Tempest\Highlight\Tokens\TokenType;
 
 #[PatternTest(input: '$foo::class', output: 'class')]
-final readonly class ClassResolutionPattern implements Pattern
+final class ClassResolutionPattern implements Pattern
 {
     use IsPattern;
 

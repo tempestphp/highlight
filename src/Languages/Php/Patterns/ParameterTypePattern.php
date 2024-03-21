@@ -14,7 +14,7 @@ use Tempest\Highlight\Tokens\TokenType;
 #[PatternTest(input: '?Bar $bar, Baz $baz', output: ['?Bar', 'Baz'])]
 #[PatternTest(input: 'Foo|Bar|null $bar', output: 'Foo|Bar|null')]
 #[PatternTest(input: '|null $bar', output: '|null')]
-final readonly class ParameterTypePattern implements Pattern
+final class ParameterTypePattern implements Pattern
 {
     use IsPattern;
 

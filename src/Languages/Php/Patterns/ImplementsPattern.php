@@ -11,7 +11,7 @@ use Tempest\Highlight\Tokens\TokenType;
 
 #[PatternTest(input: 'implements Foo', output: ' Foo')]
 #[PatternTest(input: 'implements Foo, Bar', output: ' Foo, Bar')]
-final readonly class ImplementsPattern implements Pattern
+final class ImplementsPattern implements Pattern
 {
     use IsPattern;
 

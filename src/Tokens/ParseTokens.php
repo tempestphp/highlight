@@ -7,7 +7,7 @@ namespace Tempest\Highlight\Tokens;
 use Tempest\Highlight\Language;
 use Tempest\Highlight\Languages\Php\Patterns\GenericPattern;
 
-final readonly class ParseTokens
+final class ParseTokens
 {
     /**
      * @return \Tempest\Highlight\Tokens\Token[]

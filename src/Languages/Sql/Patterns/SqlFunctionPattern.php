@@ -11,7 +11,7 @@ use Tempest\Highlight\Tokens\TokenType;
 
 #[PatternTest(input: 'COUNT(*)', output: 'COUNT')]
 #[PatternTest(input: 'count(*)', output: 'count')]
-final readonly class SqlFunctionPattern implements Pattern
+final class SqlFunctionPattern implements Pattern
 {
     use IsPattern;
 

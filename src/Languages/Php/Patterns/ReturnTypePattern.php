@@ -18,7 +18,7 @@ use Tempest\Highlight\Tokens\TokenType;
 #[PatternTest(input: 'function foo(): Foo|Bar;', output: 'Foo|Bar')]
 #[PatternTest(input: 'function foo(): Foo&Bar;', output: 'Foo&Bar')]
 #[PatternTest(input: 'function foo(): (Foo&Bar)|null;', output: '(Foo&Bar)|null')]
-final readonly class ReturnTypePattern implements Pattern
+final class ReturnTypePattern implements Pattern
 {
     use IsPattern;
 

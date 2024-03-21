@@ -10,7 +10,7 @@ use Tempest\Highlight\PatternTest;
 use Tempest\Highlight\Tokens\TokenType;
 
 #[PatternTest(input: '-- single-line comment', output: '-- single-line comment')]
-final readonly class SqlSinglelineCommentPattern implements Pattern
+final class SqlSinglelineCommentPattern implements Pattern
 {
     use IsPattern;
 

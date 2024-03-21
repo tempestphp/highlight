@@ -17,7 +17,7 @@ use Tempest\Highlight\Tokens\TokenType;
     }',
     output: ['color', 'font-style', 'font-family'],
 )]
-final readonly class CssAttributePattern implements Pattern
+final class CssAttributePattern implements Pattern
 {
     use IsPattern;
 

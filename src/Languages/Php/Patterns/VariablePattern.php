@@ -10,7 +10,7 @@ use Tempest\Highlight\PatternTest;
 use Tempest\Highlight\Tokens\TokenType;
 
 #[PatternTest(input: '$foo', output: '$foo')]
-final readonly class VariablePattern implements Pattern
+final class VariablePattern implements Pattern
 {
     use IsPattern;
 

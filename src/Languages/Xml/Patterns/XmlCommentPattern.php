@@ -19,7 +19,7 @@ use Tempest\Highlight\Tokens\TokenType;
             foo
             -->'
 )]
-final readonly class XmlCommentPattern implements Pattern
+final class XmlCommentPattern implements Pattern
 {
     use IsPattern;
 

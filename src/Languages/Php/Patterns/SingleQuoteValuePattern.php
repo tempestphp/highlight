@@ -13,7 +13,7 @@ use Tempest\Highlight\Tokens\TokenType;
     input: "return 'hello';",
     output: 'hello',
 )]
-final readonly class SingleQuoteValuePattern implements Pattern
+final class SingleQuoteValuePattern implements Pattern
 {
     use IsPattern;
 

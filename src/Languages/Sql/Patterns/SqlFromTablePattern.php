@@ -11,7 +11,7 @@ use Tempest\Highlight\Tokens\TokenType;
 
 #[PatternTest(input: 'FROM country', output: 'country')]
 #[PatternTest(input: 'from country', output: 'country')]
-final readonly class SqlFromTablePattern implements Pattern
+final class SqlFromTablePattern implements Pattern
 {
     use IsPattern;
 

@@ -10,7 +10,7 @@ use Tempest\Highlight\PatternTest;
 use Tempest\Highlight\Tokens\TokenType;
 
 #[PatternTest(input: '"baz"', output: '"baz"')]
-final readonly class JsonDoubleQuoteValuePattern implements Pattern
+final class JsonDoubleQuoteValuePattern implements Pattern
 {
     use IsPattern;
 

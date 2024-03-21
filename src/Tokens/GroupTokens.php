@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Tempest\Highlight\Tokens;
 
-final readonly class GroupTokens
+final class GroupTokens
 {
     /**
      * @param \Tempest\Highlight\Tokens\Token[] $tokens

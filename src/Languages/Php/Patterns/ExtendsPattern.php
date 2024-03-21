@@ -10,7 +10,7 @@ use Tempest\Highlight\PatternTest;
 use Tempest\Highlight\Tokens\TokenType;
 
 #[PatternTest(input: 'extends Foo', output: 'Foo')]
-final readonly class ExtendsPattern implements Pattern
+final class ExtendsPattern implements Pattern
 {
     use IsPattern;
 

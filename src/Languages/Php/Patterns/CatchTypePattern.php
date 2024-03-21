@@ -12,7 +12,7 @@ use Tempest\Highlight\Tokens\TokenType;
 #[PatternTest(input: 'catch (Foo) {}', output: 'Foo')]
 #[PatternTest(input: 'catch (Foo|Bar) {}', output: 'Foo|Bar')]
 #[PatternTest(input: 'catch (Foo|Bar $bar) {}', output: null)]
-final readonly class CatchTypePattern implements Pattern
+final class CatchTypePattern implements Pattern
 {
     use IsPattern;
 

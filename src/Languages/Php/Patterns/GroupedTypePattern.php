@@ -12,7 +12,7 @@ use Tempest\Highlight\Tokens\TokenType;
 #[PatternTest(input: '(Foo&Bar)|null $bar', output: '(Foo&Bar)')]
 #[PatternTest(input: 'null|(Foo&Bar) $bar', output: '(Foo&Bar)')]
 #[PatternTest(input: 'while (true)', output: null)]
-final readonly class GroupedTypePattern implements Pattern
+final class GroupedTypePattern implements Pattern
 {
     use IsPattern;
 

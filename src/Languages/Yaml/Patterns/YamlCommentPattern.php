@@ -10,7 +10,7 @@ use Tempest\Highlight\PatternTest;
 use Tempest\Highlight\Tokens\TokenType;
 
 #[PatternTest(input: '# comment', output: '# comment')]
-final readonly class YamlCommentPattern implements Pattern
+final class YamlCommentPattern implements Pattern
 {
     use IsPattern;
 

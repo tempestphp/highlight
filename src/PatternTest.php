@@ -7,7 +7,7 @@ namespace Tempest\Highlight;
 use Attribute;
 
 #[Attribute(Attribute::IS_REPEATABLE | Attribute::TARGET_CLASS)]
-final readonly class PatternTest
+final class PatternTest
 {
     public function __construct(
         public string $input,

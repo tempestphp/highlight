@@ -8,7 +8,7 @@ use Tempest\Highlight\Escape;
 use Tempest\Highlight\Highlighter;
 use Tempest\Highlight\Injection;
 
-final readonly class CustomClassInjection implements Injection
+final class CustomClassInjection implements Injection
 {
     public function parse(string $content, Highlighter $highlighter): string
     {

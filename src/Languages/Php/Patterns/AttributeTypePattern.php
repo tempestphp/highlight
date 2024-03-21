@@ -21,7 +21,7 @@ use Tempest\Highlight\Tokens\TokenType;
 ]',
     output: ['Foo', 'Bar', 'Baz']
 )]
-final readonly class AttributeTypePattern implements Pattern
+final class AttributeTypePattern implements Pattern
 {
     use IsPattern;
 

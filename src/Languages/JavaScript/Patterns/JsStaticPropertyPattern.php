@@ -10,7 +10,7 @@ use Tempest\Highlight\PatternTest;
 use Tempest\Highlight\Tokens\TokenType;
 
 #[PatternTest(input: 'static foo', output: 'foo')]
-final readonly class JsStaticPropertyPattern implements Pattern
+final class JsStaticPropertyPattern implements Pattern
 {
     use IsPattern;
 

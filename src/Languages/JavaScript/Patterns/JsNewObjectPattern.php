@@ -11,7 +11,7 @@ use Tempest\Highlight\Tokens\TokenType;
 
 #[PatternTest(input: 'new Rectangle(', output: 'Rectangle')]
 #[PatternTest(input: 'new qq.AjaxRequester(', output: 'AjaxRequester')]
-final readonly class JsNewObjectPattern implements Pattern
+final class JsNewObjectPattern implements Pattern
 {
     use IsPattern;
 

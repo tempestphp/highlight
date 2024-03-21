@@ -11,7 +11,7 @@ use Tempest\Highlight\Tokens\TokenType;
 
 #[PatternTest(input: 'name: Fix Styling', output: 'name')]
 #[PatternTest(input: 'property-name: value', output: 'property-name')]
-final readonly class YamlPropertyPattern implements Pattern
+final class YamlPropertyPattern implements Pattern
 {
     use IsPattern;
 

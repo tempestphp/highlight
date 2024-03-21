@@ -13,7 +13,7 @@ use Tempest\Highlight\Tokens\TokenType;
 #[PatternTest(input: 'case Foo="";', output: 'Foo')]
 #[PatternTest(input: 'case Foo;', output: 'Foo')]
 #[PatternTest(input: 'case Foo ;', output: 'Foo')]
-final readonly class EnumCasePattern implements Pattern
+final class EnumCasePattern implements Pattern
 {
     use IsPattern;
 

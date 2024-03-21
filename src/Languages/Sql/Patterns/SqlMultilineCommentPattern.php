@@ -17,7 +17,7 @@ multi-line comment
 multi-line comment
 */'
 )]
-final readonly class SqlMultilineCommentPattern implements Pattern
+final class SqlMultilineCommentPattern implements Pattern
 {
     use IsPattern;
 

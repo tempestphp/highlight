@@ -11,7 +11,7 @@ use Tempest\Highlight\Tokens\TokenType;
 
 #[PatternTest(input: 'instanceof Closure', output: 'Closure')]
 #[PatternTest(input: 'instanceof \\Foo\\Bar', output: '\\Foo\\Bar')]
-final readonly class InstanceOfPattern implements Pattern
+final class InstanceOfPattern implements Pattern
 {
     use IsPattern;
 

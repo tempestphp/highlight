@@ -13,7 +13,7 @@ use Tempest\Highlight\Tokens\TokenType;
 #[PatternTest(input: '@param $concrete', output: '$concrete')]
 #[PatternTest(input: '@var Foo $concrete', output: '$concrete')]
 #[PatternTest(input: '@var $concrete', output: '$concrete')]
-final readonly class DocCommentVariablePattern implements Pattern
+final class DocCommentVariablePattern implements Pattern
 {
     use IsPattern;
 

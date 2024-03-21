@@ -10,7 +10,7 @@ use Tempest\Highlight\PatternTest;
 use Tempest\Highlight\Tokens\TokenType;
 
 #[PatternTest(input: 'class Rectangle', output: 'Rectangle')]
-final readonly class JsClassNamePattern implements Pattern
+final class JsClassNamePattern implements Pattern
 {
     use IsPattern;
 

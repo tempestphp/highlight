@@ -11,7 +11,7 @@ use Tempest\Highlight\Tokens\TokenType;
 
 #[PatternTest(input: 'Math.round', output: 'Math')]
 #[PatternTest(input: 'customHeaders.get', output: null)]
-final readonly class JsStaticClassPattern implements Pattern
+final class JsStaticClassPattern implements Pattern
 {
     use IsPattern;
 

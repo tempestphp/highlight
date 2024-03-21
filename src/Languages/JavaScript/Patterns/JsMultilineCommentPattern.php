@@ -17,7 +17,7 @@ hello
 hello
 */'
 )]
-final readonly class JsMultilineCommentPattern implements Pattern
+final class JsMultilineCommentPattern implements Pattern
 {
     use IsPattern;
 

@@ -11,7 +11,7 @@ use Tempest\Highlight\Tokens\TokenType;
 
 #[PatternTest(input: '- name: Setup problem matchers |', output: ':')]
 #[PatternTest(input: '- { link: "/blog/new-in-php-83" }', output: ':')]
-final readonly class YamlColonPattern implements Pattern
+final class YamlColonPattern implements Pattern
 {
     use IsPattern;
 

@@ -10,7 +10,7 @@ use Tempest\Highlight\PatternTest;
 use Tempest\Highlight\Tokens\TokenType;
 
 #[PatternTest(input: 'branches: { link: "/blog/new-in-php-83", title: "Whats new in PHP 8.3" }', output: ['{', '}'])]
-final readonly class YamlObjectBracketsPattern implements Pattern
+final class YamlObjectBracketsPattern implements Pattern
 {
     use IsPattern;
 

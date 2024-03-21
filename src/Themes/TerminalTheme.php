@@ -7,7 +7,7 @@ namespace Tempest\Highlight\Themes;
 use Tempest\Highlight\Theme;
 use Tempest\Highlight\Tokens\TokenType;
 
-final readonly class TerminalTheme implements Theme
+final class TerminalTheme implements Theme
 {
     public function before(string|TokenType $tokenType): string
     {

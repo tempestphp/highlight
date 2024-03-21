@@ -8,7 +8,7 @@ use Tempest\Highlight\IsPattern;
 use Tempest\Highlight\Pattern;
 use Tempest\Highlight\Tokens\TokenType;
 
-final readonly class PropertyAccessPattern implements Pattern
+final class PropertyAccessPattern implements Pattern
 {
     use IsPattern;
 

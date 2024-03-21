@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Tempest\Highlight;
 
-final readonly class Escape
+final class Escape
 {
-    public const string INJECTION_TOKEN = '❿';
+    public const INJECTION_TOKEN = '❿';
 
-    private const array TOKENS = [
+    private const TOKENS = [
         '❶' => '&',
         '❷' => '<',
         '❸' => '>',

@@ -10,7 +10,7 @@ use Tempest\Highlight\PatternTest;
 use Tempest\Highlight\Tokens\TokenType;
 
 #[PatternTest(input: 'runs-on: ${{ matrix.os }}', output: ['{{', '}}'])]
-final readonly class YamlDoubleAccoladesValuePattern implements Pattern
+final class YamlDoubleAccoladesValuePattern implements Pattern
 {
     use IsPattern;
 

@@ -9,7 +9,7 @@ use Tempest\Highlight\IsPattern;
 use Tempest\Highlight\Pattern;
 use Tempest\Highlight\Tokens\TokenType;
 
-final readonly class InjectionTokenPattern implements Pattern
+final class InjectionTokenPattern implements Pattern
 {
     use IsPattern;
 

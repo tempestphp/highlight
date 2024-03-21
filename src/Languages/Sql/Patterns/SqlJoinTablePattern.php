@@ -11,7 +11,7 @@ use Tempest\Highlight\Tokens\TokenType;
 
 #[PatternTest(input: 'INNER JOIN country', output: 'country')]
 #[PatternTest(input: 'inner join country', output: 'country')]
-final readonly class SqlJoinTablePattern implements Pattern
+final class SqlJoinTablePattern implements Pattern
 {
     use IsPattern;
 

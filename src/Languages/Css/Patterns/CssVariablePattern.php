@@ -11,7 +11,7 @@ use Tempest\Highlight\Tokens\TokenType;
 
 #[PatternTest(input: '--var-name: foo', output: '--var-name')]
 #[PatternTest(input: 'var(--var-name)', output: '--var-name')]
-final readonly class CssVariablePattern implements Pattern
+final class CssVariablePattern implements Pattern
 {
     use IsPattern;
 

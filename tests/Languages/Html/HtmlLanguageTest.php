@@ -17,7 +17,7 @@ class HtmlLanguageTest extends TestCase
 
         $this->assertSame(
             $expected,
-            $highlighter->parse($content, 'xml'),
+            $highlighter->parse($content, 'html'),
         );
     }
 
@@ -42,10 +42,10 @@ TXT,
     
     <span class="hl-comment">&lt;!-- comment --&gt;</span>
     
-    &lt;<span class="hl-keyword">style</span>&gt;body {color: red}&lt;/<span class="hl-keyword">style</span>&gt;
-    &lt;<span class="hl-keyword">tag</span> <span class="hl-property">style</span>=&quot;background-color: #fff;&quot;&gt;&lt;/<span class="hl-keyword">tag</span>&gt;
-    &lt;?= foo() ?&gt;
-    &lt;?php foo(); ?&gt;
+    &lt;<span class="hl-keyword">style</span>&gt;<span class="hl-keyword">body </span>{<span class="hl-property">color</span>: red}&lt;/<span class="hl-keyword">style</span>&gt;
+    &lt;<span class="hl-keyword">tag</span> <span class="hl-property">style</span>=&quot;<span class="hl-property">background-color</span>: #fff;&quot;&gt;&lt;/<span class="hl-keyword">tag</span>&gt;
+    &lt;?= <span class="hl-property">foo</span>() ?&gt;
+    &lt;?php <span class="hl-property">foo</span>(); ?&gt;
 &lt;/<span class="hl-keyword">tag</span>&gt;
 TXT],
         ];

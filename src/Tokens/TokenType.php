@@ -21,7 +21,7 @@ enum TokenType: string
     {
         return match ($this) {
             self::OPERATOR, self::VARIABLE, self::VALUE, self::INJECTION, self::COMMENT => false,
-            self::TYPE => ! in_array($other->value, [self::KEYWORD->value]),
+            self::TYPE => ! in_array($other->value, [self::KEYWORD->value, self::PROPERTY->value]),
             self::GENERIC => ! in_array($other->value, [self::TYPE->value]),
             default => true,
         };

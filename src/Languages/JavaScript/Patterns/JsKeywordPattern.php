@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Tempest\Highlight\Languages\Php\Patterns;
+namespace Tempest\Highlight\Languages\JavaScript\Patterns;
 
 use Tempest\Highlight\IsPattern;
 use Tempest\Highlight\Pattern;
 use Tempest\Highlight\Tokens\TokenType;
 
-final class KeywordPattern implements Pattern
+final class JsKeywordPattern implements Pattern
 {
     use IsPattern;
 
@@ -27,7 +27,7 @@ final class KeywordPattern implements Pattern
 
     public function getPattern(): string
     {
-        $pattern = "/\b(?<!\\$)(?<!\-\>)(?<match>{$this->keyword})(\,|\)|\;|\:|\s|\()/";
+        $pattern = "/\b(?<!\.)(?<match>{$this->keyword})(\,|\.|\)|\;|\:|\s|\()/";
 
         if ($this->caseInsensitive) {
             $pattern .= 'i';

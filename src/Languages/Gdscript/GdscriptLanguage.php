@@ -13,7 +13,6 @@ use Tempest\Highlight\Languages\Gdscript\Patterns\ExtendsPattern;
 use Tempest\Highlight\Languages\Gdscript\Patterns\FunctionCallPattern;
 use Tempest\Highlight\Languages\Gdscript\Patterns\FunctionNamePattern;
 use Tempest\Highlight\Languages\Gdscript\Patterns\KeywordPattern;
-use Tempest\Highlight\Languages\Gdscript\Patterns\OnReadyPattern;
 use Tempest\Highlight\Languages\Gdscript\Patterns\OperatorPattern;
 use Tempest\Highlight\Languages\Gdscript\Patterns\PropertyAccessPattern;
 use Tempest\Highlight\Languages\Gdscript\Patterns\ReturnTypePattern;
@@ -55,6 +54,7 @@ class GdscriptLanguage extends BaseLanguage
             new OperatorPattern('&='),
             new OperatorPattern('|='),
             new OperatorPattern('^='),
+            new OperatorPattern('->'),
             new OperatorPattern('/'),
             new OperatorPattern('%'),
             new OperatorPattern('+'),

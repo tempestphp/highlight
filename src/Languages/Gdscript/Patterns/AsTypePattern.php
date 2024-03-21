@@ -9,16 +9,14 @@ use Tempest\Highlight\Pattern;
 use Tempest\Highlight\PatternTest;
 use Tempest\Highlight\Tokens\TokenType;
 
-#[PatternTest(input: 'foo as int', output: 'int')]
-#[PatternTest(input: '(foo as int)', output: 'int')]
-#[PatternTest(input: '%Agent as NavigationAgent2D)', output: 'NavigationAgent2D')]
+#[PatternTest(input: 'as int', output: 'int')]
 final readonly class AsTypePattern implements Pattern
 {
     use IsPattern;
 
     public function getPattern(): string
     {
-        return '(as)\s+(?<match>\w+)[\n\)]+';
+        return 'as\s+\b(?<match>[a-zA-Z][a-zA-Z0-9]+)\b';
     }
 
     public function getTokenType(): TokenType

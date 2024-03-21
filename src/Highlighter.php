@@ -7,6 +7,7 @@ namespace Tempest\Highlight;
 use Tempest\Highlight\Languages\Blade\BladeLanguage;
 use Tempest\Highlight\Languages\Css\CssLanguage;
 use Tempest\Highlight\Languages\DocComment\DocCommentLanguage;
+use Tempest\Highlight\Languages\Gdscript\GdscriptLanguage;
 use Tempest\Highlight\Languages\Html\HtmlLanguage;
 use Tempest\Highlight\Languages\JavaScript\JavaScriptLanguage;
 use Tempest\Highlight\Languages\Json\JsonLanguage;
@@ -29,17 +30,18 @@ final class Highlighter
         private readonly Theme $theme = new CssTheme(),
     ) {
         $this
-            ->setLanguage('php', new PhpLanguage())
-            ->setLanguage('xml', new XmlLanguage())
-            ->setLanguage('html', new HtmlLanguage())
-            ->setLanguage('sql', new SqlLanguage())
             ->setLanguage('blade', new BladeLanguage())
-            ->setLanguage('yaml', new YamlLanguage())
-            ->setLanguage('yml', new YamlLanguage())
-            ->setLanguage('json', new JsonLanguage())
-            ->setLanguage('js', new JavaScriptLanguage())
+            ->setLanguage('css', new CssLanguage())
             ->setLanguage('doc', new DocCommentLanguage())
-            ->setLanguage('css', new CssLanguage());
+            ->setLanguage('gdscript', new GdscriptLanguage())
+            ->setLanguage('html', new HtmlLanguage())
+            ->setLanguage('js', new JavaScriptLanguage())
+            ->setLanguage('json', new JsonLanguage())
+            ->setLanguage('php', new PhpLanguage())
+            ->setLanguage('sql', new SqlLanguage())
+            ->setLanguage('xml', new XmlLanguage())
+            ->setLanguage('yaml', new YamlLanguage())
+            ->setLanguage('yml', new YamlLanguage());
     }
 
     public function setLanguage(string $name, Language $language): self

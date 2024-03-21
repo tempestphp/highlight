@@ -41,7 +41,7 @@ class PhpLanguageTest extends TestCase
             ['$foo ? $value : null', '<span class="hl-variable">$foo</span> <span class="hl-operator">?</span> <span class="hl-variable">$value</span> : null'],
             ['use Illuminate\Contracts\Container\Container as ContainerContract', '<span class="hl-keyword">use</span> <span class="hl-type">Illuminate\Contracts\Container\Container</span> <span class="hl-keyword">as</span> <span class="hl-type">ContainerContract</span>'],
             ['$foo::class;', '<span class="hl-variable">$foo</span>::<span class="hl-keyword">class</span>;'],
-//            ['function ((Foo&Bar)|null $bar)', '<span class="hl-keyword">function</span> (<span class="hl-type">(Foo&amp;Bar)</span><span class="hl-type">|null</span> <span class="hl-variable">$bar</span>)'],
+            ['function ((Foo&Bar)|null $bar)', '<span class="hl-keyword">function</span> (<span class="hl-type">(Foo&amp;Bar)</span><span class="hl-type">|null</span> <span class="hl-variable">$bar</span>)'],
             ['while (true) {', '<span class="hl-keyword">while</span> (true) {'],
             ['catch (Foo|Bar) {}', '<span class="hl-keyword">catch</span> (<span class="hl-type">Foo|Bar</span>) {}'],
             ['fn&(', '<span class="hl-keyword">fn</span>&amp;('],

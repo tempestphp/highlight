@@ -11,17 +11,14 @@ use Tempest\Highlight\Tokens\TokenType;
 
 #[PatternTest(input: '(Foo&Bar)|null $bar', output: '(Foo&Bar)')]
 #[PatternTest(input: 'null|(Foo&Bar) $bar', output: '(Foo&Bar)')]
-#[PatternTest(input: 'null|(Foo|Bar) $bar', output: '(Foo|Bar)')]
-#[PatternTest(input: 'null|(?Bar) $bar', output: '(?Bar)')]
-//#[PatternTest(input: 'while (true)', output: null)]
-// TODO: this pattern is broken and disabled
+#[PatternTest(input: 'while (true)', output: null)]
 final readonly class GroupedTypePattern implements Pattern
 {
     use IsPattern;
 
     public function getPattern(): string
     {
-        return '(?<match>\([\w\&\|\?]+\))';
+        return '(?<match>\(\w+(&\w+)+\))';
     }
 
     public function getTokenType(): TokenType

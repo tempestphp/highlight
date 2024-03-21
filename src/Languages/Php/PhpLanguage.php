@@ -21,6 +21,7 @@ use Tempest\Highlight\Languages\Php\Patterns\EnumCasePattern;
 use Tempest\Highlight\Languages\Php\Patterns\ExtendsPattern;
 use Tempest\Highlight\Languages\Php\Patterns\FunctionCallPattern;
 use Tempest\Highlight\Languages\Php\Patterns\FunctionNamePattern;
+use Tempest\Highlight\Languages\Php\Patterns\GroupedTypePattern;
 use Tempest\Highlight\Languages\Php\Patterns\ImplementsPattern;
 use Tempest\Highlight\Languages\Php\Patterns\InstanceOfPattern;
 use Tempest\Highlight\Languages\Php\Patterns\KeywordPattern;
@@ -164,8 +165,8 @@ class PhpLanguage extends BaseLanguage
             new UseAsPattern(),
             new CatchTypePattern(),
             new EnumBackedTypePattern(),
-//            new GroupedTypePattern(),
-
+            new GroupedTypePattern(),
+//
             // PROPERTIES
             new ClassPropertyPattern(),
             new NamedArgumentPattern(),

@@ -20,7 +20,7 @@ $environment
 
 $markdown = new MarkdownConverter($environment);
 
-$contents = $markdown->convert(file_get_contents(__DIR__ . '/test.md'))->getContent();
+$contents = $markdown->convert(file_get_contents(__DIR__ . '/test-big.md'))->getContent();
 
 ?>
 

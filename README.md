@@ -77,6 +77,14 @@ You can build your own CSS theme with just a couple of classes:
     color: #9D3AF6;
 }
 
+.hl-value {
+  color: #000;
+}
+
+.hl-variable {
+  color: #000;
+}
+
 .hl-comment {
     color: #888888;
 }

@@ -48,6 +48,7 @@ class PhpLanguageTest extends TestCase
             ['enum Foo: string', '<span class="hl-keyword">enum</span> <span class="hl-type">Foo</span>: <span class="hl-type">string</span>'],
             ['case Foo;', '<span class="hl-keyword">case</span> <span class="hl-property">Foo</span>;'],
             ['$this->extends("View/base.view.php");', '<span class="hl-variable">$this</span>-&gt;<span class="hl-property">extends</span>(&quot;<span class="hl-value">View/base.view.php</span>&quot;);'],
+            ['/** @var Foo $var */', '<span class="hl-comment">/** <span class="hl-value">@var</span> <span class="hl-type">Foo</span> <span class="hl-variable">$var</span> */</span>'],
             [
                 "// We'll
 

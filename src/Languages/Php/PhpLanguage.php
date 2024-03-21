@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Tempest\Highlight\Languages\Php;
 
 use Tempest\Highlight\Languages\Base\BaseLanguage;
+use Tempest\Highlight\Languages\DocComment\Injections\DocCommentInjection;
 use Tempest\Highlight\Languages\Php\Injections\HeredocInjection;
 use Tempest\Highlight\Languages\Php\Patterns\AttributePattern;
 use Tempest\Highlight\Languages\Php\Patterns\AttributeTypePattern;
@@ -25,7 +26,6 @@ use Tempest\Highlight\Languages\Php\Patterns\GroupedTypePattern;
 use Tempest\Highlight\Languages\Php\Patterns\ImplementsPattern;
 use Tempest\Highlight\Languages\Php\Patterns\InstanceOfPattern;
 use Tempest\Highlight\Languages\Php\Patterns\KeywordPattern;
-use Tempest\Highlight\Languages\Php\Patterns\MultilineDoubleDocCommentPattern;
 use Tempest\Highlight\Languages\Php\Patterns\MultilineSingleDocCommentPattern;
 use Tempest\Highlight\Languages\Php\Patterns\NamedArgumentPattern;
 use Tempest\Highlight\Languages\Php\Patterns\NamespacePattern;
@@ -52,6 +52,7 @@ class PhpLanguage extends BaseLanguage
         return [
             ...parent::getInjections(),
             new HeredocInjection(),
+            new DocCommentInjection(),
         ];
     }
 
@@ -144,7 +145,6 @@ class PhpLanguage extends BaseLanguage
             new AttributePattern(),
 
             // COMMENTS
-            new MultilineDoubleDocCommentPattern(),
             new MultilineSingleDocCommentPattern(),
             new SinglelineCommentPattern(),
 

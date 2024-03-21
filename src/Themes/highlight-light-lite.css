@@ -6,6 +6,7 @@
     --type-color: #EA4334;
     --generic-color: #9d3af6;
     --value-color: #000;
+    --variable-color: #000;
     --comment-color: #888888;
 }
 
@@ -32,6 +33,10 @@
 
 .hl-value {
     color: var(--value-color);
+}
+
+.hl-variable {
+    color: var(--variable-color);
 }
 
 .hl-comment {

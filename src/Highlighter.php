@@ -6,6 +6,7 @@ namespace Tempest\Highlight;
 
 use Tempest\Highlight\Languages\Blade\BladeLanguage;
 use Tempest\Highlight\Languages\Css\CssLanguage;
+use Tempest\Highlight\Languages\DocComment\DocCommentLanguage;
 use Tempest\Highlight\Languages\Html\HtmlLanguage;
 use Tempest\Highlight\Languages\JavaScript\JavaScriptLanguage;
 use Tempest\Highlight\Languages\Json\JsonLanguage;
@@ -37,6 +38,7 @@ final class Highlighter
             ->setLanguage('yml', new YamlLanguage())
             ->setLanguage('json', new JsonLanguage())
             ->setLanguage('js', new JavaScriptLanguage())
+            ->setLanguage('doc', new DocCommentLanguage())
             ->setLanguage('css', new CssLanguage());
     }
 

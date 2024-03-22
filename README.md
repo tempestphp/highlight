@@ -42,6 +42,7 @@ $code = $highlighter->parse($code, 'php');
 - [x] YAML
 - [x] JSON
 - [x] XML
+- [x] GDScript
 
 ## Themes
 

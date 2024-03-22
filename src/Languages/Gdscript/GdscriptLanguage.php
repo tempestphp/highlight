@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace Tempest\Highlight\Languages\Gdscript;
 
 use Tempest\Highlight\Languages\Base\BaseLanguage;
+use Tempest\Highlight\Languages\Gdscript\Patterns\AnnotationPattern;
 use Tempest\Highlight\Languages\Gdscript\Patterns\AsTypePattern;
 use Tempest\Highlight\Languages\Gdscript\Patterns\ClassNamePattern;
 use Tempest\Highlight\Languages\Gdscript\Patterns\DoubleQuoteValuePattern;
-use Tempest\Highlight\Languages\Gdscript\Patterns\AnnotationPattern;
 use Tempest\Highlight\Languages\Gdscript\Patterns\ExtendsPattern;
 use Tempest\Highlight\Languages\Gdscript\Patterns\FunctionCallPattern;
 use Tempest\Highlight\Languages\Gdscript\Patterns\FunctionNamePattern;

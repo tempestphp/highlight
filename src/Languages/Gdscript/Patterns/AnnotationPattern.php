@@ -6,7 +6,6 @@ namespace Tempest\Highlight\Languages\Gdscript\Patterns;
 
 use Tempest\Highlight\IsPattern;
 use Tempest\Highlight\Pattern;
-use Tempest\Highlight\PatternTest;
 use Tempest\Highlight\Tokens\TokenType;
 
 final readonly class AnnotationPattern implements Pattern

@@ -38,6 +38,7 @@ $contents = $markdown->convert(file_get_contents(__DIR__ . DIRECTORY_SEPARATOR .
 
         body {
             font-size: 15px;
+            background-color: #232323;
         }
 
         code,
@@ -47,16 +48,14 @@ $contents = $markdown->convert(file_get_contents(__DIR__ . DIRECTORY_SEPARATOR .
             font-family: "JetBrains Mono", monospace;
         }
 
-        code {
-
-        }
-
         .hl {
             width: 800px;
             margin: 3em auto;
             box-shadow: 0 0 10px 0 #00000044;
             padding: 1em 2em;
-            background-color: #fafafa;
+            /*background-color: #fafafa;*/
+            background-color: var(--background-color);
+            color: var(--text-color);
             border-radius: 3px;
         }
 

@@ -6,8 +6,12 @@ namespace Tempest\Highlight\Languages\Php\Patterns;
 
 use Tempest\Highlight\IsPattern;
 use Tempest\Highlight\Pattern;
+use Tempest\Highlight\PatternTest;
 use Tempest\Highlight\Tokens\TokenType;
 
+#[PatternTest(input: 'new Foo()', output: 'Foo')]
+#[PatternTest(input: '(new Foo)', output: 'Foo')]
+#[PatternTest(input: 'new Foo', output: 'Foo')]
 final readonly class NewObjectPattern implements Pattern
 {
     use IsPattern;

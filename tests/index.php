@@ -20,7 +20,13 @@ $environment
 
 $markdown = new MarkdownConverter($environment);
 
-$contents = $markdown->convert(file_get_contents(__DIR__ . '/test.md'))->getContent();
+$target = 'targets' . DIRECTORY_SEPARATOR . 'test.md';
+
+if (isset($_GET['target'])) {
+    $target = $_GET['target'];
+}
+
+$contents = $markdown->convert(file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . $target))->getContent();
 
 ?>
 
@@ -53,7 +59,7 @@ $contents = $markdown->convert(file_get_contents(__DIR__ . '/test.md'))->getCont
             background-color: #fafafa;
             border-radius: 3px;
         }
-        
+
         .hl-injection {
             background-color: #00ffff22;
         }

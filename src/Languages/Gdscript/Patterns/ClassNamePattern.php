@@ -2,23 +2,21 @@
 
 declare(strict_types=1);
 
-namespace Tempest\Highlight\Languages\Php\Patterns;
+namespace Tempest\Highlight\Languages\Gdscript\Patterns;
 
 use Tempest\Highlight\IsPattern;
 use Tempest\Highlight\Pattern;
 use Tempest\Highlight\PatternTest;
 use Tempest\Highlight\Tokens\TokenType;
 
-#[PatternTest(input: 'new Foo()', output: 'Foo')]
-#[PatternTest(input: '(new Foo)', output: 'Foo')]
-#[PatternTest(input: 'new Foo', output: 'Foo')]
-final readonly class NewObjectPattern implements Pattern
+#[PatternTest(input: 'class_name Foo', output: 'Foo')]
+final readonly class ClassNamePattern implements Pattern
 {
     use IsPattern;
 
     public function getPattern(): string
     {
-        return 'new (?<match>[\w]+)';
+        return 'class_name\s(?<match>[\w]+)';
     }
 
     public function getTokenType(): TokenType

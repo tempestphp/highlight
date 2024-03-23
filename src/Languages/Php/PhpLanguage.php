@@ -74,7 +74,6 @@ class PhpLanguage extends BaseLanguage
             new KeywordPattern('__halt_compiler'),
             new KeywordPattern('abstract'),
             new KeywordPattern('and'),
-            new KeywordPattern('array'),
             new KeywordPattern('as'),
             new KeywordPattern('break'),
             new KeywordPattern('callable'),

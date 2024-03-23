@@ -30,7 +30,7 @@ class PhpLanguageTest extends TestCase
             ['$foo || $bar', '<span class="hl-variable">$foo</span> <span class="hl-operator">||</span> <span class="hl-variable">$bar</span>'],
             ['$foo <=> $bar', '<span class="hl-variable">$foo</span> <span class="hl-operator">&lt;=&gt;</span> <span class="hl-variable">$bar</span>'],
             ["public const string|\Stringable MESSAGE = 'hi';", '<span class="hl-keyword">public</span> <span class="hl-keyword">const</span> <span class="hl-type">string|\Stringable</span> <span class="hl-property">MESSAGE</span> = \'<span class="hl-value">hi</span>\';'],
-            ["public string|\Stringable \$message;", '<span class="hl-keyword">public</span> <span class="hl-type">string|\<span class="hl-type">Stringable</span></span> <span class="hl-property">$message</span>;'],
+            ["public string|\Stringable \$message;", '<span class="hl-keyword">public</span> <span class="hl-type">string|\Stringable</span> <span class="hl-property">$message</span>;'],
             ['for($x = 0; $x < 150; $x++) {', '<span class="hl-keyword">for</span>(<span class="hl-variable">$x</span> = 0; <span class="hl-variable">$x</span> &lt; 150; <span class="hl-variable">$x</span>++) {'],
             ["'namespace ';", "'<span class=\"hl-value\">namespace </span>';"],
             ["static::foo()", '<span class="hl-keyword">static</span>::<span class="hl-property">foo</span>()'],

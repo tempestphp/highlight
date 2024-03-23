@@ -14,13 +14,14 @@ use Tempest\Highlight\Tokens\TokenType;
 #[PatternTest(input: '?Bar $bar, Baz $baz', output: ['?Bar', 'Baz'])]
 #[PatternTest(input: 'Foo|Bar|null $bar', output: 'Foo|Bar|null')]
 #[PatternTest(input: '|null $bar', output: '|null')]
+#[PatternTest(input: 'string|\Stringable $bar', output: 'string|\Stringable')]
 final readonly class ParameterTypePattern implements Pattern
 {
     use IsPattern;
 
     public function getPattern(): string
     {
-        return '(?<match>(\([\?\w\&\|]+\)|[\?\w\|\&]+))\s\\$';
+        return '(?<match>(\([\\\\\?\w\&\|]+\)|[\\\\\?\w\|\&]+))\s\\$';
     }
 
     public function getTokenType(): TokenType

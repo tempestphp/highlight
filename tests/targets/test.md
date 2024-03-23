@@ -1,3 +1,6 @@
 ```php
-#[PatternTest(input: 'new Foo()', output: 'Foo')]
+    public function warning(
+        string|\Stringable $message, 
+        array $context = []
+    ): void;
 ```

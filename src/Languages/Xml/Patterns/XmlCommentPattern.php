@@ -19,13 +19,14 @@ use Tempest\Highlight\Tokens\TokenType;
             foo
             -->'
 )]
+#[PatternTest(input: '<!-- foo --><div class="wrapper"><!-- foo2 -->',output: ['<!-- foo -->','<!-- foo2 -->'])]
 final readonly class XmlCommentPattern implements Pattern
 {
     use IsPattern;
 
     public function getPattern(): string
     {
-        return '(?<match>\<!--(.|\n)*-->)';
+        return '/(?<match>\<!--(.|\n)*-->)/mU';
     }
 
     public function getTokenType(): TokenType

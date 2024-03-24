@@ -11,13 +11,13 @@ use Tempest\Highlight\Highlighter;
 use Tempest\Highlight\Injection;
 use Tempest\Highlight\IsInjection;
 
-class TwigPropertyInjection implements Injection{
+class TwigCommentInjection implements Injection{
 
 	use IsInjection;
 
 	public function getPattern(): string
 	{
-		return '(?<match>({{(.|\n)*?}}))';
+		return '(?<match>({#(.|\n)*?#}))';
 	}
 
 	public function parseContent(string $content, Highlighter $highlighter): string

@@ -17,11 +17,11 @@ class TwigKeywordInjection implements Injection{
 
 	public function getPattern(): string
 	{
-		return '\<\?php(?<match>(.|\n)*?)\?>';
+		return '(?<match>({%(.|\n)*?%}))';
 	}
 
 	public function parseContent(string $content, Highlighter $highlighter): string
 	{
-		return $highlighter->parse($content, 'php');
+		return $highlighter->parse($content, 'twig');
 	}
 }

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tempest\Highlight;
 
+use Tempest\Highlight\Languages\Base\BaseLanguage;
 use Tempest\Highlight\Languages\Blade\BladeLanguage;
 use Tempest\Highlight\Languages\Css\CssLanguage;
 use Tempest\Highlight\Languages\DocComment\DocCommentLanguage;
@@ -54,13 +55,7 @@ final class Highlighter
     public function parse(string $content, string|Language $language): string
     {
         if (is_string($language)) {
-            $language = $this->languages[$language] ?? null;
-        }
-
-        if (! $language) {
-            return $this->shouldEscape ?
-                Escape::html($content)
-                : $content;
+            $language = $this->languages[$language] ?? new BaseLanguage();
         }
 
         $this->currentLanguage = $language;

@@ -49,7 +49,6 @@ $contents = $markdown->convert(file_get_contents(__DIR__ . DIRECTORY_SEPARATOR .
         }
 
         .hl {
-            width: 800px;
             margin: 3em auto;
             box-shadow: 0 0 10px 0 #00000044;
             padding: 1em 2em;
@@ -62,11 +61,19 @@ $contents = $markdown->convert(file_get_contents(__DIR__ . DIRECTORY_SEPARATOR .
         .hl-injection {
             background-color: #00ffff22;
         }
+
+        .container {
+            display: flex;
+            align-items: center;
+            height: 100vh;
+        }
     </style>
 </head>
 <body>
-<div class="hl">
-    <?= $contents ?>
+<div class="container">
+    <div class="hl">
+        <?= $contents ?>
+    </div>
 </div>
 </body>
 </html>

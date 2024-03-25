@@ -22,9 +22,9 @@ test~} extends{~ Bar ~}
 TXT;
 
         $expected = <<<TXT
-<span class="hl-keyword">class</span> <span class="hl-blur"><span class="hl-type">Foo</span>
+<span class="hl-keyword">class</span> <span class="hl-injection"><span class="hl-blur"><span class="hl-type">Foo</span>
 
-test</span> extends<span class="hl-blur"> <span class="hl-type">Bar</span> </span>
+test</span></span> extends<span class="hl-injection"><span class="hl-blur"> <span class="hl-type">Bar</span> </span></span>
 TXT;
 
         $this->assertMatches(

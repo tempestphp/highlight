@@ -59,13 +59,13 @@ $contents = $markdown->convert(file_get_contents(__DIR__ . DIRECTORY_SEPARATOR .
         }
 
         .hl-injection {
-            background-color: #00ffff22;
+            /*background-color: #00ffff22;*/
         }
 
         .container {
             display: flex;
             align-items: center;
-            height: 100vh;
+            /*height: 100vh;*/
         }
     </style>
 </head>

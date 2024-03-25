@@ -21,8 +21,8 @@ class CustomClassInjectionTest extends TestCase
 TXT;
 
         $expected = <<<TXT
-<span class="hl-a"><span class="hl-keyword">public</span> <span class="hl-keyword">class</span> <span class="hl-type">Foo</span> {}</span>
-<span class="hl-b"><span class="hl-keyword">public</span> <span class="hl-keyword">class</span> <span class="hl-type">Bar</span> {}</span>
+<span class="hl-injection"><span class="hl-a"><span class="hl-keyword">public</span> <span class="hl-keyword">class</span> <span class="hl-type">Foo</span> {}</span></span>
+<span class="hl-injection"><span class="hl-b"><span class="hl-keyword">public</span> <span class="hl-keyword">class</span> <span class="hl-type">Bar</span> {}</span></span>
 TXT;
 
         $this->assertMatches(

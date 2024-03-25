@@ -35,10 +35,11 @@ trait IsHighlightInjection
 
             $content = str_replace(
                 search: $match,
-                replace:
+                replace: Escape::injection(
                     Escape::tokens($theme->before($classForMatch))
                     . $parsed
                     . Escape::tokens($theme->after($classForMatch)),
+                ),
                 subject: $content,
             );
         }

@@ -55,6 +55,7 @@ class PhpLanguageTest extends TestCase
             ['$foo = true;', '<span class="hl-variable">$foo</span> = <span class="hl-keyword">true</span>;'],
             ['$foo = false;', '<span class="hl-variable">$foo</span> = <span class="hl-keyword">false</span>;'],
             ['/** @var Foo $var */', '<span class="hl-comment">/** <span class="hl-value">@var</span> <span class="hl-type">Foo</span> <span class="hl-variable">$var</span> */</span>'],
+            ['{~}): Foo {}~}', '<span class="hl-injection"><span class="hl-injection"><span class="hl-blur">}): <span class="hl-type">Foo</span> {}</span></span></span>'],
             [
                 "// We'll
 

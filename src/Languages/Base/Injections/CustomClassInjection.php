@@ -30,10 +30,11 @@ final readonly class CustomClassInjection implements Injection
 
             $content = str_replace(
                 search: $match,
-                replace:
-                Escape::tokens($theme->before($classForMatch))
-                . $parsed
-                . Escape::tokens($theme->after($classForMatch)),
+                replace: Escape::injection(
+                    Escape::tokens($theme->before($classForMatch))
+                    . $parsed
+                    . Escape::tokens($theme->after($classForMatch)),
+                ),
                 subject: $content,
             );
         }

@@ -6,7 +6,6 @@ namespace Tempest\Highlight\Languages\Twig\Patterns;
 
 use Tempest\Highlight\IsPattern;
 use Tempest\Highlight\Pattern;
-use Tempest\Highlight\PatternTest;
 use Tempest\Highlight\Tokens\TokenType;
 
 final class TwigRegexPattern implements Pattern
@@ -19,7 +18,7 @@ final class TwigRegexPattern implements Pattern
 
     public function getPattern(): string
     {
-		return "/(?<match>{$this->regex})/";
+        return "/(?<match>{$this->regex})/";
     }
 
     public function getTokenType(): TokenType

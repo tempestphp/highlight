@@ -23,9 +23,9 @@ class HtmlLanguage extends XmlLanguage
             new PhpShortEchoInjection(),
             new CssInjection(),
             new CssAttributeInjection(),
-			new TwigPropertyInjection(),
-			new TwigKeywordInjection(),
-			new TwigCommentInjection(),
+            new TwigPropertyInjection(),
+            new TwigKeywordInjection(),
+            new TwigCommentInjection(),
         ];
     }
 

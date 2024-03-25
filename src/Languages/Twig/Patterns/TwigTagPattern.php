@@ -9,17 +9,13 @@ use Tempest\Highlight\Pattern;
 use Tempest\Highlight\PatternTest;
 use Tempest\Highlight\Tokens\TokenType;
 
-#[PatternTest(
-	input: "{% extends 'admin/empty_base.html.twig' %}",
-	output: 'extends'
-)]
 final class TwigTagPattern implements Pattern
 {
     use IsPattern;
 
     private bool $caseInsensitive = false;
 
-    public function __construct(private string $keyword='extends')
+    public function __construct(private string $keyword)
     {
     }
 

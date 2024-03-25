@@ -9,15 +9,11 @@ use Tempest\Highlight\Pattern;
 use Tempest\Highlight\PatternTest;
 use Tempest\Highlight\Tokens\TokenType;
 
-#[PatternTest(
-	input: "{% extends 'admin/empty_base.html.twig' %}",
-	output: '{%'
-)]
 final class TwigRegexPattern implements Pattern
 {
     use IsPattern;
 
-    public function __construct(private string $regex='^{%', private TokenType $type=TokenType::KEYWORD)
+    public function __construct(private string $regex, private TokenType $type)
     {
     }
 

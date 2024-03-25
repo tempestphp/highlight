@@ -7,6 +7,7 @@ namespace Tempest\Highlight\Tests\Languages\Sql;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Tempest\Highlight\Highlighter;
+use Tempest\Highlight\Themes\TerminalTheme;
 
 class SqlLanguageTest extends TestCase
 {
@@ -15,7 +16,7 @@ class SqlLanguageTest extends TestCase
     {
         $highlighter = new Highlighter();
 
-        $this->assertSame(
+        self::assertSame(
             $expected,
             $highlighter->parse($content, 'sql'),
         );
@@ -61,5 +62,21 @@ multi-line comment
             // test 4
             ['WHERE bar = "foo"', "<span class=\"hl-keyword\">WHERE</span> bar = &quot;<span class=\"hl-value\">foo</span>&quot;"],
         ];
+    }
+
+    public function test_highlight_in_terminal()
+    {
+        $highlighter = new Highlighter(new TerminalTheme());
+
+        $sql = <<<SQL
+        ALTER TABLE "packages"   DROP COLUMN updated_at_orig;
+        SQL;
+        // Encode in base64 to avoid storing binary escapes in the source code.
+        $expected = base64_decode(<<<ESC
+        G1szNG0bWzM0bUFMVEVSG1swbSAbWzM0bVRBQkxFG1swbRtbMG0gIhtbMzBtcGFja2FnZXMbWzBtIi
+        AgIBtbMzRtG1szNG1EUk9QG1swbSAbWzM0bUNPTFVNThtbMG0bWzBtIHVwZGF0ZWRfYXRfb3JpZzs=
+        ESC);
+
+        self::assertSame($expected, $highlighter->parse($sql, 'sql'));
     }
 }

@@ -16,7 +16,7 @@ class SqlLanguageTest extends TestCase
     {
         $highlighter = new Highlighter();
 
-        self::assertSame(
+        $this->assertSame(
             $expected,
             $highlighter->parse($content, 'sql'),
         );
@@ -77,6 +77,6 @@ multi-line comment
         AgIBtbMzRtG1szNG1EUk9QG1swbSAbWzM0bUNPTFVNThtbMG0bWzBtIHVwZGF0ZWRfYXRfb3JpZzs=
         ESC);
 
-        self::assertSame($expected, $highlighter->parse($sql, 'sql'));
+        $this->assertSame($expected, $highlighter->parse($sql, 'sql'));
     }
 }

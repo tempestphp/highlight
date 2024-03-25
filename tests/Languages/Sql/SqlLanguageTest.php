@@ -78,7 +78,7 @@ multi-line comment
                 <span class="hl-keyword">SELECT</span> <span class="hl-property">name</span>, <span class="hl-property">age</span>, <span class="hl-property">hobby</span> <span class="hl-keyword">FROM</span> <span class="hl-type">students</span>
                 <span class="hl-keyword">WHERE</span> age <span class="hl-keyword">BETWEEN</span> 20 <span class="hl-keyword">AND</span> 30;
                 HTML
-            ]
+            ],
         ];
     }
 

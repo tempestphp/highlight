@@ -61,6 +61,24 @@ multi-line comment
 
             // test 4
             ['WHERE bar = "foo"', "<span class=\"hl-keyword\">WHERE</span> bar = &quot;<span class=\"hl-value\">foo</span>&quot;"],
+
+            // test 5
+            [
+                <<<SQL
+                SELECT name, age, hobby FROM students_hobbies
+                WHERE age BETWEEN 25 AND 30
+                INTERSECT
+                SELECT name, age, hobby FROM students
+                WHERE age BETWEEN 20 AND 30;
+                SQL,
+                <<<HTML
+                <span class="hl-keyword">SELECT</span> <span class="hl-property">name</span>, <span class="hl-property">age</span>, <span class="hl-property">hobby</span> <span class="hl-keyword">FROM</span> <span class="hl-type">students_hobbies</span>
+                <span class="hl-keyword">WHERE</span> age <span class="hl-keyword">BETWEEN</span> 25 <span class="hl-keyword">AND</span> 30
+                <span class="hl-keyword">INTERSECT</span>
+                <span class="hl-keyword">SELECT</span> <span class="hl-property">name</span>, <span class="hl-property">age</span>, <span class="hl-property">hobby</span> <span class="hl-keyword">FROM</span> <span class="hl-type">students</span>
+                <span class="hl-keyword">WHERE</span> age <span class="hl-keyword">BETWEEN</span> 20 <span class="hl-keyword">AND</span> 30;
+                HTML
+            ]
         ];
     }
 

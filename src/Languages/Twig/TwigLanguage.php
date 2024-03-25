@@ -10,9 +10,9 @@ use Tempest\Highlight\Languages\Twig\Patterns\TwigDoubleQuoteValuePattern;
 use Tempest\Highlight\Languages\Twig\Patterns\TwigFilterPattern;
 use Tempest\Highlight\Languages\Twig\Patterns\TwigMethodPattern;
 use Tempest\Highlight\Languages\Twig\Patterns\TwigPropertyPattern;
-use Tempest\Highlight\Languages\Twig\Patterns\TwigRegexPattern;
 use Tempest\Highlight\Languages\Twig\Patterns\TwigSingleQuoteValuePattern;
 use Tempest\Highlight\Languages\Twig\Patterns\TwigTagPattern;
+use Tempest\Highlight\Languages\Twig\Patterns\TwigTokenPattern;
 use Tempest\Highlight\Tokens\TokenType;
 
 class TwigLanguage extends BaseLanguage
@@ -29,12 +29,12 @@ class TwigLanguage extends BaseLanguage
         return [
             ...parent::getPatterns(),
 
-            new TwigRegexPattern("^{%", TokenType::TYPE),
-            new TwigRegexPattern("%}$", TokenType::TYPE),
-            new TwigRegexPattern("^{{", TokenType::TYPE),
-            new TwigRegexPattern("}}$", TokenType::TYPE),
-            new TwigRegexPattern("^{#", TokenType::TYPE),
-            new TwigRegexPattern("#}$", TokenType::TYPE),
+            new TwigTokenPattern("^{%", TokenType::TYPE),
+            new TwigTokenPattern("%}$", TokenType::TYPE),
+            new TwigTokenPattern("^{{", TokenType::TYPE),
+            new TwigTokenPattern("}}$", TokenType::TYPE),
+            new TwigTokenPattern("^{#", TokenType::TYPE),
+            new TwigTokenPattern("#}$", TokenType::TYPE),
             // TAGS
             new TwigTagPattern('set'),
             new TwigTagPattern('apply'),

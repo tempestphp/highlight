@@ -16,6 +16,7 @@ use Tempest\Highlight\Languages\Sql\SqlLanguage;
 use Tempest\Highlight\Languages\Xml\XmlLanguage;
 use Tempest\Highlight\Languages\Yaml\YamlLanguage;
 use Tempest\Highlight\Themes\CssTheme;
+use Tempest\Highlight\Themes\TerminalTheme;
 use Tempest\Highlight\Tokens\GroupTokens;
 use Tempest\Highlight\Tokens\ParseTokens;
 use Tempest\Highlight\Tokens\RenderTokens;
@@ -42,6 +43,10 @@ final class Highlighter
             ->setLanguage('xml', new XmlLanguage())
             ->setLanguage('yaml', new YamlLanguage())
             ->setLanguage('yml', new YamlLanguage());
+
+        if ($this->theme instanceof TerminalTheme) {
+            $this->shouldEscape = false;
+        }
     }
 
     public function setLanguage(string $name, Language $language): self

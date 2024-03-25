@@ -1,3 +1,6 @@
 ```php
-{~}): Foo {}~}
+$sql = <<<SQL
+SELECT * FROM t;
+SQL;
+
 ```

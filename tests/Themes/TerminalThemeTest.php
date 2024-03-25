@@ -6,7 +6,7 @@ namespace Tempest\Highlight\Tests\Themes;
 
 use PHPUnit\Framework\TestCase;
 use Tempest\Highlight\Highlighter;
-use Tempest\Highlight\Themes\TerminalTheme;
+use Tempest\Highlight\Themes\LightTerminalTheme;
 
 class TerminalThemeTest extends TestCase
 {
@@ -16,7 +16,7 @@ class TerminalThemeTest extends TestCase
 public function before
 TXT;
 
-        $highlighter = new Highlighter(new TerminalTheme());
+        $highlighter = new Highlighter(new LightTerminalTheme());
 
         $output = $highlighter->parse($content, 'php');
 

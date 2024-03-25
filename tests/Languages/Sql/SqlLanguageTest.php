@@ -7,7 +7,7 @@ namespace Tempest\Highlight\Tests\Languages\Sql;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Tempest\Highlight\Highlighter;
-use Tempest\Highlight\Themes\TerminalTheme;
+use Tempest\Highlight\Themes\LightTerminalTheme;
 
 class SqlLanguageTest extends TestCase
 {
@@ -66,7 +66,7 @@ multi-line comment
 
     public function test_highlight_in_terminal()
     {
-        $highlighter = new Highlighter(new TerminalTheme());
+        $highlighter = new Highlighter(new LightTerminalTheme());
 
         $sql = <<<SQL
         ALTER TABLE "packages"   DROP COLUMN updated_at_orig;

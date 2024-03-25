@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Tempest\Highlight\Themes;
 
-use Tempest\Highlight\Theme;
+use Tempest\Highlight\TerminalTheme;
 use Tempest\Highlight\Tokens\TokenType;
 
-final readonly class TerminalTheme implements Theme
+class LightTerminalTheme implements TerminalTheme
 {
     public function before(string|TokenType $tokenType): string
     {

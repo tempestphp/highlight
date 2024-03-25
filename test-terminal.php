@@ -1,11 +1,11 @@
 <?php
 
 use Tempest\Highlight\Highlighter;
-use Tempest\Highlight\Themes\TerminalTheme;
+use Tempest\Highlight\Themes\LightTerminalTheme;
 
 require_once __DIR__ . '/vendor/autoload.php';
 
-$highlighter = new Highlighter(new TerminalTheme());
+$highlighter = new Highlighter(new LightTerminalTheme());
 
 $target = $argc > 1
     ? $argv[1]
@@ -25,4 +25,4 @@ $code = str_replace(
     $code,
 );
 
-echo PHP_EOL, html_entity_decode($highlighter->parse($code, $language)), PHP_EOL, PHP_EOL;
+echo PHP_EOL, $highlighter->parse($code, $language), PHP_EOL, PHP_EOL;

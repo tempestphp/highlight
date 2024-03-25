@@ -17,7 +17,6 @@ use Tempest\Highlight\Languages\Sql\SqlLanguage;
 use Tempest\Highlight\Languages\Xml\XmlLanguage;
 use Tempest\Highlight\Languages\Yaml\YamlLanguage;
 use Tempest\Highlight\Themes\CssTheme;
-use Tempest\Highlight\Themes\TerminalTheme;
 use Tempest\Highlight\Tokens\GroupTokens;
 use Tempest\Highlight\Tokens\ParseTokens;
 use Tempest\Highlight\Tokens\RenderTokens;
@@ -106,8 +105,11 @@ final class Highlighter
 
         $output = (new RenderTokens($this->theme))($content, $groupedTokens);
 
-        return $this->shouldEscape
-            ? Escape::html($output)
-            : $output;
+        // Determine proper escaping
+        return match(true) {
+            $this->theme instanceof TerminalTheme => Escape::terminal($output),
+            $this->shouldEscape => Escape::html($output),
+            default => $output,
+        };
     }
 }

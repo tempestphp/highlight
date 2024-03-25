@@ -120,9 +120,9 @@ Note that `pre` tag styling isn't included in this package.
 
 ```php
 use Tempest\Highlight\Highlighter;
-use Tempest\Highlight\Themes\TerminalTheme;
+use Tempest\Highlight\Themes\LightTerminalTheme;
 
-$highlighter = new Highlighter(new TerminalTheme());
+$highlighter = new Highlighter(new LightTerminalTheme());
 
 echo $highlighter->parse($code, 'php');
 ```

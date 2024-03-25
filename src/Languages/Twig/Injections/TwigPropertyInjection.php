@@ -1,12 +1,6 @@
 <?php
 
 declare(strict_types=1);
-/**
- * Created by PhpStorm.
- * User: Jozef Môstka
- * Date: 24. 3. 2024
- * Time: 6:56
- */
 
 namespace Tempest\Highlight\Languages\Twig\Injections;
 

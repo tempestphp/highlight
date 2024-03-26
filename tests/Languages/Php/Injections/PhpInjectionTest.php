@@ -6,7 +6,7 @@ namespace Tempest\Highlight\Tests\Languages\Php\Injections;
 
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
-use Tempest\Highlight\Languages\Php\Injections\PhpInjection;
+use Tempest\Highlight\Languages\Html\Injections\PhpInHtmlInjection;
 use Tempest\Highlight\Tests\TestsInjections;
 
 class PhpInjectionTest extends TestCase
@@ -35,7 +35,7 @@ Hello, &lt;?= $this-&gt;name ?&gt;
         ';
 
         $this->assertMatches(
-            injection: new PhpInjection(),
+            injection: new PhpInHtmlInjection(),
             content: $content,
             expected: $expected,
         );

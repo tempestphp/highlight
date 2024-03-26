@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Tempest\Highlight\Languages\Php\Injections;
+namespace Tempest\Highlight\Languages\Html\Injections;
 
 use Tempest\Highlight\Highlighter;
 use Tempest\Highlight\Injection;
 use Tempest\Highlight\IsInjection;
 
-final readonly class PhpInjection implements Injection
+final readonly class PhpInHtmlInjection implements Injection
 {
     use IsInjection;
 

@@ -6,7 +6,7 @@ namespace Tempest\Highlight\Tests\Languages\Php\Injections;
 
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
-use Tempest\Highlight\Languages\Php\Injections\PhpShortEchoInjection;
+use Tempest\Highlight\Languages\Html\Injections\PhpShortEchoInHtmlInjection;
 use Tempest\Highlight\Tests\TestsInjections;
 
 class PhpShortEchoInjectionTest extends TestCase
@@ -27,7 +27,7 @@ Hello, &lt;?= <span class="hl-variable">$this</span>-&gt;<span class="hl-propert
         ';
 
         $this->assertMatches(
-            injection: new PhpShortEchoInjection(),
+            injection: new PhpShortEchoInHtmlInjection(),
             content: $content,
             expected: $expected,
         );

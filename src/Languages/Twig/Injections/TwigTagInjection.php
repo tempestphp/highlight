@@ -2,23 +2,24 @@
 
 declare(strict_types=1);
 
-namespace Tempest\Highlight\Languages\Css\Injections;
+namespace Tempest\Highlight\Languages\Twig\Injections;
 
 use Tempest\Highlight\Highlighter;
 use Tempest\Highlight\Injection;
 use Tempest\Highlight\IsInjection;
+use Tempest\Highlight\Languages\Twig\TwigTagLanguage;
 
-final readonly class CssAttributeInjection implements Injection
+class TwigTagInjection implements Injection
 {
     use IsInjection;
 
     public function getPattern(): string
     {
-        return 'style="(?<match>(.|\n)*?)"';
+        return '(?<match>({%(.|\n)*?%}))';
     }
 
     public function parseContent(string $content, Highlighter $highlighter): string
     {
-        return $highlighter->parse($content, 'css');
+        return $highlighter->parse($content, new TwigTagLanguage());
     }
 }

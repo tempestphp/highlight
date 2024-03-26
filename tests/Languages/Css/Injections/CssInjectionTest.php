@@ -6,7 +6,7 @@ namespace Tempest\Highlight\Tests\Languages\Css\Injections;
 
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
-use Tempest\Highlight\Languages\Css\Injections\CssInjection;
+use Tempest\Highlight\Languages\Html\Injections\CssInHtmlInjection;
 use Tempest\Highlight\Tests\TestsInjections;
 
 class CssInjectionTest extends TestCase
@@ -37,7 +37,7 @@ class CssInjectionTest extends TestCase
         TXT;
 
         $this->assertMatches(
-            injection: new CssInjection(),
+            injection: new CssInHtmlInjection(),
             content: $content,
             expected: $expected,
         );

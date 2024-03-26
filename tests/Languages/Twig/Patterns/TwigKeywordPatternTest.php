@@ -6,23 +6,23 @@ namespace Languages\Twig\Patterns;
 
 use PHPUnit\Framework\TestCase;
 use Tempest\Highlight\Languages\Php\Patterns\ClassNamePattern;
-use Tempest\Highlight\Languages\Twig\Patterns\TwigTagPattern;
+use Tempest\Highlight\Languages\Twig\Patterns\TwigKeywordPattern;
 use Tempest\Highlight\Tests\TestsPatterns;
 
-class TwigTagPatternTest extends TestCase
+class TwigKeywordPatternTest extends TestCase
 {
     use TestsPatterns;
 
     public function test_pattern()
     {
         $this->assertMatches(
-            pattern: new TwigTagPattern("extends"),
+            pattern: new TwigKeywordPattern("extends"),
             content: "{% extends 'admin/empty_base.html.twig' %}",
             expected: 'extends',
         );
 
         $this->assertMatches(
-            pattern: new TwigTagPattern("if"),
+            pattern: new TwigKeywordPattern("if"),
             content: "{% if is_granted('IS_IMPERSONATOR') %}",
             expected: 'if',
         );

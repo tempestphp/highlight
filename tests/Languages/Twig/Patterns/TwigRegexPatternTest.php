@@ -6,7 +6,7 @@ namespace Languages\Twig\Patterns;
 
 use PHPUnit\Framework\TestCase;
 use Tempest\Highlight\Languages\Twig\Patterns\TwigTokenPattern;
-use Tempest\Highlight\Languages\Twig\Patterns\TwigTagPattern;
+use Tempest\Highlight\Languages\Twig\Patterns\TwigKeywordPattern;
 use Tempest\Highlight\Tests\TestsPatterns;
 use Tempest\Highlight\Tokens\TokenType;
 

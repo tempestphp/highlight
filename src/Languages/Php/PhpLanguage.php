@@ -169,7 +169,7 @@ class PhpLanguage extends BaseLanguage
             new CatchTypePattern(),
             new EnumBackedTypePattern(),
             new GroupedTypePattern(),
-//
+
             // PROPERTIES
             new ClassPropertyPattern(),
             new NamedArgumentPattern(),

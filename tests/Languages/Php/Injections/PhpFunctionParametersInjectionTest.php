@@ -12,6 +12,9 @@ class PhpFunctionParametersInjectionTest extends TestCase
     public function test_highlight(): void
     {
         $input = <<<'TXT'
+public function __construct(private Console $console) {}
+public function __construct(public Console $console) {}
+public function __construct(protected Console $console) {}
 function ((Foo&Bar)|null $bar)) {}
 function (Foo|false $bar)) {}
 fn((Foo&Bar)|null $post, (Foo&Bar)|null $foo)) => $foo,
@@ -54,6 +57,9 @@ fn (
 TXT;
 
         $expectedOutput = <<<'TXT'
+<span class="hl-keyword">public</span> <span class="hl-keyword">function</span> <span class="hl-property">__construct</span>(<span class="hl-injection"><span class="hl-keyword">private</span> <span class="hl-type">Console</span> <span class="hl-property">$console</span></span>) {}
+<span class="hl-keyword">public</span> <span class="hl-keyword">function</span> <span class="hl-property">__construct</span>(<span class="hl-injection"><span class="hl-keyword">public</span> <span class="hl-type">Console</span> <span class="hl-property">$console</span></span>) {}
+<span class="hl-keyword">public</span> <span class="hl-keyword">function</span> <span class="hl-property">__construct</span>(<span class="hl-injection"><span class="hl-keyword">protected</span> <span class="hl-type">Console</span> <span class="hl-property">$console</span></span>) {}
 <span class="hl-keyword">function</span> (<span class="hl-injection"><span class="hl-type">(Foo&amp;Bar)|null</span> $bar)</span>) {}
 <span class="hl-keyword">function</span> (<span class="hl-injection"><span class="hl-type">Foo|false</span> $bar)</span>) {}
 <span class="hl-keyword">fn</span>(<span class="hl-injection"><span class="hl-type">(Foo&amp;Bar)|null</span> $post, <span class="hl-type">(Foo&amp;Bar)|null</span> $foo)</span>) =&gt; <span class="hl-variable">$foo</span>,

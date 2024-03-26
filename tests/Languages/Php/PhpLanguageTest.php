@@ -39,7 +39,7 @@ class PhpLanguageTest extends TestCase
             ['protected Foo $resolved = [];', '<span class="hl-keyword">protected</span> <span class="hl-type">Foo</span> <span class="hl-property">$resolved</span> = [];'],
             ['$concrete instanceof Closure', '<span class="hl-variable">$concrete</span> <span class="hl-keyword">instanceof</span> <span class="hl-type">Closure</span>'],
             ['extends Foo implements ArrayAccess, ContainerContract', '<span class="hl-keyword">extends</span> <span class="hl-type">Foo</span> <span class="hl-keyword">implements</span><span class="hl-type"> ArrayAccess, ContainerContract</span>'],
-            ['$foo ? $value : null', '<span class="hl-variable">$foo</span> <span class="hl-operator">?</span> <span class="hl-variable">$value</span> : null'],
+            ['$foo ? $value : null', '<span class="hl-variable">$foo</span> <span class="hl-operator">?</span> <span class="hl-variable">$value</span> : <span class="hl-keyword">null</span>'],
             ['use Illuminate\Contracts\Container\Container as ContainerContract', '<span class="hl-keyword">use</span> <span class="hl-type">Illuminate\Contracts\Container\Container</span> <span class="hl-keyword">as</span> <span class="hl-type">ContainerContract</span>'],
             ['$foo::class;', '<span class="hl-variable">$foo</span>::<span class="hl-keyword">class</span>;'],
             ['function ((Foo&Bar)|null $bar) {}', '<span class="hl-keyword">function</span> (<span class="hl-injection"><span class="hl-type">(Foo&amp;Bar)|null</span> $bar</span>) {}'],

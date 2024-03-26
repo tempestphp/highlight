@@ -36,7 +36,7 @@ class TwigLanguageTest extends TestCase
             ["{{ parent() }}", '{{ <span class="hl-property">parent</span>() }}'],
             ["{{ impersonation_exit_path(path('app.user.list') ) }}", '{{ <span class="hl-property">impersonation_exit_path</span>(<span class="hl-property">path</span>(\'<span class="hl-value">app.user.list</span>\') ) }}'],
             ["{{ app.user.userIdentifier }}", '{{ app.<span class="hl-property">user</span>.<span class="hl-property">userIdentifier</span> }}'],
-            ['<script>const mainSearchUrl = "";</script>', '&lt;<span class="hl-keyword">script</span>&gt;<span class="hl-keyword">const</span> mainSearchUrl = &quot;<span class="hl-value"><span class="hl-value"></span></span>&quot;;&lt;/<span class="hl-keyword">script</span>&gt;']
+            ['<script>const mainSearchUrl = "";</script>', '&lt;<span class="hl-keyword">script</span>&gt;<span class="hl-keyword">const</span> mainSearchUrl = &quot;<span class="hl-value"><span class="hl-value"></span></span>&quot;;&lt;/<span class="hl-keyword">script</span>&gt;'],
         ];
     }
 }

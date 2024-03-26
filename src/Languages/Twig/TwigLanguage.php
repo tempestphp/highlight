@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Tempest\Highlight\Languages\Twig;
 
-use Tempest\Highlight\Languages\Base\BaseLanguage;
 use Tempest\Highlight\Languages\Html\HtmlLanguage;
 use Tempest\Highlight\Languages\Twig\Injections\TwigTagInjection;
 use Tempest\Highlight\Languages\Twig\Patterns\TwigCommentPattern;

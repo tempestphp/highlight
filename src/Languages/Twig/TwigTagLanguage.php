@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tempest\Highlight\Languages\Twig;
 
 use Tempest\Highlight\Languages\Base\BaseLanguage;

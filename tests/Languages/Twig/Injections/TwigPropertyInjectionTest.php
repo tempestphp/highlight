@@ -11,19 +11,19 @@ use Tempest\Highlight\Tests\TestsInjections;
 
 class TwigPropertyInjectionTest extends TestCase
 {
-	use TestsInjections;
+    use TestsInjections;
 
-	#[Test]
-	public function test_injection(): void
-	{
-		$content = '<b>Version</b> {{ appVersion }}';
+    #[Test]
+    public function test_injection(): void
+    {
+        $content = '<b>Version</b> {{ appVersion }}';
 
-		$expected = '&lt;b&gt;Version&lt;/b&gt; {{ appVersion }}';
+        $expected = '&lt;b&gt;Version&lt;/b&gt; {{ appVersion }}';
 
-		$this->assertMatches(
-			injection: new TwigPropertyInjection(),
-			content: $content,
-			expected: $expected,
-		);
-	}
+        $this->assertMatches(
+            injection: new TwigPropertyInjection(),
+            content: $content,
+            expected: $expected,
+        );
+    }
 }

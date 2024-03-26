@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Languages\Twig\Patterns;
+namespace Tempest\Highlight\Tests\Languages\Twig\Patterns;
 
 use PHPUnit\Framework\TestCase;
 use Tempest\Highlight\Languages\Twig\Patterns\TwigTokenPattern;
 use Tempest\Highlight\Tests\TestsPatterns;
 use Tempest\Highlight\Tokens\TokenType;
 
-class TwigRegexPatternTest extends TestCase
+class TwigTokenPatternTest extends TestCase
 {
     use TestsPatterns;
 

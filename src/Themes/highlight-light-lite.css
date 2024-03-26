@@ -38,6 +38,7 @@
     color: var(--variable-color);
 }
 
+.hl-comment span,
 .hl-comment {
     color: var(--comment-color);
 }

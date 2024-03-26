@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Languages\Twig\Injections;
+namespace Tempest\Highlight\Tests\Languages\Twig\Injections;
 
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;

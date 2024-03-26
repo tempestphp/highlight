@@ -6,7 +6,7 @@ namespace Tempest\Highlight\Tests\Languages\Twig\Injections;
 
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
-use Tempest\Highlight\Languages\Twig\Injections\TwigPropertyInjection;
+use Tempest\Highlight\Languages\Twig\Injections\TwigEchoInjection;
 use Tempest\Highlight\Tests\TestsInjections;
 
 class TwigPropertyInjectionTest extends TestCase
@@ -21,7 +21,7 @@ class TwigPropertyInjectionTest extends TestCase
         $expected = '&lt;b&gt;Version&lt;/b&gt; {{ appVersion }}';
 
         $this->assertMatches(
-            injection: new TwigPropertyInjection(),
+            injection: new TwigEchoInjection(),
             content: $content,
             expected: $expected,
         );

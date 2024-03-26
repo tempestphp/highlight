@@ -12,8 +12,10 @@ final class TwigTokenPattern implements Pattern
 {
     use IsPattern;
 
-    public function __construct(private string $regex, private TokenType $type)
-    {
+    public function __construct(
+        private readonly string $regex,
+        private readonly TokenType $type,
+    ) {
     }
 
     public function getPattern(): string

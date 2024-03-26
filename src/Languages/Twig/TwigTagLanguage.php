@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Tempest\Highlight\Languages\Twig;
 
 use Tempest\Highlight\Languages\Base\BaseLanguage;
-use Tempest\Highlight\Languages\Twig\Patterns\TwigCommentPattern;
 use Tempest\Highlight\Languages\Twig\Patterns\TwigDoubleQuoteValuePattern;
 use Tempest\Highlight\Languages\Twig\Patterns\TwigFilterPattern;
 use Tempest\Highlight\Languages\Twig\Patterns\TwigKeywordPattern;

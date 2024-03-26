@@ -86,6 +86,7 @@ You can build your own CSS theme with just a couple of classes:
   color: #000;
 }
 
+.hl-comment span,
 .hl-comment {
     color: #888888;
 }

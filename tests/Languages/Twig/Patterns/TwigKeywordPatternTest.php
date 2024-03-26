@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Languages\Twig\Patterns;
+namespace Tempest\Highlight\Tests\Languages\Twig\Patterns;
 
 use PHPUnit\Framework\TestCase;
 use Tempest\Highlight\Languages\Twig\Patterns\TwigKeywordPattern;

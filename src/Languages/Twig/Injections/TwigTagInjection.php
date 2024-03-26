@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tempest\Highlight\Languages\Twig\Injections;
 
+use Tempest\Highlight\Escape;
 use Tempest\Highlight\Highlighter;
 use Tempest\Highlight\Injection;
 use Tempest\Highlight\IsInjection;
@@ -20,6 +21,6 @@ class TwigTagInjection implements Injection
 
     public function parseContent(string $content, Highlighter $highlighter): string
     {
-        return $highlighter->parse($content, new TwigTagLanguage());
+        return Escape::injection($highlighter->parse($content, new TwigTagLanguage()));
     }
 }

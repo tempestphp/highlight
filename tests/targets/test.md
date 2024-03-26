@@ -1,3 +1,3 @@
 ```twig
-{#<a href="#">{{ app.user.userIdentifier }}</a>#}
+{{ '<b>foobar</b>'|data_uri(mime="text/html", parameters={charset: "ascii"}) }}
 ```

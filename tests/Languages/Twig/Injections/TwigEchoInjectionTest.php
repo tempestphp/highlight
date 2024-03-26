@@ -9,7 +9,7 @@ use PHPUnit\Framework\TestCase;
 use Tempest\Highlight\Languages\Twig\Injections\TwigEchoInjection;
 use Tempest\Highlight\Tests\TestsInjections;
 
-class TwigPropertyInjectionTest extends TestCase
+class TwigEchoInjectionTest extends TestCase
 {
     use TestsInjections;
 

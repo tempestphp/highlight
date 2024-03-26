@@ -275,4 +275,4 @@ This package makes it easy for developers to add new languages or extend existin
 
 In order to build your own highlighter functionality, you need to understand _three_ concepts of how code is highlighted: _patterns_, _injections_, and _languages_. [Continue reading](https://stitcher.io/blog/building-a-custom-language-in-tempest-highlight).
 
-You can also watch [this video](https://www.youtube.com/embed/cZugbAR8Fyg?si=F0wZf6QOxhsbPpOS) to get a better understand of the package's architecture:
+You can also watch [this video](https://www.youtube.com/watch?v=cZugbAR8Fyg) to get a better understand of the package's architecture:

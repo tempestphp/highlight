@@ -1,4 +1,5 @@
 # Fast, extensible, server-side code highlighting
+[![Coverage Status](https://coveralls.io/repos/github/tempestphp/highlight/badge.svg?branch=main)](https://coveralls.io/github/tempestphp/highlight?branch=main)
 
 You can read about why I started this package [here](https://stitcher.io/blog/a-syntax-highlighter-that-doesnt-suck).
 
@@ -120,9 +121,9 @@ Note that `pre` tag styling isn't included in this package.
 
 ```php
 use Tempest\Highlight\Highlighter;
-use Tempest\Highlight\Themes\TerminalTheme;
+use Tempest\Highlight\Themes\LightTerminalTheme;
 
-$highlighter = new Highlighter(new TerminalTheme());
+$highlighter = new Highlighter(new LightTerminalTheme());
 
 echo $highlighter->parse($code, 'php');
 ```

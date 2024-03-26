@@ -26,6 +26,11 @@ final readonly class Escape
         return self::INJECTION_TOKEN . $input . self::INJECTION_TOKEN;
     }
 
+    public static function terminal(string $input): string
+    {
+        return str_replace(self::INJECTION_TOKEN, '', $input);
+    }
+
     public static function html(string $input): string
     {
         return self::reverse(

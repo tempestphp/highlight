@@ -1,6 +1,6 @@
 ```php
-    public function warning(
-        string|\Stringable $message, 
-        array $context = []
-    ): void;
+$sql = <<<SQL
+SELECT * FROM t;
+SQL;
+
 ```

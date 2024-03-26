@@ -20,7 +20,7 @@ class AdditionInjectionTest extends TestCase
 TXT;
 
         $expected = <<<TXT
-<span class="hl-addition"> <span class="hl-keyword">class</span> <span class="hl-type">Foo</span> </span>
+<span class="hl-injection"><span class="hl-addition"> <span class="hl-keyword">class</span> <span class="hl-type">Foo</span> </span></span>
 TXT;
 
         $this->assertMatches(

@@ -21,7 +21,7 @@ class DeletionInjectionTest extends TestCase
 TXT;
 
         $expected = <<<TXT
-<span class="hl-deletion"> class Foo </span>
+<span class="hl-injection"><span class="hl-deletion"> class Foo </span></span>
 <span class="hl-comment">{{-- <span class="hl-keyword">class</span> <span class="hl-type">Foo</span> --}}</span>
 TXT;
 

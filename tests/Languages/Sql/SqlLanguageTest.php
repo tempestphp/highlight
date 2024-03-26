@@ -7,6 +7,7 @@ namespace Tempest\Highlight\Tests\Languages\Sql;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Tempest\Highlight\Highlighter;
+use Tempest\Highlight\Themes\LightTerminalTheme;
 
 class SqlLanguageTest extends TestCase
 {
@@ -60,6 +61,40 @@ multi-line comment
 
             // test 4
             ['WHERE bar = "foo"', "<span class=\"hl-keyword\">WHERE</span> bar = &quot;<span class=\"hl-value\">foo</span>&quot;"],
+
+            // test 5
+            [
+                <<<SQL
+                SELECT name, age, hobby FROM students_hobbies
+                WHERE age BETWEEN 25 AND 30
+                INTERSECT
+                SELECT name, age, hobby FROM students
+                WHERE age BETWEEN 20 AND 30;
+                SQL,
+                <<<HTML
+                <span class="hl-keyword">SELECT</span> <span class="hl-property">name</span>, <span class="hl-property">age</span>, <span class="hl-property">hobby</span> <span class="hl-keyword">FROM</span> <span class="hl-type">students_hobbies</span>
+                <span class="hl-keyword">WHERE</span> age <span class="hl-keyword">BETWEEN</span> 25 <span class="hl-keyword">AND</span> 30
+                <span class="hl-keyword">INTERSECT</span>
+                <span class="hl-keyword">SELECT</span> <span class="hl-property">name</span>, <span class="hl-property">age</span>, <span class="hl-property">hobby</span> <span class="hl-keyword">FROM</span> <span class="hl-type">students</span>
+                <span class="hl-keyword">WHERE</span> age <span class="hl-keyword">BETWEEN</span> 20 <span class="hl-keyword">AND</span> 30;
+                HTML
+            ],
         ];
+    }
+
+    public function test_highlight_in_terminal()
+    {
+        $highlighter = new Highlighter(new LightTerminalTheme());
+
+        $sql = <<<SQL
+        ALTER TABLE "packages"   DROP COLUMN updated_at_orig;
+        SQL;
+        // Encode in base64 to avoid storing binary escapes in the source code.
+        $expected = base64_decode(<<<ESC
+        G1szNG0bWzM0bUFMVEVSG1swbSAbWzM0bVRBQkxFG1swbRtbMG0gIhtbMzBtcGFja2FnZXMbWzBtIi
+        AgIBtbMzRtG1szNG1EUk9QG1swbSAbWzM0bUNPTFVNThtbMG0bWzBtIHVwZGF0ZWRfYXRfb3JpZzs=
+        ESC);
+
+        $this->assertSame($expected, $highlighter->parse($sql, 'sql'));
     }
 }

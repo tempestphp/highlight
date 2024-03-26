@@ -6,8 +6,9 @@ namespace Tempest\Highlight\Languages\Php;
 
 use Tempest\Highlight\Languages\Base\BaseLanguage;
 use Tempest\Highlight\Languages\DocComment\Injections\DocCommentInjection;
-use Tempest\Highlight\Languages\Php\Injections\AttributeInjection;
-use Tempest\Highlight\Languages\Php\Injections\HeredocInjection;
+use Tempest\Highlight\Languages\Php\Injections\PhpAttributeInjection;
+use Tempest\Highlight\Languages\Php\Injections\PhpFunctionParametersInjection;
+use Tempest\Highlight\Languages\Php\Injections\PhpHeredocInjection;
 use Tempest\Highlight\Languages\Php\Patterns\AttributeTypePattern;
 use Tempest\Highlight\Languages\Php\Patterns\CatchTypePattern;
 use Tempest\Highlight\Languages\Php\Patterns\ClassNamePattern;
@@ -32,7 +33,6 @@ use Tempest\Highlight\Languages\Php\Patterns\NamespacePattern;
 use Tempest\Highlight\Languages\Php\Patterns\NestedFunctionCallPattern;
 use Tempest\Highlight\Languages\Php\Patterns\NewObjectPattern;
 use Tempest\Highlight\Languages\Php\Patterns\OperatorPattern;
-use Tempest\Highlight\Languages\Php\Patterns\ParameterTypePattern;
 use Tempest\Highlight\Languages\Php\Patterns\PropertyAccessPattern;
 use Tempest\Highlight\Languages\Php\Patterns\PropertyTypesPattern;
 use Tempest\Highlight\Languages\Php\Patterns\ReturnTypePattern;
@@ -51,9 +51,10 @@ class PhpLanguage extends BaseLanguage
     {
         return [
             ...parent::getInjections(),
-            new HeredocInjection(),
+            new PhpHeredocInjection(),
             new DocCommentInjection(),
-            new AttributeInjection(),
+            new PhpAttributeInjection(),
+            new PhpFunctionParametersInjection(),
         ];
     }
 
@@ -162,7 +163,6 @@ class PhpLanguage extends BaseLanguage
             new ClassNamePattern(),
             new ReturnTypePattern(),
             new StaticClassCallPattern(),
-            new ParameterTypePattern(),
             new NewObjectPattern(),
             new InstanceOfPattern(),
             new UseAsPattern(),

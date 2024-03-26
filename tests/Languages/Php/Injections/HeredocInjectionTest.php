@@ -6,7 +6,7 @@ namespace Tempest\Highlight\Tests\Languages\Php\Injections;
 
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
-use Tempest\Highlight\Languages\Php\Injections\HeredocInjection;
+use Tempest\Highlight\Languages\Php\Injections\PhpHeredocInjection;
 use Tempest\Highlight\Languages\Php\PhpLanguage;
 use Tempest\Highlight\Tests\TestsInjections;
 
@@ -38,7 +38,7 @@ $var = &lt;&lt;&lt;<span class="hl-property">HTML</span>
         ';
 
         $this->assertMatches(
-            injection: new HeredocInjection(),
+            injection: new PhpHeredocInjection(),
             content: $content,
             expected: $expected,
             currentLanguage: new PhpLanguage(),

@@ -8,23 +8,21 @@ use Tempest\Highlight\Escape;
 use Tempest\Highlight\Highlighter;
 use Tempest\Highlight\Injection;
 use Tempest\Highlight\IsInjection;
-use Tempest\Highlight\Tokens\TokenType;
+use Tempest\Highlight\Languages\Php\PhpTypeLanguage;
 
-final readonly class AttributeInjection implements Injection
+final readonly class PhpFunctionParametersInjection implements Injection
 {
     use IsInjection;
 
     public function getPattern(): string
     {
-        return '(?<match>\#\[(.|\n)*?\])';
+        return '(function|fn)[\s\w]*\((?<match>(.|\n)*?)\)[\s]*({|;|:|=>)';
     }
 
     public function parseContent(string $content, Highlighter $highlighter): string
     {
-        $theme = $highlighter->getTheme();
-
-        return Escape::tokens($theme->before(TokenType::ATTRIBUTE))
-            . $content
-            . Escape::tokens($theme->after(TokenType::ATTRIBUTE));
+        return Escape::injection(
+            $highlighter->parse($content, new PhpTypeLanguage())
+        ) . ')';
     }
 }

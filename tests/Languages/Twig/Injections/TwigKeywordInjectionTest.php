@@ -6,7 +6,6 @@ namespace Languages\Twig\Injections;
 
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
-use Tempest\Highlight\Languages\Php\Injections\PhpInjection;
 use Tempest\Highlight\Languages\Twig\Injections\TwigKeywordInjection;
 use Tempest\Highlight\Tests\TestsInjections;
 

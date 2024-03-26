@@ -1,12 +1,6 @@
 ```twig
-{% extends "admin/empty_base.html.twig" %}
-
-{% block javascripts %}
-    {{ parent() }}
-	
-    <script>
-        const mainSearchUrl = "";
-        const customerUrl = "";
-    </script>
-{% endblock %}
+{% with %}
+    {% set foo = 42 %}
+    {{ foo }} {# foo is 42 here #}
+{% endwith %}
 ```

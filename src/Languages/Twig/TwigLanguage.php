@@ -9,6 +9,7 @@ use Tempest\Highlight\Languages\Twig\Injections\TwigTagInjection;
 use Tempest\Highlight\Languages\Twig\Patterns\TwigCommentPattern;
 use Tempest\Highlight\Languages\Twig\Patterns\TwigDoubleQuoteValuePattern;
 use Tempest\Highlight\Languages\Twig\Patterns\TwigFilterPattern;
+use Tempest\Highlight\Languages\Twig\Patterns\TwigKeywordPattern;
 use Tempest\Highlight\Languages\Twig\Patterns\TwigMethodPattern;
 use Tempest\Highlight\Languages\Twig\Patterns\TwigPropertyPattern;
 use Tempest\Highlight\Languages\Twig\Patterns\TwigSingleQuoteValuePattern;
@@ -28,17 +29,8 @@ class TwigLanguage extends HtmlLanguage
         return [
             ...parent::getPatterns(),
 
-            // PROPERTIES
-            new TwigMethodPattern(),
-            new TwigPropertyPattern(),
-            new TwigFilterPattern(),
-
             // COMMENTS
             new TwigCommentPattern(),
-
-            // VALUES
-            new TwigSingleQuoteValuePattern(),
-            new TwigDoubleQuoteValuePattern(),
         ];
     }
 }

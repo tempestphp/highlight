@@ -30,7 +30,7 @@ class TwigTagInjectionTest extends TestCase
         ';
 
         $expected = '
-{% <span class="hl-keyword">extends</span> &quot;admin/empty_base.html.twig&quot; %}
+{% <span class="hl-keyword">extends</span> &quot;<span class="hl-value">admin/empty_base.html.twig</span>&quot; %}
 
 {% <span class="hl-keyword">block</span> javascripts %}
     {{ parent() }}

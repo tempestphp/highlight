@@ -1,3 +1,6 @@
 ```twig
-{{ '<b>foobar</b>'|data_uri(mime="text/html", parameters={charset: "ascii"}) }}
+{% from 'forms.html' import input as input_field, textarea %}
+
+<p>{{ input_field('password', '', 'password') }}</p>
+<p>{{ textarea('comment') }}</p>
 ```

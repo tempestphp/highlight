@@ -54,45 +54,45 @@ fn (
 TXT;
 
         $expectedOutput = <<<'TXT'
-<span class="hl-keyword">function</span> (<span class="hl-injection"><span class="hl-type">(Foo&amp;Bar)|null</span> $bar)</span>)) {}
-<span class="hl-keyword">function</span> (<span class="hl-injection"><span class="hl-type">Foo|false</span> $bar)</span>)) {}
-<span class="hl-keyword">fn</span>(<span class="hl-injection"><span class="hl-type">(Foo&amp;Bar)|null</span> $post, <span class="hl-type">(Foo&amp;Bar)|null</span> $foo)</span>)) =&gt; <span class="hl-variable">$foo</span>,
-<span class="hl-keyword">fn</span> (<span class="hl-injection"><span class="hl-type">(Foo&amp;Bar)|null</span> $post, <span class="hl-type">(Foo&amp;Bar)|null</span> $foo)</span>)) =&gt; <span class="hl-variable">$foo</span>,
-<span class="hl-keyword">public</span> <span class="hl-keyword">function</span> <span class="hl-property">show</span>(<span class="hl-injection"><span class="hl-type">Post</span> $post, <span class="hl-type">Baz</span> $baz)</span>)): <span class="hl-type">Response</span>
-<span class="hl-keyword">public</span> <span class="hl-keyword">function</span> <span class="hl-property">show</span>(<span class="hl-injection"><span class="hl-type">(Foo&amp;Bar)|null</span> $post, <span class="hl-type">(Foo&amp;Bar)|null</span> $foo)</span>)): <span class="hl-type">Response</span>
-<span class="hl-keyword">public</span> <span class="hl-keyword">function</span> <span class="hl-property">show</span>(<span class="hl-injection"><span class="hl-type">Foo|Bar</span> $post, <span class="hl-type">Boo</span> $boo)</span>)): <span class="hl-type">Response</span>
-<span class="hl-keyword">public</span> <span class="hl-keyword">function</span> <span class="hl-property">show</span>(<span class="hl-injection"><span class="hl-type">?Foo</span> $post, <span class="hl-type">Bar</span> $bar)</span>)): <span class="hl-type">Response</span>
-<span class="hl-keyword">public</span> <span class="hl-keyword">function</span> <span class="hl-property">show</span>(<span class="hl-injection"><span class="hl-type">Post</span> $post, <span class="hl-type">Baz</span> $baz)</span>)): <span class="hl-type">Response</span>
-<span class="hl-keyword">public</span> <span class="hl-keyword">function</span> <span class="hl-property">show</span>(<span class="hl-injection"><span class="hl-type">(Foo&amp;Bar)|null</span> $post, <span class="hl-type">(Foo&amp;Bar)|null</span> $foo)</span>)): <span class="hl-type">Response</span>
+<span class="hl-keyword">function</span> (<span class="hl-injection"><span class="hl-type">(Foo&amp;Bar)|null</span> $bar)</span>) {}
+<span class="hl-keyword">function</span> (<span class="hl-injection"><span class="hl-type">Foo|false</span> $bar)</span>) {}
+<span class="hl-keyword">fn</span>(<span class="hl-injection"><span class="hl-type">(Foo&amp;Bar)|null</span> $post, <span class="hl-type">(Foo&amp;Bar)|null</span> $foo)</span>) =&gt; <span class="hl-variable">$foo</span>,
+<span class="hl-keyword">fn</span> (<span class="hl-injection"><span class="hl-type">(Foo&amp;Bar)|null</span> $post, <span class="hl-type">(Foo&amp;Bar)|null</span> $foo)</span>) =&gt; <span class="hl-variable">$foo</span>,
+<span class="hl-keyword">public</span> <span class="hl-keyword">function</span> <span class="hl-property">show</span>(<span class="hl-injection"><span class="hl-type">Post</span> $post, <span class="hl-type">Baz</span> $baz)</span>): <span class="hl-type">Response</span>
+<span class="hl-keyword">public</span> <span class="hl-keyword">function</span> <span class="hl-property">show</span>(<span class="hl-injection"><span class="hl-type">(Foo&amp;Bar)|null</span> $post, <span class="hl-type">(Foo&amp;Bar)|null</span> $foo)</span>): <span class="hl-type">Response</span>
+<span class="hl-keyword">public</span> <span class="hl-keyword">function</span> <span class="hl-property">show</span>(<span class="hl-injection"><span class="hl-type">Foo|Bar</span> $post, <span class="hl-type">Boo</span> $boo)</span>): <span class="hl-type">Response</span>
+<span class="hl-keyword">public</span> <span class="hl-keyword">function</span> <span class="hl-property">show</span>(<span class="hl-injection"><span class="hl-type">?Foo</span> $post, <span class="hl-type">Bar</span> $bar)</span>): <span class="hl-type">Response</span>
+<span class="hl-keyword">public</span> <span class="hl-keyword">function</span> <span class="hl-property">show</span>(<span class="hl-injection"><span class="hl-type">Post</span> $post, <span class="hl-type">Baz</span> $baz)</span>): <span class="hl-type">Response</span>
+<span class="hl-keyword">public</span> <span class="hl-keyword">function</span> <span class="hl-property">show</span>(<span class="hl-injection"><span class="hl-type">(Foo&amp;Bar)|null</span> $post, <span class="hl-type">(Foo&amp;Bar)|null</span> $foo)</span>): <span class="hl-type">Response</span>
 {
-<span class="hl-keyword">public</span> <span class="hl-keyword">function</span> <span class="hl-property">show</span>(<span class="hl-injection"><span class="hl-type">Foo|Bar</span> $post, <span class="hl-type">Boo</span> $boo)</span>)): <span class="hl-type">Response</span> {
-<span class="hl-keyword">public</span> <span class="hl-keyword">function</span> <span class="hl-property">show</span>(<span class="hl-injection"><span class="hl-type">?Foo</span> $post, <span class="hl-type">Bar</span> $bar)</span>)): <span class="hl-type">Response</span>;
-<span class="hl-keyword">public</span> <span class="hl-keyword">function</span> <span class="hl-property">show</span>(<span class="hl-injection"><span class="hl-type">?Foo</span> $post, <span class="hl-type">Bar</span> $bar)</span>));
-<span class="hl-keyword">public</span> <span class="hl-keyword">function</span> <span class="hl-property">show</span>(<span class="hl-injection"><span class="hl-type">?Foo</span> $post, <span class="hl-type">Bar</span> $bar)</span>)) {}
-<span class="hl-keyword">function</span>(<span class="hl-injection"><span class="hl-type">?Foo</span> $post, <span class="hl-type">Bar</span> $bar)</span>)) {}
-<span class="hl-keyword">function</span> (<span class="hl-injection"><span class="hl-type">?Foo</span> $post, <span class="hl-type">Bar</span> $bar)</span>)) {}
+<span class="hl-keyword">public</span> <span class="hl-keyword">function</span> <span class="hl-property">show</span>(<span class="hl-injection"><span class="hl-type">Foo|Bar</span> $post, <span class="hl-type">Boo</span> $boo)</span>): <span class="hl-type">Response</span> {
+<span class="hl-keyword">public</span> <span class="hl-keyword">function</span> <span class="hl-property">show</span>(<span class="hl-injection"><span class="hl-type">?Foo</span> $post, <span class="hl-type">Bar</span> $bar)</span>): <span class="hl-type">Response</span>;
+<span class="hl-keyword">public</span> <span class="hl-keyword">function</span> <span class="hl-property">show</span>(<span class="hl-injection"><span class="hl-type">?Foo</span> $post, <span class="hl-type">Bar</span> $bar)</span>);
+<span class="hl-keyword">public</span> <span class="hl-keyword">function</span> <span class="hl-property">show</span>(<span class="hl-injection"><span class="hl-type">?Foo</span> $post, <span class="hl-type">Bar</span> $bar)</span>) {}
+<span class="hl-keyword">function</span>(<span class="hl-injection"><span class="hl-type">?Foo</span> $post, <span class="hl-type">Bar</span> $bar)</span>) {}
+<span class="hl-keyword">function</span> (<span class="hl-injection"><span class="hl-type">?Foo</span> $post, <span class="hl-type">Bar</span> $bar)</span>) {}
 
 <span class="hl-keyword">public</span> <span class="hl-keyword">function</span> <span class="hl-property">show</span>(<span class="hl-injection">
     <span class="hl-type">?Foo</span> $post, 
     <span class="hl-type">Bar</span> $bar
-)</span>)): <span class="hl-type">Response</span>;
+)</span>): <span class="hl-type">Response</span>;
 
 <span class="hl-keyword">public</span> <span class="hl-keyword">function</span> <span class="hl-property">show</span>(<span class="hl-injection">
     <span class="hl-type">?Foo</span> $post, 
     <span class="hl-type">Bar</span> $bar
-)</span>));
+)</span>);
 
 <span class="hl-keyword">public</span> <span class="hl-keyword">function</span> <span class="hl-property">show</span>(<span class="hl-injection">
     <span class="hl-type">?Foo</span> $post, 
     <span class="hl-type">Bar</span> $bar
-)</span>)) {}
+)</span>) {}
 
 
 
 <span class="hl-keyword">fn</span> (<span class="hl-injection">
     <span class="hl-type">?Foo</span> $post, 
     <span class="hl-type">Bar</span> $bar
-)</span>)) =&gt; <span class="hl-variable">$bar</span>,
+)</span>) =&gt; <span class="hl-variable">$bar</span>,
 TXT;
 
         $highlighter = new Highlighter();

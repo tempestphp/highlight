@@ -10,6 +10,7 @@ use Tempest\Highlight\PatternTest;
 use Tempest\Highlight\Tokens\TokenType;
 
 #[PatternTest(input: 'new Foo()', output: 'Foo')]
+#[PatternTest(input: 'new Foo\Bar()', output: 'Foo\Bar')]
 #[PatternTest(input: '(new Foo)', output: 'Foo')]
 #[PatternTest(input: 'new Foo', output: 'Foo')]
 final readonly class NewObjectPattern implements Pattern
@@ -18,7 +19,7 @@ final readonly class NewObjectPattern implements Pattern
 
     public function getPattern(): string
     {
-        return 'new (?<match>[\w]+)';
+        return 'new (?<match>[\w\\\\]+)';
     }
 
     public function getTokenType(): TokenType

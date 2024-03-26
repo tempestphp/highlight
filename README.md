@@ -16,7 +16,6 @@ You can read about why I started this package [here](https://stitcher.io/blog/a-
 - [Commonmark integration](#commonmark-integration)
 - [Adding or extending languages](#adding-or-extending-languages)
 
-
 ## Quickstart
 
 ```php
@@ -272,6 +271,10 @@ composer require league/commonmark;
 
 ## Adding or extending languages
 
-This package makes it easy for developers to add new languages or extend existing languages. Right now, these languages are supported: `php`, `html`, `css`, and `blade`. More will be added.
+This package makes it easy for developers to add new languages or extend existing languages.
 
 In order to build your own highlighter functionality, you need to understand _three_ concepts of how code is highlighted: _patterns_, _injections_, and _languages_. [Continue reading](https://stitcher.io/blog/building-a-custom-language-in-tempest-highlight).
+
+You can also watch this video to get a better understand of the package's architecture:
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/cZugbAR8Fyg?si=F0wZf6QOxhsbPpOS" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>

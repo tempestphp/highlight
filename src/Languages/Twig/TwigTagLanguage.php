@@ -5,7 +5,13 @@ declare(strict_types=1);
 namespace Tempest\Highlight\Languages\Twig;
 
 use Tempest\Highlight\Languages\Base\BaseLanguage;
+use Tempest\Highlight\Languages\Twig\Patterns\TwigCommentPattern;
+use Tempest\Highlight\Languages\Twig\Patterns\TwigDoubleQuoteValuePattern;
+use Tempest\Highlight\Languages\Twig\Patterns\TwigFilterPattern;
 use Tempest\Highlight\Languages\Twig\Patterns\TwigKeywordPattern;
+use Tempest\Highlight\Languages\Twig\Patterns\TwigMethodPattern;
+use Tempest\Highlight\Languages\Twig\Patterns\TwigPropertyPattern;
+use Tempest\Highlight\Languages\Twig\Patterns\TwigSingleQuoteValuePattern;
 
 final class TwigTagLanguage extends BaseLanguage
 {
@@ -14,6 +20,16 @@ final class TwigTagLanguage extends BaseLanguage
         return [
             ...parent::getPatterns(),
 
+            // PROPERTIES
+            new TwigMethodPattern(),
+            new TwigPropertyPattern(),
+            new TwigFilterPattern(),
+
+            // VALUES
+            new TwigDoubleQuoteValuePattern(),
+            new TwigSingleQuoteValuePattern(),
+
+            // KEYWORDS
             new TwigKeywordPattern('set'),
             new TwigKeywordPattern('apply'),
             new TwigKeywordPattern('autoescape'),
@@ -44,6 +60,14 @@ final class TwigTagLanguage extends BaseLanguage
             new TwigKeywordPattern('with'),
             new TwigKeywordPattern('end'),
             new TwigKeywordPattern('as'),
+            new TwigKeywordPattern('in'),
+            new TwigKeywordPattern('endapply'),
+            new TwigKeywordPattern('endcache'),
+            new TwigKeywordPattern('endembed'),
+            new TwigKeywordPattern('endset'),
+            new TwigKeywordPattern('endsandbox'),
+            new TwigKeywordPattern('endverbatim'),
+            new TwigKeywordPattern('endwith'),
         ];
     }
 }

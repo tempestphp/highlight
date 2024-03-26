@@ -14,6 +14,7 @@ use Tempest\Highlight\Languages\JavaScript\JavaScriptLanguage;
 use Tempest\Highlight\Languages\Json\JsonLanguage;
 use Tempest\Highlight\Languages\Php\PhpLanguage;
 use Tempest\Highlight\Languages\Sql\SqlLanguage;
+use Tempest\Highlight\Languages\Twig\TwigLanguage;
 use Tempest\Highlight\Languages\Xml\XmlLanguage;
 use Tempest\Highlight\Languages\Yaml\YamlLanguage;
 use Tempest\Highlight\Themes\CssTheme;
@@ -42,7 +43,8 @@ final class Highlighter
             ->setLanguage('sql', new SqlLanguage())
             ->setLanguage('xml', new XmlLanguage())
             ->setLanguage('yaml', new YamlLanguage())
-            ->setLanguage('yml', new YamlLanguage());
+            ->setLanguage('yml', new YamlLanguage())
+            ->setLanguage('twig', new TwigLanguage());
 
         if ($this->theme instanceof TerminalTheme) {
             $this->shouldEscape = false;

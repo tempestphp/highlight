@@ -8,6 +8,9 @@ use Tempest\Highlight\Languages\Css\Injections\CssAttributeInjection;
 use Tempest\Highlight\Languages\Css\Injections\CssInjection;
 use Tempest\Highlight\Languages\Php\Injections\PhpInjection;
 use Tempest\Highlight\Languages\Php\Injections\PhpShortEchoInjection;
+use Tempest\Highlight\Languages\Twig\Injections\TwigCommentInjection;
+use Tempest\Highlight\Languages\Twig\Injections\TwigKeywordInjection;
+use Tempest\Highlight\Languages\Twig\Injections\TwigPropertyInjection;
 use Tempest\Highlight\Languages\Xml\XmlLanguage;
 
 class HtmlLanguage extends XmlLanguage
@@ -20,6 +23,9 @@ class HtmlLanguage extends XmlLanguage
             new PhpShortEchoInjection(),
             new CssInjection(),
             new CssAttributeInjection(),
+            new TwigPropertyInjection(),
+            new TwigKeywordInjection(),
+            new TwigCommentInjection(),
         ];
     }
 

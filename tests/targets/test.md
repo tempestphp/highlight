@@ -1,3 +1,3 @@
 ```php
-public function __construct(private Console $console) {}
+public function __invoke(bool $force = false, Foo $bar = new Foo()): void  
 ```

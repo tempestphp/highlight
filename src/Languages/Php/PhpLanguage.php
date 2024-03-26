@@ -145,9 +145,6 @@ class PhpLanguage extends BaseLanguage
             new ClassResolutionPattern(),
             new ShortFunctionReferencePattern(),
 
-            // ATTRIBUTES
-//            new AttributePattern(),
-
             // COMMENTS
             new MultilineSingleDocCommentPattern(),
             new SinglelineCommentPattern(),

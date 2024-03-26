@@ -38,8 +38,8 @@ $code = $highlighter->parse($code, 'php');
 - [x] Blade
 - [x] SQL
 - [x] CSS
-- [ ] JavaScript
-- [ ] Twig
+- [x] JavaScript
+- [x] Twig
 - [x] YAML
 - [x] JSON
 - [x] XML

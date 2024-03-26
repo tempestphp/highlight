@@ -24,6 +24,7 @@ final class PhpTypeLanguage extends BaseLanguage
             new KeywordPattern('true'),
             new KeywordPattern('false'),
             new KeywordPattern('new'),
+            new KeywordPattern('readonly'),
 
             new TypeForVariablePattern(),
             new ClassPropertyPattern(),

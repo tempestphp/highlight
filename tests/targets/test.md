@@ -1,3 +1,3 @@
 ```php
-function __invoke(bool $force = false): 
+public function __construct(public readonly string $name) {
 ```

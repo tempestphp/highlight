@@ -23,6 +23,6 @@ final readonly class PhpFunctionParametersInjection implements Injection
     {
         return Escape::injection(
             $highlighter->parse($content, new PhpTypeLanguage())
-        ) . ')';
+        );
     }
 }

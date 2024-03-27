@@ -101,6 +101,16 @@ final class Highlighter
         foreach ($language->getInjections() as $injection) {
             $parsedInjection = $injection->parse($content, $this->withoutEscaping());
 
+            // Injections are allowed to return one of two things:
+            //      1. A string of content, which will be used to replace the existing content
+            //      2. a `ParsedInjection` object, which contains both the new content AND a list of tokens to be parsed
+            //
+            // The benefit of returning ParsedInjections is that the list of returned tokens will be added
+            // to all other tokens detected by patterns, and thus follow all token rules.
+            // They are grouped and checked on whether tokens can be contained by other tokens.
+            // This offers more flexibility from the injection's point of view, and in same cases lead to more accurate highlighting
+            //
+            // TODO: a future version might only allow ParsedTokens and no more standalone strings, but for now we'll keep it as is.
             if (is_string($parsedInjection)) {
                 $content = $parsedInjection;
             } else {

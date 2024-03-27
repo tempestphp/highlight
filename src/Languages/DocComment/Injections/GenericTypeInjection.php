@@ -7,7 +7,7 @@ namespace Tempest\Highlight\Languages\DocComment\Injections;
 use Tempest\Highlight\Escape;
 use Tempest\Highlight\Highlighter;
 use Tempest\Highlight\Injection;
-use Tempest\Highlight\Tokens\TokenType;
+use Tempest\Highlight\Tokens\TokenTypeEnum;
 
 final readonly class GenericTypeInjection implements Injection
 {
@@ -32,9 +32,9 @@ final readonly class GenericTypeInjection implements Injection
         foreach ($genericTypes as $genericType) {
             $content = preg_replace(
                 '/\b' . $genericType . '\b/',
-                Escape::tokens($theme->before(TokenType::GENERIC))
+                Escape::tokens($theme->before(TokenTypeEnum::GENERIC))
                 . $genericType
-                . Escape::tokens($theme->after(TokenType::GENERIC)),
+                . Escape::tokens($theme->after(TokenTypeEnum::GENERIC)),
                 $content,
             );
         }

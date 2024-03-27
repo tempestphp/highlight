@@ -7,7 +7,7 @@ namespace Tempest\Highlight\Languages\Yaml\Patterns;
 use Tempest\Highlight\IsPattern;
 use Tempest\Highlight\Pattern;
 use Tempest\Highlight\PatternTest;
-use Tempest\Highlight\Tokens\TokenType;
+use Tempest\Highlight\Tokens\TokenTypeEnum;
 
 #[PatternTest(input: '- name: Setup problem matchers |', output: '|')]
 final readonly class YamlPipePattern implements Pattern
@@ -19,8 +19,8 @@ final readonly class YamlPipePattern implements Pattern
         return '/^[-\s\w\:]+(?<match>\|)/m';
     }
 
-    public function getTokenType(): TokenType
+    public function getTokenType(): TokenTypeEnum
     {
-        return TokenType::PROPERTY;
+        return TokenTypeEnum::PROPERTY;
     }
 }

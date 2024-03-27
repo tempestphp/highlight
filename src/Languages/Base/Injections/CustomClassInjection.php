@@ -7,6 +7,7 @@ namespace Tempest\Highlight\Languages\Base\Injections;
 use Tempest\Highlight\Escape;
 use Tempest\Highlight\Highlighter;
 use Tempest\Highlight\Injection;
+use Tempest\Highlight\Tokens\DynamicTokenType;
 
 final readonly class CustomClassInjection implements Injection
 {
@@ -31,9 +32,9 @@ final readonly class CustomClassInjection implements Injection
             $content = str_replace(
                 search: $match,
                 replace: Escape::injection(
-                    Escape::tokens($theme->before($classForMatch))
+                    Escape::tokens($theme->before(new DynamicTokenType($classForMatch)))
                     . $parsed
-                    . Escape::tokens($theme->after($classForMatch)),
+                    . Escape::tokens($theme->after(new DynamicTokenType($classForMatch))),
                 ),
                 subject: $content,
             );

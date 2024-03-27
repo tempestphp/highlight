@@ -7,7 +7,7 @@ namespace Tempest\Highlight\Languages\Php\Patterns;
 use Tempest\Highlight\IsPattern;
 use Tempest\Highlight\Pattern;
 use Tempest\Highlight\PatternTest;
-use Tempest\Highlight\Tokens\TokenType;
+use Tempest\Highlight\Tokens\TokenTypeEnum;
 
 #[PatternTest(input: 'Bar $bar, Baz $baz', output: ['Bar', 'Baz'])]
 #[PatternTest(input: 'Foo|Bar $bar, Baz $baz', output: ['Foo|Bar', 'Baz'])]
@@ -24,8 +24,8 @@ final readonly class TypeForVariablePattern implements Pattern
         return '(?<match>[\w\&\(\)\|\\\\\?]+)\s+\\$';
     }
 
-    public function getTokenType(): TokenType
+    public function getTokenType(): TokenTypeEnum
     {
-        return TokenType::TYPE;
+        return TokenTypeEnum::TYPE;
     }
 }

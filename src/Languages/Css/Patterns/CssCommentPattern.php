@@ -7,7 +7,7 @@ namespace Tempest\Highlight\Languages\Css\Patterns;
 use Tempest\Highlight\IsPattern;
 use Tempest\Highlight\Pattern;
 use Tempest\Highlight\PatternTest;
-use Tempest\Highlight\Tokens\TokenType;
+use Tempest\Highlight\Tokens\TokenTypeEnum;
 
 #[PatternTest(
     input: '    /* 1 */
@@ -25,8 +25,8 @@ final readonly class CssCommentPattern implements Pattern
         return '/(?<match>\/\*(.|\n)*?\*\/)/m';
     }
 
-    public function getTokenType(): TokenType
+    public function getTokenType(): TokenTypeEnum
     {
-        return TokenType::COMMENT;
+        return TokenTypeEnum::COMMENT;
     }
 }

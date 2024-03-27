@@ -7,7 +7,7 @@ namespace Tempest\Highlight\Languages\Gdscript\Patterns;
 use Tempest\Highlight\IsPattern;
 use Tempest\Highlight\Pattern;
 use Tempest\Highlight\PatternTest;
-use Tempest\Highlight\Tokens\TokenType;
+use Tempest\Highlight\Tokens\TokenTypeEnum;
 
 #[PatternTest(input: 'as int', output: 'int')]
 final readonly class AsTypePattern implements Pattern
@@ -19,8 +19,8 @@ final readonly class AsTypePattern implements Pattern
         return 'as\s+\b(?<match>[a-zA-Z][a-zA-Z0-9]+)\b';
     }
 
-    public function getTokenType(): TokenType
+    public function getTokenType(): TokenTypeEnum
     {
-        return TokenType::TYPE;
+        return TokenTypeEnum::TYPE;
     }
 }

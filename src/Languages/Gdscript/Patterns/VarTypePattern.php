@@ -7,7 +7,7 @@ namespace Tempest\Highlight\Languages\Gdscript\Patterns;
 use Tempest\Highlight\IsPattern;
 use Tempest\Highlight\Pattern;
 use Tempest\Highlight\PatternTest;
-use Tempest\Highlight\Tokens\TokenType;
+use Tempest\Highlight\Tokens\TokenTypeEnum;
 
 #[PatternTest(input: 'var foo:int=', output: 'int')]
 #[PatternTest(input: 'var foo : int =', output: 'int')]
@@ -21,8 +21,8 @@ final readonly class VarTypePattern implements Pattern
         return '\:[^\S\n]*(?<match>\w+)';
     }
 
-    public function getTokenType(): TokenType
+    public function getTokenType(): TokenTypeEnum
     {
-        return TokenType::TYPE;
+        return TokenTypeEnum::TYPE;
     }
 }

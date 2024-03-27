@@ -8,7 +8,7 @@ use Tempest\Highlight\Tokens\TokenType;
 
 interface Theme
 {
-    public function before(string|TokenType $tokenType): string;
+    public function before(TokenType $tokenType): string;
 
-    public function after(string|TokenType $tokenType): string;
+    public function after(TokenType $tokenType): string;
 }

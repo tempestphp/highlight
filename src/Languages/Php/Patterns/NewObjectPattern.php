@@ -7,7 +7,7 @@ namespace Tempest\Highlight\Languages\Php\Patterns;
 use Tempest\Highlight\IsPattern;
 use Tempest\Highlight\Pattern;
 use Tempest\Highlight\PatternTest;
-use Tempest\Highlight\Tokens\TokenType;
+use Tempest\Highlight\Tokens\TokenTypeEnum;
 
 #[PatternTest(input: 'new Foo()', output: 'Foo')]
 #[PatternTest(input: 'new Foo\Bar()', output: 'Foo\Bar')]
@@ -22,8 +22,8 @@ final readonly class NewObjectPattern implements Pattern
         return 'new (?<match>[\w\\\\]+)';
     }
 
-    public function getTokenType(): TokenType
+    public function getTokenType(): TokenTypeEnum
     {
-        return TokenType::TYPE;
+        return TokenTypeEnum::TYPE;
     }
 }

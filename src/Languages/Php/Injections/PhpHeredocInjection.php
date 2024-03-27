@@ -7,13 +7,13 @@ namespace Tempest\Highlight\Languages\Php\Injections;
 use Tempest\Highlight\Escape;
 use Tempest\Highlight\Highlighter;
 use Tempest\Highlight\Injection;
-use Tempest\Highlight\Tokens\TokenType;
+use Tempest\Highlight\Tokens\TokenTypeEnum;
 
 final readonly class PhpHeredocInjection implements Injection
 {
     public function parse(string $content, Highlighter $highlighter): string
     {
-        $heredocTokenType = TokenType::PROPERTY;
+        $heredocTokenType = TokenTypeEnum::PROPERTY;
         $theme = $highlighter->getTheme();
 
         preg_match_all('/<<<(?<language>[\w]+)\b/', $content, $languageMatches);

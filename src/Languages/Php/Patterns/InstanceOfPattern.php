@@ -7,7 +7,7 @@ namespace Tempest\Highlight\Languages\Php\Patterns;
 use Tempest\Highlight\IsPattern;
 use Tempest\Highlight\Pattern;
 use Tempest\Highlight\PatternTest;
-use Tempest\Highlight\Tokens\TokenType;
+use Tempest\Highlight\Tokens\TokenTypeEnum;
 
 #[PatternTest(input: 'instanceof Closure', output: 'Closure')]
 #[PatternTest(input: 'instanceof \\Foo\\Bar', output: '\\Foo\\Bar')]
@@ -20,8 +20,8 @@ final readonly class InstanceOfPattern implements Pattern
         return 'instanceof\s(?<match>[\w\\\\]+)';
     }
 
-    public function getTokenType(): TokenType
+    public function getTokenType(): TokenTypeEnum
     {
-        return TokenType::TYPE;
+        return TokenTypeEnum::TYPE;
     }
 }

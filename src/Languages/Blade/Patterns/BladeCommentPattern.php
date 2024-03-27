@@ -7,7 +7,7 @@ namespace Tempest\Highlight\Languages\Blade\Patterns;
 use Tempest\Highlight\IsPattern;
 use Tempest\Highlight\Pattern;
 use Tempest\Highlight\PatternTest;
-use Tempest\Highlight\Tokens\TokenType;
+use Tempest\Highlight\Tokens\TokenTypeEnum;
 
 #[PatternTest(
     input: '{{-- test --}} content',
@@ -22,8 +22,8 @@ final readonly class BladeCommentPattern implements Pattern
         return '(?<match>\{\{\-\-(.|\n)*?\-\-\}\})';
     }
 
-    public function getTokenType(): TokenType
+    public function getTokenType(): TokenTypeEnum
     {
-        return TokenType::COMMENT;
+        return TokenTypeEnum::COMMENT;
     }
 }

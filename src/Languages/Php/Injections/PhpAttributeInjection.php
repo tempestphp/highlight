@@ -8,7 +8,7 @@ use Tempest\Highlight\Escape;
 use Tempest\Highlight\Highlighter;
 use Tempest\Highlight\Injection;
 use Tempest\Highlight\IsInjection;
-use Tempest\Highlight\Tokens\TokenType;
+use Tempest\Highlight\Tokens\TokenTypeEnum;
 
 final readonly class PhpAttributeInjection implements Injection
 {
@@ -23,8 +23,8 @@ final readonly class PhpAttributeInjection implements Injection
     {
         $theme = $highlighter->getTheme();
 
-        return Escape::tokens($theme->before(TokenType::ATTRIBUTE))
+        return Escape::tokens($theme->before(TokenTypeEnum::ATTRIBUTE))
             . $content
-            . Escape::tokens($theme->after(TokenType::ATTRIBUTE));
+            . Escape::tokens($theme->after(TokenTypeEnum::ATTRIBUTE));
     }
 }

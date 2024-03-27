@@ -6,25 +6,26 @@ namespace Tempest\Highlight\Themes;
 
 use Tempest\Highlight\TerminalTheme;
 use Tempest\Highlight\Tokens\TokenType;
+use Tempest\Highlight\Tokens\TokenTypeEnum;
 
 class LightTerminalTheme implements TerminalTheme
 {
-    public function before(string|TokenType $tokenType): string
+    public function before(TokenType $tokenType): string
     {
         $style = match ($tokenType) {
-            TokenType::KEYWORD => TerminalStyle::FG_DARK_BLUE,
-            TokenType::PROPERTY => TerminalStyle::FG_DARK_GREEN,
-            TokenType::TYPE => TerminalStyle::FG_DARK_RED,
-            TokenType::GENERIC => TerminalStyle::FG_DARK_CYAN,
-            TokenType::VALUE => TerminalStyle::FG_BLACK,
-            TokenType::COMMENT => TerminalStyle::FG_GRAY,
+            TokenTypeEnum::KEYWORD => TerminalStyle::FG_DARK_BLUE,
+            TokenTypeEnum::PROPERTY => TerminalStyle::FG_DARK_GREEN,
+            TokenTypeEnum::TYPE => TerminalStyle::FG_DARK_RED,
+            TokenTypeEnum::GENERIC => TerminalStyle::FG_DARK_CYAN,
+            TokenTypeEnum::VALUE => TerminalStyle::FG_BLACK,
+            TokenTypeEnum::COMMENT => TerminalStyle::FG_GRAY,
             default => TerminalStyle::RESET,
         };
 
         return TerminalStyle::ESC->value . $style->value;
     }
 
-    public function after(string|TokenType $tokenType): string
+    public function after(TokenType $tokenType): string
     {
         return TerminalStyle::ESC->value . TerminalStyle::RESET->value;
     }

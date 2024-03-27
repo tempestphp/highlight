@@ -7,7 +7,7 @@ namespace Tempest\Highlight\Languages\Php\Patterns;
 use Tempest\Highlight\IsPattern;
 use Tempest\Highlight\Pattern;
 use Tempest\Highlight\PatternTest;
-use Tempest\Highlight\Tokens\TokenType;
+use Tempest\Highlight\Tokens\TokenTypeEnum;
 
 #[PatternTest(input: 'public Foo $foo', output: '$foo')]
 #[PatternTest(input: 'private Foo $foo', output: '$foo')]
@@ -24,8 +24,8 @@ final readonly class ClassPropertyPattern implements Pattern
         return '(public|private|protected)(\s(.+?)) (?<match>\\$[\w]+)';
     }
 
-    public function getTokenType(): TokenType
+    public function getTokenType(): TokenTypeEnum
     {
-        return TokenType::PROPERTY;
+        return TokenTypeEnum::PROPERTY;
     }
 }

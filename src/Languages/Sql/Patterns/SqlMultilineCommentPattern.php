@@ -7,7 +7,7 @@ namespace Tempest\Highlight\Languages\Sql\Patterns;
 use Tempest\Highlight\IsPattern;
 use Tempest\Highlight\Pattern;
 use Tempest\Highlight\PatternTest;
-use Tempest\Highlight\Tokens\TokenType;
+use Tempest\Highlight\Tokens\TokenTypeEnum;
 
 #[PatternTest(
     input: '/*
@@ -26,8 +26,8 @@ final readonly class SqlMultilineCommentPattern implements Pattern
         return '/(?<match>\/\*(.|\n)*?\*\/)/m';
     }
 
-    public function getTokenType(): TokenType
+    public function getTokenType(): TokenTypeEnum
     {
-        return TokenType::COMMENT;
+        return TokenTypeEnum::COMMENT;
     }
 }

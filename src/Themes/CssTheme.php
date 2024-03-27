@@ -6,29 +6,30 @@ namespace Tempest\Highlight\Themes;
 
 use Tempest\Highlight\Theme;
 use Tempest\Highlight\Tokens\TokenType;
+use Tempest\Highlight\Tokens\TokenTypeEnum;
 
 final readonly class CssTheme implements Theme
 {
-    public function before(string|TokenType $tokenType): string
+    public function before(TokenType $tokenType): string
     {
         $class = match ($tokenType) {
-            TokenType::KEYWORD => 'hl-keyword',
-            TokenType::PROPERTY => 'hl-property',
-            TokenType::TYPE => 'hl-type',
-            TokenType::GENERIC => 'hl-generic',
-            TokenType::VALUE => 'hl-value',
-            TokenType::COMMENT => 'hl-comment',
-            TokenType::ATTRIBUTE => 'hl-attribute',
-            TokenType::INJECTION => 'hl-injection',
-            TokenType::VARIABLE => 'hl-variable',
-            TokenType::OPERATOR => 'hl-operator',
-            default => $tokenType,
+            TokenTypeEnum::KEYWORD => 'hl-keyword',
+            TokenTypeEnum::PROPERTY => 'hl-property',
+            TokenTypeEnum::TYPE => 'hl-type',
+            TokenTypeEnum::GENERIC => 'hl-generic',
+            TokenTypeEnum::VALUE => 'hl-value',
+            TokenTypeEnum::COMMENT => 'hl-comment',
+            TokenTypeEnum::ATTRIBUTE => 'hl-attribute',
+            TokenTypeEnum::INJECTION => 'hl-injection',
+            TokenTypeEnum::VARIABLE => 'hl-variable',
+            TokenTypeEnum::OPERATOR => 'hl-operator',
+            default => $tokenType->getValue(),
         };
 
         return "<span class=\"{$class}\">";
     }
 
-    public function after(string|TokenType $tokenType): string
+    public function after(TokenType $tokenType): string
     {
         return "</span>";
     }

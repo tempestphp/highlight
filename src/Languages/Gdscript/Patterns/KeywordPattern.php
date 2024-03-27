@@ -6,7 +6,7 @@ namespace Tempest\Highlight\Languages\Gdscript\Patterns;
 
 use Tempest\Highlight\IsPattern;
 use Tempest\Highlight\Pattern;
-use Tempest\Highlight\Tokens\TokenType;
+use Tempest\Highlight\Tokens\TokenTypeEnum;
 
 final class KeywordPattern implements Pattern
 {
@@ -21,8 +21,8 @@ final class KeywordPattern implements Pattern
         return "/\b(?<match>{$this->keyword})\b/";
     }
 
-    public function getTokenType(): TokenType
+    public function getTokenType(): TokenTypeEnum
     {
-        return TokenType::KEYWORD;
+        return TokenTypeEnum::KEYWORD;
     }
 }

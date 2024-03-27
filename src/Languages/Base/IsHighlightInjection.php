@@ -6,6 +6,7 @@ namespace Tempest\Highlight\Languages\Base;
 
 use Tempest\Highlight\Escape;
 use Tempest\Highlight\Highlighter;
+use Tempest\Highlight\Tokens\DynamicTokenType;
 
 trait IsHighlightInjection
 {
@@ -36,9 +37,9 @@ trait IsHighlightInjection
             $content = str_replace(
                 search: $match,
                 replace: Escape::injection(
-                    Escape::tokens($theme->before($classForMatch))
+                    Escape::tokens($theme->before(new DynamicTokenType($classForMatch)))
                     . $parsed
-                    . Escape::tokens($theme->after($classForMatch)),
+                    . Escape::tokens($theme->after(new DynamicTokenType($classForMatch))),
                 ),
                 subject: $content,
             );

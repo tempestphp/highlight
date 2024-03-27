@@ -6,7 +6,7 @@ namespace Tempest\Highlight\Languages\Php\Patterns;
 
 use Tempest\Highlight\IsPattern;
 use Tempest\Highlight\Pattern;
-use Tempest\Highlight\Tokens\TokenType;
+use Tempest\Highlight\Tokens\TokenTypeEnum;
 
 final class OperatorPattern implements Pattern
 {
@@ -21,8 +21,8 @@ final class OperatorPattern implements Pattern
         return "/\s(?<!\\$)(?<match>{$this->operator})(\s|\()/";
     }
 
-    public function getTokenType(): TokenType
+    public function getTokenType(): TokenTypeEnum
     {
-        return TokenType::OPERATOR;
+        return TokenTypeEnum::OPERATOR;
     }
 }

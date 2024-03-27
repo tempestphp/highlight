@@ -7,7 +7,7 @@ namespace Tempest\Highlight\Languages\Sql\Patterns;
 use Tempest\Highlight\IsPattern;
 use Tempest\Highlight\Pattern;
 use Tempest\Highlight\PatternTest;
-use Tempest\Highlight\Tokens\TokenType;
+use Tempest\Highlight\Tokens\TokenTypeEnum;
 
 #[PatternTest(input: 'SELECT foo, bar, c.baz', output:['foo', 'bar'])]
 final readonly class SqlPropertyPattern implements Pattern
@@ -19,8 +19,8 @@ final readonly class SqlPropertyPattern implements Pattern
         return '(SELECT|,)\s(?<match>(\w)+)';
     }
 
-    public function getTokenType(): TokenType
+    public function getTokenType(): TokenTypeEnum
     {
-        return TokenType::PROPERTY;
+        return TokenTypeEnum::PROPERTY;
     }
 }

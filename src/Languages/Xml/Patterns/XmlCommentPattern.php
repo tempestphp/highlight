@@ -7,7 +7,7 @@ namespace Tempest\Highlight\Languages\Xml\Patterns;
 use Tempest\Highlight\IsPattern;
 use Tempest\Highlight\Pattern;
 use Tempest\Highlight\PatternTest;
-use Tempest\Highlight\Tokens\TokenType;
+use Tempest\Highlight\Tokens\TokenTypeEnum;
 
 #[PatternTest(
     input: 'test
@@ -29,8 +29,8 @@ final readonly class XmlCommentPattern implements Pattern
         return '/(?<match>\<!--(.|\n)*-->)/mU';
     }
 
-    public function getTokenType(): TokenType
+    public function getTokenType(): TokenTypeEnum
     {
-        return TokenType::COMMENT;
+        return TokenTypeEnum::COMMENT;
     }
 }

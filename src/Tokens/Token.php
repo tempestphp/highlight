@@ -18,7 +18,7 @@ final class Token
     public function __construct(
         public int $offset,
         public string $value,
-        public TokenType $type,
+        public TokenTypeEnum $type,
         public ?Pattern $pattern = null,
     ) {
         $this->length = strlen($this->value);

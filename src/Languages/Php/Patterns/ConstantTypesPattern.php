@@ -7,7 +7,7 @@ namespace Tempest\Highlight\Languages\Php\Patterns;
 use Tempest\Highlight\IsPattern;
 use Tempest\Highlight\Pattern;
 use Tempest\Highlight\PatternTest;
-use Tempest\Highlight\Tokens\TokenType;
+use Tempest\Highlight\Tokens\TokenTypeEnum;
 
 #[PatternTest(input: 'const string BAR_FOO = \'baz\'', output: 'string')]
 #[PatternTest(input: 'const BAR = \'baz\'', output: null)]
@@ -21,8 +21,8 @@ final readonly class ConstantTypesPattern implements Pattern
         return 'const\s(?<match>.+?)\s[\w]+\s=';
     }
 
-    public function getTokenType(): TokenType
+    public function getTokenType(): TokenTypeEnum
     {
-        return TokenType::TYPE;
+        return TokenTypeEnum::TYPE;
     }
 }

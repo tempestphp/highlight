@@ -7,7 +7,7 @@ namespace Tempest\Highlight\Tests;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Tempest\Highlight\Tokens\Token;
-use Tempest\Highlight\Tokens\TokenType;
+use Tempest\Highlight\Tokens\TokenTypeEnum;
 
 class TokenTest extends TestCase
 {
@@ -17,13 +17,13 @@ class TokenTest extends TestCase
         $a = new Token(
             offset: 10,
             value: 'abc',
-            type: TokenType::VALUE,
+            type: TokenTypeEnum::VALUE,
         );
 
         $b = new Token(
             offset: 11,
             value: 'b',
-            type: TokenType::VALUE,
+            type: TokenTypeEnum::VALUE,
         );
 
         $this->assertTrue($a->containsOrOverlaps($b));

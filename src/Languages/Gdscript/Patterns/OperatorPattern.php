@@ -6,7 +6,7 @@ namespace Tempest\Highlight\Languages\Gdscript\Patterns;
 
 use Tempest\Highlight\IsPattern;
 use Tempest\Highlight\Pattern;
-use Tempest\Highlight\Tokens\TokenType;
+use Tempest\Highlight\Tokens\TokenTypeEnum;
 
 final class OperatorPattern implements Pattern
 {
@@ -23,8 +23,8 @@ final class OperatorPattern implements Pattern
         return "/(?<match>{$quoted})/";
     }
 
-    public function getTokenType(): TokenType
+    public function getTokenType(): TokenTypeEnum
     {
-        return TokenType::OPERATOR;
+        return TokenTypeEnum::OPERATOR;
     }
 }

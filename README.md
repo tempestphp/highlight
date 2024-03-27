@@ -113,10 +113,6 @@ You can build your own CSS theme with just a couple of classes:
     min-width: 100%;
     background-color: #FF000022;
 }
-
-.hl-hidden {
-  display: none;
-}
 ```
 
 Note that `pre` tag styling isn't included in this package.

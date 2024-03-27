@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tempest\Highlight\Languages\DocComment\Patterns;
+namespace Tempest\Highlight\Languages\Php\Patterns;
 
 use Tempest\Highlight\IsPattern;
 use Tempest\Highlight\Pattern;
@@ -11,7 +11,7 @@ use Tempest\Highlight\Tokens\TokenTypeEnum;
 
 #[PatternTest(input: '@return array|string', output: 'array|string')]
 #[PatternTest(input: '@return \\Foo', output: '\\Foo')]
-final readonly class DocCommentReturnTypePattern implements Pattern
+final readonly class PhpDocCommentReturnTypePattern implements Pattern
 {
     use IsPattern;
 

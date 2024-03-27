@@ -1,13 +1,12 @@
 ```php
-final readonly class BookController
-{
-    #[Post(uri: '/books/create')]
-    public function store(BookRequest $request): Response
-    {
-        $book = map($request)->to(Book::class)->save();
-        
-        return response()
-            ->redirect(uri([self::class, 'show'], id: $book->id));
-    }
-}
+/**
+ * This function will do some things
+ * 
+ * @template T
+ * @param class-string<T> $className the class' name
+ * @param int $id
+ * @return T|null
+ * 
+ * That's about all
+ */
 ```

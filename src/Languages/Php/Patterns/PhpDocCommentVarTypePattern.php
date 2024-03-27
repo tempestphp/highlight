@@ -2,22 +2,22 @@
 
 declare(strict_types=1);
 
-namespace Tempest\Highlight\Languages\DocComment\Patterns;
+namespace Tempest\Highlight\Languages\Php\Patterns;
 
 use Tempest\Highlight\IsPattern;
 use Tempest\Highlight\Pattern;
 use Tempest\Highlight\PatternTest;
 use Tempest\Highlight\Tokens\TokenTypeEnum;
 
-#[PatternTest(input: '@param array|string $concrete', output: 'array|string')]
-#[PatternTest(input: '@param \\Foo $concrete', output: '\\Foo')]
-final readonly class DocCommentParamTypePattern implements Pattern
+#[PatternTest(input: '@var array|string $concrete', output: 'array|string')]
+#[PatternTest(input: '@var \\Foo $concrete', output: '\\Foo')]
+final readonly class PhpDocCommentVarTypePattern implements Pattern
 {
     use IsPattern;
 
     public function getPattern(): string
     {
-        return '\@param(\s)+(?<match>.*?) \\$';
+        return '\@var(\s)+(?<match>.*?) \\$';
     }
 
     public function getTokenType(): TokenTypeEnum

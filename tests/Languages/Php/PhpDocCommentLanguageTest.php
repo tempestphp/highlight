@@ -2,13 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Tempest\Highlight\Tests\Languages\DocComment;
+namespace Tempest\Highlight\Tests\Languages\Php;
 
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Tempest\Highlight\Highlighter;
+use Tempest\Highlight\Languages\Php\PhpDocCommentLanguage;
 
-class DocCommentLanguageTest extends TestCase
+class PhpDocCommentLanguageTest extends TestCase
 {
     #[DataProvider('data')]
     public function test_highlight(string $content, string $expected): void
@@ -17,7 +18,7 @@ class DocCommentLanguageTest extends TestCase
 
         $this->assertSame(
             $expected,
-            $highlighter->parse($content, 'doc'),
+            $highlighter->parse($content, new PhpDocCommentLanguage()),
         );
     }
 

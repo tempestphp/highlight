@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Tempest\Highlight\Languages\Php;
 
 use Tempest\Highlight\Languages\Base\BaseLanguage;
-use Tempest\Highlight\Languages\DocComment\Injections\DocCommentInjection;
 use Tempest\Highlight\Languages\Php\Injections\PhpAttributeInjection;
+use Tempest\Highlight\Languages\Php\Injections\PhpDocCommentInjection;
 use Tempest\Highlight\Languages\Php\Injections\PhpFunctionParametersInjection;
 use Tempest\Highlight\Languages\Php\Injections\PhpHeredocInjection;
 use Tempest\Highlight\Languages\Php\Patterns\AttributeTypePattern;
@@ -52,7 +52,7 @@ class PhpLanguage extends BaseLanguage
         return [
             ...parent::getInjections(),
             new PhpHeredocInjection(),
-            new DocCommentInjection(),
+            new PhpDocCommentInjection(),
             new PhpAttributeInjection(),
             new PhpFunctionParametersInjection(),
         ];

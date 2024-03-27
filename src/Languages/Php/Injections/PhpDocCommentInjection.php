@@ -2,13 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Tempest\Highlight\Languages\DocComment\Injections;
+namespace Tempest\Highlight\Languages\Php\Injections;
 
 use Tempest\Highlight\Highlighter;
 use Tempest\Highlight\Injection;
 use Tempest\Highlight\IsInjection;
+use Tempest\Highlight\Languages\Php\PhpDocCommentLanguage;
 
-final readonly class DocCommentInjection implements Injection
+final readonly class PhpDocCommentInjection implements Injection
 {
     use IsInjection;
 
@@ -19,6 +20,6 @@ final readonly class DocCommentInjection implements Injection
 
     public function parseContent(string $content, Highlighter $highlighter): string
     {
-        return $highlighter->parse($content, 'doc');
+        return $highlighter->parse($content, new PhpDocCommentLanguage());
     }
 }

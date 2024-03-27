@@ -12,7 +12,7 @@ pre, code {
 }
 
 .hl-attribute {
-    font-family: "Radon", inherit, monospace;
+    font-style: italic;
 }
 
 .hl-type {

@@ -46,6 +46,7 @@ $contents = $markdown->convert(file_get_contents(__DIR__ . DIRECTORY_SEPARATOR .
             overflow-x: scroll;
             line-height: 1.8em;
             font-family: "JetBrains Mono", monospace;
+            padding: .1em;
         }
 
         .hl {
@@ -53,13 +54,9 @@ $contents = $markdown->convert(file_get_contents(__DIR__ . DIRECTORY_SEPARATOR .
             box-shadow: 0 0 10px 0 #00000044;
             padding: 1em 2em;
             /*background-color: #fafafa;*/
-            background-color: var(--background-color);
-            color: var(--text-color);
             border-radius: 3px;
-        }
-
-        .hl-injection {
-            /*background-color: #00ffff22;*/
+            color: #000;
+            background-color: #f3f3f3;
         }
 
         .container {

@@ -1,46 +1,39 @@
-:root {
-    --background-color: #f3f3f3;
-    --text-color: #000;
-    --keyword-color: #4285F4;
-    --property-color: #34A853;
-    --type-color: #EA4334;
-    --generic-color: #9d3af6;
-    --value-color: #000;
-    --variable-color: #000;
-    --comment-color: #888888;
+pre, code {
+    color: #000;
+    background-color: #f3f3f3;
 }
 
 .hl-keyword {
-    color: var(--keyword-color);
+    color: #4285F4;
 }
 
 .hl-property {
-    color: var(--property-color);
+    color: #34A853;
 }
 
 .hl-attribute {
-    font-family: "Radon", inherit, monospace;
+    font-style: italic;
 }
 
 .hl-type {
-    color: var(--type-color);
+    color: #EA4334;
 }
 
 .hl-generic {
-    color: var(--generic-color);
+    color: #9d3af6;
 }
 
 .hl-value {
-    color: var(--value-color);
+    color: #000;
 }
 
 .hl-variable {
-    color: var(--variable-color);
+    color: #000;
 }
 
 .hl-comment span,
 .hl-comment {
-    color: var(--comment-color);
+    color: #888888;
 }
 
 .hl-blur {

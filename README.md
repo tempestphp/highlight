@@ -52,70 +52,10 @@ For HTML rendering, you can use one of the provided themes that comes with this 
 
 ```css
 @import "../vendor/tempest/highlight/src/Themes/highlight-light-lite.css";
+@import "../vendor/tempest/highlight/src/Themes/highlight-dark-lite.css";
 ```
 
-You can build your own CSS theme with just a couple of classes:
-
-```css
-.hl-keyword {
-    color: #4F95D1;
-}
-
-.hl-property {
-    color: #46b98d;
-}
-
-.hl-attribute {
-    font-style: italic;
-}
-
-.hl-type {
-    color: #D14F57;
-}
-
-.hl-generic {
-    color: #9D3AF6;
-}
-
-.hl-value {
-  color: #000;
-}
-
-.hl-variable {
-  color: #000;
-}
-
-.hl-comment span,
-.hl-comment {
-    color: #888888;
-}
-
-.hl-blur {
-    filter: blur(2px);
-}
-
-.hl-strong {
-    font-weight: bold;
-}
-
-.hl-em {
-    font-style: italic;
-}
-
-.hl-addition {
-    display: inline-block;
-    min-width: 100%;
-    background-color: #00FF0033;
-}
-
-.hl-deletion {
-    display: inline-block;
-    min-width: 100%;
-    background-color: #FF000022;
-}
-```
-
-Note that `pre` tag styling isn't included in this package.
+You can build your own CSS theme with just a couple of classes, copy over [the base stylesheet](./src/Themes/highlight-light-lite.css), and make adjustments however you like. Note that `pre` tag styling isn't included in this package.
 
 ### For the terminal
 

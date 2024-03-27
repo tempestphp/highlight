@@ -34,8 +34,7 @@ final readonly class GroupTokens
                     continue;
                 }
 
-                if ($token->containsOrOverlaps($compareToken))
-                {
+                if ($token->containsOrOverlaps($compareToken)) {
                     if ($token->canContain($compareToken)) {
                         $token->addChild($compareToken);
                     }

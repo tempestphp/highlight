@@ -7,7 +7,7 @@ namespace Tempest\Highlight\Languages\Php\Patterns;
 use Tempest\Highlight\IsPattern;
 use Tempest\Highlight\Pattern;
 use Tempest\Highlight\PatternTest;
-use Tempest\Highlight\Tokens\TokenType;
+use Tempest\Highlight\Tokens\TokenTypeEnum;
 
 #[PatternTest(input: 'enum Foo: string', output: 'string')]
 #[PatternTest(input: 'enum Foo: int', output: 'int')]
@@ -20,8 +20,8 @@ final readonly class EnumBackedTypePattern implements Pattern
         return 'enum [\w]+\:(\s)*(?<match>int|string)';
     }
 
-    public function getTokenType(): TokenType
+    public function getTokenType(): TokenTypeEnum
     {
-        return TokenType::TYPE;
+        return TokenTypeEnum::TYPE;
     }
 }

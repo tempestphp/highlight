@@ -7,7 +7,7 @@ namespace Tempest\Highlight\Languages\Gdscript\Patterns;
 use Tempest\Highlight\IsPattern;
 use Tempest\Highlight\Pattern;
 use Tempest\Highlight\PatternTest;
-use Tempest\Highlight\Tokens\TokenType;
+use Tempest\Highlight\Tokens\TokenTypeEnum;
 
 #[PatternTest(input: 'class_name Foo', output: 'Foo')]
 final readonly class ClassNamePattern implements Pattern
@@ -19,8 +19,8 @@ final readonly class ClassNamePattern implements Pattern
         return 'class_name\s(?<match>[\w]+)';
     }
 
-    public function getTokenType(): TokenType
+    public function getTokenType(): TokenTypeEnum
     {
-        return TokenType::TYPE;
+        return TokenTypeEnum::TYPE;
     }
 }

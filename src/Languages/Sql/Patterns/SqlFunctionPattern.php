@@ -7,7 +7,7 @@ namespace Tempest\Highlight\Languages\Sql\Patterns;
 use Tempest\Highlight\IsPattern;
 use Tempest\Highlight\Pattern;
 use Tempest\Highlight\PatternTest;
-use Tempest\Highlight\Tokens\TokenType;
+use Tempest\Highlight\Tokens\TokenTypeEnum;
 
 #[PatternTest(input: 'COUNT(*)', output: 'COUNT')]
 #[PatternTest(input: 'count(*)', output: 'count')]
@@ -20,8 +20,8 @@ final readonly class SqlFunctionPattern implements Pattern
         return '/(?<match>[\w]+)\(/i';
     }
 
-    public function getTokenType(): TokenType
+    public function getTokenType(): TokenTypeEnum
     {
-        return TokenType::PROPERTY;
+        return TokenTypeEnum::PROPERTY;
     }
 }

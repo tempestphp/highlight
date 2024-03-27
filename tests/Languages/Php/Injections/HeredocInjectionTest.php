@@ -40,7 +40,7 @@ $var = &lt;&lt;&lt;<span class="hl-property">HTML</span>
         $this->assertMatches(
             injection: new PhpHeredocInjection(),
             content: $content,
-            expected: $expected,
+            expectedContent: $expected,
             currentLanguage: new PhpLanguage(),
         );
     }

@@ -7,7 +7,7 @@ namespace Tempest\Highlight\Languages\Gdscript\Patterns;
 use Tempest\Highlight\IsPattern;
 use Tempest\Highlight\Pattern;
 use Tempest\Highlight\PatternTest;
-use Tempest\Highlight\Tokens\TokenType;
+use Tempest\Highlight\Tokens\TokenTypeEnum;
 
 #[PatternTest(
     input: "return 'hello';",
@@ -22,8 +22,8 @@ final readonly class SingleQuoteValuePattern implements Pattern
         return "'(?<match>.*?)'";
     }
 
-    public function getTokenType(): TokenType
+    public function getTokenType(): TokenTypeEnum
     {
-        return TokenType::VALUE;
+        return TokenTypeEnum::VALUE;
     }
 }

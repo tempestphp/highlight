@@ -11,7 +11,7 @@ use Tempest\Highlight\Themes\CssTheme;
 use Tempest\Highlight\Tokens\GroupTokens;
 use Tempest\Highlight\Tokens\RenderTokens;
 use Tempest\Highlight\Tokens\Token;
-use Tempest\Highlight\Tokens\TokenType;
+use Tempest\Highlight\Tokens\TokenTypeEnum;
 
 class RenderTokensTest extends TestCase
 {
@@ -24,12 +24,12 @@ class RenderTokensTest extends TestCase
             new Token(
                 offset: 0,
                 value: '/** @var \Tempest\View\GenericView $this */',
-                type: TokenType::COMMENT,
+                type: TokenTypeEnum::COMMENT,
             ),
             new Token(
                 offset: 23,
                 value: 'GenericView',
-                type: TokenType::TYPE,
+                type: TokenTypeEnum::TYPE,
             ),
         ]);
 
@@ -48,17 +48,17 @@ class RenderTokensTest extends TestCase
             new Token(
                 offset: 0,
                 value: "#[Get(hi: '/')]",
-                type: TokenType::ATTRIBUTE,
+                type: TokenTypeEnum::ATTRIBUTE,
             ),
             new Token(
                 offset: 2,
                 value: 'get',
-                type: TokenType::TYPE,
+                type: TokenTypeEnum::TYPE,
             ),
             new Token(
                 offset: 6,
                 value: 'hi',
-                type: TokenType::PROPERTY,
+                type: TokenTypeEnum::PROPERTY,
             ),
         ]);
 
@@ -80,22 +80,22 @@ class RenderTokensTest extends TestCase
             new Token(
                 offset: 4,
                 value: "#[Get(hi: '/')]",
-                type: TokenType::ATTRIBUTE,
+                type: TokenTypeEnum::ATTRIBUTE,
             ),
             new Token(
                 offset: 6,
                 value: 'get',
-                type: TokenType::TYPE,
+                type: TokenTypeEnum::TYPE,
             ),
             new Token(
                 offset: 10,
                 value: 'hi',
-                type: TokenType::PROPERTY,
+                type: TokenTypeEnum::PROPERTY,
             ),
             new Token(
                 offset: 24,
                 value: 'public',
-                type: TokenType::KEYWORD,
+                type: TokenTypeEnum::KEYWORD,
             ),
         ]);
 

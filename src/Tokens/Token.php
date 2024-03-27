@@ -29,8 +29,8 @@ final class Token
     public function equals(Token $other): bool
     {
         return $this->value === $other->value
-            && $this->offset === $other->offset;
-        //            && $this->type === $other->type;
+            && $this->offset === $other->offset
+            && $this->type === $other->type;
     }
 
     public function containsOrOverlaps(Token $other): bool

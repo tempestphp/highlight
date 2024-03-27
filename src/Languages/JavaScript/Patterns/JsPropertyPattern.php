@@ -7,7 +7,7 @@ namespace Tempest\Highlight\Languages\JavaScript\Patterns;
 use Tempest\Highlight\IsPattern;
 use Tempest\Highlight\Pattern;
 use Tempest\Highlight\PatternTest;
-use Tempest\Highlight\Tokens\TokenType;
+use Tempest\Highlight\Tokens\TokenTypeEnum;
 
 #[PatternTest(input: 'Object.foo()', output: 'foo')]
 final readonly class JsPropertyPattern implements Pattern
@@ -19,8 +19,8 @@ final readonly class JsPropertyPattern implements Pattern
         return '\.(?<match>[\w]+)';
     }
 
-    public function getTokenType(): TokenType
+    public function getTokenType(): TokenTypeEnum
     {
-        return TokenType::PROPERTY;
+        return TokenTypeEnum::PROPERTY;
     }
 }

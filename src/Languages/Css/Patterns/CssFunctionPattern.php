@@ -7,7 +7,7 @@ namespace Tempest\Highlight\Languages\Css\Patterns;
 use Tempest\Highlight\IsPattern;
 use Tempest\Highlight\Pattern;
 use Tempest\Highlight\PatternTest;
-use Tempest\Highlight\Tokens\TokenType;
+use Tempest\Highlight\Tokens\TokenTypeEnum;
 
 #[PatternTest(
     input: 'src: url("fonts/MonaspaceArgon-Bold.woff") format("woff");',
@@ -22,8 +22,8 @@ final readonly class CssFunctionPattern implements Pattern
         return '(?<match>[\w]+)\(';
     }
 
-    public function getTokenType(): TokenType
+    public function getTokenType(): TokenTypeEnum
     {
-        return TokenType::KEYWORD;
+        return TokenTypeEnum::KEYWORD;
     }
 }

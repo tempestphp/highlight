@@ -19,7 +19,7 @@ class BladeEchoInjectionTest extends TestCase
         $this->assertMatches(
             injection: new BladeEchoInjection(),
             content: '{{ count($foo) }}',
-            expected: '{{ <span class="hl-property">count</span>(<span class="hl-variable">$foo</span>) }}',
+            expectedContent: '{{ <span class="hl-property">count</span>(<span class="hl-variable">$foo</span>) }}',
         );
     }
 }

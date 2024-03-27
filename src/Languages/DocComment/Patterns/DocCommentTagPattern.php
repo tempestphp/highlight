@@ -7,7 +7,7 @@ namespace Tempest\Highlight\Languages\DocComment\Patterns;
 use Tempest\Highlight\IsPattern;
 use Tempest\Highlight\Pattern;
 use Tempest\Highlight\PatternTest;
-use Tempest\Highlight\Tokens\TokenType;
+use Tempest\Highlight\Tokens\TokenTypeEnum;
 
 #[PatternTest(input: '@param', output: '@param')]
 final readonly class DocCommentTagPattern implements Pattern
@@ -19,8 +19,8 @@ final readonly class DocCommentTagPattern implements Pattern
         return '(?<match>\@[\w]+)';
     }
 
-    public function getTokenType(): TokenType
+    public function getTokenType(): TokenTypeEnum
     {
-        return TokenType::VALUE;
+        return TokenTypeEnum::VALUE;
     }
 }

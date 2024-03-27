@@ -6,7 +6,7 @@ namespace Tempest\Highlight\Languages\Twig\Patterns;
 
 use Tempest\Highlight\IsPattern;
 use Tempest\Highlight\Pattern;
-use Tempest\Highlight\Tokens\TokenType;
+use Tempest\Highlight\Tokens\TokenTypeEnum;
 
 final class TwigTokenPattern implements Pattern
 {
@@ -14,7 +14,7 @@ final class TwigTokenPattern implements Pattern
 
     public function __construct(
         private readonly string $regex,
-        private readonly TokenType $type,
+        private readonly TokenTypeEnum $type,
     ) {
     }
 
@@ -23,7 +23,7 @@ final class TwigTokenPattern implements Pattern
         return "/(?<match>{$this->regex})/";
     }
 
-    public function getTokenType(): TokenType
+    public function getTokenType(): TokenTypeEnum
     {
         return $this->type;
     }

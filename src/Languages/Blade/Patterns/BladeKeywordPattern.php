@@ -7,7 +7,7 @@ namespace Tempest\Highlight\Languages\Blade\Patterns;
 use Tempest\Highlight\IsPattern;
 use Tempest\Highlight\Pattern;
 use Tempest\Highlight\PatternTest;
-use Tempest\Highlight\Tokens\TokenType;
+use Tempest\Highlight\Tokens\TokenTypeEnum;
 
 #[PatternTest(
     input: '@if()
@@ -23,8 +23,8 @@ final readonly class BladeKeywordPattern implements Pattern
         return '(?<match>\@[\w]+)\b';
     }
 
-    public function getTokenType(): TokenType
+    public function getTokenType(): TokenTypeEnum
     {
-        return TokenType::KEYWORD;
+        return TokenTypeEnum::KEYWORD;
     }
 }

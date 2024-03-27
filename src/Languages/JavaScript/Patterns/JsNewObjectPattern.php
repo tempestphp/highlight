@@ -7,7 +7,7 @@ namespace Tempest\Highlight\Languages\JavaScript\Patterns;
 use Tempest\Highlight\IsPattern;
 use Tempest\Highlight\Pattern;
 use Tempest\Highlight\PatternTest;
-use Tempest\Highlight\Tokens\TokenType;
+use Tempest\Highlight\Tokens\TokenTypeEnum;
 
 #[PatternTest(input: 'new Rectangle(', output: 'Rectangle')]
 #[PatternTest(input: 'new qq.AjaxRequester(', output: 'AjaxRequester')]
@@ -20,8 +20,8 @@ final readonly class JsNewObjectPattern implements Pattern
         return 'new (\w+\.)*(?<match>[\w]+)(\s)*\(';
     }
 
-    public function getTokenType(): TokenType
+    public function getTokenType(): TokenTypeEnum
     {
-        return TokenType::TYPE;
+        return TokenTypeEnum::TYPE;
     }
 }

@@ -6,7 +6,7 @@ namespace Tempest\Highlight\Languages\Gdscript\Patterns;
 
 use Tempest\Highlight\IsPattern;
 use Tempest\Highlight\Pattern;
-use Tempest\Highlight\Tokens\TokenType;
+use Tempest\Highlight\Tokens\TokenTypeEnum;
 
 final readonly class AnnotationPattern implements Pattern
 {
@@ -42,8 +42,8 @@ final readonly class AnnotationPattern implements Pattern
         return "(?<match>(@onready|@icon|@export|@export_{$variations}|@rpc|@static_unload|@tool|@warning_ignore))";
     }
 
-    public function getTokenType(): TokenType
+    public function getTokenType(): TokenTypeEnum
     {
-        return TokenType::KEYWORD;
+        return TokenTypeEnum::KEYWORD;
     }
 }

@@ -18,7 +18,7 @@ final readonly class ParseTokens
 
         // Match tokens from patterns
         foreach ($language->getPatterns() as $key => $pattern) {
-            if ($pattern instanceof TokenType) {
+            if ($pattern instanceof TokenTypeEnum) {
                 $pattern = new GenericPattern(
                     $key,
                     $pattern,

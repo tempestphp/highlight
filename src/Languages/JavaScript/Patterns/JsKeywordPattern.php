@@ -6,7 +6,7 @@ namespace Tempest\Highlight\Languages\JavaScript\Patterns;
 
 use Tempest\Highlight\IsPattern;
 use Tempest\Highlight\Pattern;
-use Tempest\Highlight\Tokens\TokenType;
+use Tempest\Highlight\Tokens\TokenTypeEnum;
 
 final class JsKeywordPattern implements Pattern
 {
@@ -36,8 +36,8 @@ final class JsKeywordPattern implements Pattern
         return $pattern;
     }
 
-    public function getTokenType(): TokenType
+    public function getTokenType(): TokenTypeEnum
     {
-        return TokenType::KEYWORD;
+        return TokenTypeEnum::KEYWORD;
     }
 }

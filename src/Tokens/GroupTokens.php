@@ -30,7 +30,12 @@ final readonly class GroupTokens
             $token = $token->cloneWithoutParent();
 
             foreach ($tokens as $compareKey => $compareToken) {
-                if ($token->containsOrOverlaps($compareToken)) {
+                if ($token->equals($compareToken)) {
+                    continue;
+                }
+
+                if ($token->containsOrOverlaps($compareToken))
+                {
                     if ($token->canContain($compareToken)) {
                         $token->addChild($compareToken);
                     }
@@ -38,7 +43,6 @@ final readonly class GroupTokens
                     unset($tokens[$compareKey]);
                 }
             }
-
             if ($token->parent === null) {
                 $groupedTokens[] = $token;
             }

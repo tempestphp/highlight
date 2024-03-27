@@ -7,7 +7,7 @@ namespace Tempest\Highlight\Languages\DocComment\Patterns;
 use Tempest\Highlight\IsPattern;
 use Tempest\Highlight\Pattern;
 use Tempest\Highlight\PatternTest;
-use Tempest\Highlight\Tokens\TokenType;
+use Tempest\Highlight\Tokens\TokenTypeEnum;
 
 #[PatternTest(input: '@var array|string $concrete', output: 'array|string')]
 #[PatternTest(input: '@var \\Foo $concrete', output: '\\Foo')]
@@ -20,8 +20,8 @@ final readonly class DocCommentVarTypePattern implements Pattern
         return '\@var(\s)+(?<match>.*?) \\$';
     }
 
-    public function getTokenType(): TokenType
+    public function getTokenType(): TokenTypeEnum
     {
-        return TokenType::TYPE;
+        return TokenTypeEnum::TYPE;
     }
 }

@@ -19,7 +19,7 @@ class CssAttributeInjectionTest extends TestCase
         $this->assertMatches(
             injection: new CssAttributeInHtmlInjection(),
             content: '<x-slot style="color: green">',
-            expected: '&lt;x-slot style=&quot;<span class="hl-property">color</span>: green&quot;&gt;'
+            expectedContent: '&lt;x-slot style=&quot;<span class="hl-property">color</span>: green&quot;&gt;'
         );
     }
 }

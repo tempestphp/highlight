@@ -5,29 +5,27 @@ declare(strict_types=1);
 namespace Tempest\Highlight\Tests\Languages\Base\Injections;
 
 use PHPUnit\Framework\TestCase;
+use Tempest\Highlight\Highlighter;
 use Tempest\Highlight\Languages\Base\Injections\AdditionInjection;
-use Tempest\Highlight\Languages\Php\PhpLanguage;
-use Tempest\Highlight\Tests\TestsInjections;
 
 class AdditionInjectionTest extends TestCase
 {
-    use TestsInjections;
-
     public function test_addition_injection()
     {
         $content = <<<TXT
-{+ class Foo +}
+{+class Foo+}
 TXT;
 
         $expected = <<<TXT
-<span class="hl-injection"><span class="hl-addition"> <span class="hl-keyword">class</span> <span class="hl-type">Foo</span> </span></span>
+class Foo
 TXT;
 
-        $this->assertMatches(
-            injection: new AdditionInjection(),
-            content: $content,
-            expected: $expected,
-            currentLanguage: new PhpLanguage(),
-        );
+        $parsed = (new AdditionInjection())->parse($content, new Highlighter());
+
+        $this->assertSame($expected, $parsed->content);
+        $this->assertCount(1, $parsed->tokens);
+        $this->assertSame(0, $parsed->tokens[0]->start);
+        $this->assertSame(9, $parsed->tokens[0]->end);
+        $this->assertSame('hl-addition', $parsed->tokens[0]->type->getValue());
     }
 }

@@ -27,7 +27,7 @@ class SqlLanguageTest extends TestCase
         return [
             // Test 1
             [
-                '-- sinle-line comment
+                '-- single-line comment
 
 SELECT country.country_name_eng, city.city_name, customer.customer_name
 FROM country AS country
@@ -39,12 +39,12 @@ multi-line comment
 */
 
 SELECT *;',
-                '<span class="hl-comment">-- sinle-line comment</span>
+                '<span class="hl-comment">-- single-line comment</span>
 
 <span class="hl-keyword">SELECT</span> <span class="hl-type">country</span>.<span class="hl-property">country_name_eng</span>, <span class="hl-type">city</span>.<span class="hl-property">city_name</span>, <span class="hl-type">customer</span>.<span class="hl-property">customer_name</span>
 <span class="hl-keyword">FROM</span> <span class="hl-type">country</span> <span class="hl-keyword">AS</span> <span class="hl-type">country</span>
-         <span class="hl-keyword">INNER <span class="hl-keyword">JOIN</span></span> <span class="hl-type">city</span> <span class="hl-keyword">ON</span> <span class="hl-type">city</span>.<span class="hl-property">country_id</span> = <span class="hl-type">country</span>.<span class="hl-property">id</span>
-         <span class="hl-keyword">INNER <span class="hl-keyword">JOIN</span></span> <span class="hl-type">customer</span> <span class="hl-keyword">ON</span> <span class="hl-type">customer</span>.<span class="hl-property">city_id</span> = <span class="hl-type">city</span>.<span class="hl-property">id</span>;
+         <span class="hl-keyword">INNER JOIN</span> <span class="hl-type">city</span> <span class="hl-keyword">ON</span> <span class="hl-type">city</span>.<span class="hl-property">country_id</span> = <span class="hl-type">country</span>.<span class="hl-property">id</span>
+         <span class="hl-keyword">INNER JOIN</span> <span class="hl-type">customer</span> <span class="hl-keyword">ON</span> <span class="hl-type">customer</span>.<span class="hl-property">city_id</span> = <span class="hl-type">city</span>.<span class="hl-property">id</span>;
 
 <span class="hl-comment">/*
 multi-line comment
@@ -90,9 +90,8 @@ multi-line comment
         ALTER TABLE "packages"   DROP COLUMN updated_at_orig;
         SQL;
         // Encode in base64 to avoid storing binary escapes in the source code.
-        $expected = base64_decode(<<<ESC
-        G1szNG0bWzM0bUFMVEVSG1swbSAbWzM0bVRBQkxFG1swbRtbMG0gIhtbMzBtcGFja2FnZXMbWzBtIi
-        AgIBtbMzRtG1szNG1EUk9QG1swbSAbWzM0bUNPTFVNThtbMG0bWzBtIHVwZGF0ZWRfYXRfb3JpZzs=
+        $expected = base64_decode(<<<'ESC'
+        G1szNG1BTFRFUiBUQUJMRRtbMG0gIhtbMzBtcGFja2FnZXMbWzBtIiAgIBtbMzRtRFJPUCBDT0xVTU4bWzBtIHVwZGF0ZWRfYXRfb3JpZzs=
         ESC);
 
         $this->assertSame($expected, $highlighter->parse($sql, 'sql'));

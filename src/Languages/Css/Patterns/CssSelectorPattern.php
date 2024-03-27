@@ -7,7 +7,7 @@ namespace Tempest\Highlight\Languages\Css\Patterns;
 use Tempest\Highlight\IsPattern;
 use Tempest\Highlight\Pattern;
 use Tempest\Highlight\PatternTest;
-use Tempest\Highlight\Tokens\TokenType;
+use Tempest\Highlight\Tokens\TokenTypeEnum;
 
 #[PatternTest(
     input: 'code, .asd, #id,
@@ -30,8 +30,8 @@ final readonly class CssSelectorPattern implements Pattern
         return '(?<match>[\@\-\#\.\w\s,\n]+)\{';
     }
 
-    public function getTokenType(): TokenType
+    public function getTokenType(): TokenTypeEnum
     {
-        return TokenType::KEYWORD;
+        return TokenTypeEnum::KEYWORD;
     }
 }

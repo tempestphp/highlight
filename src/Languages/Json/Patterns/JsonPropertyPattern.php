@@ -7,7 +7,7 @@ namespace Tempest\Highlight\Languages\Json\Patterns;
 use Tempest\Highlight\IsPattern;
 use Tempest\Highlight\Pattern;
 use Tempest\Highlight\PatternTest;
-use Tempest\Highlight\Tokens\TokenType;
+use Tempest\Highlight\Tokens\TokenTypeEnum;
 
 #[PatternTest(input: '"baz": "bar"', output: '"baz"')]
 final readonly class JsonPropertyPattern implements Pattern
@@ -19,8 +19,8 @@ final readonly class JsonPropertyPattern implements Pattern
         return '(?<match>\"[\w\\\-]+\")(\s)*\:';
     }
 
-    public function getTokenType(): TokenType
+    public function getTokenType(): TokenTypeEnum
     {
-        return TokenType::KEYWORD;
+        return TokenTypeEnum::KEYWORD;
     }
 }

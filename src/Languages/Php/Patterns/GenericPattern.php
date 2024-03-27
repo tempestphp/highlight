@@ -6,7 +6,7 @@ namespace Tempest\Highlight\Languages\Php\Patterns;
 
 use Tempest\Highlight\IsPattern;
 use Tempest\Highlight\Pattern;
-use Tempest\Highlight\Tokens\TokenType;
+use Tempest\Highlight\Tokens\TokenTypeEnum;
 
 final readonly class GenericPattern implements Pattern
 {
@@ -14,7 +14,7 @@ final readonly class GenericPattern implements Pattern
 
     public function __construct(
         private string $pattern,
-        private TokenType $tokenType,
+        private TokenTypeEnum $tokenType,
     ) {
     }
 
@@ -23,7 +23,7 @@ final readonly class GenericPattern implements Pattern
         return $this->pattern;
     }
 
-    public function getTokenType(): TokenType
+    public function getTokenType(): TokenTypeEnum
     {
         return $this->tokenType;
     }

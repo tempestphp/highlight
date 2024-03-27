@@ -6,7 +6,7 @@ namespace Tempest\Highlight\Languages\Php\Patterns;
 
 use Tempest\Highlight\IsPattern;
 use Tempest\Highlight\Pattern;
-use Tempest\Highlight\Tokens\TokenType;
+use Tempest\Highlight\Tokens\TokenTypeEnum;
 
 final readonly class MultilineSingleDocCommentPattern implements Pattern
 {
@@ -17,8 +17,8 @@ final readonly class MultilineSingleDocCommentPattern implements Pattern
         return '/(?<match>\/\*(.|\n)*?\*\/)/m';
     }
 
-    public function getTokenType(): TokenType
+    public function getTokenType(): TokenTypeEnum
     {
-        return TokenType::COMMENT;
+        return TokenTypeEnum::COMMENT;
     }
 }

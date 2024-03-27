@@ -13,7 +13,7 @@ class PhpFunctionParametersInjectionTest extends TestCase
     {
         $input = <<<'TXT'
 public function __construct(public readonly string $name) {
-function __invoke(bool $force = false):
+function __invoke(bool $force = false): Foo;
 public function __invoke(bool $force = false, Foo $bar = new Foo()): void;
 public function __construct(private Console $console) {}
 public function __construct(public Console $console) {}
@@ -61,7 +61,7 @@ TXT;
 
         $expectedOutput = <<<'TXT'
 <span class="hl-keyword">public</span> <span class="hl-keyword">function</span> <span class="hl-property">__construct</span>(<span class="hl-injection"><span class="hl-keyword">public</span> <span class="hl-keyword">readonly</span> <span class="hl-type">string</span> <span class="hl-property">$name</span></span>) {
-<span class="hl-keyword">function</span> <span class="hl-property">__invoke</span>(<span class="hl-injection"><span class="hl-type">bool</span> $force = <span class="hl-keyword">false</span></span>):
+<span class="hl-keyword">function</span> <span class="hl-property">__invoke</span>(<span class="hl-injection"><span class="hl-type">bool</span> $force = <span class="hl-keyword">false</span></span>): <span class="hl-type">Foo</span>;
 <span class="hl-keyword">public</span> <span class="hl-keyword">function</span> <span class="hl-property">__invoke</span>(<span class="hl-injection"><span class="hl-type">bool</span> $force = <span class="hl-keyword">false</span>, <span class="hl-type">Foo</span> $bar = <span class="hl-keyword">new</span> <span class="hl-type">Foo</span>()</span>): <span class="hl-type">void</span>;
 <span class="hl-keyword">public</span> <span class="hl-keyword">function</span> <span class="hl-property">__construct</span>(<span class="hl-injection"><span class="hl-keyword">private</span> <span class="hl-type">Console</span> <span class="hl-property">$console</span></span>) {}
 <span class="hl-keyword">public</span> <span class="hl-keyword">function</span> <span class="hl-property">__construct</span>(<span class="hl-injection"><span class="hl-keyword">public</span> <span class="hl-type">Console</span> <span class="hl-property">$console</span></span>) {}

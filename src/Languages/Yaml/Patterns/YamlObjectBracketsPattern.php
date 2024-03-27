@@ -7,7 +7,7 @@ namespace Tempest\Highlight\Languages\Yaml\Patterns;
 use Tempest\Highlight\IsPattern;
 use Tempest\Highlight\Pattern;
 use Tempest\Highlight\PatternTest;
-use Tempest\Highlight\Tokens\TokenType;
+use Tempest\Highlight\Tokens\TokenTypeEnum;
 
 #[PatternTest(input: 'branches: { link: "/blog/new-in-php-83", title: "Whats new in PHP 8.3" }', output: ['{', '}'])]
 final readonly class YamlObjectBracketsPattern implements Pattern
@@ -19,8 +19,8 @@ final readonly class YamlObjectBracketsPattern implements Pattern
         return '(?<match>(\{|\}))';
     }
 
-    public function getTokenType(): TokenType
+    public function getTokenType(): TokenTypeEnum
     {
-        return TokenType::PROPERTY;
+        return TokenTypeEnum::PROPERTY;
     }
 }

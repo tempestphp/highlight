@@ -7,7 +7,7 @@ namespace Tempest\Highlight\Languages\Base\Patterns;
 use Tempest\Highlight\Escape;
 use Tempest\Highlight\IsPattern;
 use Tempest\Highlight\Pattern;
-use Tempest\Highlight\Tokens\TokenType;
+use Tempest\Highlight\Tokens\TokenTypeEnum;
 
 final readonly class InjectionTokenPattern implements Pattern
 {
@@ -18,8 +18,8 @@ final readonly class InjectionTokenPattern implements Pattern
         return Escape::INJECTION_TOKEN . '(?<match>(.|\n)*?)' . Escape::INJECTION_TOKEN;
     }
 
-    public function getTokenType(): TokenType
+    public function getTokenType(): TokenTypeEnum
     {
-        return TokenType::INJECTION;
+        return TokenTypeEnum::INJECTION;
     }
 }

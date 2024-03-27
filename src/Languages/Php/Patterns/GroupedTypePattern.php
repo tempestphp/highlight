@@ -7,7 +7,7 @@ namespace Tempest\Highlight\Languages\Php\Patterns;
 use Tempest\Highlight\IsPattern;
 use Tempest\Highlight\Pattern;
 use Tempest\Highlight\PatternTest;
-use Tempest\Highlight\Tokens\TokenType;
+use Tempest\Highlight\Tokens\TokenTypeEnum;
 
 #[PatternTest(input: '(Foo&Bar)|null $bar', output: '(Foo&Bar)')]
 #[PatternTest(input: 'null|(Foo&Bar) $bar', output: '(Foo&Bar)')]
@@ -21,8 +21,8 @@ final readonly class GroupedTypePattern implements Pattern
         return '(?<match>\(\w+(&\w+)+\))';
     }
 
-    public function getTokenType(): TokenType
+    public function getTokenType(): TokenTypeEnum
     {
-        return TokenType::TYPE;
+        return TokenTypeEnum::TYPE;
     }
 }

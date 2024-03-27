@@ -37,7 +37,7 @@ Hello, &lt;?= $this-&gt;name ?&gt;
         $this->assertMatches(
             injection: new PhpInHtmlInjection(),
             content: $content,
-            expected: $expected,
+            expectedContent: $expected,
         );
     }
 }

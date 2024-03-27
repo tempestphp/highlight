@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace Tempest\Highlight\Languages\Base;
 
-use Tempest\Highlight\Escape;
 use Tempest\Highlight\Highlighter;
+use Tempest\Highlight\ParsedInjection;
 use Tempest\Highlight\Tokens\DynamicTokenType;
+use Tempest\Highlight\Tokens\Token;
 
 trait IsHighlightInjection
 {
@@ -14,37 +15,38 @@ trait IsHighlightInjection
 
     abstract private function getClassname(): string;
 
-    public function parse(string $content, Highlighter $highlighter): string
+    public function parse(string $content, Highlighter $highlighter): ParsedInjection
     {
         $token = '\\' . $this->getToken();
 
         $pattern = '/\{' . $token . '(?<match>(.|\n)*?)' . $token . '}(?!})/';
 
-        preg_match_all($pattern, $content, $matches);
+        preg_match_all($pattern, $content, $matches, PREG_OFFSET_CAPTURE);
+
+        $tokens = [];
 
         if ($matches[0] === []) {
-            return $content;
+            return new ParsedInjection($content);
         }
 
         foreach ($matches[0] as $key => $match) {
-            $contentForMatch = $matches['match'][$key];
-            $classForMatch = $this->getClassname();
-
-            $parsed = $highlighter->parse($contentForMatch, $highlighter->getCurrentLanguage());
-
-            $theme = $highlighter->getTheme();
-
+            // Get rid of the highlight tokens themselves
             $content = str_replace(
-                search: $match,
-                replace: Escape::injection(
-                    Escape::tokens($theme->before(new DynamicTokenType($classForMatch)))
-                    . $parsed
-                    . Escape::tokens($theme->after(new DynamicTokenType($classForMatch))),
-                ),
+                search: $match[0],
+                replace: $matches['match'][$key][0],
                 subject: $content,
+            );
+
+            $tokens[] = new Token(
+                offset: $match[1],
+                value: $matches['match'][$key][0],
+                type: new DynamicTokenType($this->getClassname()),
             );
         }
 
-        return $highlighter->parse($content, $highlighter->getCurrentLanguage());
+        return new ParsedInjection(
+            content: $content,
+            tokens: $tokens,
+        );
     }
 }

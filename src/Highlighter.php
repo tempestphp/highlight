@@ -95,13 +95,22 @@ final class Highlighter
 
     private function parseContent(string $content, Language $language): string
     {
+        $tokens = [];
+
         // Injections
         foreach ($language->getInjections() as $injection) {
-            $content = $injection->parse($content, $this->withoutEscaping());
+            $parsedInjection = $injection->parse($content, $this->withoutEscaping());
+
+            if (is_string($parsedInjection)) {
+                $content = $parsedInjection;
+            } else {
+                $content = $parsedInjection->content;
+                $tokens = [...$tokens, ...$parsedInjection->tokens];
+            }
         }
 
         // Patterns
-        $tokens = (new ParseTokens())($content, $language);
+        $tokens = [...$tokens, ...(new ParseTokens())($content, $language)];
 
         $groupedTokens = (new GroupTokens())($tokens);
 

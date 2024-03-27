@@ -32,17 +32,7 @@ $code = $highlighter->parse($code, 'php');
 
 ## Supported languages
 
-- [x] PHP
-- [x] HTML
-- [x] Blade
-- [x] SQL
-- [x] CSS
-- [x] JavaScript
-- [x] Twig
-- [x] YAML
-- [x] JSON
-- [x] XML
-- [x] GDScript
+All supported languages can be found in the [Languages folder](./src/Languages). We welcome PRs with additional languages. You can read about creating your own languages [here](#adding-or-extending-languages).
 
 ## Themes
 

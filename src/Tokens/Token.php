@@ -33,12 +33,6 @@ final class Token
             && $this->type === $other->type;
     }
 
-    public function samePosition(Token $other): bool
-    {
-        return $this->start === $other->start
-            && $this->end === $other->end;
-    }
-
     public function containsOrOverlaps(Token $other): bool
     {
         return

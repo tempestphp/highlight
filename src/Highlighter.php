@@ -105,10 +105,15 @@ final class Highlighter
             //      1. A string of content, which will be used to replace the existing content
             //      2. a `ParsedInjection` object, which contains both the new content AND a list of tokens to be parsed
             //
-            // The benefit of returning ParsedInjections is that the list of returned tokens will be added
+            // One benefit of returning ParsedInjections is that the list of returned tokens will be added
             // to all other tokens detected by patterns, and thus follow all token rules.
             // They are grouped and checked on whether tokens can be contained by other tokens.
-            // This offers more flexibility from the injection's point of view, and in same cases lead to more accurate highlighting
+            // This offers more flexibility from the injection's point of view, and in same cases lead to more accurate highlighting.
+            //
+            // The other benefit is that injections returning ParsedInjection objects don't need to worry about Escape::injection anymore.
+            // This escape only exists to prevent outside patterns from matching already highlighted content that's injected.
+            // If an injection doesn't highlight content anymore, then there also isn't any danger for these kinds of collisions.
+            // And so, Escape::injection becomes obsolete.
             //
             // TODO: a future version might only allow ParsedTokens and no more standalone strings, but for now we'll keep it as is.
             if (is_string($parsedInjection)) {

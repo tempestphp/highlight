@@ -24,11 +24,15 @@ enum TokenTypeEnum: string implements TokenType
 
     public function canContain(TokenType $other): bool
     {
+        if ($this === $other) {
+            return false;
+        }
+
         return match ($this) {
-            self::OPERATOR, self::VARIABLE, self::VALUE, self::INJECTION, self::COMMENT => false,
             self::TYPE => ! in_array($other->getValue(), [self::KEYWORD->getValue(), self::PROPERTY->getValue()]),
             self::GENERIC => ! in_array($other->getValue(), [self::TYPE->getValue()]),
-            default => true,
+            self::ATTRIBUTE => true,
+            default => false,
         };
     }
 }

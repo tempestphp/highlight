@@ -29,7 +29,7 @@ Hello, &lt;?= <span class="hl-variable">$this</span>-&gt;<span class="hl-propert
         $this->assertMatches(
             injection: new PhpShortEchoInHtmlInjection(),
             content: $content,
-            expected: $expected,
+            expectedContent: $expected,
         );
     }
 }

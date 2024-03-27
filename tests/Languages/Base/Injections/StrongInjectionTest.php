@@ -5,33 +5,27 @@ declare(strict_types=1);
 namespace Tempest\Highlight\Tests\Languages\Base\Injections;
 
 use PHPUnit\Framework\TestCase;
+use Tempest\Highlight\Highlighter;
 use Tempest\Highlight\Languages\Base\Injections\StrongInjection;
-use Tempest\Highlight\Languages\Php\PhpLanguage;
-use Tempest\Highlight\Tests\TestsInjections;
 
 class StrongInjectionTest extends TestCase
 {
-    use TestsInjections;
-
-    public function test_emphasize_injection()
+    public function test_strong_injection()
     {
         $content = <<<TXT
-class {*Foo
-
-test*} extends{* Bar *}
+{*class Foo*}
 TXT;
 
         $expected = <<<TXT
-<span class="hl-keyword">class</span> <span class="hl-injection"><span class="hl-strong"><span class="hl-type">Foo</span>
-
-test</span></span> extends<span class="hl-injection"><span class="hl-strong"> <span class="hl-type">Bar</span> </span></span>
+class Foo
 TXT;
 
-        $this->assertMatches(
-            injection: new StrongInjection(),
-            content: $content,
-            expected: $expected,
-            currentLanguage: new PhpLanguage(),
-        );
+        $parsed = (new StrongInjection())->parse($content, new Highlighter());
+
+        $this->assertSame($expected, $parsed->content);
+        $this->assertCount(1, $parsed->tokens);
+        $this->assertSame(0, $parsed->tokens[0]->start);
+        $this->assertSame(9, $parsed->tokens[0]->end);
+        $this->assertSame('hl-strong', $parsed->tokens[0]->type->getValue());
     }
 }

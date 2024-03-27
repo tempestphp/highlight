@@ -39,7 +39,7 @@ class CssInjectionTest extends TestCase
         $this->assertMatches(
             injection: new CssInHtmlInjection(),
             content: $content,
-            expected: $expected,
+            expectedContent: $expected,
         );
     }
 }

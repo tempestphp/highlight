@@ -45,7 +45,7 @@ class TwigTagInjectionTest extends TestCase
         $this->assertMatches(
             injection: new TwigTagInjection(),
             content: $content,
-            expected: $expected,
+            expectedContent: $expected,
         );
     }
 }

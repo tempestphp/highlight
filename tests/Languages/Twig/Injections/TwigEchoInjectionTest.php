@@ -23,7 +23,7 @@ class TwigEchoInjectionTest extends TestCase
         $this->assertMatches(
             injection: new TwigEchoInjection(),
             content: $content,
-            expected: $expected,
+            expectedContent: $expected,
         );
     }
 }

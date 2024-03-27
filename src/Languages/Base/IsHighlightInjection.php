@@ -19,29 +19,23 @@ trait IsHighlightInjection
     {
         $token = '\\' . $this->getToken();
 
-        $pattern = '/\{' . $token . '(?<match>(.|\n)*?)' . $token . '}(?!})/';
+        $pattern = '/(?<start>{' . $token . ')(?<match>(.|\n)*?)(?<end>' . $token . '})(?!})/';
 
         preg_match_all($pattern, $content, $matches, PREG_OFFSET_CAPTURE);
 
         $tokens = [];
 
-        if ($matches[0] === []) {
-            return new ParsedInjection($content);
-        }
-
-        foreach ($matches[0] as $key => $match) {
-            // Get rid of the highlight tokens themselves
-            $content = str_replace(
-                search: $match[0],
-                replace: $matches['match'][$key][0],
-                subject: $content,
-            );
+        foreach ($matches[0] as $key => $original) {
+            $startToken = $matches['start'][$key][0];
+            $endToken = $matches['end'][$key][0];
 
             $tokens[] = new Token(
-                offset: $match[1],
+                offset: (int) $matches['match'][$key][1] - strlen($startToken),
                 value: $matches['match'][$key][0],
                 type: new DynamicTokenType($this->getClassname()),
             );
+
+            $content = str_replace([$startToken, $endToken], '', $content);
         }
 
         return new ParsedInjection(

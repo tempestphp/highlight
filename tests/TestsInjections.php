@@ -14,7 +14,7 @@ trait TestsInjections
     public function assertMatches(
         Injection $injection,
         string $content,
-        string|array|null $expected,
+        string|array|null $expectedContent,
         Language|null $currentLanguage = null,
     ) {
         $highlighter = (new Highlighter())->withoutEscaping();
@@ -23,10 +23,18 @@ trait TestsInjections
             $highlighter->setCurrentLanguage($currentLanguage);
         }
 
-        $output = Escape::html($injection->parse($content, $highlighter));
+        $parsedInjection = $injection->parse($content, $highlighter);
+
+        if (is_string($parsedInjection)) {
+            $content = $parsedInjection;
+        } else {
+            $content = $parsedInjection->content;
+        }
+
+        $output = Escape::html($content);
 
         $this->assertSame(
-            $expected,
+            $expectedContent,
             $output,
         );
     }

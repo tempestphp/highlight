@@ -17,6 +17,6 @@ final readonly class DynamicTokenType implements TokenType
 
     public function canContain(TokenType $other): bool
     {
-        return true;
+        return $this->getValue() !== $other->getValue();
     }
 }

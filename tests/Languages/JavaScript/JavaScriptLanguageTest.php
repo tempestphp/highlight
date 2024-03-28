@@ -108,9 +108,9 @@ TXT,
                 <<<'TXT'
 <span class="hl-comment">/**
  * Class making something fun and easy.
- * @param {string} arg1 An argument that makes this more interesting.
- * @param {Array.&lt;number&gt;} arg2 List of numbers to be processed.
- * @constructor
+ * <span class="hl-value">@param</span> <span class="hl-type">{string}</span> <span class="hl-value">arg1</span> An argument that makes this more interesting.
+ * <span class="hl-value">@param</span> <span class="hl-type">{Array.&lt;number&gt;}</span> <span class="hl-value">arg2</span> List of numbers to be processed.
+ * <span class="hl-value">@constructor</span>
  */</span>
 <span class="hl-keyword">function</span> <span class="hl-property">someMethod</span>(obj) {
     <span class="hl-comment">// ...</span>

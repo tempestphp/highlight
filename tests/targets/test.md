@@ -1,12 +1,8 @@
-```php
+```js
 /**
- * This function will do some things
- * 
- * @template T
- * @param class-string<T> $className the class' name
- * @param int $id
- * @return T|null
- * 
- * That's about all
+ * Class making something fun and easy.
+ * @param {string} arg1 An argument that makes this more interesting.
+ * @param {Array.<number>} arg2 List of numbers to be processed.
+ * @constructor
  */
 ```

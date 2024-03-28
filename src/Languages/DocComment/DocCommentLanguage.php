@@ -6,7 +6,6 @@ namespace Tempest\Highlight\Languages\DocComment;
 
 use Tempest\Highlight\Languages\Base\BaseLanguage;
 use Tempest\Highlight\Languages\DocComment\Patterns\DocCommentTagPattern;
-use Tempest\Highlight\Languages\Php\Injections\PhpGenericTypeInjection;
 
 class DocCommentLanguage extends BaseLanguage
 {
@@ -14,7 +13,6 @@ class DocCommentLanguage extends BaseLanguage
     {
         return [
             ...parent::getInjections(),
-            new PhpGenericTypeInjection(),
         ];
     }
 

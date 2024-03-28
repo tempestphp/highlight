@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Tempest\Highlight\Languages\JavaScript;
 
 use Tempest\Highlight\Languages\Base\BaseLanguage;
+use Tempest\Highlight\Languages\JavaScript\Injections\JsDocInjection;
 use Tempest\Highlight\Languages\JavaScript\Patterns\JsClassNamePattern;
 use Tempest\Highlight\Languages\JavaScript\Patterns\JsDoubleQuoteValuePattern;
 use Tempest\Highlight\Languages\JavaScript\Patterns\JsKeywordPattern;
@@ -24,6 +25,7 @@ class JavaScriptLanguage extends BaseLanguage
     {
         return [
             ...parent::getInjections(),
+            new JsDocInjection(),
         ];
     }
 

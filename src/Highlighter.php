@@ -13,6 +13,7 @@ use Tempest\Highlight\Languages\Html\HtmlLanguage;
 use Tempest\Highlight\Languages\JavaScript\JavaScriptLanguage;
 use Tempest\Highlight\Languages\Json\JsonLanguage;
 use Tempest\Highlight\Languages\Php\PhpLanguage;
+use Tempest\Highlight\Languages\Pxp\PxpLanguage;
 use Tempest\Highlight\Languages\Sql\SqlLanguage;
 use Tempest\Highlight\Languages\Twig\TwigLanguage;
 use Tempest\Highlight\Languages\Xml\XmlLanguage;
@@ -40,6 +41,7 @@ final class Highlighter
             ->setLanguage('js', new JavaScriptLanguage())
             ->setLanguage('json', new JsonLanguage())
             ->setLanguage('php', new PhpLanguage())
+            ->setLanguage('pxp', new PxpLanguage())
             ->setLanguage('sql', new SqlLanguage())
             ->setLanguage('xml', new XmlLanguage())
             ->setLanguage('yaml', new YamlLanguage())

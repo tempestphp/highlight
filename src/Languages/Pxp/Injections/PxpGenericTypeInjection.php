@@ -1,8 +1,9 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tempest\Highlight\Languages\Pxp\Injections;
 
-use Tempest\Highlight\Escape;
 use Tempest\Highlight\Highlighter;
 use Tempest\Highlight\Injection;
 use Tempest\Highlight\ParsedInjection;
@@ -29,7 +30,7 @@ final readonly class PxpGenericTypeInjection implements Injection
                     matches: $genericClassMatches,
                     flags: PREG_OFFSET_CAPTURE
                 );
-                
+
                 foreach ($genericClassMatches['genericClass'] as $genericClassMatch) {
                     $tokens[] = new Token(
                         offset: $genericClassMatch[1],

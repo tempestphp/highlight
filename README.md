@@ -19,7 +19,7 @@ You can read about why I started this package [here](https://stitcher.io/blog/a-
 ## Quickstart
 
 ```php
-composer require tempest/highlight:dev-main
+composer require tempest/highlight
 ```
 
 Highlight code like this:

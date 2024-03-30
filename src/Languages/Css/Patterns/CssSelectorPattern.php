@@ -21,13 +21,14 @@ pre {
 kbd, samp,
 pre ',
 )]
+#[PatternTest(input: "[data-x='asd'] .light {", output: "[data-x='asd'] .light ")]
 final readonly class CssSelectorPattern implements Pattern
 {
     use IsPattern;
 
     public function getPattern(): string
     {
-        return '(?<match>[\@\-\#\.\w\s,\n]+)\{';
+        return '(?<match>[\[\]\'\"\=\@\-\#\.\w\s,\n]+)\{';
     }
 
     public function getTokenType(): TokenTypeEnum

@@ -37,6 +37,7 @@ final class Highlighter
             ->setLanguage('doc', new DocCommentLanguage())
             ->setLanguage('gdscript', new GdscriptLanguage())
             ->setLanguage('html', new HtmlLanguage())
+            ->setLanguage('javascript', new JavaScriptLanguage())
             ->setLanguage('js', new JavaScriptLanguage())
             ->setLanguage('json', new JsonLanguage())
             ->setLanguage('php', new PhpLanguage())

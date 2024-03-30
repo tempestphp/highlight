@@ -13,13 +13,15 @@ use Tempest\Highlight\Tokens\TokenTypeEnum;
     input: 'code, .asd, #id,
 .hl-blur, @font-face,
 kbd, samp,
-pre {
+pre,
+[data-foo="bar"] {
     font-family: ui-monospace, monospace;
 }',
     output: 'code, .asd, #id,
 .hl-blur, @font-face,
 kbd, samp,
-pre ',
+pre,
+[data-foo="bar"] '
 )]
 final readonly class CssSelectorPattern implements Pattern
 {
@@ -27,7 +29,7 @@ final readonly class CssSelectorPattern implements Pattern
 
     public function getPattern(): string
     {
-        return '(?<match>[\@\-\#\.\w\s,\n]+)\{';
+        return '(?<match>[\@\-\#\.\w\s,\n\[\]+=\'"]+)\{';
     }
 
     public function getTokenType(): TokenTypeEnum

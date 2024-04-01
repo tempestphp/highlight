@@ -9,13 +9,16 @@ use League\CommonMark\Extension\CommonMark\Node\Inline\Code;
 use League\CommonMark\MarkdownConverter;
 use Tempest\Highlight\CommonMark\CodeBlockRenderer;
 use Tempest\Highlight\CommonMark\InlineCodeBlockRenderer;
+use Tempest\Highlight\Highlighter;
 
 $environment = new Environment();
 
+$highlighter = (new Highlighter())->withGutter(20);
+
 $environment
     ->addExtension(new CommonMarkCoreExtension())
-    ->addRenderer(FencedCode::class, new CodeBlockRenderer())
-    ->addRenderer(Code::class, new InlineCodeBlockRenderer())
+    ->addRenderer(FencedCode::class, new CodeBlockRenderer($highlighter))
+    ->addRenderer(Code::class, new InlineCodeBlockRenderer($highlighter))
 ;
 
 $markdown = new MarkdownConverter($environment);
@@ -52,7 +55,7 @@ $contents = $markdown->convert(file_get_contents(__DIR__ . DIRECTORY_SEPARATOR .
         .hl {
             margin: 3em auto;
             box-shadow: 0 0 10px 0 #00000044;
-            padding: 1em 2em;
+            padding: 1em 2em 1em 1ch;
             /*background-color: #fafafa;*/
             border-radius: 3px;
             color: #000;

@@ -58,3 +58,21 @@ pre, code {
     min-width: 100%;
     background-color: #FF000022;
 }
+
+.hl-gutter {
+    display: inline-block;
+    margin-right: 1ch;
+    font-size: 0.9em;
+    color: #555;
+    padding: 0 1ch;
+}
+
+.hl-gutter-addition {
+    background-color: #34A853;
+    color: #fff;
+}
+
+.hl-gutter-deletion {
+    background-color: #EA4334;
+    color: #fff;
+}

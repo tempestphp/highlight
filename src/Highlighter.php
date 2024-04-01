@@ -17,6 +17,12 @@ use Tempest\Highlight\Languages\Sql\SqlLanguage;
 use Tempest\Highlight\Languages\Twig\TwigLanguage;
 use Tempest\Highlight\Languages\Xml\XmlLanguage;
 use Tempest\Highlight\Languages\Yaml\YamlLanguage;
+use Tempest\Highlight\Renderers\AdditionRenderer;
+use Tempest\Highlight\Renderers\BlurRenderer;
+use Tempest\Highlight\Renderers\DeletionRenderer;
+use Tempest\Highlight\Renderers\EmphasizeRenderer;
+use Tempest\Highlight\Renderers\GutterRenderer;
+use Tempest\Highlight\Renderers\StrongRenderer;
 use Tempest\Highlight\Themes\CssTheme;
 use Tempest\Highlight\Tokens\GroupTokens;
 use Tempest\Highlight\Tokens\ParseTokens;
@@ -25,8 +31,11 @@ use Tempest\Highlight\Tokens\RenderTokens;
 final class Highlighter
 {
     private array $languages = [];
+    private array $renderers = [];
     private ?Language $currentLanguage = null;
     private bool $shouldEscape = true;
+    private bool $shouldRender = true;
+    private ?GutterRenderer $gutterRenderer = null;
 
     public function __construct(
         private readonly Theme $theme = new CssTheme(),
@@ -46,9 +55,28 @@ final class Highlighter
             ->setLanguage('yml', new YamlLanguage())
             ->setLanguage('twig', new TwigLanguage());
 
+        $this
+            ->addRenderer(new AdditionRenderer())
+            ->addRenderer(new DeletionRenderer())
+    ;
+
         if ($this->theme instanceof TerminalTheme) {
             $this->shouldEscape = false;
         }
+    }
+
+    public function withGutter(int $startAt = 1): self
+    {
+        $this->gutterRenderer = new GutterRenderer($startAt);
+
+        return $this;
+    }
+
+    public function addRenderer(Renderer $renderer): self
+    {
+        $this->renderers[] = $renderer;
+
+        return $this;
     }
 
     public function setLanguage(string $name, Language $language): self
@@ -93,13 +121,25 @@ final class Highlighter
         return $clone;
     }
 
+    public function withoutRenderers(): self
+    {
+        $clone = clone $this;
+
+        $clone->shouldRender = false;
+
+        return $clone;
+    }
+
     private function parseContent(string $content, Language $language): string
     {
         $tokens = [];
 
         // Injections
         foreach ($language->getInjections() as $injection) {
-            $parsedInjection = $injection->parse($content, $this->withoutEscaping());
+            $parsedInjection = $injection->parse(
+                $content,
+                $this->withoutEscaping()->withoutRenderers()
+            );
 
             // Injections are allowed to return one of two things:
             //      1. A string of content, which will be used to replace the existing content
@@ -130,6 +170,21 @@ final class Highlighter
         $groupedTokens = (new GroupTokens())($tokens);
 
         $output = (new RenderTokens($this->theme))($content, $groupedTokens);
+
+        if ($this->shouldRender) {
+            // Renderers
+            foreach ($this->renderers as $renderer) {
+                if ($renderer instanceof WithGutter && $this->gutterRenderer) {
+                    $renderer->setGutter($this->gutterRenderer);
+                }
+
+                $output = $renderer->render($output);
+            }
+
+            if ($this->gutterRenderer) {
+                $output = $this->gutterRenderer->render($output);
+            }
+        }
 
         // Determine proper escaping
         return match(true) {

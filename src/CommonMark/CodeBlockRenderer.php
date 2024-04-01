@@ -12,22 +12,25 @@ use League\CommonMark\Renderer\NodeRendererInterface;
 use League\CommonMark\Util\HtmlElement;
 use Tempest\Highlight\Highlighter;
 
-class CodeBlockRenderer implements NodeRendererInterface
+final class CodeBlockRenderer implements NodeRendererInterface
 {
+    public function __construct(
+        private Highlighter $highlighter = new Highlighter(),
+    ) {}
+
     public function render(Node $node, ChildNodeRendererInterface $childRenderer)
     {
         if (! $node instanceof FencedCode) {
             throw new InvalidArgumentException('Block must be instance of ' . FencedCode::class);
         }
 
-        $highlight = new Highlighter();
         $code = $node->getLiteral();
         $language = $node->getInfoWords()[0] ?? 'txt';
 
         return new HtmlElement(
             'pre',
             [],
-            $highlight->parse($code, $language)
+            $this->highlighter->parse($code, $language)
         );
     }
 }

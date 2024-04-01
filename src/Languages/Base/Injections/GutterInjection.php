@@ -1,11 +1,13 @@
 <?php
 
-namespace Tempest\Highlight\Renderers;
+namespace Tempest\Highlight\Languages\Base\Injections;
 
 use Tempest\Highlight\Escape;
-use Tempest\Highlight\Renderer;
+use Tempest\Highlight\Highlighter;
+use Tempest\Highlight\Injection;
+use Tempest\Highlight\ParsedInjection;
 
-final class GutterRenderer implements Renderer
+final class GutterInjection implements Injection
 {
     private array $icons = [];
     private array $classes = [];
@@ -26,7 +28,7 @@ final class GutterRenderer implements Renderer
         return $this;
     }
 
-    public function render(string $content): string
+    public function parse(string $content, Highlighter $highlighter): string|ParsedInjection
     {
         $lines = explode(PHP_EOL, trim($content));
 
@@ -46,7 +48,7 @@ final class GutterRenderer implements Renderer
                 $longestGutterNumber = $gutterNumber;
             }
         }
-        
+
         $gutterWidth = strlen($longestGutterNumber);
 
         foreach ($lines as $i => $line) {

@@ -1,6 +1,6 @@
 ```php
 foreach ($lines as $i => $line) {
-    $gutterNumber = $gutterNumbers[$i];
+    {~$gutterNumber = $gutterNumbers[$i];~}
 
 {+    $gutterClass = 'hl-gutter ' . ($this->classes[$i + 1] ?? '');+}
 {++}

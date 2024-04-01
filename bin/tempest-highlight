@@ -1,0 +1,30 @@
+#!/bin/env php
+<?php
+
+declare(strict_types=1);
+
+use Tempest\Highlight\Highlighter;
+use Tempest\Highlight\Themes\LightTerminalTheme;
+
+
+require_once $_composer_autoload_path ?? __DIR__ . '/../vendor/autoload.php';
+
+stream_set_blocking(STDIN, false);
+$content = file_get_contents('php://stdin');
+
+if (empty($argv[1]) || (empty($content) && empty($argv[2]))) {
+    printf("Usage: %s: [language] '[content]'\n", basename(__FILE__));
+    exit(1);
+}
+
+$content = $content === '' ? $argv[2] : $content;
+$language = $argv[1];
+
+$thighlighter = new Highlighter(new LightTerminalTheme());
+
+if ($thighlighter->hasLanguage($language) === false) {
+    echo "Error: '$language' is not a currently supported language.\n";
+    exit(2);
+}
+
+echo $thighlighter->parse($content, strtolower($language)) . "\n";

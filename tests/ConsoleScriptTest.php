@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Tempest\Highlight\Tests;
 
-use PHPUnit\Framework\Assert;
 use PHPUnit\Framework\TestCase;
 use Tempest\Highlight\Highlighter;
 use Tempest\Highlight\Themes\LightTerminalTheme;
@@ -23,8 +22,8 @@ class ConsoleScriptTest extends TestCase
         $expected = "Usage: tempest-highlight: [language] '[content]'";
         exec($this->getHighlightCommand(), $actual, $resultCode);
 
-        Assert::assertEquals([$expected], $actual);
-        Assert::assertEquals(1, $resultCode);
+        $this->assertEquals([$expected], $actual);
+        $this->assertEquals(1, $resultCode);
         ;
     }
 
@@ -39,8 +38,8 @@ class ConsoleScriptTest extends TestCase
 
         $expected = (new Highlighter(new LightTerminalTheme()))->parse($code, 'php');
 
-        Assert::assertEquals(0, $resultCode);
-        Assert::assertSame($expected, $actual);
+        $this->assertEquals(0, $resultCode);
+        $this->assertSame($expected, $actual);
     }
 
     public function test_supports_text_from_stdin_including_nowdoc(): void
@@ -64,8 +63,8 @@ class ConsoleScriptTest extends TestCase
 
             $expected = (new Highlighter(new LightTerminalTheme()))->parse($code, 'php') . "\n";
 
-            Assert::assertEquals(0, $resultCode);
-            Assert::assertSame($expected, $actual);
+            $this->assertEquals(0, $resultCode);
+            $this->assertSame($expected, $actual);
         };
 
         $jsTest = function () {
@@ -86,8 +85,8 @@ class ConsoleScriptTest extends TestCase
 
             $expected = (new Highlighter(new LightTerminalTheme()))->parse($code, 'javascript') . "\n";
 
-            Assert::assertEquals(0, $resultCode);
-            Assert::assertSame($expected, $actual);
+            $this->assertEquals(0, $resultCode);
+            $this->assertSame($expected, $actual);
         };
 
         $phpTest();
@@ -100,7 +99,7 @@ class ConsoleScriptTest extends TestCase
         exec($command, $output, $resultCode);
 
         $expected = "Error: 'DOESNT_EXIST' is not a currently supported language.";
-        Assert::assertEquals(2, $resultCode);
-        Assert::assertEquals([$expected], $output);
+        $this->assertEquals(2, $resultCode);
+        $this->assertEquals([$expected], $output);
     }
 }

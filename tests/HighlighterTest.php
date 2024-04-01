@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Tempest\Highlight\Tests;
 
-use PHPUnit\Framework\Assert;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
@@ -47,11 +46,11 @@ class HighlighterTest extends TestCase
     {
         $highlight = new Highlighter();
 
-        Assert::assertTrue($highlight->hasLanguage('php'));
-        Assert::assertTrue($highlight->hasLanguage('PHP'));
-        Assert::assertTrue($highlight->hasLanguage('Php'));
+        $this->assertTrue($highlight->hasLanguage('php'));
+        $this->assertTrue($highlight->hasLanguage('PHP'));
+        $this->assertTrue($highlight->hasLanguage('Php'));
 
-        Assert::assertFalse($highlight->hasLanguage('DoesNotExist'));
-        Assert::assertFalse($highlight->hasLanguage('DOESNOTEXIST'));
+        $this->assertFalse($highlight->hasLanguage('DoesNotExist'));
+        $this->assertFalse($highlight->hasLanguage('DOESNOTEXIST'));
     }
 }

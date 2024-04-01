@@ -52,7 +52,7 @@ final class Highlighter
         }
     }
 
-    public function isSupportedLanguage(string $language): bool
+    public function hasLanguage(string $language): bool
     {
         return array_key_exists(strtolower($language), $this->languages);
     }

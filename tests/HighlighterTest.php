@@ -42,15 +42,15 @@ class HighlighterTest extends TestCase
         ];
     }
 
-    public function test_is_supported_language(): void
+    public function test_has_language(): void
     {
         $highlight = new Highlighter();
 
-        self::assertTrue($highlight->isSupportedLanguage('php'));
-        self::assertTrue($highlight->isSupportedLanguage('PHP'));
-        self::assertTrue($highlight->isSupportedLanguage('Php'));
+        self::assertTrue($highlight->hasLanguage('php'));
+        self::assertTrue($highlight->hasLanguage('PHP'));
+        self::assertTrue($highlight->hasLanguage('Php'));
 
-        self::assertFalse($highlight->isSupportedLanguage('DoesNotExist'));
-        self::assertFalse($highlight->isSupportedLanguage('DOESNOTEXIST'));
+        self::assertFalse($highlight->hasLanguage('DoesNotExist'));
+        self::assertFalse($highlight->hasLanguage('DOESNOTEXIST'));
     }
 }

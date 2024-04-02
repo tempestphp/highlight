@@ -8,6 +8,7 @@ use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Tempest\Highlight\Highlighter;
+use Tempest\Highlight\Themes\InlineTheme;
 
 class HighlighterTest extends TestCase
 {
@@ -32,6 +33,15 @@ class HighlighterTest extends TestCase
 
         $output = $highlight->parse('<style>', 'unknown');
         $this->assertSame('&lt;style&gt;', $output);
+    }
+
+    public function test_inline_theme(): void
+    {
+        $highlighter = (new Highlighter(new InlineTheme(__DIR__ . '/../src/Themes/min-light.css')));
+
+        $output = $highlighter->parse('echo 1', 'php');
+
+        $this->assertSame('<span style="color: #D32F2F;">echo</span> 1', $output);
     }
 
     public static function data(): array

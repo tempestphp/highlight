@@ -1,3 +1,8 @@
+## 1.2.0
+
+- Added a collection of themes (#87)
+- Added a new `InlineTheme`, which doesn't require loading a CSS style sheet (#88)
+
 ## 1.1.0
 
 - Added Gutter support:

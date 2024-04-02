@@ -11,6 +11,8 @@ use League\CommonMark\Extension\FrontMatter\FrontMatterExtension;
 use League\CommonMark\MarkdownConverter;
 use PHPUnit\Framework\TestCase;
 use Tempest\Highlight\CommonMark\CodeBlockRenderer;
+use Tempest\Highlight\Highlighter;
+use Tempest\Highlight\Themes\InlineTheme;
 
 class CodeBlockRendererTest extends TestCase
 {
@@ -51,6 +53,33 @@ TXT;
 
         $expected = <<<'TXT'
 <pre><span class="hl-gutter ">10</span> <span class="hl-keyword">class</span> <span class="hl-type">Foo</span> {}</pre>
+
+TXT;
+
+        $this->assertSame($expected, $markdown->convert($input)->getContent());
+    }
+
+    public function test_commonmark_with_pre(): void
+    {
+
+        $environment = new Environment();
+
+        $environment
+            ->addExtension(new CommonMarkCoreExtension())
+            ->addExtension(new FrontMatterExtension())
+            ->addRenderer(FencedCode::class, new CodeBlockRenderer(new Highlighter(new InlineTheme(__DIR__ . '/../../src/Themes/min-light.css'))));
+
+        $markdown = new MarkdownConverter($environment);
+
+        $input = <<<'TXT'
+```php
+echo;
+```
+TXT;
+
+        $expected = <<<'TXT'
+<pre style="color: #212121; background-color: #ffffff;"><span style="color: #D32F2F;">echo</span>;
+</pre>
 
 TXT;
 

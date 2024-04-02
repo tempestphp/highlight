@@ -1,18 +1,12 @@
-```php
-foreach ($lines as $i => $line) {
-    $gutterNumber = $gutterNumbers[$i];
+```php{1}
+$environment = new Environment();
 
-    $gutterClass = 'hl-gutter ' . ($this->classes[$i + 1] ?? '');
-{+
-    $lines[$i] = sprintf(
-        Escape::tokens('<span class="%s">%s</span>%s'),+}
-        $gutterClass,
-        str_pad(
-            string: {-$gutterNumber-},
-            length: $gutterWidth,
-            pad_type: STR_PAD_LEFT,
-        ),
-        $line,
-    );
-}
+$theme = new InlineTheme(__DIR__ . {+'/../src/Themes/solarized-dark.css'+}));
+
+$highlighter = (new Highlighter($theme))->withGutter();
+
+$environment
+    ->addExtension(new CommonMarkCoreExtension())
+    ->addRenderer(FencedCode::class, new CodeBlockRenderer($highlighter))
+    ->addRenderer(Code::class, new InlineCodeBlockRenderer($highlighter));
 ```

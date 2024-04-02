@@ -9,8 +9,8 @@ use League\CommonMark\Extension\CommonMark\Node\Block\FencedCode;
 use League\CommonMark\Node\Node;
 use League\CommonMark\Renderer\ChildNodeRendererInterface;
 use League\CommonMark\Renderer\NodeRendererInterface;
-use League\CommonMark\Util\HtmlElement;
 use Tempest\Highlight\Highlighter;
+use Tempest\Highlight\WithPre;
 
 final class CodeBlockRenderer implements NodeRendererInterface
 {
@@ -31,13 +31,14 @@ final class CodeBlockRenderer implements NodeRendererInterface
             $this->highlighter->withGutter((int)$startAt);
         }
 
-        return new HtmlElement(
-            'pre',
-            [],
-            $this->highlighter->parse(
-                content: $node->getLiteral(),
-                language: $matches['language'],
-            ),
-        );
+        $parsed = $this->highlighter->parse($node->getLiteral(), $matches['language']);
+
+        $theme = $this->highlighter->getTheme();
+
+        if ($theme instanceof WithPre) {
+            return $theme->preBefore() . $parsed . $theme->preAfter();
+        } else {
+            return '<pre>' . $parsed . '</pre>';
+        }
     }
 }

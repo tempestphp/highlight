@@ -6,8 +6,6 @@ You can read about why I started this package [here](https://stitcher.io/blog/a-
 - [Quickstart](#quickstart)
 - [Supported languages](#supported-languages)
 - [Themes](#themes)
-  - [For the web](#for-the-web)
-  - [For the terminal](#for-the-terminal)
 - [Gutter](#gutter)
 - [Special highlighting tags](#special-highlighting-tags)
   - [Emphasize strong and blur](#emphasize-strong-and-blur)
@@ -37,18 +35,17 @@ All supported languages can be found in the [Languages folder](./src/Languages).
 
 ## Themes
 
-### For the web
-
-For HTML rendering, you can use one of the provided themes that comes with this package:
+There are a [bunch of themes](./src/Themes) included in this package. You can load them either by importing the correct CSS file into your project's CSS file, or you can manually copy a stylesheet.
 
 ```css
 @import "../vendor/tempest/highlight/src/Themes/highlight-light-lite.css";
-@import "../vendor/tempest/highlight/src/Themes/highlight-dark-lite.css";
 ```
 
 You can build your own CSS theme with just a couple of classes, copy over [the base stylesheet](./src/Themes/highlight-light-lite.css), and make adjustments however you like. Note that `pre` tag styling isn't included in this package.
 
-### For the terminal
+### Terminal themes
+
+Terminal themes are more limited because of their limited styling options. Right now there's one terminal theme provided: `LightTerminalTheme`. More terminal themes are planned to be added in the future.
 
 ```php
 use Tempest\Highlight\Highlighter;

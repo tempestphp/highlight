@@ -10,10 +10,11 @@ use League\CommonMark\MarkdownConverter;
 use Tempest\Highlight\CommonMark\CodeBlockRenderer;
 use Tempest\Highlight\CommonMark\InlineCodeBlockRenderer;
 use Tempest\Highlight\Highlighter;
+use Tempest\Highlight\Themes\InlineTheme;
 
 $environment = new Environment();
 
-$highlighter = (new Highlighter())->withGutter(20);
+$highlighter = (new Highlighter(new InlineTheme(__DIR__ . '/../src/Themes/solarized-dark.css')));
 
 $environment
     ->addExtension(new CommonMarkCoreExtension())
@@ -52,10 +53,10 @@ $contents = $markdown->convert(file_get_contents(__DIR__ . DIRECTORY_SEPARATOR .
             padding: .1em;
         }
 
-        .hl {
+        pre {
             margin: 3em auto;
             box-shadow: 0 0 10px 0 #00000044;
-            padding: 1em 2em 1em 1ch;
+            padding: 2em 2em 2em 1ch;
             /*background-color: #fafafa;*/
             border-radius: 3px;
             color: #000;
@@ -71,9 +72,7 @@ $contents = $markdown->convert(file_get_contents(__DIR__ . DIRECTORY_SEPARATOR .
 </head>
 <body>
 <div class="container">
-    <div class="hl">
-        <?= $contents ?>
-    </div>
+    <?= $contents ?>
 </div>
 </body>
 </html>

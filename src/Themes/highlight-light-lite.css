@@ -48,15 +48,13 @@ pre, code {
 }
 
 .hl-addition {
-    display: inline-block;
     min-width: 100%;
-    background-color: #00FF0033;
+    background-color: #00FF0022;
 }
 
 .hl-deletion {
-    display: inline-block;
     min-width: 100%;
-    background-color: #FF000022;
+    background-color: #FF000011;
 }
 
 .hl-gutter {

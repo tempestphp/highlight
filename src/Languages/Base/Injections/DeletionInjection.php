@@ -14,40 +14,46 @@ final readonly class DeletionInjection implements Injection
 {
     public function parse(string $content, Highlighter $highlighter): string
     {
+        preg_match_all('/(\{-)((.|\n)*?)(-})/', $content, $matches, PREG_OFFSET_CAPTURE);
 
-        preg_match_all('/(?<match>\{\-)/', $content, $matches, PREG_OFFSET_CAPTURE);
+        foreach ($matches[0] as $match) {
+            $matchedContent = $match[0];
+            $offset = $match[1];
 
-        $parsedOffset = 0;
+            $open = Escape::tokens('<span class="hl-deletion">');
+            $close = Escape::tokens('</span>');
 
-        foreach ($matches['match'] as $match) {
-            $span = Escape::tokens('<span class="hl-deletion">');
-
-            $content = substr_replace(
-                string: $content,
-                replace: $span,
-                offset: $match[1] + $parsedOffset,
-                length: strlen($match[0]),
+            // Replace tags + EOLs with appropriate span tags
+            $parsedMatchedContent = str_replace(
+                ['{-', PHP_EOL, '-}'],
+                [$open, $close . PHP_EOL . $open, $close],
+                $matchedContent,
             );
 
+            // Inject the parsed match into the content
+            $content = str_replace($matchedContent, $parsedMatchedContent, $content);
+
+            // Configure the gutter,
             if ($gutter = $highlighter->getGutterInjection()) {
-                $lineNumber = substr_count(
-                        haystack: $content,
-                        needle: PHP_EOL,
-                        length: $match[1] + $parsedOffset,
-                    ) + 1;
+                $startingLineNumber = substr_count(
+                    haystack: $content,
+                    needle: PHP_EOL,
+                    length: $offset,
+                ) + 1;
 
-                $gutter
-                    ->addIcon($lineNumber, '-')
-                    ->addClass($lineNumber, 'hl-gutter-deletion');
+                $totalAmountOfLines = substr_count(
+                    haystack: $parsedMatchedContent,
+                    needle: PHP_EOL,
+                ) + 1;
+
+                for ($lineNumber = $startingLineNumber; $lineNumber < $startingLineNumber + $totalAmountOfLines; $lineNumber++) {
+                    $gutter
+                        ->addIcon($lineNumber, '-')
+                        ->addClass($lineNumber, 'hl-gutter-deletion');
+                }
             }
-
-            $parsedOffset += strlen($span) - strlen($match[0]);
         }
 
-        return str_replace(
-            '-}',
-            Escape::tokens('</span>'),
-            $content,
-        );
+        return $content;
     }
 }

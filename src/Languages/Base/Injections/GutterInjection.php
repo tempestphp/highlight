@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tempest\Highlight\Languages\Base\Injections;
 
 use Tempest\Highlight\Escape;
@@ -12,7 +14,9 @@ final class GutterInjection implements Injection
     private array $icons = [];
     private array $classes = [];
 
-    public function __construct(private int $startAt = 1) {}
+    public function __construct(private int $startAt = 1)
+    {
+    }
 
     public function addIcon(int $line, string $token): self
     {
@@ -44,8 +48,8 @@ final class GutterInjection implements Injection
 
             $gutterNumbers[$i] = $gutterNumber;
 
-            if (strlen($longestGutterNumber) < strlen($gutterNumber)) {
-                $longestGutterNumber = $gutterNumber;
+            if (strlen((string) $longestGutterNumber) < strlen((string) $gutterNumber)) {
+                $longestGutterNumber = (string) $gutterNumber;
             }
         }
 
@@ -60,7 +64,7 @@ final class GutterInjection implements Injection
                 Escape::tokens('<span class="%s">%s</span>%s'),
                 $gutterClass,
                 str_pad(
-                    string: $gutterNumber,
+                    string: (string) $gutterNumber,
                     length: $gutterWidth,
                     pad_type: STR_PAD_LEFT,
                 ),

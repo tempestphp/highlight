@@ -34,8 +34,7 @@ final class Highlighter
 
     public function __construct(
         private readonly Theme $theme = new CssTheme(),
-    )
-    {
+    ) {
         $this
             ->setLanguage('blade', new BladeLanguage())
             ->setLanguage('css', new CssLanguage())
@@ -137,7 +136,7 @@ final class Highlighter
     }
 
     /**
-     * @param \Tempest\Highlight\Language $language
+     * @param Language $language
      * @return \Tempest\Highlight\Injection[]
      */
     private function getBeforeInjections(Language $language): Generator
@@ -155,7 +154,7 @@ final class Highlighter
     }
 
     /**
-     * @param \Tempest\Highlight\Language $language
+     * @param Language $language
      * @return \Tempest\Highlight\Injection[]
      */
     private function getAfterInjections(Language $language): Generator

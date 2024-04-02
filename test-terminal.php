@@ -5,7 +5,7 @@ use Tempest\Highlight\Themes\LightTerminalTheme;
 
 require_once __DIR__ . '/vendor/autoload.php';
 
-$highlighter = new Highlighter(new LightTerminalTheme());
+$highlighter = (new Highlighter(new LightTerminalTheme()))->withGutter();
 
 $target = $argc > 1
     ? $argv[1]

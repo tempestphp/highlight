@@ -61,7 +61,7 @@ final class GutterInjection implements Injection
             $gutterClass = 'hl-gutter ' . ($this->classes[$i + $this->startAt] ?? '');
 
             $lines[$i] = sprintf(
-                Escape::tokens('<span class="%s">%s</span>%s'),
+                Escape::tokens('<span class="%s">%s</span> %s'),
                 $gutterClass,
                 str_pad(
                     string: (string) $gutterNumber,

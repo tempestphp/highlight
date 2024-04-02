@@ -11,7 +11,6 @@ $highlighter = (new \Tempest\Highlight\Highlighter())->withGutter();
 ```css
 .hl-gutter {
     display: inline-block;
-    margin-right: 1ch;
     font-size: 0.9em;
     color: #555;
     padding: 0 1ch;

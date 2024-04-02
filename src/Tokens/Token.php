@@ -63,6 +63,17 @@ final class Token
 
     public function canContain(Token $otherToken): bool
     {
+        foreach ($this->children as $childToken) {
+            // If there's already a child token at the exact position,
+            // we're not going to allow another child to be added
+            if (
+                $childToken->start === $otherToken->start
+                && $childToken->end === $otherToken->end
+            ) {
+                return false;
+            }
+        }
+
         return $this->type->canContain($otherToken->type);
     }
 }

@@ -14,7 +14,7 @@ use Tempest\Highlight\Themes\InlineTheme;
 
 $environment = new Environment();
 
-$highlighter = (new Highlighter(new InlineTheme(__DIR__ . '/../src/Themes/solarized-dark.css')));
+$highlighter = (new Highlighter(new InlineTheme(__DIR__ . '/../src/Themes/highlight-light-lite.css')))->withGutter();
 
 $environment
     ->addExtension(new CommonMarkCoreExtension())

@@ -1,3 +1,7 @@
+## 1.2.1
+
+- Fix blur bleed bug (#89)
+
 ## 1.2.0
 
 - Added a collection of themes (#87)

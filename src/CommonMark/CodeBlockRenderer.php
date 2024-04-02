@@ -25,13 +25,19 @@ final class CodeBlockRenderer implements NodeRendererInterface
             throw new InvalidArgumentException('Block must be instance of ' . FencedCode::class);
         }
 
-        $code = $node->getLiteral();
-        $language = $node->getInfoWords()[0] ?? 'txt';
+        preg_match('/^(?<language>[\w]+)(\{(?<startAt>[\d]+)\})?/', $node->getInfoWords()[0] ?? 'txt', $matches);
+
+        if ($startAt = ($matches['startAt']) ?? null) {
+            $this->highlighter->withGutter((int)$startAt);
+        }
 
         return new HtmlElement(
             'pre',
             [],
-            $this->highlighter->parse($code, $language)
+            $this->highlighter->parse(
+                content: $node->getLiteral(),
+                language: $matches['language'],
+            ),
         );
     }
 }

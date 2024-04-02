@@ -73,7 +73,13 @@ The gutter will show additions and deletions, and can start at any given line nu
 
 ![](./.github/highlight-4.png)
 
-Gutter styling is managed within your CSS theme.
+Finally, you can enable gutter rendering on the fly if you're using [commonmark code blocks](#commonmark-integration) by appending `{startAt}` to the language definition:
+
+```md
+&#96;&#96;&#96;php{1}
+echo 'hi'!
+&#96;&#96;&#96;
+```
 
 ## Special highlighting tags
 

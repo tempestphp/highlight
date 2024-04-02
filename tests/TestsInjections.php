@@ -17,7 +17,7 @@ trait TestsInjections
         string|array|null $expectedContent,
         Language|null $currentLanguage = null,
     ) {
-        $highlighter = (new Highlighter())->withoutEscaping();
+        $highlighter = (new Highlighter())->nested();
 
         if ($currentLanguage) {
             $highlighter->setCurrentLanguage($currentLanguage);

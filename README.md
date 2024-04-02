@@ -8,6 +8,7 @@ You can read about why I started this package [here](https://stitcher.io/blog/a-
 - [Themes](#themes)
   - [For the web](#for-the-web)
   - [For the terminal](#for-the-terminal)
+- [Gutter](#gutter)
 - [Special highlighting tags](#special-highlighting-tags)
   - [Emphasize strong and blur](#emphasize-strong-and-blur)
   - [Additions and deletions](#additions-and-deletions)
@@ -59,6 +60,26 @@ echo $highlighter->parse($code, 'php');
 ```
 
 ![](./.github/terminal.png)
+
+## Gutter
+
+This package can render an optional gutter if needed. 
+
+```php
+$highlighter = (new Highlighter())->withGutter(startAt: 10);
+```
+
+The gutter will show additions and deletions, and can start at any given line number:
+
+![](./.github/highlight-4.png)
+
+Finally, you can enable gutter rendering on the fly if you're using [commonmark code blocks](#commonmark-integration) by appending `{startAt}` to the language definition:
+
+```md
+&#96;&#96;&#96;php{1}
+echo 'hi'!
+&#96;&#96;&#96;
+```
 
 ## Special highlighting tags
 

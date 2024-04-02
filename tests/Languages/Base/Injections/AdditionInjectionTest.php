@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Tempest\Highlight\Tests\Languages\Base\Injections;
 
 use PHPUnit\Framework\TestCase;
+use Tempest\Highlight\Escape;
 use Tempest\Highlight\Highlighter;
 use Tempest\Highlight\Languages\Base\Injections\AdditionInjection;
 
@@ -17,15 +18,11 @@ class AdditionInjectionTest extends TestCase
 TXT;
 
         $expected = <<<TXT
-class Foo
+<span class="hl-addition">class Foo</span>
 TXT;
 
-        $parsed = (new AdditionInjection())->parse($content, new Highlighter());
+        $content = (new AdditionInjection())->parse($content, new Highlighter());
 
-        $this->assertSame($expected, $parsed->content);
-        $this->assertCount(1, $parsed->tokens);
-        $this->assertSame(0, $parsed->tokens[0]->start);
-        $this->assertSame(9, $parsed->tokens[0]->end);
-        $this->assertSame('hl-addition', $parsed->tokens[0]->type->getValue());
+        $this->assertSame($expected, Escape::html($content));
     }
 }

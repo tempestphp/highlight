@@ -4,20 +4,56 @@ declare(strict_types=1);
 
 namespace Tempest\Highlight\Languages\Base\Injections;
 
+use Tempest\Highlight\After;
+use Tempest\Highlight\Escape;
+use Tempest\Highlight\Highlighter;
 use Tempest\Highlight\Injection;
-use Tempest\Highlight\Languages\Base\IsHighlightInjection;
 
+#[After]
 final readonly class DeletionInjection implements Injection
 {
-    use IsHighlightInjection;
-
-    private function getToken(): string
+    public function parse(string $content, Highlighter $highlighter): string
     {
-        return '-';
-    }
+        preg_match_all('/(\{-)((.|\n)*?)(-})/', $content, $matches, PREG_OFFSET_CAPTURE);
 
-    private function getClassname(): string
-    {
-        return 'hl-deletion';
+        foreach ($matches[0] as $match) {
+            $matchedContent = $match[0];
+            $offset = $match[1];
+
+            $open = Escape::tokens('<span class="hl-deletion">');
+            $close = Escape::tokens('</span>');
+
+            // Replace tags + EOLs with appropriate span tags
+            $parsedMatchedContent = str_replace(
+                ['{-', PHP_EOL, '-}'],
+                [$open, $close . PHP_EOL . $open, $close],
+                $matchedContent,
+            );
+
+            // Inject the parsed match into the content
+            $content = str_replace($matchedContent, $parsedMatchedContent, $content);
+
+            // Configure the gutter,
+            if ($gutter = $highlighter->getGutterInjection()) {
+                $startingLineNumber = substr_count(
+                    haystack: $content,
+                    needle: PHP_EOL,
+                    length: $offset,
+                ) + 1;
+
+                $totalAmountOfLines = substr_count(
+                    haystack: $parsedMatchedContent,
+                    needle: PHP_EOL,
+                ) + 1;
+
+                for ($lineNumber = $startingLineNumber; $lineNumber < $startingLineNumber + $totalAmountOfLines; $lineNumber++) {
+                    $gutter
+                        ->addIcon($lineNumber, '-')
+                        ->addClass($lineNumber, 'hl-gutter-deletion');
+                }
+            }
+        }
+
+        return $content;
     }
 }

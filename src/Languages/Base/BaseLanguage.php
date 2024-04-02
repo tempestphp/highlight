@@ -21,9 +21,9 @@ class BaseLanguage implements Language
             new BlurInjection(),
             new EmphasizeInjection(),
             new StrongInjection(),
+            new CustomClassInjection(),
             new AdditionInjection(),
             new DeletionInjection(),
-            new CustomClassInjection(),
         ];
     }
 

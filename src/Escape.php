@@ -28,7 +28,11 @@ final readonly class Escape
 
     public static function terminal(string $input): string
     {
-        return str_replace(self::INJECTION_TOKEN, '', $input);
+        return preg_replace(
+            ['/❷(.*?)❸/', '/❿/'],
+            '',
+            $input,
+        );
     }
 
     public static function html(string $input): string

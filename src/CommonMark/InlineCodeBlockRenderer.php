@@ -11,8 +11,13 @@ use League\CommonMark\Renderer\ChildNodeRendererInterface;
 use League\CommonMark\Renderer\NodeRendererInterface;
 use Tempest\Highlight\Highlighter;
 
-class InlineCodeBlockRenderer implements NodeRendererInterface
+final class InlineCodeBlockRenderer implements NodeRendererInterface
 {
+    public function __construct(
+        private Highlighter $highlighter = new Highlighter(),
+    ) {
+    }
+
     public function render(Node $node, ChildNodeRendererInterface $childRenderer)
     {
         if (! $node instanceof Code) {
@@ -21,10 +26,9 @@ class InlineCodeBlockRenderer implements NodeRendererInterface
 
         preg_match('/^\{(?<match>[\w]+)}(?<code>.*)/', $node->getLiteral(), $match);
 
-        $highlighter = new Highlighter();
         $language = $match['match'] ?? 'txt';
         $code = $match['code'] ?? $node->getLiteral();
 
-        return '<code>' . $highlighter->parse($code, $language) . '</code>';
+        return '<code>' . $this->highlighter->parse($code, $language) . '</code>';
     }
 }

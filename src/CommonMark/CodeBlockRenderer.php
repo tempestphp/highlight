@@ -38,7 +38,7 @@ final class CodeBlockRenderer implements NodeRendererInterface
         if ($theme instanceof WithPre) {
             return $theme->preBefore() . $parsed . $theme->preAfter();
         } else {
-            return '<pre>' . $parsed . '</pre>';
+            return '<pre data-lang="' . $matches['language'] . '">' . $parsed . '</pre>';
         }
     }
 }

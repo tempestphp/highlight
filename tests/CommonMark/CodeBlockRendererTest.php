@@ -32,6 +32,7 @@ class CodeBlockRendererTest extends TestCase
         ```");
 
         $this->assertStringContainsString('hl-keyword', $parsed->getContent());
+        $this->assertStringContainsString('data-lang="php"', $parsed->getContent());
     }
 
     public function test_commonmark_with_gutter(): void
@@ -52,7 +53,7 @@ class Foo {}
 TXT;
 
         $expected = <<<'TXT'
-<pre><span class="hl-gutter ">10</span> <span class="hl-keyword">class</span> <span class="hl-type">Foo</span> {}</pre>
+<pre data-lang="php"><span class="hl-gutter ">10</span> <span class="hl-keyword">class</span> <span class="hl-type">Foo</span> {}</pre>
 
 TXT;
 

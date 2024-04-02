@@ -1,0 +1,77 @@
+pre, code {
+    color: #000;
+    background-color: #1f1f1f;
+}
+
+.hl-keyword {
+    color: #f97583;
+}
+
+.hl-property {
+    color: #b392f0;
+}
+
+.hl-attribute {
+    font-style: italic;
+}
+
+.hl-type {
+    color: #EA4334;
+}
+
+.hl-generic {
+    color: #79b8ff;
+}
+
+.hl-value {
+    color: #9db1c5;
+}
+
+.hl-variable {
+    color: #000;
+}
+
+.hl-comment {
+    color: #6b737c;
+}
+
+.hl-blur {
+    filter: blur(2px);
+}
+
+.hl-strong {
+    font-weight: bold;
+}
+
+.hl-em {
+    font-style: italic;
+}
+
+.hl-addition {
+    display: inline-block;
+    min-width: 100%;
+    background-color: #00FF0022;
+}
+
+.hl-deletion {
+    display: inline-block;
+    min-width: 100%;
+    background-color: #FF000011;
+}
+
+.hl-gutter {
+    display: inline-block;
+    font-size: 0.9em;
+    color: #555;
+    padding: 0 1ch;
+}
+
+.hl-gutter-addition {
+    background-color: #34A853;
+    color: #fff;
+}
+
+.hl-gutter-deletion {
+    background-color: #EA4334;
+    color: #fff;
+}

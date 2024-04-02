@@ -75,11 +75,11 @@ The gutter will show additions and deletions, and can start at any given line nu
 
 Finally, you can enable gutter rendering on the fly if you're using [commonmark code blocks](#commonmark-integration) by appending `{startAt}` to the language definition:
 
-```md
+<pre>
 &#96;&#96;&#96;php{1}
 echo 'hi'!
 &#96;&#96;&#96;
-```
+</pre>
 
 ## Special highlighting tags
 

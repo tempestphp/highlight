@@ -36,7 +36,7 @@ final class CodeBlockRenderer implements NodeRendererInterface
         $theme = $this->highlighter->getTheme();
 
         if ($theme instanceof WebTheme) {
-            return $theme->preBefore() . $parsed . $theme->preAfter();
+            return $theme->preBefore($this->highlighter) . $parsed . $theme->preAfter($this->highlighter);
         } else {
             return '<pre data-lang="' . $matches['language'] . '">' . $parsed . '</pre>';
         }

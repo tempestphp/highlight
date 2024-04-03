@@ -37,7 +37,7 @@ final readonly class CssTheme implements WebTheme
 
     public function preBefore(Highlighter $highlighter): string
     {
-        return '<pre>';
+        return '<pre data-lang="' . $highlighter->getCurrentLanguage()->getName() . '">';
     }
 
     public function preAfter(Highlighter $highlighter): string

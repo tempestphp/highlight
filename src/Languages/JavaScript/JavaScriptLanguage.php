@@ -21,6 +21,19 @@ use Tempest\Highlight\Languages\JavaScript\Patterns\JsStaticPropertyPattern;
 
 class JavaScriptLanguage extends BaseLanguage
 {
+    public function getName(): string
+    {
+        return 'js';
+    }
+
+    public function getAliases(): array
+    {
+        return [
+            'javascript',
+            'node',
+        ];
+    }
+
     public function getInjections(): array
     {
         return [

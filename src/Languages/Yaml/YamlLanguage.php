@@ -19,6 +19,18 @@ use Tempest\Highlight\Languages\Yaml\Patterns\YamlVariablePattern;
 
 class YamlLanguage extends BaseLanguage
 {
+    public function getName(): string
+    {
+        return 'yaml';
+    }
+
+    public function getAliases(): array
+    {
+        return [
+            'yml',
+        ];
+    }
+
     public function getInjections(): array
     {
         return [

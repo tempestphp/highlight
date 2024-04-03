@@ -11,6 +11,11 @@ use Tempest\Highlight\Languages\Twig\Patterns\TwigCommentPattern;
 
 class TwigLanguage extends HtmlLanguage
 {
+    public function getName(): string
+    {
+        return 'twig';
+    }
+
     public function getInjections(): array
     {
         return [

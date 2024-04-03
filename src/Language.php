@@ -6,6 +6,10 @@ namespace Tempest\Highlight;
 
 interface Language
 {
+    public function getName(): string;
+
+    public function getAliases(): array;
+
     /**
      * @return \Tempest\Highlight\Injection[]
      */

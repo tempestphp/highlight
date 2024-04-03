@@ -13,8 +13,13 @@ use Tempest\Highlight\Languages\Base\Injections\EmphasizeInjection;
 use Tempest\Highlight\Languages\Base\Injections\StrongInjection;
 use Tempest\Highlight\Languages\Base\Patterns\InjectionTokenPattern;
 
-class BaseLanguage implements Language
+abstract class BaseLanguage implements Language
 {
+    public function getAliases(): array
+    {
+        return [];
+    }
+
     public function getInjections(): array
     {
         return [

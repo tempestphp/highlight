@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tempest\Highlight\Themes;
 
+use Tempest\Highlight\Highlighter;
 use Tempest\Highlight\Theme;
 use Tempest\Highlight\Tokens\TokenType;
 use Tempest\Highlight\Tokens\TokenTypeEnum;
@@ -55,14 +56,14 @@ final class InlineTheme implements Theme, WebTheme
         return '</span>';
     }
 
-    public function preBefore(): string
+    public function preBefore(Highlighter $highlighter): string
     {
         $preStyle = $this->map['pre'] ?? $this->map['pre, code'] ?? '';
 
         return "<pre style=\"{$preStyle}\">";
     }
 
-    public function preAfter(): string
+    public function preAfter(Highlighter $highlighter): string
     {
         return '</pre>';
     }

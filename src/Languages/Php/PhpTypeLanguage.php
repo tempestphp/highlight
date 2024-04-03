@@ -12,6 +12,11 @@ use Tempest\Highlight\Languages\Php\Patterns\TypeForVariablePattern;
 
 final class PhpTypeLanguage extends BaseLanguage
 {
+    public function getName(): string
+    {
+        return 'phptype';
+    }
+
     public function getPatterns(): array
     {
         return [

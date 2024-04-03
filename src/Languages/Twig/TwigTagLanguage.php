@@ -16,6 +16,11 @@ use Tempest\Highlight\Languages\Twig\Patterns\TwigSingleQuoteValuePattern;
 
 final class TwigTagLanguage extends BaseLanguage
 {
+    public function getName(): string
+    {
+        return 'twigTag';
+    }
+
     public function getPatterns(): array
     {
         return [

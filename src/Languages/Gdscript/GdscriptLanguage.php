@@ -22,6 +22,11 @@ use Tempest\Highlight\Languages\Gdscript\Patterns\VarTypePattern;
 
 class GdscriptLanguage extends BaseLanguage
 {
+    public function getName(): string
+    {
+        return 'gdscript';
+    }
+
     public function getInjections(): array
     {
         return [

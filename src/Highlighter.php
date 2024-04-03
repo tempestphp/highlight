@@ -6,7 +6,6 @@ namespace Tempest\Highlight;
 
 use Generator;
 use ReflectionClass;
-use Tempest\Highlight\Languages\Base\BaseLanguage;
 use Tempest\Highlight\Languages\Base\Injections\GutterInjection;
 use Tempest\Highlight\Languages\Blade\BladeLanguage;
 use Tempest\Highlight\Languages\Css\CssLanguage;
@@ -17,6 +16,7 @@ use Tempest\Highlight\Languages\JavaScript\JavaScriptLanguage;
 use Tempest\Highlight\Languages\Json\JsonLanguage;
 use Tempest\Highlight\Languages\Php\PhpLanguage;
 use Tempest\Highlight\Languages\Sql\SqlLanguage;
+use Tempest\Highlight\Languages\Text\TextLanguage;
 use Tempest\Highlight\Languages\Twig\TwigLanguage;
 use Tempest\Highlight\Languages\Xml\XmlLanguage;
 use Tempest\Highlight\Languages\Yaml\YamlLanguage;
@@ -74,7 +74,7 @@ final class Highlighter
     public function parse(string $content, string|Language $language): string
     {
         if (is_string($language)) {
-            $language = $this->languages[$language] ?? new BaseLanguage();
+            $language = $this->languages[$language] ?? new TextLanguage();
         }
 
         $this->currentLanguage = $language;

@@ -20,6 +20,11 @@ use Tempest\Highlight\Languages\Sql\Patterns\SqlTablePropertyPattern;
 
 class SqlLanguage extends BaseLanguage
 {
+    public function getName(): string
+    {
+        return 'sql';
+    }
+
     public function getInjections(): array
     {
         return [

@@ -14,6 +14,11 @@ use Tempest\Highlight\Languages\Html\HtmlLanguage;
 
 class BladeLanguage extends HtmlLanguage
 {
+    public function getName(): string
+    {
+        return 'blade';
+    }
+
     public function getInjections(): array
     {
         return [

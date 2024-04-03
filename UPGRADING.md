@@ -1,3 +1,39 @@
+## 2.0.0
+
+- `Language` interface has two new methods: `getName` and `getAliases`
+
+```diff
+interface Language
+{
++    public function getName(): string;
++    public function getAliases(): array;
+```
+
+- `BaseLanguage` is now abstract
+- `Highlighter::setLanguage` is renamed to `Highlighter::addLanguage` and its signature was changed:
+
+```diff
+- public function setLanguage(string $name, Language $language): self
++ public function addLanguage(Language $language): self
+```
+
+- A new `TextLanguage`was added
+- Rename `WithPre` to `WebTheme`
+
+```diff
+- interface WithPre
++ interface WebTheme extends Theme
+```
+
+- Changes to `WebTheme` method signatures:
+
+```diff
+- public function preBefore(): string;
+- public function preAfter(): string;
++ public function preBefore(Highlighter $highlighter): string;
++ public function preAfter(Highlighter $highlighter): string;
+```
+
 ## 1.3.0
 
 - Add `data-lang` attribute to pre tags (#90)

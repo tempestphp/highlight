@@ -15,6 +15,11 @@ use Tempest\Highlight\Languages\Twig\Patterns\TwigSingleQuoteValuePattern;
 
 final class TwigEchoLanguage extends BaseLanguage
 {
+    public function getName(): string
+    {
+        return 'twigEcho';
+    }
+
     public function getPatterns(): array
     {
         return [

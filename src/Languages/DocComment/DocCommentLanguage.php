@@ -9,6 +9,11 @@ use Tempest\Highlight\Languages\DocComment\Patterns\DocCommentTagPattern;
 
 class DocCommentLanguage extends BaseLanguage
 {
+    public function getName(): string
+    {
+        return 'doc';
+    }
+
     public function getInjections(): array
     {
         return [

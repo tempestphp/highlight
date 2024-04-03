@@ -13,6 +13,11 @@ use Tempest\Highlight\Languages\Xml\XmlLanguage;
 
 class HtmlLanguage extends XmlLanguage
 {
+    public function getName(): string
+    {
+        return 'html';
+    }
+
     public function getInjections(): array
     {
         return [

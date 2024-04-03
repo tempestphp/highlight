@@ -12,6 +12,11 @@ use Tempest\Highlight\Languages\Json\Patterns\JsonPropertyPattern;
 
 class JsonLanguage extends BaseLanguage
 {
+    public function getName(): string
+    {
+        return 'json';
+    }
+
     public function getInjections(): array
     {
         return [

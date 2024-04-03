@@ -47,6 +47,11 @@ use Tempest\Highlight\Languages\Php\Patterns\VariablePattern;
 
 class PhpLanguage extends BaseLanguage
 {
+    public function getName(): string
+    {
+        return 'php';
+    }
+
     public function getInjections(): array
     {
         return [

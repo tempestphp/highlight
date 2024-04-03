@@ -11,4 +11,6 @@ interface Theme
     public function before(TokenType $tokenType): string;
 
     public function after(TokenType $tokenType): string;
+
+    public function escape(string $content): string;
 }

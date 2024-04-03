@@ -10,6 +10,8 @@ use Tempest\Highlight\Tokens\TokenTypeEnum;
 
 class LightTerminalTheme implements TerminalTheme
 {
+    use EscapesTerminalTheme;
+
     public function before(TokenType $tokenType): string
     {
         $style = match ($tokenType) {

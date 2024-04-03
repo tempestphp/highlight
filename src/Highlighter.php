@@ -132,12 +132,11 @@ final class Highlighter
             $content = $parsedInjection->content;
         }
 
-        // Determine proper escaping
-        return match (true) {
-            $this->isNested => $content,
-            $this->theme instanceof TerminalTheme => Escape::terminal($content),
-            default => Escape::html($content),
-        };
+        if ($this->isNested) {
+            return $content;
+        }
+
+        return $this->theme->escape($content);
     }
 
     /**

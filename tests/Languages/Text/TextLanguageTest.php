@@ -1,10 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tempest\Highlight\Tests\Languages\Text;
 
 use PHPUnit\Framework\Attributes\DataProvider;
-use Tempest\Highlight\Highlighter;
 use PHPUnit\Framework\TestCase;
+use Tempest\Highlight\Highlighter;
 
 class TextLanguageTest extends TestCase
 {

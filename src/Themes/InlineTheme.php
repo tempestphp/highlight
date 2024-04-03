@@ -12,6 +12,8 @@ use Tempest\Highlight\WebTheme;
 
 final class InlineTheme implements Theme, WebTheme
 {
+    use EscapesWebTheme;
+
     private array $map = [];
 
     public function __construct(string $themePath)

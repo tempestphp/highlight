@@ -11,6 +11,8 @@ use Tempest\Highlight\WebTheme;
 
 final readonly class CssTheme implements WebTheme
 {
+    use EscapesWebTheme;
+
     public function before(TokenType $tokenType): string
     {
         $class = match ($tokenType) {

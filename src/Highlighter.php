@@ -36,20 +36,20 @@ final class Highlighter
         private readonly Theme $theme = new CssTheme(),
     ) {
         $this
-            ->setLanguage('blade', new BladeLanguage())
-            ->setLanguage('css', new CssLanguage())
-            ->setLanguage('doc', new DocCommentLanguage())
-            ->setLanguage('gdscript', new GdscriptLanguage())
-            ->setLanguage('html', new HtmlLanguage())
-            ->setLanguage('javascript', new JavaScriptLanguage())
-            ->setLanguage('js', new JavaScriptLanguage())
-            ->setLanguage('json', new JsonLanguage())
-            ->setLanguage('php', new PhpLanguage())
-            ->setLanguage('sql', new SqlLanguage())
-            ->setLanguage('xml', new XmlLanguage())
-            ->setLanguage('yaml', new YamlLanguage())
-            ->setLanguage('yml', new YamlLanguage())
-            ->setLanguage('twig', new TwigLanguage());
+            ->addLanguage(new BladeLanguage())
+            ->addLanguage(new CssLanguage())
+            ->addLanguage(new DocCommentLanguage())
+            ->addLanguage(new GdscriptLanguage())
+            ->addLanguage(new HtmlLanguage())
+            ->addLanguage(new JavaScriptLanguage())
+            ->addLanguage(new JavaScriptLanguage())
+            ->addLanguage(new JsonLanguage())
+            ->addLanguage(new PhpLanguage())
+            ->addLanguage(new SqlLanguage())
+            ->addLanguage(new XmlLanguage())
+            ->addLanguage(new YamlLanguage())
+            ->addLanguage(new YamlLanguage())
+            ->addLanguage(new TwigLanguage());
     }
 
     public function withGutter(int $startAt = 1): self
@@ -64,9 +64,13 @@ final class Highlighter
         return $this->gutterInjection;
     }
 
-    public function setLanguage(string $name, Language $language): self
+    public function addLanguage(Language $language): self
     {
-        $this->languages[$name] = $language;
+        $this->languages[$language->getName()] = $language;
+
+        foreach ($language->getAliases() as $alias) {
+            $this->languages[$alias] = $language;
+        }
 
         return $this;
     }

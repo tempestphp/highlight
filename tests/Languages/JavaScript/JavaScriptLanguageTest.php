@@ -19,6 +19,16 @@ class JavaScriptLanguageTest extends TestCase
             $expected,
             $highlighter->parse($content, 'js'),
         );
+
+        $this->assertSame(
+            $expected,
+            $highlighter->parse($content, 'javascript'),
+        );
+
+        $this->assertSame(
+            $expected,
+            $highlighter->parse($content, 'node'),
+        );
     }
 
     public static function data(): array

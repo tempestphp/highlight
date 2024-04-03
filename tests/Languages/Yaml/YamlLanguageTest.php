@@ -19,6 +19,11 @@ class YamlLanguageTest extends TestCase
             $expected,
             $highlighter->parse($content, 'yaml'),
         );
+
+        $this->assertSame(
+            $expected,
+            $highlighter->parse($content, 'yml'),
+        );
     }
 
     public static function data(): array

@@ -7,11 +7,12 @@ namespace Tempest\Highlight\Languages\Php\Injections;
 use Tempest\Highlight\Escape;
 use Tempest\Highlight\Highlighter;
 use Tempest\Highlight\Injection;
+use Tempest\Highlight\ParsedInjection;
 use Tempest\Highlight\Tokens\TokenTypeEnum;
 
 final readonly class PhpGenericTypeInjection implements Injection
 {
-    public function parse(string $content, Highlighter $highlighter): string
+    public function parse(string $content, Highlighter $highlighter): ParsedInjection
     {
         $genericTypes = [];
 
@@ -39,6 +40,6 @@ final readonly class PhpGenericTypeInjection implements Injection
             );
         }
 
-        return $content;
+        return new ParsedInjection($content);
     }
 }

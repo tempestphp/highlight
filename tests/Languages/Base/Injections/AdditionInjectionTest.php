@@ -21,8 +21,8 @@ TXT;
 <span class="hl-addition">class Foo</span>
 TXT;
 
-        $content = (new AdditionInjection())->parse($content, new Highlighter());
+        $parsedInjection = (new AdditionInjection())->parse($content, new Highlighter());
 
-        $this->assertSame($expected, Escape::html($content));
+        $this->assertSame($expected, Escape::html($parsedInjection->content));
     }
 }

@@ -32,7 +32,7 @@ final class GutterInjection implements Injection
         return $this;
     }
 
-    public function parse(string $content, Highlighter $highlighter): string|ParsedInjection
+    public function parse(string $content, Highlighter $highlighter): ParsedInjection
     {
         $lines = explode(PHP_EOL, trim($content));
 
@@ -72,6 +72,6 @@ final class GutterInjection implements Injection
             );
         }
 
-        return implode(PHP_EOL, $lines);
+        return new ParsedInjection(implode(PHP_EOL, $lines));
     }
 }

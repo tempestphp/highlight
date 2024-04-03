@@ -19,7 +19,7 @@ final class InlineTheme implements Theme, WebTheme
 
     public function __construct(string $themePath)
     {
-        $contents = file_get_contents($themePath);
+        $contents = @file_get_contents($themePath);
 
         if ($contents === false) {
             throw new Exception("No valid CSS file found at path {$themePath}");

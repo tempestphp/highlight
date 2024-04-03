@@ -39,6 +39,15 @@ interface Language
 ```
 
 - Moved all CSS themes from `src/Themes` to `src/Themes/Css`
+- Injections can now only return `ParsedInjection` anymore. If you happen to have custom injections that return strings, then those strings can simply be wrapped within a `ParsedInjection`: `return new ParsedInjection($content)`.
+
+```diff
+interface Injection
+{
+-    public function parse(string $content, Highlighter $highlighter): string|ParsedInjection;
++    public function parse(string $content, Highlighter $highlighter): ParsedInjection;
+}
+```
 
 ## 1.3.0
 

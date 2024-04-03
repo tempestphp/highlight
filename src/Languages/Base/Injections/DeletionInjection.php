@@ -8,11 +8,12 @@ use Tempest\Highlight\After;
 use Tempest\Highlight\Escape;
 use Tempest\Highlight\Highlighter;
 use Tempest\Highlight\Injection;
+use Tempest\Highlight\ParsedInjection;
 
 #[After]
 final readonly class DeletionInjection implements Injection
 {
-    public function parse(string $content, Highlighter $highlighter): string
+    public function parse(string $content, Highlighter $highlighter): ParsedInjection
     {
         preg_match_all('/(\{-)((.|\n)*?)(-})/', $content, $matches, PREG_OFFSET_CAPTURE);
 
@@ -54,6 +55,6 @@ final readonly class DeletionInjection implements Injection
             }
         }
 
-        return $content;
+        return new ParsedInjection($content);
     }
 }

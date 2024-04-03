@@ -10,7 +10,7 @@ trait IsInjection
 
     abstract public function parseContent(string $content, Highlighter $highlighter): string;
 
-    public function parse(string $content, Highlighter $highlighter): string
+    public function parse(string $content, Highlighter $highlighter): ParsedInjection
     {
         $pattern = $this->getPattern();
 
@@ -18,7 +18,7 @@ trait IsInjection
             $pattern = "/{$pattern}/";
         }
 
-        return preg_replace_callback(
+        $content = preg_replace_callback(
             pattern: $pattern,
             callback: function ($matches) use ($highlighter) {
                 $content = $matches['match'] ?? null;
@@ -35,5 +35,7 @@ trait IsInjection
             },
             subject: $content,
         );
+
+        return new ParsedInjection($content);
     }
 }

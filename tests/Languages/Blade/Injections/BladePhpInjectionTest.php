@@ -23,11 +23,11 @@ class BladePhpInjectionTest extends TestCase
         $highlighter = new Highlighter();
         $injection = new BladePhpInjection();
 
-        $output = $injection->parse($content, $highlighter);
+        $parsedInjection = $injection->parse($content, $highlighter);
 
         $this->assertStringContainsString(
             '<span class="hl-property">count',
-            $output,
+            $parsedInjection->content,
         );
     }
 }

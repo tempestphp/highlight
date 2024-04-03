@@ -21,8 +21,8 @@ TXT;
 <span class="hl-deletion">class Foo</span>
 TXT;
 
-        $content = (new DeletionInjection())->parse($content, new Highlighter());
+        $parsedInjection = (new DeletionInjection())->parse($content, new Highlighter());
 
-        $this->assertSame($expected, Escape::html($content));
+        $this->assertSame($expected, Escape::html($parsedInjection->content));
     }
 }

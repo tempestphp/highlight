@@ -7,11 +7,12 @@ namespace Tempest\Highlight\Languages\Php\Injections;
 use Tempest\Highlight\Escape;
 use Tempest\Highlight\Highlighter;
 use Tempest\Highlight\Injection;
+use Tempest\Highlight\ParsedInjection;
 use Tempest\Highlight\Tokens\TokenTypeEnum;
 
 final readonly class PhpHeredocInjection implements Injection
 {
-    public function parse(string $content, Highlighter $highlighter): string
+    public function parse(string $content, Highlighter $highlighter): ParsedInjection
     {
         $heredocTokenType = TokenTypeEnum::PROPERTY;
         $theme = $highlighter->getTheme();
@@ -49,6 +50,6 @@ final readonly class PhpHeredocInjection implements Injection
             }
         }
 
-        return $content;
+        return new ParsedInjection($content);
     }
 }

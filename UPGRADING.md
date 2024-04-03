@@ -7,6 +7,9 @@ interface Language
 {
 +    public function getName(): string;
 +    public function getAliases(): array;
+
+    …
+}
 ```
 
 - `BaseLanguage` is now abstract
@@ -34,6 +37,8 @@ interface Language
 + public function preBefore(Highlighter $highlighter): string;
 + public function preAfter(Highlighter $highlighter): string;
 ```
+
+- Moved all CSS themes from `src/Themes` to `src/Themes/Css`
 
 ## 1.3.0
 

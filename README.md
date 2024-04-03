@@ -35,25 +35,25 @@ All supported languages can be found in the [Languages folder](./src/Languages).
 
 ## Themes
 
-There are a [bunch of themes](./src/Themes) included in this package. You can load them either by importing the correct CSS file into your project's CSS file, or you can manually copy a stylesheet.
+There are a [bunch of themes](./src/Themes/Css) included in this package. You can load them either by importing the correct CSS file into your project's CSS file, or you can manually copy a stylesheet.
 
 ```css
-@import "../vendor/tempest/highlight/src/Themes/highlight-light-lite.css";
+@import "../vendor/tempest/highlight/src/Themes/Css/highlight-light-lite.css";
 ```
 
-You can build your own CSS theme with just a couple of classes, copy over [the base stylesheet](./src/Themes/highlight-light-lite.css), and make adjustments however you like. Note that `pre` tag styling isn't included in this package.
+You can build your own CSS theme with just a couple of classes, copy over [the base stylesheet](./src/Themes/Css/highlight-light-lite.css), and make adjustments however you like. Note that `pre` tag styling isn't included in this package.
 
 ### Inline themes
 
 If you don't want to or can't load a CSS file, you can opt to use the `InlineTheme` class. This theme takes the path to a CSS file, and will parse it into inline styles:
 
 ```php
-$highlighter = (new Highlighter(new InlineTheme(__DIR__ . '/../src/Themes/solarized-dark.css')));
+$highlighter = (new Highlighter(new InlineTheme(__DIR__ . '/../src/Themes/Css/solarized-dark.css')));
 ```
 
 ### Terminal themes
 
-Terminal themes are more limited because of their limited styling options. Right now there's one terminal theme provided: `LightTerminalTheme`. More terminal themes are planned to be added in the future.
+Terminal themes are simpler because of their limited styling options. Right now there's one terminal theme provided: `LightTerminalTheme`. More terminal themes are planned to be added in the future.
 
 ```php
 use Tempest\Highlight\Highlighter;

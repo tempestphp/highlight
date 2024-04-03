@@ -37,7 +37,7 @@ class HighlighterTest extends TestCase
 
     public function test_inline_theme(): void
     {
-        $highlighter = (new Highlighter(new InlineTheme(__DIR__ . '/../src/Themes/min-light.css')));
+        $highlighter = (new Highlighter(new InlineTheme(__DIR__ . '/../src/Themes/Css/min-light.css')));
 
         $output = $highlighter->parse('echo 1', 'php');
 

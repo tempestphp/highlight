@@ -68,7 +68,7 @@ TXT;
         $environment
             ->addExtension(new CommonMarkCoreExtension())
             ->addExtension(new FrontMatterExtension())
-            ->addRenderer(FencedCode::class, new CodeBlockRenderer(new Highlighter(new InlineTheme(__DIR__ . '/../../src/Themes/min-light.css'))));
+            ->addRenderer(FencedCode::class, new CodeBlockRenderer(new Highlighter(new InlineTheme(__DIR__ . '/../../src/Themes/Css/min-light.css'))));
 
         $markdown = new MarkdownConverter($environment);
 

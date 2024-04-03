@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tempest\Highlight\Themes;
 
+use Exception;
 use Tempest\Highlight\Highlighter;
 use Tempest\Highlight\Theme;
 use Tempest\Highlight\Tokens\TokenType;
@@ -18,7 +19,13 @@ final class InlineTheme implements Theme, WebTheme
 
     public function __construct(string $themePath)
     {
-        preg_match_all('/(?<selector>[\w,\.\s\-]+){(?<style>(.|\n)*?)}/', @file_get_contents($themePath) ?? '', $matches);
+        $contents = file_get_contents($themePath);
+
+        if ($contents === false) {
+            throw new Exception("No valid CSS file found at path {$themePath}");
+        }
+
+        preg_match_all('/(?<selector>[\w,\.\s\-]+){(?<style>(.|\n)*?)}/', $contents, $matches);
 
         foreach ($matches[0] as $key => $match) {
             $selector = trim($matches['selector'][$key]);

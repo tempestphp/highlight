@@ -19,6 +19,7 @@ interface Language
 
 - A new `TextLanguage`was added
 - Rename `WithPre` to `WebTheme`
+- `data-lang` now also works for `InlineTheme`
 
 ```diff
 - interface WithPre

@@ -60,7 +60,7 @@ final class InlineTheme implements Theme, WebTheme
     {
         $preStyle = $this->map['pre'] ?? $this->map['pre, code'] ?? '';
 
-        return "<pre style=\"{$preStyle}\">";
+        return "<pre data-lang=\"{$highlighter->getCurrentLanguage()->getName()}\" style=\"{$preStyle}\">";
     }
 
     public function preAfter(Highlighter $highlighter): string

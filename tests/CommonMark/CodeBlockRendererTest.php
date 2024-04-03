@@ -79,7 +79,7 @@ echo;
 TXT;
 
         $expected = <<<'TXT'
-<pre style="color: #212121; background-color: #ffffff;"><span style="color: #D32F2F;">echo</span>;
+<pre data-lang="php" style="color: #212121; background-color: #ffffff;"><span style="color: #D32F2F;">echo</span>;
 </pre>
 
 TXT;

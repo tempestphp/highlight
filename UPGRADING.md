@@ -1,3 +1,7 @@
+## 1.3.0
+
+- Add `data-lang` attribute to pre tags (#90)
+
 ## 1.2.1
 
 - Fix blur bleed bug (#89)

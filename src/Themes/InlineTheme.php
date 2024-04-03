@@ -7,9 +7,9 @@ namespace Tempest\Highlight\Themes;
 use Tempest\Highlight\Theme;
 use Tempest\Highlight\Tokens\TokenType;
 use Tempest\Highlight\Tokens\TokenTypeEnum;
-use Tempest\Highlight\WithPre;
+use Tempest\Highlight\WebTheme;
 
-final class InlineTheme implements Theme, WithPre
+final class InlineTheme implements Theme, WebTheme
 {
     private array $map = [];
 

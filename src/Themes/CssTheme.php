@@ -4,11 +4,12 @@ declare(strict_types=1);
 
 namespace Tempest\Highlight\Themes;
 
-use Tempest\Highlight\Theme;
+use Tempest\Highlight\Highlighter;
 use Tempest\Highlight\Tokens\TokenType;
 use Tempest\Highlight\Tokens\TokenTypeEnum;
+use Tempest\Highlight\WebTheme;
 
-final readonly class CssTheme implements Theme
+final readonly class CssTheme implements WebTheme
 {
     public function before(TokenType $tokenType): string
     {
@@ -32,5 +33,15 @@ final readonly class CssTheme implements Theme
     public function after(TokenType $tokenType): string
     {
         return "</span>";
+    }
+
+    public function preBefore(Highlighter $highlighter): string
+    {
+        return '<pre>';
+    }
+
+    public function preAfter(Highlighter $highlighter): string
+    {
+        return '</pre>';
     }
 }

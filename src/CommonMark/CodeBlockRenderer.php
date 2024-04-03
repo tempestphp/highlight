@@ -10,7 +10,7 @@ use League\CommonMark\Node\Node;
 use League\CommonMark\Renderer\ChildNodeRendererInterface;
 use League\CommonMark\Renderer\NodeRendererInterface;
 use Tempest\Highlight\Highlighter;
-use Tempest\Highlight\WithPre;
+use Tempest\Highlight\WebTheme;
 
 final class CodeBlockRenderer implements NodeRendererInterface
 {
@@ -35,7 +35,7 @@ final class CodeBlockRenderer implements NodeRendererInterface
 
         $theme = $this->highlighter->getTheme();
 
-        if ($theme instanceof WithPre) {
+        if ($theme instanceof WebTheme) {
             return $theme->preBefore() . $parsed . $theme->preAfter();
         } else {
             return '<pre>' . $parsed . '</pre>';

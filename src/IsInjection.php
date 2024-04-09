@@ -17,7 +17,7 @@ trait IsInjection
         if (! str_starts_with($pattern, '/')) {
             $pattern = "/{$pattern}/";
         }
-        
+
         $result = preg_replace_callback(
             pattern: $pattern,
             callback: function ($matches) use ($highlighter) {
@@ -35,7 +35,7 @@ trait IsInjection
             },
             subject: $content,
         );
-        
+
         return $result;
     }
 }

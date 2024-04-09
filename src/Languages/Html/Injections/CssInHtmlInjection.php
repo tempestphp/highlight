@@ -14,7 +14,7 @@ final readonly class CssInHtmlInjection implements Injection
 
     public function getPattern(): string
     {
-        return '<style>(?<match>(.|\n)*)<\/style>';
+        return '<style>(?<match>(.|\n)*?)<\/style>';
     }
 
     public function parseContent(string $content, Highlighter $highlighter): string

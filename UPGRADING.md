@@ -1,3 +1,9 @@
+## 1.3.2
+
+- Fix bug where two or more `style` tags within the same HTML file caused an error
+- Fix CSS media query bug
+- Fix missing CSS selector tokens bug
+
 ## 1.3.0
 
 - Add `data-lang` attribute to pre tags (#90)

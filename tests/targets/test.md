@@ -1,4 +1,3 @@
 ```php
-{~->addExtension(new CommonMarkCoreExtension())~}
-dd();
+return '<style>(?<match>(.|\n)*{+?+})<\/style>';
 ```

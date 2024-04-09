@@ -24,6 +24,7 @@ class CssLanguageTest extends TestCase
     public static function data(): array
     {
         return [
+            ['@media only screen and (max-width: 500px) {}', '<span class="hl-keyword">@media only screen and (max-width: 500px) </span>{}'],
             [
                 <<<TXT
 .foo {

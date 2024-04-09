@@ -1,3 +1,7 @@
+## 1.3.3
+
+- Fix bug with FQCN and `::class`
+
 ## 1.3.2
 
 - Fix bug where two or more `style` tags within the same HTML file caused an error

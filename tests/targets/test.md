@@ -1,3 +1,3 @@
 ```php
-return '<style>(?<match>(.|\n)*{+?+})<\/style>';
+'media_model' => Spatie\MediaLibrary\MediaCollections\Models\Media::class,
 ```

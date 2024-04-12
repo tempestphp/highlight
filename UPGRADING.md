@@ -1,3 +1,7 @@
+## 1.3.4
+
+- Fallback for preg JIT exhaustion
+
 ## 1.3.3
 
 - Fix bug with FQCN and `::class`

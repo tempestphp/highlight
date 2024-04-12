@@ -36,6 +36,6 @@ trait IsInjection
             subject: $content,
         );
 
-        return $result;
+        return $result ?? $content;
     }
 }

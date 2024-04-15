@@ -18,10 +18,10 @@ trait IsInjection
             $pattern = "/{$pattern}/";
         }
 
-        $content = preg_replace_callback(
+        $result = preg_replace_callback(
             pattern: $pattern,
             callback: function ($matches) use ($highlighter) {
-                $content = $matches['match'] ?? null;
+                $content = $matches['match'] ?? '';
 
                 if (! $content) {
                     return $matches[0];
@@ -36,6 +36,6 @@ trait IsInjection
             subject: $content,
         );
 
-        return new ParsedInjection($content);
+        return new ParsedInjection($result ?? $content);
     }
 }

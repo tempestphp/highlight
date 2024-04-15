@@ -14,7 +14,7 @@ use Tempest\Highlight\Themes\InlineTheme;
 
 $environment = new Environment();
 
-$highlighter = (new Highlighter(new InlineTheme(__DIR__ . '/../src/Themes/highlight-light-lite.css')))->withGutter();
+$highlighter = (new Highlighter(new InlineTheme(__DIR__ . '/../src/Themes/highlight-light-lite.css')));
 
 $environment
     ->addExtension(new CommonMarkCoreExtension())
@@ -56,7 +56,8 @@ $contents = $markdown->convert(file_get_contents(__DIR__ . DIRECTORY_SEPARATOR .
         pre {
             margin: 3em auto;
             box-shadow: 0 0 10px 0 #00000044;
-            padding: 2em 2em 2em 1ch;
+            /*padding: 2em 2em 2em 1ch;*/
+            padding: 2em;
             /*background-color: #fafafa;*/
             border-radius: 3px;
             color: #000;

@@ -33,14 +33,16 @@ final class CodeBlockRenderer implements NodeRendererInterface
             $highlighter = $highlighter->withGutter((int)$startAt);
         }
 
-        $parsed = $highlighter->parse($node->getLiteral(), $matches['language']);
+        $language = $matches['language'] ?? 'txt';
+
+        $parsed = $highlighter->parse($node->getLiteral(), $language);
 
         $theme = $highlighter->getTheme();
 
         if ($theme instanceof WebTheme) {
             return $theme->preBefore($highlighter) . $parsed . $theme->preAfter($highlighter);
         } else {
-            return '<pre data-lang="' . $matches['language'] . '">' . $parsed . '</pre>';
+            return '<pre data-lang="' . $language . '">' . $parsed . '</pre>';
         }
     }
 }

@@ -86,4 +86,30 @@ TXT;
 
         $this->assertSame($expected, $markdown->convert($input)->getContent());
     }
+
+    public function test_commonmark_with_no_language(): void
+    {
+        $environment = new Environment();
+
+        $environment
+            ->addExtension(new CommonMarkCoreExtension())
+            ->addExtension(new FrontMatterExtension())
+            ->addRenderer(FencedCode::class, new CodeBlockRenderer());
+
+        $markdown = new MarkdownConverter($environment);
+
+        $input = <<<'TXT'
+```
+echo;
+```
+TXT;
+
+        $expected = <<<'TXT'
+<pre data-lang="txt">echo;
+</pre>
+
+TXT;
+
+        $this->assertSame($expected, $markdown->convert($input)->getContent());
+    }
 }

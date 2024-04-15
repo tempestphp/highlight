@@ -27,16 +27,18 @@ final class CodeBlockRenderer implements NodeRendererInterface
 
         preg_match('/^(?<language>[\w]+)(\{(?<startAt>[\d]+)\})?/', $node->getInfoWords()[0] ?? 'txt', $matches);
 
+        $highlighter = $this->highlighter;
+
         if ($startAt = ($matches['startAt']) ?? null) {
-            $this->highlighter->withGutter((int)$startAt);
+            $highlighter = $highlighter->withGutter((int)$startAt);
         }
 
-        $parsed = $this->highlighter->parse($node->getLiteral(), $matches['language']);
+        $parsed = $highlighter->parse($node->getLiteral(), $matches['language']);
 
-        $theme = $this->highlighter->getTheme();
+        $theme = $highlighter->getTheme();
 
         if ($theme instanceof WebTheme) {
-            return $theme->preBefore($this->highlighter) . $parsed . $theme->preAfter($this->highlighter);
+            return $theme->preBefore($highlighter) . $parsed . $theme->preAfter($highlighter);
         } else {
             return '<pre data-lang="' . $matches['language'] . '">' . $parsed . '</pre>';
         }

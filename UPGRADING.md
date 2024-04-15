@@ -49,6 +49,8 @@ interface Injection
 }
 ```
 
+- `Highlighter::withGutter()` is now an immutable function
+
 ## 1.3.0
 
 - Add `data-lang` attribute to pre tags (#90)

@@ -54,9 +54,11 @@ final class Highlighter
 
     public function withGutter(int $startAt = 1): self
     {
-        $this->gutterInjection = new GutterInjection($startAt);
+        $clone = clone $this;
 
-        return $this;
+        $clone->gutterInjection = new GutterInjection($startAt);
+
+        return $clone;
     }
 
     public function getGutterInjection(): ?GutterInjection

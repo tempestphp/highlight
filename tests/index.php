@@ -14,7 +14,7 @@ use Tempest\Highlight\Themes\InlineTheme;
 
 $environment = new Environment();
 
-$highlighter = (new Highlighter(new InlineTheme(__DIR__ . '/../src/Themes/highlight-light-lite.css')));
+$highlighter = (new Highlighter(new InlineTheme(__DIR__ . '/../src/Themes/Css/highlight-light-lite.css')));
 
 $environment
     ->addExtension(new CommonMarkCoreExtension())

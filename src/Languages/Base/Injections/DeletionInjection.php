@@ -20,6 +20,8 @@ final readonly class DeletionInjection implements Injection
 
         preg_match_all('/(\{-)((.|\n)*?)(-})/', $content, $matches, PREG_OFFSET_CAPTURE);
 
+        $parsedOffset = 0;
+
         foreach ($matches[0] as $match) {
             $matchedContent = $match[0];
             $offset = $match[1];
@@ -42,7 +44,7 @@ final readonly class DeletionInjection implements Injection
                 $startingLineNumber = substr_count(
                     haystack: $content,
                     needle: PHP_EOL,
-                    length: $offset,
+                    length: $offset + $parsedOffset,
                 ) + 1;
 
                 $totalAmountOfLines = substr_count(
@@ -56,6 +58,8 @@ final readonly class DeletionInjection implements Injection
                         ->addClass($lineNumber, 'hl-gutter-deletion');
                 }
             }
+
+            $parsedOffset += strlen($open) + strlen($close);
         }
 
         return new ParsedInjection($content);

@@ -11,7 +11,6 @@ use Tempest\Highlight\CommonMark\CodeBlockRenderer;
 use Tempest\Highlight\CommonMark\InlineCodeBlockRenderer;
 use Tempest\Highlight\Highlighter;
 use Tempest\Highlight\Themes\CssTheme;
-use Tempest\Highlight\Themes\InlineTheme;
 
 $environment = new Environment();
 

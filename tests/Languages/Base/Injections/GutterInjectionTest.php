@@ -54,6 +54,58 @@ TXT;
         $this->assertSame($expected, $highlighter->parse($input, 'php'));
     }
 
+    public function test_gutter_injection_one_single_line(): void
+    {
+        $input = <<<'TXT'
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, ready_for_review]
+{+ pull_request_target: +}
+other: foo
+TXT;
+
+        $expected = <<<'TXT'
+<span class="hl-gutter ">  10</span> <span class="hl-property">on</span>:
+<span class="hl-gutter ">  11</span>   <span class="hl-property">pull_request</span>:
+<span class="hl-gutter ">  12</span>     <span class="hl-property">types</span>: [opened, synchronize, reopened, ready_for_review]
+<span class="hl-gutter hl-gutter-addition">13 +</span> <span class="hl-addition"> <span class="hl-property">pull_request_target</span>: </span>
+<span class="hl-gutter ">  14</span> <span class="hl-property">other</span>: foo
+TXT;
+
+        $highlighter = (new Highlighter())->withGutter(10);
+
+        $this->assertSame($expected, $highlighter->parse($input, 'php'));
+    }
+
+    public function test_gutter_injection_many_single_lines(): void
+    {
+        $input = <<<'TXT'
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, ready_for_review]
+{+ pull_request_target: +}
+{+   types: [opened, synchronize, reopened, ready_for_review] +}
+{+   types: [opened, synchronize, reopened, ready_for_review] +}
+{+   types: [opened, synchronize, reopened, ready_for_review] +}
+other: foo
+TXT;
+
+        $expected = <<<'TXT'
+<span class="hl-gutter ">  10</span> <span class="hl-property">on</span>:
+<span class="hl-gutter ">  11</span>   <span class="hl-property">pull_request</span>:
+<span class="hl-gutter ">  12</span>     <span class="hl-property">types</span>: [opened, synchronize, reopened, ready_for_review]
+<span class="hl-gutter hl-gutter-addition">13 +</span> <span class="hl-addition"> <span class="hl-property">pull_request_target</span>: </span>
+<span class="hl-gutter hl-gutter-addition">14 +</span> <span class="hl-addition">   <span class="hl-property">types</span>: [opened, synchronize, reopened, ready_for_review] </span>
+<span class="hl-gutter hl-gutter-addition">15 +</span> <span class="hl-addition">   <span class="hl-property">types</span>: [opened, synchronize, reopened, ready_for_review] </span>
+<span class="hl-gutter hl-gutter-addition">16 +</span> <span class="hl-addition">   <span class="hl-property">types</span>: [opened, synchronize, reopened, ready_for_review] </span>
+<span class="hl-gutter ">  17</span> <span class="hl-property">other</span>: foo
+TXT;
+
+        $highlighter = (new Highlighter())->withGutter(10);
+
+        $this->assertSame($expected, $highlighter->parse($input, 'php'));
+    }
+
     public function test_gutter_injection_terminal(): void
     {
         $input = <<<'TXT'
@@ -76,7 +128,7 @@ foreach ($lines as $i => $line) {
 TXT;
 
         $expected = <<<'TXT'
-ICAxMCAbWzM0bWZvcmVhY2gbWzBtICgbWzBtJGxpbmVzG1swbSAbWzM0bWFzG1swbSAbWzBtJGkbWzBtID0+IBtbMG0kbGluZRtbMG0pIHsKICAxMSAgICAgG1swbSRndXR0ZXJOdW1iZXIbWzBtID0gG1swbSRndXR0ZXJOdW1iZXJzG1swbVsbWzBtJGkbWzBtXTsKICAxMiAKICAxMyAgICAgG1swbSRndXR0ZXJDbGFzcxtbMG0gPSAnG1szMG1obC1ndXR0ZXIgG1swbScgLiAoG1swbSR0aGlzG1swbS0+G1szMm1jbGFzc2VzG1swbVsbWzBtJGkbWzBtICsgMV0gPz8gJxtbMzBtG1swbScpOwoxNCArIAoxNSArICAgICAbWzBtJGxpbmVzG1swbVsbWzBtJGkbWzBtXSA9IBtbMzJtc3ByaW50ZhtbMG0oCjE2ICsgICAgICAgICAbWzMxbUVzY2FwZRtbMG06OhtbMzJtdG9rZW5zG1swbSgnG1szMG08c3BhbiBjbGFzcz0iJXMiPiVzPC9zcGFuPiVzG1swbScpLAogIDE3ICAgICAgICAgG1swbSRndXR0ZXJDbGFzcxtbMG0sCiAgMTggICAgICAgICAbWzMybXN0cl9wYWQbWzBtKAoxOSAtICAgICAgICAgICAgIBtbMzJtc3RyaW5nG1swbTogG1swbSRndXR0ZXJOdW1iZXIbWzBtLAogIDIwICAgICAgICAgICAgIBtbMzJtbGVuZ3RoG1swbTogG1swbSRndXR0ZXJXaWR0aBtbMG0sCiAgMjEgICAgICAgICAgICAgG1szMm1wYWRfdHlwZRtbMG06IBtbMzJtU1RSX1BBRF9MRUZUG1swbSwKICAyMiAgICAgICAgICksCiAgMjMgICAgICAgICAbWzBtJGxpbmUbWzBtLAogIDI0ICAgICApOwogIDI1IH0=
+ICAxMCAbWzM0bWZvcmVhY2gbWzBtICgbWzBtJGxpbmVzG1swbSAbWzM0bWFzG1swbSAbWzBtJGkbWzBtID0+IBtbMG0kbGluZRtbMG0pIHsKICAxMSAgICAgG1swbSRndXR0ZXJOdW1iZXIbWzBtID0gG1swbSRndXR0ZXJOdW1iZXJzG1swbVsbWzBtJGkbWzBtXTsKICAxMiAKICAxMyAgICAgG1swbSRndXR0ZXJDbGFzcxtbMG0gPSAnG1szMG1obC1ndXR0ZXIgG1swbScgLiAoG1swbSR0aGlzG1swbS0+G1szMm1jbGFzc2VzG1swbVsbWzBtJGkbWzBtICsgMV0gPz8gJxtbMzBtG1swbScpOwoxNCArIBtbMG0bWzBtCjE1ICsgICAgIBtbMG0kbGluZXMbWzBtWxtbMG0kaRtbMG1dID0gG1szMm1zcHJpbnRmG1swbSgKMTYgKyAgICAgICAgIBtbMzFtRXNjYXBlG1swbTo6G1szMm10b2tlbnMbWzBtKCcbWzMwbTxzcGFuIGNsYXNzPSIlcyI+JXM8L3NwYW4+JXMbWzBtJyksG1swbRtbMG0KICAxNyAgICAgICAgIBtbMG0kZ3V0dGVyQ2xhc3MbWzBtLAogIDE4ICAgICAgICAgG1szMm1zdHJfcGFkG1swbSgKMTkgLSAgICAgICAgICAgICAbWzMybXN0cmluZxtbMG06IBtbMG0bWzBtG1swbSRndXR0ZXJOdW1iZXIbWzBtG1swbRtbMG0sCiAgMjAgICAgICAgICAgICAgG1szMm1sZW5ndGgbWzBtOiAbWzBtJGd1dHRlcldpZHRoG1swbSwKICAyMSAgICAgICAgICAgICAbWzMybXBhZF90eXBlG1swbTogG1szMm1TVFJfUEFEX0xFRlQbWzBtLAogIDIyICAgICAgICAgKSwKICAyMyAgICAgICAgIBtbMG0kbGluZRtbMG0sCiAgMjQgICAgICk7CiAgMjUgfQ==
 TXT;
 
         $highlighter = (new Highlighter(new LightTerminalTheme()))->withGutter(10);

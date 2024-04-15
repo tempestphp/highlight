@@ -20,6 +20,8 @@ final readonly class AdditionInjection implements Injection
 
         preg_match_all('/(\{\+)((.|\n)*?)(\+})/', $content, $matches, PREG_OFFSET_CAPTURE);
 
+        $parsedOffset = 0;
+
         foreach ($matches[0] as $match) {
             $matchedContent = $match[0];
             $offset = $match[1];
@@ -42,20 +44,22 @@ final readonly class AdditionInjection implements Injection
                 $startingLineNumber = substr_count(
                     haystack: $content,
                     needle: PHP_EOL,
-                    length: $offset,
+                    length: $offset + $parsedOffset,
                 ) + 1;
 
                 $totalAmountOfLines = substr_count(
                     haystack: $parsedMatchedContent,
                     needle: PHP_EOL,
-                ) + 1;
+                );
 
-                for ($lineNumber = $startingLineNumber; $lineNumber < $startingLineNumber + $totalAmountOfLines; $lineNumber++) {
+                for ($lineNumber = $startingLineNumber; $lineNumber <= $startingLineNumber + $totalAmountOfLines; $lineNumber++) {
                     $gutter
                         ->addIcon($lineNumber, '+')
                         ->addClass($lineNumber, 'hl-gutter-addition');
                 }
             }
+
+            $parsedOffset += strlen($open) + strlen($close);
         }
 
         return new ParsedInjection($content);

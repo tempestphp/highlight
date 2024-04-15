@@ -1,11 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tempest\Highlight\Languages\Base\Patterns;
 
 use Tempest\Highlight\IsPattern;
 use Tempest\Highlight\Pattern;
 use Tempest\Highlight\PatternTest;
-use Tempest\Highlight\Tokens\DynamicTokenType;
 use Tempest\Highlight\Tokens\IgnoreTokenType;
 use Tempest\Highlight\Tokens\TokenType;
 

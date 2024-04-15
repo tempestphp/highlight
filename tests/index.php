@@ -10,11 +10,12 @@ use League\CommonMark\MarkdownConverter;
 use Tempest\Highlight\CommonMark\CodeBlockRenderer;
 use Tempest\Highlight\CommonMark\InlineCodeBlockRenderer;
 use Tempest\Highlight\Highlighter;
+use Tempest\Highlight\Themes\CssTheme;
 use Tempest\Highlight\Themes\InlineTheme;
 
 $environment = new Environment();
 
-$highlighter = (new Highlighter(new InlineTheme(__DIR__ . '/../src/Themes/Css/highlight-light-lite.css')));
+$highlighter = (new Highlighter(new CssTheme()))->withGutter();
 
 $environment
     ->addExtension(new CommonMarkCoreExtension())
@@ -38,7 +39,7 @@ $contents = $markdown->convert(file_get_contents(__DIR__ . DIRECTORY_SEPARATOR .
 <head>
     <title>Test</title>
     <style>
-        <?= file_get_contents(__DIR__ . '/../src/Themes/highlight-light-lite.css') ?>
+        <?= file_get_contents(__DIR__ . '/../src/Themes/Css/highlight-light-lite.css') ?>
 
         body {
             font-size: 15px;

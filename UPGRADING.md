@@ -39,13 +39,23 @@ interface Language
 ```
 
 - Moved all CSS themes from `src/Themes` to `src/Themes/Css`
-- Injections can now only return `ParsedInjection` anymore. If you happen to have custom injections that return strings, then those strings can simply be wrapped within a `ParsedInjection`: `return new ParsedInjection($content)`.
+- Injections can now only return `ParsedInjection`. If you happen to have custom injections that return strings, then those strings can simply be wrapped within a `ParsedInjection`: `return new ParsedInjection($content)`.
 
 ```diff
 interface Injection
 {
 -    public function parse(string $content, Highlighter $highlighter): string|ParsedInjection;
 +    public function parse(string $content, Highlighter $highlighter): ParsedInjection;
+}
+```
+
+- Return type of `Pattern::getTokenType()` changed from `TokenTypeEnum` to `TokenType`
+
+```diff
+interface Pattern
+{
+-    public function getTokenType(): TokenTypeEnum;
++    public function getTokenType(): TokenType;
 }
 ```
 

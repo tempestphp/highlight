@@ -11,6 +11,10 @@ use Tempest\Highlight\Languages\Base\Injections\CustomClassInjection;
 use Tempest\Highlight\Languages\Base\Injections\DeletionInjection;
 use Tempest\Highlight\Languages\Base\Injections\EmphasizeInjection;
 use Tempest\Highlight\Languages\Base\Injections\StrongInjection;
+use Tempest\Highlight\Languages\Base\Patterns\AdditionEndTokenPattern;
+use Tempest\Highlight\Languages\Base\Patterns\AdditionStartTokenPattern;
+use Tempest\Highlight\Languages\Base\Patterns\DeletionEndTokenPattern;
+use Tempest\Highlight\Languages\Base\Patterns\DeletionStartTokenPattern;
 use Tempest\Highlight\Languages\Base\Patterns\InjectionTokenPattern;
 
 abstract class BaseLanguage implements Language
@@ -35,6 +39,10 @@ abstract class BaseLanguage implements Language
     public function getPatterns(): array
     {
         return [
+            new AdditionStartTokenPattern(),
+            new AdditionEndTokenPattern(),
+            new DeletionStartTokenPattern(),
+            new DeletionEndTokenPattern(),
             new InjectionTokenPattern(),
         ];
     }

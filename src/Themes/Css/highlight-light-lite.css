@@ -62,6 +62,7 @@ pre, code {
     font-size: 0.9em;
     color: #555;
     padding: 0 1ch;
+    user-select: none;
 }
 
 .hl-gutter-addition {

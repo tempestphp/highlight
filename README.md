@@ -17,7 +17,7 @@ You can read about why I started this package [here](https://stitcher.io/blog/a-
 
 ## Quickstart
 
-```php
+```console
 composer require tempest/highlight
 ```
 

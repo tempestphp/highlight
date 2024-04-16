@@ -34,6 +34,9 @@ use Tempest\Highlight\Languages\Php\Patterns\NestedFunctionCallPattern;
 use Tempest\Highlight\Languages\Php\Patterns\NewObjectPattern;
 use Tempest\Highlight\Languages\Php\Patterns\OperatorPattern;
 use Tempest\Highlight\Languages\Php\Patterns\PropertyAccessPattern;
+use Tempest\Highlight\Languages\Php\Patterns\PropertyHookGetPattern;
+use Tempest\Highlight\Languages\Php\Patterns\PropertyHookSetParameterTypePattern;
+use Tempest\Highlight\Languages\Php\Patterns\PropertyHookSetPattern;
 use Tempest\Highlight\Languages\Php\Patterns\PropertyTypesPattern;
 use Tempest\Highlight\Languages\Php\Patterns\ReturnTypePattern;
 use Tempest\Highlight\Languages\Php\Patterns\ShortFunctionReferencePattern;
@@ -75,6 +78,7 @@ class PhpLanguage extends BaseLanguage
 
             // KEYWORDS
             new KeywordPattern('null'),
+            new KeywordPattern('parent'),
             new KeywordPattern('true'),
             new KeywordPattern('false'),
             new KeywordPattern('__halt_compiler'),
@@ -149,6 +153,8 @@ class PhpLanguage extends BaseLanguage
             new KeywordPattern('yield from'),
             new ClassResolutionPattern(),
             new ShortFunctionReferencePattern(),
+            new PropertyHookSetPattern(),
+            new PropertyHookGetPattern(),
 
             // COMMENTS
             new MultilineSingleDocCommentPattern(),
@@ -171,6 +177,7 @@ class PhpLanguage extends BaseLanguage
             new CatchTypePattern(),
             new EnumBackedTypePattern(),
             new GroupedTypePattern(),
+            new PropertyHookSetParameterTypePattern(),
 
             // PROPERTIES
             new ClassPropertyPattern(),

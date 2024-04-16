@@ -14,7 +14,7 @@ use Tempest\Highlight\Themes\CssTheme;
 
 $environment = new Environment();
 
-$highlighter = (new Highlighter(new CssTheme()))->withGutter();
+$highlighter = (new Highlighter(new CssTheme()));
 
 $environment
     ->addExtension(new CommonMarkCoreExtension())

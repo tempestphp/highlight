@@ -60,6 +60,7 @@ interface Pattern
 ```
 
 - `Highlighter::withGutter()` is now an immutable function
+- Support for [PHP's property hooks](https://wiki.php.net/rfc/property-hooks)
 
 ## 1.3.4
 

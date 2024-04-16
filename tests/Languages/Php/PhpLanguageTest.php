@@ -58,6 +58,16 @@ class PhpLanguageTest extends TestCase
             ['{~}): Foo {}~}', '<span class="hl-blur">}): <span class="hl-type">Foo</span> {}</span>'],
             ['{~class~} Foo {}', '<span class="hl-blur"><span class="hl-keyword">class</span></span> <span class="hl-type">Foo</span> {}'],
             [
+                'public string $fullName {
+                    get => $this->first . " " . $this->last;
+                    set (string $value) => $this->first . " " . $this->last;
+                }',
+                '<span class="hl-keyword">public</span> <span class="hl-type">string</span> <span class="hl-property">$fullName</span> {
+                    <span class="hl-keyword">get</span> =&gt; <span class="hl-variable">$this</span>-&gt;<span class="hl-property">first</span> . &quot;<span class="hl-value"> </span>&quot; . <span class="hl-variable">$this</span>-&gt;<span class="hl-property">last</span>;
+                    <span class="hl-keyword">set</span> (<span class="hl-type">string</span> <span class="hl-variable">$value</span>) =&gt; <span class="hl-variable">$this</span>-&gt;<span class="hl-property">first</span> . &quot;<span class="hl-value"> </span>&quot; . <span class="hl-variable">$this</span>-&gt;<span class="hl-property">last</span>;
+                }',
+            ],
+            [
                 "// We'll
 
 foo()

@@ -207,14 +207,18 @@ use League\CommonMark\Extension\CommonMark\Node\Block\FencedCode;
 use League\CommonMark\MarkdownConverter;
 use Tempest\Highlight\CommonMark\CodeBlockRenderer;
 use Tempest\Highlight\CommonMark\InlineCodeBlockRenderer;
+use Tempest\Highlight\CommonMark\HighlightExtension;
 
 $environment = new Environment();
 
 $environment
     ->addExtension(new CommonMarkCoreExtension())
+
     ->addRenderer(FencedCode::class, new CodeBlockRenderer())
     ->addRenderer(Code::class, new InlineCodeBlockRenderer())
-    ;
+    // or
+    ->addExtension(new HighlightExtension())
+;
 
 $markdown = new MarkdownConverter($environment);
 ```

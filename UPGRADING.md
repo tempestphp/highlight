@@ -1,3 +1,7 @@
+## 2.0.1
+
+- Bugfix for arrays within attributes
+
 ## 2.0.0
 
 - `Language` interface has two new methods: `getName` and `getAliases`

@@ -57,6 +57,9 @@ class PhpLanguageTest extends TestCase
             ['/** @var Foo $var */', '<span class="hl-comment">/** <span class="hl-value">@var</span> <span class="hl-type">Foo</span> <span class="hl-variable">$var</span> */</span>'],
             ['{~}): Foo {}~}', '<span class="hl-blur">}): <span class="hl-type">Foo</span> {}</span>'],
             ['{~class~} Foo {}', '<span class="hl-blur"><span class="hl-keyword">class</span></span> <span class="hl-type">Foo</span> {}'],
+            ['#[ConsoleCommand()]', '<span class="hl-attribute">#[<span class="hl-type">ConsoleCommand</span>()]</span>'],
+            ['#[ConsoleCommand]', '<span class="hl-attribute">#[<span class="hl-type">ConsoleCommand</span>]</span>'],
+            ['#[ConsoleCommand(foo: [])]', '<span class="hl-attribute">#[<span class="hl-type">ConsoleCommand</span>(<span class="hl-property">foo</span>: [])]</span>'],
             [
                 'public string $fullName {
                     get => $this->first . " " . $this->last;

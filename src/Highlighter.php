@@ -98,6 +98,11 @@ final class Highlighter
         return $this->currentLanguage;
     }
 
+    public function getSupportedLanguageNames(): array
+    {
+        return array_keys($this->languages);
+    }
+
     public function setCurrentLanguage(Language $language): void
     {
         $this->currentLanguage = $language;

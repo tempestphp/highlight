@@ -62,8 +62,8 @@ class PhpLanguage extends BaseLanguage
             ...parent::getInjections(),
             new PhpHeredocInjection(),
             new PhpDocCommentInjection(),
-            new PhpAttributeInstanceInjection(),
             new PhpAttributePlainInjection(),
+            new PhpAttributeInstanceInjection(),
             new PhpFunctionParametersInjection(),
         ];
     }

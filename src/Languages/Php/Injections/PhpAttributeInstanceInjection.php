@@ -16,15 +16,19 @@ final readonly class PhpAttributeInstanceInjection implements Injection
 
     public function getPattern(): string
     {
-        return '(?<match>\#\[(.|\n)*?\)\])';
+        return '(?<match>\#\[[\w]+\((.|\n)*?\)\])';
     }
 
     public function parseContent(string $content, Highlighter $highlighter): string
     {
         $theme = $highlighter->getTheme();
 
-        return Escape::tokens($theme->before(TokenTypeEnum::ATTRIBUTE))
-            . $content
-            . Escape::tokens($theme->after(TokenTypeEnum::ATTRIBUTE));
+        $parsed = '#[' . $highlighter->parse(str_replace(['#[', ')]'], '', $content), 'php') . ')]';
+
+        return Escape::injection(
+            Escape::tokens($theme->before(TokenTypeEnum::ATTRIBUTE))
+            . $parsed
+            . Escape::tokens($theme->after(TokenTypeEnum::ATTRIBUTE))
+        );
     }
 }

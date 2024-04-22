@@ -1,6 +1,11 @@
 ```php
-public string $fullName {
-    get => $this->first . " " . $this->last;
-    set (string $value) => $this->first . " " . $this->last;
-}
+#[ConsoleCommand]
+public function info(
+    #[ConsoleArgument(
+        description: 'The name of the package',
+        help: 'Extended help text for this argument',
+        aliases: ['n'],
+    )]
+    string $name
+): void {}
 ```

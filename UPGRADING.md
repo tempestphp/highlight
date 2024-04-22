@@ -1,4 +1,8 @@
-# 2.0.3
+## 2.0.4
+
+- Fix for overflowing highlight tags
+
+## 2.0.3
 
 - Fix for custom class overflows
 

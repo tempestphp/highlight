@@ -15,6 +15,10 @@ final readonly class CssTheme implements WebTheme
 
     public function before(TokenType $tokenType): string
     {
+        if ($tokenType === TokenTypeEnum::HIDDEN) {
+            return '<span style="display: none">';
+        }
+
         $class = match ($tokenType) {
             TokenTypeEnum::KEYWORD => 'hl-keyword',
             TokenTypeEnum::PROPERTY => 'hl-property',

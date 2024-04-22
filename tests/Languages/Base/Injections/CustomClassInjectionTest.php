@@ -12,12 +12,12 @@ class CustomClassInjectionTest extends TestCase
 {
     public function test_custom_class_injection()
     {
-        $content = <<<TXT
+        $content = <<<'TXT'
 {:hl-property:read:}({:hl-type:int:} $bytes): {:hl-type:string:}
 TXT;
 
-        $expected = <<<TXT
-read(int ): string
+        $expected = <<<'TXT'
+read(int $bytes): string
 TXT;
 
         $parsed = (new CustomClassInjection())->parse($content, new Highlighter());
@@ -30,8 +30,8 @@ TXT;
         $this->assertSame(5, $parsed->tokens[1]->start);
         $this->assertSame(8, $parsed->tokens[1]->end);
         $this->assertSame('hl-type', $parsed->tokens[1]->type->getValue());
-        $this->assertSame(12, $parsed->tokens[2]->start);
-        $this->assertSame(18, $parsed->tokens[2]->end);
+        $this->assertSame(18, $parsed->tokens[2]->start);
+        $this->assertSame(24, $parsed->tokens[2]->end);
         $this->assertSame('hl-type', $parsed->tokens[2]->type->getValue());
     }
 }

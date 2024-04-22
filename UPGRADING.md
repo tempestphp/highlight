@@ -1,3 +1,7 @@
+# 2.0.3
+
+- Fix for custom class overflows
+
 ## 2.0.2
 
 - Attribute highlighting bugfix

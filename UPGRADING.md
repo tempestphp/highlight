@@ -1,3 +1,7 @@
+## 2.0.2
+
+- Attribute highlighting bugfix
+
 ## 2.0.1
 
 - Bugfix for arrays within attributes

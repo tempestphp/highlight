@@ -9,6 +9,7 @@ use ReflectionClass;
 use Tempest\Highlight\Languages\Base\Injections\GutterInjection;
 use Tempest\Highlight\Languages\Blade\BladeLanguage;
 use Tempest\Highlight\Languages\Css\CssLanguage;
+use Tempest\Highlight\Languages\Diff\DiffLanguage;
 use Tempest\Highlight\Languages\DocComment\DocCommentLanguage;
 use Tempest\Highlight\Languages\Gdscript\GdscriptLanguage;
 use Tempest\Highlight\Languages\Html\HtmlLanguage;
@@ -38,6 +39,7 @@ final class Highlighter
         $this
             ->addLanguage(new BladeLanguage())
             ->addLanguage(new CssLanguage())
+            ->addLanguage(new DiffLanguage())
             ->addLanguage(new DocCommentLanguage())
             ->addLanguage(new GdscriptLanguage())
             ->addLanguage(new HtmlLanguage())

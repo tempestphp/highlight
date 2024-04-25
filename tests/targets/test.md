@@ -1,4 +1,3 @@
-```diff
-+class Foo {}
--class Foo {}
+```php
+/** @var \DateTimeImmutable|null */
 ```

@@ -1,3 +1,7 @@
+## 2.3.0
+
+- Add `\Tempest\Highlight\CommonMark\HighlightExtension`
+
 ## 2.2.0
 
 - Add `Highlighter::getSupportedLanguageNames()`

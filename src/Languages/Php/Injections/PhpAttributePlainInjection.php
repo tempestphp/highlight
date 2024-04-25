@@ -10,13 +10,13 @@ use Tempest\Highlight\Injection;
 use Tempest\Highlight\IsInjection;
 use Tempest\Highlight\Tokens\TokenTypeEnum;
 
-final readonly class PhpAttributeInjection implements Injection
+final readonly class PhpAttributePlainInjection implements Injection
 {
     use IsInjection;
 
     public function getPattern(): string
     {
-        return '(?<match>\#\[(.|\n)*?\])';
+        return '(?<match>\#\[[\w]+\])';
     }
 
     public function parseContent(string $content, Highlighter $highlighter): string

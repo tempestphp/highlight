@@ -1,3 +1,27 @@
+## 2.2.0
+
+- Add `Highlighter::getSupportedLanguageNames()`
+
+## 2.1.0
+
+- Add support for `diff` language
+
+## 2.0.4
+
+- Fix for overflowing highlight tags
+
+## 2.0.3
+
+- Fix for custom class overflows
+
+## 2.0.2
+
+- Attribute highlighting bugfix
+
+## 2.0.1
+
+- Bugfix for arrays within attributes
+
 ## 2.0.0
 
 - `Language` interface has two new methods: `getName` and `getAliases`

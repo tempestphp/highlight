@@ -44,6 +44,13 @@ class HighlighterTest extends TestCase
         $this->assertSame('<span style="color: #D32F2F;">echo</span> 1', $output);
     }
 
+    public function test_get_supported_languages(): void
+    {
+        $highlighter = new Highlighter();
+
+        $this->assertTrue(in_array('php', $highlighter->getSupportedLanguageNames()));
+    }
+
     public static function data(): array
     {
         return [

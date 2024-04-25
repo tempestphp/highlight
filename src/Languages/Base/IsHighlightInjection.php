@@ -8,6 +8,7 @@ use Tempest\Highlight\Highlighter;
 use Tempest\Highlight\ParsedInjection;
 use Tempest\Highlight\Tokens\DynamicTokenType;
 use Tempest\Highlight\Tokens\Token;
+use Tempest\Highlight\Tokens\TokenTypeEnum;
 
 trait IsHighlightInjection
 {
@@ -26,16 +27,23 @@ trait IsHighlightInjection
         $tokens = [];
 
         foreach ($matches[0] as $key => $original) {
-            $startToken = $matches['start'][$key][0];
-            $endToken = $matches['end'][$key][0];
+            $tokens[] = new Token(
+                offset: (int) $matches['start'][$key][1],
+                value: $matches['start'][$key][0],
+                type: TokenTypeEnum::HIDDEN,
+            );
 
             $tokens[] = new Token(
-                offset: (int) $matches['match'][$key][1] - strlen($startToken),
+                offset: (int) $matches['match'][$key][1],
                 value: $matches['match'][$key][0],
                 type: new DynamicTokenType($this->getClassname()),
             );
 
-            $content = str_replace([$startToken, $endToken], '', $content);
+            $tokens[] = new Token(
+                offset: (int) $matches['end'][$key][1],
+                value: $matches['end'][$key][0],
+                type: TokenTypeEnum::HIDDEN,
+            );
         }
 
         return new ParsedInjection(

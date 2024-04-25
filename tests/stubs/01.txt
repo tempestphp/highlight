@@ -18,7 +18,7 @@ final readonly class HomeController
 ===
 <span class="hl-keyword">final</span> <span class="hl-keyword">readonly</span> <span class="hl-keyword">class</span> <span class="hl-type">HomeController</span>
 {
-    <span class="hl-attribute">#[<span class="hl-type">Get</span>(<span class="hl-property">uri</span>: '<span class="hl-value">/home</span>')]</span>
+    <span class="hl-injection"><span class="hl-attribute">#[<span class="hl-type">Get</span>(<span class="hl-property">uri</span>: '<span class="hl-value">/home</span>')]</span></span>
     <span class="hl-keyword">public</span> <span class="hl-keyword">function</span> <span class="hl-property">__invoke</span>(): <span class="hl-type">View</span>
     {
         <span class="hl-keyword">return</span> <span class="hl-property">view</span>('<span class="hl-value">Views/home.view.php</span>')
@@ -28,7 +28,7 @@ final readonly class HomeController
             );
     }
 
-    <span class="hl-attribute">#[<span class="hl-type">Post</span>(<span class="hl-property">uri</span>: '<span class="hl-value">/home</span>')]</span>
+    <span class="hl-injection"><span class="hl-attribute">#[<span class="hl-type">Post</span>(<span class="hl-property">uri</span>: '<span class="hl-value">/home</span>')]</span></span>
     <span class="hl-keyword">public</span> <span class="hl-keyword">function</span> <span class="hl-property">__invoke</span>(): <span class="hl-type">View</span>
     {
     }

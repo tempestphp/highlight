@@ -1,3 +1,4 @@
-```
-{~class~} Foo {}
+```diff
++class Foo {}
+-class Foo {}
 ```

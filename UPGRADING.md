@@ -1,3 +1,7 @@
+## 2.2.0
+
+- Add `Highlighter::getSupportedLanguageNames()`
+
 ## 2.1.0
 
 - Add support for `diff` language

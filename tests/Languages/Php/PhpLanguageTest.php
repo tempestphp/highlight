@@ -107,6 +107,7 @@ foo()
 <span class="hl-comment">// We\'ll</span>',
             ],
             ['use function Tempest\Foo\redirect;', '<span class="hl-keyword">use</span> <span class="hl-keyword">function</span> <span class="hl-type">Tempest\Foo\</span><span class="hl-property">redirect</span>;'],
+            ['default: true,', '<span class="hl-property">default</span>: <span class="hl-keyword">true</span>,'],
         ];
     }
 }

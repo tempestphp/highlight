@@ -77,6 +77,8 @@ class PhpLanguage extends BaseLanguage
 
             new UseFunctionNamePattern(),
             new UseFunctionPattern(),
+            new ClassNamePattern(),
+            new NamedArgumentPattern(),
             new OperatorPattern('&&'),
             new OperatorPattern('\|\|'),
             new OperatorPattern('<=>'),
@@ -174,7 +176,6 @@ class PhpLanguage extends BaseLanguage
             new NamespacePattern(),
             new PropertyTypesPattern(),
             new ConstantTypesPattern(),
-            new ClassNamePattern(),
             new ReturnTypePattern(),
             new StaticClassCallPattern(),
             new NewObjectPattern(),
@@ -187,7 +188,6 @@ class PhpLanguage extends BaseLanguage
 
             // PROPERTIES
             new ClassPropertyPattern(),
-            new NamedArgumentPattern(),
             new PropertyAccessPattern(),
             new FunctionNamePattern(),
             new NestedFunctionCallPattern(),

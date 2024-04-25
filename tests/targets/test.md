@@ -1,3 +1,3 @@
 ```php
-use function Tempest\Foo\redirect;
+enum Foo: string
 ```

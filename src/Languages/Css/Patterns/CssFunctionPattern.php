@@ -13,13 +13,18 @@ use Tempest\Highlight\Tokens\TokenTypeEnum;
     input: 'src: url("fonts/MonaspaceArgon-Bold.woff") format("woff");',
     output: ['url', 'format'],
 )]
+
+#[PatternTest(
+    input: 'background: linear-gradient(white 30%)',
+    output: ['linear-gradient'],
+)]
 final readonly class CssFunctionPattern implements Pattern
 {
     use IsPattern;
 
     public function getPattern(): string
     {
-        return '(?<match>[\w]+)\(';
+        return '(?<match>[\w\-]+)\(';
     }
 
     public function getTokenType(): TokenTypeEnum

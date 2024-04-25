@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tempest\Highlight\Languages\Diff\Injections;
 
 use Tempest\Highlight\Escape;

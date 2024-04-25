@@ -8,6 +8,7 @@ use Tempest\Highlight\Languages\Base\BaseLanguage;
 use Tempest\Highlight\Languages\Css\Patterns\CssAttributePattern;
 use Tempest\Highlight\Languages\Css\Patterns\CssCommentPattern;
 use Tempest\Highlight\Languages\Css\Patterns\CssFunctionPattern;
+use Tempest\Highlight\Languages\Css\Patterns\CssImportPattern;
 use Tempest\Highlight\Languages\Css\Patterns\CssMediaQueryPattern;
 use Tempest\Highlight\Languages\Css\Patterns\CssSelectorPattern;
 use Tempest\Highlight\Languages\Css\Patterns\CssVariablePattern;
@@ -31,6 +32,7 @@ class CssLanguage extends BaseLanguage
         return [
             ...parent::getPatterns(),
             new CssMediaQueryPattern(),
+            new CssImportPattern(),
             new CssCommentPattern(),
             new CssSelectorPattern(),
             new CssAttributePattern(),

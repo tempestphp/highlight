@@ -39,6 +39,8 @@ TXT,
 }
 TXT,
             ],
+            ['linear-gradient(', '<span class="hl-keyword">linear-gradient</span>('],
+            ['@import "foo.css"', '<span class="hl-keyword">@import</span> &quot;foo.css&quot;'],
         ];
     }
 }

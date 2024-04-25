@@ -46,6 +46,8 @@ use Tempest\Highlight\Languages\Php\Patterns\SingleQuoteValuePattern;
 use Tempest\Highlight\Languages\Php\Patterns\StaticClassCallPattern;
 use Tempest\Highlight\Languages\Php\Patterns\UntypedClassPropertyPattern;
 use Tempest\Highlight\Languages\Php\Patterns\UseAsPattern;
+use Tempest\Highlight\Languages\Php\Patterns\UseFunctionNamePattern;
+use Tempest\Highlight\Languages\Php\Patterns\UseFunctionPattern;
 use Tempest\Highlight\Languages\Php\Patterns\UsePattern;
 use Tempest\Highlight\Languages\Php\Patterns\VariablePattern;
 
@@ -73,6 +75,8 @@ class PhpLanguage extends BaseLanguage
         return [
             ...parent::getPatterns(),
 
+            new UseFunctionNamePattern(),
+            new UseFunctionPattern(),
             new OperatorPattern('&&'),
             new OperatorPattern('\|\|'),
             new OperatorPattern('<=>'),

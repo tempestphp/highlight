@@ -1,3 +1,3 @@
 ```php
-/** @var \DateTimeImmutable|null */
+use function Tempest\Foo\redirect;
 ```

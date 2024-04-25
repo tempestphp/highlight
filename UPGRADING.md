@@ -1,3 +1,7 @@
+## 2.3.1
+
+- Several bugfixes
+
 ## 2.3.0
 
 - Add `\Tempest\Highlight\CommonMark\HighlightExtension`

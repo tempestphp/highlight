@@ -1,3 +1,7 @@
+## 2.3.3
+
+- Fix blade comments being styled as deletions (#10)
+
 ## 2.3.2 
 
 - Bugfixes

@@ -24,7 +24,7 @@ final readonly class ReturnTypePattern implements Pattern
 
     public function getPattern(): string
     {
-        return '\)\s*\:\s*(?<match>.+?)[\s{;\n]';
+        return '\)\s*\:\s*(?<match>[\w\(\)\&\|\?]+)[\s{;\n]';
     }
 
     public function getTokenType(): TokenTypeEnum

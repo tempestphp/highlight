@@ -108,6 +108,8 @@ foo()
             ],
             ['use function Tempest\Foo\redirect;', '<span class="hl-keyword">use</span> <span class="hl-keyword">function</span> <span class="hl-type">Tempest\Foo\</span><span class="hl-property">redirect</span>;'],
             ['default: true,', '<span class="hl-property">default</span>: <span class="hl-keyword">true</span>,'],
+            ['new MyClass()::CONSTANT;', '<span class="hl-keyword">new</span> <span class="hl-type">MyClass</span>()::<span class="hl-property">CONSTANT</span>;'],
+            ['new MyClass()::$staticProperty;', '<span class="hl-keyword">new</span> <span class="hl-type">MyClass</span>()::<span class="hl-property">$staticProperty</span>;'],
         ];
     }
 }

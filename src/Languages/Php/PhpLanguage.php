@@ -44,6 +44,7 @@ use Tempest\Highlight\Languages\Php\Patterns\ShortFunctionReferencePattern;
 use Tempest\Highlight\Languages\Php\Patterns\SinglelineCommentPattern;
 use Tempest\Highlight\Languages\Php\Patterns\SingleQuoteValuePattern;
 use Tempest\Highlight\Languages\Php\Patterns\StaticClassCallPattern;
+use Tempest\Highlight\Languages\Php\Patterns\StaticPropertyPattern;
 use Tempest\Highlight\Languages\Php\Patterns\UntypedClassPropertyPattern;
 use Tempest\Highlight\Languages\Php\Patterns\UseAsPattern;
 use Tempest\Highlight\Languages\Php\Patterns\UseFunctionNamePattern;
@@ -196,6 +197,7 @@ class PhpLanguage extends BaseLanguage
             new ConstantNamePattern(),
             new UntypedClassPropertyPattern(),
             new EnumCasePattern(),
+            new StaticPropertyPattern(),
 
             // VARIABLES
             new VariablePattern(),

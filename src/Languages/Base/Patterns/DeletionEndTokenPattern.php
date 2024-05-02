@@ -11,13 +11,14 @@ use Tempest\Highlight\Tokens\IgnoreTokenType;
 use Tempest\Highlight\Tokens\TokenType;
 
 #[PatternTest('{- pull_request_target: -}', '-}')]
+#[PatternTest('{-- pull_request_target: --}', null)]
 final readonly class DeletionEndTokenPattern implements Pattern
 {
     use IsPattern;
 
     public function getPattern(): string
     {
-        return '/(?<match>\-})/';
+        return '/(?<!-)(?<match>\-})/';
     }
 
     public function getTokenType(): TokenType

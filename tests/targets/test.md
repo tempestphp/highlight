@@ -1,3 +1,3 @@
-```php
-self::$staticProperty;
+```blade
+{{-- Blade comment --}}
 ```

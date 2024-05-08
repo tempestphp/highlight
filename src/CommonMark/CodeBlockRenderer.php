@@ -42,7 +42,7 @@ final class CodeBlockRenderer implements NodeRendererInterface
         if ($theme instanceof WebTheme) {
             return $theme->preBefore($highlighter) . $parsed . $theme->preAfter($highlighter);
         } else {
-            return '<pre data-lang="' . $language . '">' . $parsed . '</pre>';
+            return '<pre data-lang="' . $language . '" class="notranslate">' . $parsed . '</pre>';
         }
     }
 }

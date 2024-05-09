@@ -37,7 +37,7 @@ final readonly class ParserInjection implements Injection
 
                 $offset = mb_stripos($content, $text);
 
-                $parsed .= Escape::tokens("<span class='hl-{$type}-sentence'>").$this->parseSentence($ellison, $text).Escape::tokens("</span>");
+                $parsed .= Escape::tokens("<span class='hl-{$type}-sentence'>").trim($this->parseSentence($ellison, $text), ' .').'. '.Escape::tokens("</span>");
 
                 $content = mb_substr($content, $offset + mb_strlen($text));
             }

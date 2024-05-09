@@ -1,3 +1,7 @@
+## 2.3.4
+
+- Add `class="notranslate"` to pre tags to prevent Google Translate from translating code blocks (#114)
+
 ## 2.3.3
 
 - Fix blade comments being styled as deletions (#10)

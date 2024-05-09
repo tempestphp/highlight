@@ -53,7 +53,7 @@ class Foo {}
 TXT;
 
         $expected = <<<'TXT'
-<pre data-lang="php"><span class="hl-gutter ">10</span> <span class="hl-keyword">class</span> <span class="hl-type">Foo</span> {}</pre>
+<pre data-lang="php" class="notranslate"><span class="hl-gutter ">10</span> <span class="hl-keyword">class</span> <span class="hl-type">Foo</span> {}</pre>
 
 TXT;
 
@@ -79,7 +79,7 @@ echo;
 TXT;
 
         $expected = <<<'TXT'
-<pre data-lang="php" style="color: #212121; background-color: #ffffff;"><span style="color: #D32F2F;">echo</span>;
+<pre data-lang="php" class="notranslate" style="color: #212121; background-color: #ffffff;"><span style="color: #D32F2F;">echo</span>;
 </pre>
 
 TXT;
@@ -105,7 +105,7 @@ echo;
 TXT;
 
         $expected = <<<'TXT'
-<pre data-lang="txt">echo;
+<pre data-lang="txt" class="notranslate">echo;
 </pre>
 
 TXT;

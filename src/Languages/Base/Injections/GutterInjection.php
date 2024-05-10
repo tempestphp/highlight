@@ -58,7 +58,8 @@ final class GutterInjection implements Injection
         foreach ($lines as $i => $line) {
             $gutterNumber = $gutterNumbers[$i];
 
-            $gutterClass = 'hl-gutter ' . ($this->classes[$i + $this->startAt] ?? '');
+            $hasClasses = $this->classes[$i + $this->startAt] ?? '';
+            $gutterClass = 'hl-gutter' . ($hasClasses ? ' ' . $hasClasses : '');
 
             $lines[$i] = sprintf(
                 Escape::tokens('<span class="%s">%s</span> %s'),

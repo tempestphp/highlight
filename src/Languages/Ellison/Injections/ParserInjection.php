@@ -58,8 +58,8 @@ final readonly class ParserInjection implements Injection
         ];
 
         foreach ($problems as $problem) {
-            $sentence = str_replace(
-                $problem['text'],
+            $sentence = preg_replace(
+                "/".preg_quote($problem['text'])."/i",
                 Escape::tokens("<span class='hl-{$problem['type']}-phrase'>").$problem['text'].Escape::tokens("</span>"),
                 $sentence,
             );

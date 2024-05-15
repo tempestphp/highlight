@@ -1,3 +1,7 @@
+## 2.4.2
+
+- Improve Ellison line splitting
+
 ## 2.4.1 
 
 - Small improvements to Ellison support

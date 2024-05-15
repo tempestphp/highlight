@@ -42,7 +42,7 @@ TXT, <<<'TXT'
 
 <span class='hl-complex-sentence'>All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. </span><span class='hl-complex-sentence'>It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. </span><span class='hl-complex-sentence'>The generated Lorem Ipsum is <span class='hl-complex-phrase'>therefore</span> always free from repetition, injected humour, or non-characteristic words etc. </span>
 TXT
-            ]
+            ],
         ];
     }
 }

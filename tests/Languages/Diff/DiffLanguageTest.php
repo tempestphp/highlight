@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Languages\Diff;
+namespace Tempest\Highlight\Tests\Languages\Diff;
 
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;

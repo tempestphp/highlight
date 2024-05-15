@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Languages\Gdscript;
+namespace Tempest\Highlight\Tests\Languages\Ellison;
 
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
@@ -24,13 +24,13 @@ class EllisonLanguageTest extends TestCase
     public static function data(): array
     {
         return [
-            ['This is a simple sentence', "<p><span class='hl-simple-sentence'>This is a simple sentence. </span></p>"],
-            ['This is a complex sentence because it includes longer, more complex words', "<p><span class='hl-moderate-sentence'>This is a complex sentence because it includes longer, more complex words. </span></p>"],
-            ['This is a complex sentence because it includes longer words of greater complexity, and an altogether unbearable length', "<p><span class='hl-complex-sentence'>This is a complex sentence because it includes longer words of greater complexity, and an altogether unbearable length. </span></p>"],
-            ['This sentence was made by me', "<p><span class='hl-simple-sentence'>This sentence <span class='hl-passive-phrase'>was made</span> by me. </span></p>"],
-            ['This sentence is conceivably awful', "<p><span class='hl-simple-sentence'>This sentence is <span class='hl-adverb-phrase'>conceivably</span> awful. </span></p>"],
-            ['There are multiple problems', "<p><span class='hl-simple-sentence'>There are <span class='hl-complex-phrase'>multiple</span> problems. </span></p>"],
-            ['I believe this sucks', "<p><span class='hl-simple-sentence'><span class='hl-qualified-phrase'>I believe</span> this sucks. </span></p>"],
+            ['This is a simple sentence', "<span class='hl-simple-sentence'>This is a simple sentence. </span>"],
+            ['This is a complex sentence because it includes longer, more complex words', "<span class='hl-moderate-sentence'>This is a complex sentence because it includes longer, more complex words. </span>"],
+            ['This is a complex sentence because it includes longer words of greater complexity, and an altogether unbearable length', "<span class='hl-complex-sentence'>This is a complex sentence because it includes longer words of greater complexity, and an altogether unbearable length. </span>"],
+            ['This sentence was made by me', "<span class='hl-simple-sentence'>This sentence <span class='hl-passive-phrase'>was made</span> by me. </span>"],
+            ['This sentence is conceivably awful', "<span class='hl-simple-sentence'>This sentence is <span class='hl-adverb-phrase'>conceivably</span> awful. </span>"],
+            ['There are multiple problems', "<span class='hl-simple-sentence'>There are <span class='hl-complex-phrase'>multiple</span> problems. </span>"],
+            ['I believe this sucks', "<span class='hl-simple-sentence'><span class='hl-qualified-phrase'>I believe</span> this sucks. </span>"],
         ];
     }
 }

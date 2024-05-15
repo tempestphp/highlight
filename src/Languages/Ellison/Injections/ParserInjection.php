@@ -16,36 +16,36 @@ final readonly class ParserInjection implements Injection
 
     public function getPattern(): string
     {
-        return '(?<match>.*)';
+        return '(?<match>(.|\n)*)';
     }
 
     public function parseContent(string $content, Highlighter $highlighter): string
     {
-        $parsed = '';
-        $paragraphs = preg_split("/\n+\w*\n+/", $content);
+        $ellison = new Ellison();
+        $parsed = [];
+        $paragraphs = explode(PHP_EOL, $content);
 
-        foreach ($paragraphs as $i => $paragraph) {
-            $parsed .= Escape::tokens("<p>");
+        foreach ($paragraphs as $paragraph) {
+            $parsedParagraph = '';
 
-            $ellison = new Ellison();
-            $sentences = $ellison->getSentenceDifficulty($content);
+            $sentences = $ellison->getSentenceDifficulty($paragraph);
 
             foreach ($sentences as $sentence) {
                 ['text' => $text, 'type' => $type] = $sentence;
 
                 $text = trim($text);
 
-                $offset = mb_stripos($content, $text);
-
-                $parsed .= Escape::tokens("<span class='hl-{$type}-sentence'>").trim($this->parseSentence($ellison, $text), ' .').'. '.Escape::tokens("</span>");
-
-                $content = mb_substr($content, $offset + mb_strlen($text));
+                $parsedParagraph .=
+                    Escape::tokens("<span class='hl-{$type}-sentence'>")
+                    . trim($this->parseSentence($ellison, $text), ' .')
+                    . '. '
+                    . Escape::tokens("</span>");
             }
 
-            $parsed .= Escape::tokens("</p>");
+            $parsed[] = $parsedParagraph;
         }
 
-        return $parsed;
+        return implode(PHP_EOL, $parsed);
     }
 
     private function parseSentence(Ellison $ellison, string $sentence): string
@@ -59,8 +59,8 @@ final readonly class ParserInjection implements Injection
 
         foreach ($problems as $problem) {
             $sentence = preg_replace(
-                "/".preg_quote($problem['text'])."/i",
-                Escape::tokens("<span class='hl-{$problem['type']}-phrase'>").$problem['text'].Escape::tokens("</span>"),
+                "/" . preg_quote($problem['text']) . "/i",
+                Escape::tokens("<span class='hl-{$problem['type']}-phrase'>") . $problem['text'] . Escape::tokens("</span>"),
                 $sentence,
             );
         }

@@ -1,3 +1,7 @@
+## 2.4.1 
+
+- Small improvements to Ellison support
+
 ## 2.4.0
 
 - Add Ellison support (#116)

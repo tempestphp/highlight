@@ -31,6 +31,18 @@ class EllisonLanguageTest extends TestCase
             ['This sentence is conceivably awful', "<span class='hl-simple-sentence'>This sentence is <span class='hl-adverb-phrase'>conceivably</span> awful. </span>"],
             ['There are multiple problems', "<span class='hl-simple-sentence'>There are <span class='hl-complex-phrase'>multiple</span> problems. </span>"],
             ['I believe this sucks', "<span class='hl-simple-sentence'><span class='hl-qualified-phrase'>I believe</span> this sucks. </span>"],
+            [<<<'TXT'
+There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. 
+
+All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.
+
+
+TXT, <<<'TXT'
+<span class='hl-complex-sentence'>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even <span class='hl-adverb-phrase'>slightly</span> believable. </span><span class='hl-complex-sentence'>If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. </span>
+
+<span class='hl-complex-sentence'>All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. </span><span class='hl-complex-sentence'>It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. </span><span class='hl-complex-sentence'>The generated Lorem Ipsum is <span class='hl-complex-phrase'>therefore</span> always free from repetition, injected humour, or non-characteristic words etc. </span>
+TXT
+            ]
         ];
     }
 }

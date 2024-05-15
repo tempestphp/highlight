@@ -23,7 +23,7 @@ final readonly class ParserInjection implements Injection
     {
         $ellison = new Ellison();
         $parsed = [];
-        $paragraphs = explode(PHP_EOL, $content);
+        $paragraphs = preg_split('/\R/', trim($content));
 
         foreach ($paragraphs as $paragraph) {
             $parsedParagraph = '';

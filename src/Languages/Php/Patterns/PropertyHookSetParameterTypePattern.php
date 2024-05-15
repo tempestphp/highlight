@@ -12,13 +12,14 @@ use Tempest\Highlight\Tokens\TokenTypeEnum;
 
 #[PatternTest('set (string $value', 'string')]
 #[PatternTest('set(string $value', 'string')]
+#[PatternTest('set(Author $value', 'Author')]
 final readonly class PropertyHookSetParameterTypePattern implements Pattern
 {
     use IsPattern;
 
     public function getPattern(): string
     {
-        return 'set\s*\((?<match>string)';
+        return 'set\s*\((?<match>[\w]+)';
     }
 
     public function getTokenType(): TokenType

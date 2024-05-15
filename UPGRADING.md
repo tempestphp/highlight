@@ -1,3 +1,7 @@
+## 2.4.3
+
+- Bugfix for missing type highlight in property set hook
+
 ## 2.4.2
 
 - Improve Ellison line splitting

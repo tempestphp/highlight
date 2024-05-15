@@ -32,6 +32,18 @@ if (isset($_GET['target'])) {
 
 $contents = $markdown->convert(file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . $target))->getContent();
 
+$wrap = false;
+
+if (isset($_GET['wrap'])) {
+    $wrap = (bool) $_GET['wrap'];
+}
+
+$stylesheet = null;
+
+if (isset($_GET['stylesheet'])) {
+    $stylesheet = $_GET['stylesheet'];
+}
+
 ?>
 
 <html>
@@ -47,7 +59,8 @@ $contents = $markdown->convert(file_get_contents(__DIR__ . DIRECTORY_SEPARATOR .
 
         code,
         pre {
-            overflow-x: scroll;
+            overflow-x: <?php echo $wrap ? 'auto' : 'scroll' ?>;
+            white-space: <?php echo $wrap ? 'normal' : 'pre' ?>;
             line-height: 1.8em;
             font-family: "JetBrains Mono", monospace;
             padding: .1em;
@@ -70,6 +83,9 @@ $contents = $markdown->convert(file_get_contents(__DIR__ . DIRECTORY_SEPARATOR .
             /*height: 100vh;*/
         }
     </style>
+    <?php if ($stylesheet): ?>
+        <link rel="stylesheet" href="<?php echo $stylesheet; ?>">
+    <?php endif; ?>
 </head>
 <body>
 <div class="container">

@@ -25,7 +25,11 @@
         "phpstan/phpstan": "^1.10.0",
         "friendsofphp/php-cs-fixer": "^3.21",
         "league/commonmark": "^2.4",
-        "larapack/dd": "^1.1"
+        "larapack/dd": "^1.1",
+        "assertchris/ellison": "^1.0.2"
+    },
+    "suggest": {
+        "assertchris/ellison": "Allows you to analyse sentence complexity"
     },
     "scripts": {
         "phpunit": "vendor/bin/phpunit --display-warnings --display-skipped --display-deprecations --display-errors --display-notices",

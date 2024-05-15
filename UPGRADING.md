@@ -1,3 +1,7 @@
+## 2.4.0
+
+- Add Ellison support (#116)
+
 ## 2.3.5
 
 - Improved line splitting for gutter (#115)

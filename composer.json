@@ -29,7 +29,8 @@
         "assertchris/ellison": "^1.0.2"
     },
     "suggest": {
-        "assertchris/ellison": "Allows you to analyse sentence complexity"
+        "assertchris/ellison": "Allows you to analyse sentence complexity",
+        "league/commonmark": "Adds markdown support"
     },
     "scripts": {
         "phpunit": "vendor/bin/phpunit --display-warnings --display-skipped --display-deprecations --display-errors --display-notices",

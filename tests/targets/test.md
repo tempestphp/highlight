@@ -1,3 +1,3 @@
-```blade
+```ellison
 {{-- Blade comment --}}
 ```

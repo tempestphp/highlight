@@ -110,6 +110,7 @@ foo()
             ['default: true,', '<span class="hl-property">default</span>: <span class="hl-keyword">true</span>,'],
             ['new MyClass()::CONSTANT;', '<span class="hl-keyword">new</span> <span class="hl-type">MyClass</span>()::<span class="hl-property">CONSTANT</span>;'],
             ['new MyClass()::$staticProperty;', '<span class="hl-keyword">new</span> <span class="hl-type">MyClass</span>()::<span class="hl-property">$staticProperty</span>;'],
+            ['/** @return K */', '<span class="hl-comment">/** <span class="hl-value">@return</span> <span class="hl-type">K </span>*/</span>'],
         ];
     }
 }

@@ -9,15 +9,15 @@ use Tempest\Highlight\Pattern;
 use Tempest\Highlight\PatternTest;
 use Tempest\Highlight\Tokens\TokenTypeEnum;
 
-#[PatternTest(input: '@return array|string', output: 'array|string')]
-#[PatternTest(input: '@return \\Foo', output: '\\Foo')]
-final readonly class PhpDocCommentReturnTypePattern implements Pattern
+#[PatternTest(input: '/** @return array|string */', output: 'array|string')]
+#[PatternTest(input: '/** @return \\Foo */', output: '\\Foo')]
+final readonly class PhpDocCommentReturnTypeSingleLinePattern implements Pattern
 {
     use IsPattern;
 
     public function getPattern(): string
     {
-        return '\@return(\s)+(?<match>.*?)(\*\/|$|\R)';
+        return '\@return\s*(?<match>.*?)(\s*\*\/|$)';
     }
 
     public function getTokenType(): TokenTypeEnum

@@ -1,3 +1,7 @@
+## 2.4.4
+
+- Bugfix for single-line return type docblock (#122)
+
 ## 2.4.3
 
 - Bugfix for missing type highlight in property set hook

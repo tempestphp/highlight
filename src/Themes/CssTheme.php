@@ -31,6 +31,7 @@ final readonly class CssTheme implements WebTheme
             TokenTypeEnum::VARIABLE => 'hl-variable',
             TokenTypeEnum::OPERATOR => 'hl-operator',
             TokenTypeEnum::NUMBER => 'hl-number',
+            TokenTypeEnum::BOOLEAN => 'hl-boolean',
             default => $tokenType->getValue(),
         };
 

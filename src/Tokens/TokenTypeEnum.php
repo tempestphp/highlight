@@ -17,6 +17,7 @@ enum TokenTypeEnum: string implements TokenType
     case INJECTION = 'injection';
     case OPERATOR = 'operator';
     case NUMBER = 'number';
+    case BOOLEAN = 'boolean';
     case HIDDEN = 'hidden';
 
     public function getValue(): string

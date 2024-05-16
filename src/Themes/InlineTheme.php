@@ -52,6 +52,7 @@ final class InlineTheme implements Theme, WebTheme
             TokenTypeEnum::INJECTION => 'hl-injection',
             TokenTypeEnum::VARIABLE => 'hl-variable',
             TokenTypeEnum::OPERATOR => 'hl-operator',
+            TokenTypeEnum::NUMBER => 'hl-number',
             default => $tokenType->getValue(),
         };
 

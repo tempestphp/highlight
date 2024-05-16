@@ -50,7 +50,7 @@ if (isset($_GET['stylesheet'])) {
 <head>
     <title>Test</title>
     <style>
-        <?= file_get_contents(__DIR__ . '/../src/Themes/Css/highlight-light-lite.css') ?>
+        <?= file_get_contents(__DIR__ . '/../src/Themes/Css/github-light.css') ?>
 
         body {
             font-size: 15px;

@@ -6,6 +6,7 @@ namespace Tempest\Highlight;
 
 use Generator;
 use ReflectionClass;
+use Tempest\Highlight\Languages\Antlers\AntlersLanguage;
 use Tempest\Highlight\Languages\Base\Injections\GutterInjection;
 use Tempest\Highlight\Languages\Blade\BladeLanguage;
 use Tempest\Highlight\Languages\Css\CssLanguage;
@@ -38,6 +39,7 @@ final class Highlighter
         private readonly Theme $theme = new CssTheme(),
     ) {
         $this
+            ->addLanguage(new AntlersLanguage())
             ->addLanguage(new BladeLanguage())
             ->addLanguage(new CssLanguage())
             ->addLanguage(new DiffLanguage())

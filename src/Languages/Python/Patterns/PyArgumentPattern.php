@@ -14,7 +14,7 @@ final readonly class PyArgumentPattern implements Pattern
 
     public function getPattern(): string
     {
-        return '(?<match>\w+)(s*=)';
+        return '(?<=,|\()\s*(?<match>\w+)s*=';
     }
 
     public function getTokenType(): TokenTypeEnum

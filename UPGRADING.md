@@ -1,3 +1,7 @@
+## 2.6.1
+
+- Add missing classes in default themes (#127)
+
 ## 2.6.0
 
 - Add Python support (#121)

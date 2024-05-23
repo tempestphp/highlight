@@ -58,7 +58,7 @@ final class InlineTheme implements Theme, WebTheme
         $style = $this->map[".{$class}"] ?? null;
 
         if (! $style) {
-            return '<span>';
+            return "<span class=\"{$class}\">";
         }
 
         return "<span style=\"{$style}\">";

@@ -1,3 +1,7 @@
+## 2.6.0
+
+- Add Python support (#121)
+
 ## 2.5.0
 
 - Add additional tokens for numbers and booleans (#123)

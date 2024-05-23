@@ -15,6 +15,7 @@ use Tempest\Highlight\Languages\Python\Patterns\PyCommentPattern;
 use Tempest\Highlight\Languages\Python\Patterns\PyDecoratorPattern;
 use Tempest\Highlight\Languages\Python\Patterns\PyFunctionPattern;
 use Tempest\Highlight\Languages\Python\Patterns\PyKeywordPattern;
+use Tempest\Highlight\Languages\Python\Patterns\PyNumberPattern;
 use Tempest\Highlight\Languages\Python\Patterns\PyOperatorPattern;
 use Tempest\Highlight\Languages\Python\Patterns\PyTripleDoubleQuoteStringPattern;
 use Tempest\Highlight\Languages\Python\Patterns\PyTripleSingleQuoteStringPattern;
@@ -52,11 +53,16 @@ class PythonLanguage extends BaseLanguage
             new PyFunctionPattern(),
 
             // TYPES
-            new PyBooleanPattern(),
             new PyBuiltinPattern(),
 
             // COMMENTS
             new PyCommentPattern(),
+
+            // NUMBERS
+            new PyNumberPattern(),
+
+            // BOOLEANS
+            new PyBooleanPattern(),
 
             // OPERATORS
             new PyOperatorPattern(),

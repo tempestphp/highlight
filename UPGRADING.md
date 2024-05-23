@@ -1,3 +1,7 @@
+## 2.5.0
+
+- Add additional tokens for numbers and booleans (#123)
+
 ## 2.4.5
 
 - Improve line splitting for addition and deletion injections (#117)

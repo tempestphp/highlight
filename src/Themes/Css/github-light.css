@@ -27,6 +27,14 @@ pre, code {
     color: #032f62;
 }
 
+.hl-boolean {
+    color: #032f62;
+}
+
+.hl-number {
+    color: #032f62;
+}
+
 .hl-variable {
     color: #e36209;
 }

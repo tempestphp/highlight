@@ -1,3 +1,7 @@
+## 2.4.5
+
+- Improve line splitting for addition and deletion injections (#117)
+
 ## 2.4.4
 
 - Bugfix for single-line return type docblock (#122)

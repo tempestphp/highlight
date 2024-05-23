@@ -23,10 +23,16 @@ pre, code {
     color: #9d3af6;
 }
 
-.hl-number,
-.hl-boolean,
 .hl-value {
     color: #0a3069;
+}
+
+.hl-boolean {
+    color: #000;
+}
+
+.hl-number {
+    color: #000;
 }
 
 .hl-variable {

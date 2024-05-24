@@ -8,7 +8,7 @@ use Tempest\Highlight\IsPattern;
 use Tempest\Highlight\Pattern;
 use Tempest\Highlight\Tokens\TokenTypeEnum;
 
-final readonly class PyBooleanPattern implements Pattern
+final readonly class PyLogicalValuePattern implements Pattern
 {
     use IsPattern;
 
@@ -19,6 +19,6 @@ final readonly class PyBooleanPattern implements Pattern
 
     public function getTokenType(): TokenTypeEnum
     {
-        return TokenTypeEnum::BOOLEAN;
+        return TokenTypeEnum::LITERAL;
     }
 }

@@ -8,13 +8,13 @@ use Tempest\Highlight\Languages\Base\BaseLanguage;
 use Tempest\Highlight\Languages\Php\Patterns\DoubleQuoteValuePattern;
 use Tempest\Highlight\Languages\Php\Patterns\SingleQuoteValuePattern;
 use Tempest\Highlight\Languages\Python\Patterns\PyArgumentPattern;
-use Tempest\Highlight\Languages\Python\Patterns\PyBooleanPattern;
 use Tempest\Highlight\Languages\Python\Patterns\PyBuiltinPattern;
 use Tempest\Highlight\Languages\Python\Patterns\PyClassNamePattern;
 use Tempest\Highlight\Languages\Python\Patterns\PyCommentPattern;
 use Tempest\Highlight\Languages\Python\Patterns\PyDecoratorPattern;
 use Tempest\Highlight\Languages\Python\Patterns\PyFunctionPattern;
 use Tempest\Highlight\Languages\Python\Patterns\PyKeywordPattern;
+use Tempest\Highlight\Languages\Python\Patterns\PyLogicalValuePattern;
 use Tempest\Highlight\Languages\Python\Patterns\PyNumberPattern;
 use Tempest\Highlight\Languages\Python\Patterns\PyOperatorPattern;
 use Tempest\Highlight\Languages\Python\Patterns\PyTripleDoubleQuoteStringPattern;
@@ -61,8 +61,8 @@ class PythonLanguage extends BaseLanguage
             // NUMBERS
             new PyNumberPattern(),
 
-            // BOOLEANS
-            new PyBooleanPattern(),
+            // LITERALS
+            new PyLogicalValuePattern(),
 
             // OPERATORS
             new PyOperatorPattern(),

@@ -19,7 +19,7 @@ class LightTerminalTheme implements TerminalTheme
             TokenTypeEnum::TYPE => TerminalStyle::FG_DARK_RED,
             TokenTypeEnum::VALUE => TerminalStyle::FG_BLACK,
             TokenTypeEnum::NUMBER => TerminalStyle::FG_DARK_YELLOW,
-            TokenTypeEnum::BOOLEAN => TerminalStyle::FG_DARK_BLUE,
+            TokenTypeEnum::LITERAL => TerminalStyle::FG_DARK_BLUE,
             TokenTypeEnum::PROPERTY => TerminalStyle::FG_DARK_GREEN,
             TokenTypeEnum::GENERIC => TerminalStyle::FG_DARK_CYAN,
             TokenTypeEnum::COMMENT => TerminalStyle::FG_GRAY,

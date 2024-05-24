@@ -7,15 +7,15 @@ namespace Tempest\Highlight\Tokens;
 enum TokenTypeEnum: string implements TokenType
 {
     case KEYWORD = 'keyword';
-    case VARIABLE = 'variable';
     case OPERATOR = 'operator';
     case TYPE = 'type';
     case VALUE = 'value';
-    case NUMBER = 'number';
-    case BOOLEAN = 'boolean';
+    case VARIABLE = 'variable';
     case PROPERTY = 'property';
     case ATTRIBUTE = 'attribute';
     case GENERIC = 'generic';
+    case NUMBER = 'number';
+    case LITERAL = 'literal';
     case COMMENT = 'comment';
     case INJECTION = 'injection';
     case HIDDEN = 'hidden';

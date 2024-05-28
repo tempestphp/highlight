@@ -1,3 +1,7 @@
+## 2.7.0
+
+- Rename BOOLEAN token to LITERAL token (#128)
+
 ## 2.6.1
 
 - Add missing classes in default themes (#127)

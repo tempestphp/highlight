@@ -8,24 +8,22 @@ use Tempest\Highlight\IsPattern;
 use Tempest\Highlight\Pattern;
 use Tempest\Highlight\Tokens\TokenTypeEnum;
 
-final class OperatorPattern implements Pattern
+final class LiteralPattern implements Pattern
 {
     use IsPattern;
 
-    public function __construct(private readonly string $operator)
+    public function __construct(private readonly string $keyword)
     {
     }
 
     public function getPattern(): string
     {
-        $quoted = preg_quote($this->operator, '/');
-
         /** @lang PhpRegExp */
-        return "{{(?:(?!{{|}}).)*?(?<match>{$quoted})(?:(?!{{|}}).)*?}}";
+        return "/{{(?:(?!{{|}}).)*?(?<match>({$this->keyword}))(?:(?!{{|}}).)*?}}/i";
     }
 
     public function getTokenType(): TokenTypeEnum
     {
-        return TokenTypeEnum::OPERATOR;
+        return TokenTypeEnum::LITERAL;
     }
 }

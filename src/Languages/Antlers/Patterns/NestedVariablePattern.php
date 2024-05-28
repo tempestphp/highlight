@@ -9,18 +9,21 @@ use Tempest\Highlight\Pattern;
 use Tempest\Highlight\PatternTest;
 use Tempest\Highlight\Tokens\TokenTypeEnum;
 
-#[PatternTest(input: 'heey:foo', output: 'foo')]
-final readonly class AntlersTagParameter implements Pattern
+#[PatternTest(input: 'skaters:name', output: null)]
+#[PatternTest(input: '{{ skaters:name }}', output: 'name')]
+#[PatternTest(input: '{{ skaters:0:name }}', output: 'name')]
+final readonly class NestedVariablePattern implements Pattern
 {
     use IsPattern;
 
     public function getPattern(): string
     {
-        return '/\w+:(?<match>[\w\/]+)/';
+        /** @lang PhpRegExp */
+        return '/^{{.+(:|\.)(?<match>[\w\/]+).*}}/m';
     }
 
     public function getTokenType(): TokenTypeEnum
     {
-        return TokenTypeEnum::VARIABLE;
+        return TokenTypeEnum::VALUE;
     }
 }

@@ -8,23 +8,22 @@ use Tempest\Highlight\IsPattern;
 use Tempest\Highlight\Pattern;
 use Tempest\Highlight\Tokens\TokenTypeEnum;
 
-final class KeywordPattern implements Pattern
+final class TagPattern implements Pattern
 {
     use IsPattern;
 
-    public function __construct(
-        private string $keyword,
-        private readonly TokenTypeEnum $type = TokenTypeEnum::KEYWORD
-    ) {
+    public function __construct(private string $keyword)
+    {
     }
 
     public function getPattern(): string
     {
-        return "/(?<!\\$)(?<!\-\>)(?<match>({$this->keyword}))((\$|\,|\)|\;|\:|\s|\())/i";
+        /** @lang PhpRegExp */
+        return "/{{(.+{)?\s*\/?(?<match>({$this->keyword}))/i";
     }
 
     public function getTokenType(): TokenTypeEnum
     {
-        return $this->type;
+        return TokenTypeEnum::KEYWORD;
     }
 }

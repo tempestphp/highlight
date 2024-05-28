@@ -9,20 +9,20 @@ use Tempest\Highlight\Pattern;
 use Tempest\Highlight\PatternTest;
 use Tempest\Highlight\Tokens\TokenTypeEnum;
 
-#[PatternTest(input: '{{# test #}} content', output: '{{# test #}}', )]
-#[PatternTest(input: '{{ test }} content', output: null, )]
-final readonly class AntlersCommentPattern implements Pattern
+#[PatternTest(input: 'heey:foo', output: null)]
+#[PatternTest(input: '{{ heey:foo }}', output: 'foo')]
+final readonly class TagParameter implements Pattern
 {
     use IsPattern;
 
     public function getPattern(): string
     {
-        /* @lang PhpRegExp */
-        return '/(?<match>{{#(.|\n)*?#}})/';
+        /** @lang PhpRegExp */
+        return '/{{[^{}]*?\b:(?<match>[\w\/]+)\b[^{}]*?}}/';
     }
 
     public function getTokenType(): TokenTypeEnum
     {
-        return TokenTypeEnum::COMMENT;
+        return TokenTypeEnum::VARIABLE;
     }
 }

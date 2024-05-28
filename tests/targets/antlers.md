@@ -1,13 +1,14 @@
 ```antlers
+
 {{# PHP Injection #}}
 {{? $register = route('account.register'); ?}}
 <a href="{{ $register }}">Register for a new account</a>
 <a href="{{$ route('account.register') $}}">Register for a new account</a>
 
 {{# Modifiers #}}
-{{ var | modifier('hi', ['pooh', 'pea'], true, 42, $favoriteVar) }}
+{{ var | modifier('hi', ['pooh', 'pea'], null, 42, $favoriteVar) }}
 {{ summary | replace('worst', 'yummiest') }}
-{{ summary | replace('It was', 'It was also') | replace('times', $noun) }}
+{{ summary | replace('It was', 'It was also') | translate('times', $noun) }}
 {{ summary | explode(' ') | ul }}
 {{ (summary | contains('best')) ?= "It was lunch, is what it was." }}
 
@@ -42,7 +43,8 @@
   order="username"
 }}
 
-I live in {{ mailing_address:city }}. It's in {{ mailing_address:province }}.
+I lived in {{ mailing_address:city }} for 10 years. It's in {{ mailing_address:province }}.
+I swear it's true!
 
 {{# Switch #}}
 {{ switch(
@@ -66,8 +68,8 @@ I live in {{ mailing_address:city }}. It's in {{ mailing_address:province }}.
 {{ /if }}
 
 {{# Here's a more complicated condition involving the output from a Tag. #}}
-{{ if {collection:count from="episodes"} >= 100 }}
-    This show is ready to be syndicated!
+{{ if {collection:count from="episodes"} >= 100 && true && boolean_variable }}
+    This show is ready to be syndicated! heey:hooo
 {{ /if }}
 
 {{ 404 }}
@@ -76,6 +78,7 @@ I live in {{ mailing_address:city }}. It's in {{ mailing_address:province }}.
   Multiline comment
   <h1>{{ title }}</h1>
   <div>{{ date }}</div>
+  <div>{{ if { collection:count  }  }}</div>
   <div class="markdown">{{ content }}</div>
 #}}
 ```

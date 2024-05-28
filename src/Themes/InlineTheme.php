@@ -43,15 +43,15 @@ final class InlineTheme implements Theme, WebTheme
 
         $class = match ($tokenType) {
             TokenTypeEnum::KEYWORD => 'hl-keyword',
-            TokenTypeEnum::VARIABLE => 'hl-variable',
             TokenTypeEnum::OPERATOR => 'hl-operator',
             TokenTypeEnum::TYPE => 'hl-type',
             TokenTypeEnum::VALUE => 'hl-value',
-            TokenTypeEnum::NUMBER => 'hl-number',
-            TokenTypeEnum::BOOLEAN => 'hl-boolean',
+            TokenTypeEnum::VARIABLE => 'hl-variable',
             TokenTypeEnum::PROPERTY => 'hl-property',
             TokenTypeEnum::ATTRIBUTE => 'hl-attribute',
             TokenTypeEnum::GENERIC => 'hl-generic',
+            TokenTypeEnum::NUMBER => 'hl-number',
+            TokenTypeEnum::LITERAL => 'hl-literal',
             TokenTypeEnum::COMMENT => 'hl-comment',
             TokenTypeEnum::INJECTION => 'hl-injection',
             default => $tokenType->getValue(),

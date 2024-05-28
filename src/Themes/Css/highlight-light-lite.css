@@ -24,7 +24,7 @@ pre, code {
 }
 
 .hl-number,
-.hl-boolean,
+.hl-literal,
 .hl-value {
     color: #000;
 }

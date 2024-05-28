@@ -12,10 +12,10 @@ final class KeywordPattern implements Pattern
 {
     use IsPattern;
 
-    private bool $caseInsensitive = false;
-
-    public function __construct(private string $keyword)
-    {
+    public function __construct(
+        private string $keyword,
+        private readonly TokenTypeEnum $type = TokenTypeEnum::KEYWORD
+    ) {
     }
 
     public function getPattern(): string
@@ -25,6 +25,6 @@ final class KeywordPattern implements Pattern
 
     public function getTokenType(): TokenTypeEnum
     {
-        return TokenTypeEnum::KEYWORD;
+        return $this->type;
     }
 }

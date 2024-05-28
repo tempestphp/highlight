@@ -14,6 +14,7 @@ use Tempest\Highlight\Languages\Base\BaseLanguage;
 use Tempest\Highlight\Languages\Php\Patterns\DoubleQuoteValuePattern;
 use Tempest\Highlight\Languages\Php\Patterns\SingleQuoteValuePattern;
 use Tempest\Highlight\Languages\Xml\Patterns\XmlAttributePattern;
+use Tempest\Highlight\Tokens\TokenTypeEnum;
 
 class AntlersTagLanguage extends BaseLanguage
 {
@@ -59,10 +60,11 @@ class AntlersTagLanguage extends BaseLanguage
             new KeywordPattern('endif'),
             new KeywordPattern('unless'),
 
-            new KeywordPattern('true'),
-            new KeywordPattern('false'),
+            new KeywordPattern('true', TokenTypeEnum::LITERAL),
+            new KeywordPattern('false', TokenTypeEnum::LITERAL),
+            new KeywordPattern('null', TokenTypeEnum::LITERAL),
 
-
+            // Statamic core tags: https://statamic.dev/tags
             new KeywordPattern('404'),
             new KeywordPattern('asset'),
             new KeywordPattern('assets'),

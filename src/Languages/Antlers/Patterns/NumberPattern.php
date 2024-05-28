@@ -23,6 +23,6 @@ final readonly class NumberPattern implements Pattern
 
     public function getTokenType(): TokenTypeEnum
     {
-        return TokenTypeEnum::VALUE;
+        return TokenTypeEnum::NUMBER;
     }
 }

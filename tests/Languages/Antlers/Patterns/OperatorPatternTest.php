@@ -23,13 +23,7 @@ class OperatorPatternTest extends TestCase
         $this->assertMatches(
             pattern: new OperatorPattern('=>'),
             content: '=>',
-            expected: null,
-        );
-
-        $this->assertMatches(
-            pattern: new OperatorPattern('=>'),
-            content: '{{ variable }} => {{ variable }} ',
-            expected: null,
+            expected: '=>',
         );
     }
 }

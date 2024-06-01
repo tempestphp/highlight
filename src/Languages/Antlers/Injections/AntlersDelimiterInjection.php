@@ -8,24 +8,22 @@ use Tempest\Highlight\Escape;
 use Tempest\Highlight\Highlighter;
 use Tempest\Highlight\Injection;
 use Tempest\Highlight\IsInjection;
-use Tempest\Highlight\Languages\Antlers\AntlersLanguage;
+use Tempest\Highlight\Languages\Antlers\AntlersDelimitedLanguage;
 
-final readonly class AntlersSubExpressionInjection implements Injection
+final readonly class AntlersDelimiterInjection implements Injection
 {
     use IsInjection;
 
     public function getPattern(): string
     {
         /** @lang PhpRegExp */
-        return '/{{(?![#?$])[^{}]*(?<match>{[^{}]*})[^{}]*}}/m';
+        return '/{{(?!(\?|\$))(?<match>.*?)(?<!(\?|\$))}}/s';
     }
 
     public function parseContent(string $content, Highlighter $highlighter): string
     {
-        // Fake the sub expression { } to a full antlers tag {{ }}
-        $parsed = $highlighter->parse('{'.$content.'}', new AntlersLanguage());
-        $parsed = substr($parsed, 1, -1);
-
-        return Escape::injection($parsed);
+        return Escape::injection(
+            $highlighter->parse($content, new AntlersDelimitedLanguage())
+        );
     }
 }

@@ -12,14 +12,14 @@ final class TagPattern implements Pattern
 {
     use IsPattern;
 
-    public function __construct(private string $keyword)
+    public function __construct(private readonly string $keyword)
     {
     }
 
     public function getPattern(): string
     {
         /** @lang PhpRegExp */
-        return "/{{(.+{)?\s*\/?(?<match>({$this->keyword}))/i";
+        return "/^.*\/?(?<match>({$this->keyword}))/i";
     }
 
     public function getTokenType(): TokenTypeEnum

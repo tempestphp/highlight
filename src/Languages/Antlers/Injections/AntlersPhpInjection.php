@@ -15,7 +15,8 @@ final readonly class AntlersPhpInjection implements Injection
 
     public function getPattern(): string
     {
-        return '\{{\?(?<match>(.|\n)*?)\\?}}';
+        /** @lang PhpRegExp */
+        return '/{{\?(?<match>.*?)\\?}}/s';
     }
 
     public function parseContent(string $content, Highlighter $highlighter): string

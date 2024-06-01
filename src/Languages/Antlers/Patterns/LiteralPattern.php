@@ -19,7 +19,7 @@ final class LiteralPattern implements Pattern
     public function getPattern(): string
     {
         /** @lang PhpRegExp */
-        return "/{{(?:(?!{{|}}).)*?(?<match>({$this->keyword}))(?:(?!{{|}}).)*?}}/i";
+        return "/.*?(?<match>({$this->keyword})).*?/i";
     }
 
     public function getTokenType(): TokenTypeEnum

@@ -9,19 +9,29 @@ use Tempest\Highlight\Pattern;
 use Tempest\Highlight\PatternTest;
 use Tempest\Highlight\Tokens\TokenTypeEnum;
 
-#[PatternTest(input: 'foo', output: null)]
+#[PatternTest(input: 'a', output: null)]
+#[PatternTest(input: 'foo', output: 'foo')]
 #[PatternTest(input: '{{foo}}', output: 'foo')]
 #[PatternTest(input: '{{ foo }}', output: 'foo')]
-#[PatternTest(input: '{{ a }} heey {{ b }}', output: 'a')]
-// #[PatternTest(input: '{{ if foo }}', output: 'foo')] // TODO: Does not work right now
+#[PatternTest(input: '{{ this_iS-RiDicuL-ou5_ }}', output: 'this_iS-RiDicuL-ou5_')]
 final readonly class VariablePattern implements Pattern
 {
     use IsPattern;
 
+    /*
+     * From the Antlers documentation:
+     *
+     * Variables must start with an alpha character or underscore,
+     * followed by any number of additional uppercase or lowercase
+     * alphanumeric characters, hyphens, or underscores,
+     * but must not end with a hyphen.
+     *
+     * Spaces or other special characters are not allowed.
+     */
     public function getPattern(): string
     {
         /** @lang RegExp */
-        return '/{{[^{}]*?\b(?<match>[_A-Za-z][-_0-9A-Za-z]*[_A-Za-z0-9]*)\b/';
+        return '/(?<match>\$?[_A-Za-z][-_0-9A-Za-z]*[_A-Za-z0-9])/';
     }
 
     public function getTokenType(): TokenTypeEnum

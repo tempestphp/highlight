@@ -20,8 +20,7 @@ final class OperatorPattern implements Pattern
     {
         $quoted = preg_quote($this->operator, '/');
 
-        /** @lang PhpRegExp */
-        return "{{(?:(?!{{|}}).)*?(?<match>{$quoted})(?:(?!{{|}}).)*?}}";
+        return "/(?<match>{$quoted})/";
     }
 
     public function getTokenType(): TokenTypeEnum

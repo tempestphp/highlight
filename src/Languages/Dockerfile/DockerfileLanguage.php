@@ -8,6 +8,7 @@ use Tempest\Highlight\Languages\Base\BaseLanguage;
 use Tempest\Highlight\Languages\Dockerfile\Patterns\ImageAliasKeywordPattern;
 use Tempest\Highlight\Languages\Dockerfile\Patterns\ImageAliasNamePattern;
 use Tempest\Highlight\Languages\Dockerfile\Patterns\ImageNamePattern;
+use Tempest\Highlight\Languages\Dockerfile\Patterns\ImageTagPattern;
 use Tempest\Highlight\Languages\Dockerfile\Patterns\KeywordPattern;
 
 class DockerfileLanguage extends BaseLanguage
@@ -42,6 +43,7 @@ class DockerfileLanguage extends BaseLanguage
             new ImageNamePattern(),
             new ImageAliasKeywordPattern(),
             new ImageAliasNamePattern(),
+            new ImageTagPattern(),
         ];
     }
 }

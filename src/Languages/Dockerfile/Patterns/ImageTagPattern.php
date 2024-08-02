@@ -10,20 +10,22 @@ use Tempest\Highlight\PatternTest;
 use Tempest\Highlight\Tokens\TokenTypeEnum;
 
 #[PatternTest(input: 'FROM php', output: null)]
-#[PatternTest(input: 'FROM php:8.1', output: null)]
-#[PatternTest(input: 'FROM php:8.1 AS stage-one', output: 'AS')]
-#[PatternTest(input: ' FROM php:8.1 AS stage-one ', output: 'AS')]
-final readonly class ImageAliasKeywordPattern implements Pattern
+#[PatternTest(input: 'FROM php', output: null)]
+#[PatternTest(input: 'FROM php:8.1', output: '8.1')]
+#[PatternTest(input: 'FROM php/cli:8.1', output: '8.1')]
+#[PatternTest(input: 'FROM php:8.1 AS stage-one', output: '8.1')]
+
+final readonly class ImageTagPattern implements Pattern
 {
     use IsPattern;
 
     public function getPattern(): string
     {
-        return "/^[\s]*FROM[\s][\S]+[\s](?<match>AS)[\s][\S]+/m";
+        return "/^[\s]*FROM[\s][\w\/]+:(?<match>\S+)[\s]?/m";
     }
 
     public function getTokenType(): TokenTypeEnum
     {
-        return TokenTypeEnum::KEYWORD;
+        return TokenTypeEnum::VALUE;
     }
 }

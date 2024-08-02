@@ -28,8 +28,17 @@ class KeywordPatternTest extends TestCase
 
         $this->assertMatches(
             pattern: new KeywordPattern('FROM'),
-            content: 'RUN some command with FROM in it',
-            expected: null,
+            content: ' FROM image:tag AS alias',
+            expected: 'FROM',
+        );
+
+        $this->assertMatches(
+            pattern: new KeywordPattern('COPY'),
+            content: <<<'DOCKERFILE'
+                     FROM image:tag
+                     COPY . /usr/share/nginx/html
+                     DOCKERFILE,
+            expected: 'COPY',
         );
     }
 }

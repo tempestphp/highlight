@@ -10,6 +10,7 @@ use Tempest\Highlight\PatternTest;
 use Tempest\Highlight\Tokens\TokenTypeEnum;
 
 #[PatternTest(input: 'FROM php', output: 'php')]
+#[PatternTest(input: ' FROM php', output: 'php')]
 #[PatternTest(input: 'FROM php:8.1', output: 'php')]
 #[PatternTest(input: 'FROM php:8.1 AS stage-one', output: 'php')]
 final readonly class ImageNamePattern implements Pattern
@@ -18,7 +19,7 @@ final readonly class ImageNamePattern implements Pattern
 
     public function getPattern(): string
     {
-        return "^FROM (?<match>[\w]+)";
+        return "/^[\s]*FROM[\s](?<match>[\w]+)/m";
     }
 
     public function getTokenType(): TokenTypeEnum

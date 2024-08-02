@@ -12,13 +12,14 @@ use Tempest\Highlight\Tokens\TokenTypeEnum;
 #[PatternTest(input: 'FROM php', output: null)]
 #[PatternTest(input: 'FROM php:8.1', output: null)]
 #[PatternTest(input: 'FROM php:8.1 AS stage-one', output: 'AS')]
+#[PatternTest(input: ' FROM php:8.1 AS stage-one ', output: 'AS')]
 final readonly class ImageAliasKeywordPattern implements Pattern
 {
     use IsPattern;
 
     public function getPattern(): string
     {
-        return "^FROM[\s][\S]+[\s](?<match>AS)[\s][\S]+";
+        return "/^[\s]*FROM[\s][\S]+[\s](?<match>AS)[\s][\S]+/m";
     }
 
     public function getTokenType(): TokenTypeEnum

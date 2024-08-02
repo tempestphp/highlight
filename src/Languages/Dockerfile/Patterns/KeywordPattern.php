@@ -18,7 +18,7 @@ final readonly class KeywordPattern implements Pattern
 
     public function getPattern(): string
     {
-        return "^(?<match>{$this->keyword})[\s].*";
+        return "/^[\s]*(?<match>{$this->keyword})[\s].*/m";
     }
 
     public function getTokenType(): TokenTypeEnum

@@ -15,7 +15,14 @@ class DockerfileLanguage extends BaseLanguage
 {
     public function getName(): string
     {
-        return 'Dockerfile';
+        return 'dockerfile';
+    }
+
+    public function getAliases(): array
+    {
+        return [
+            'docker',
+        ];
     }
 
     public function getPatterns(): array

@@ -1,3 +1,7 @@
+## 2.8.0
+
+- Add Dockerfile support (#135)
+
 ## 2.7.0
 
 - Rename BOOLEAN token to LITERAL token (#128)

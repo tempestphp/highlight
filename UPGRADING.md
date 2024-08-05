@@ -1,3 +1,7 @@
+## 2.8.1
+
+- Fix unicode tokens bug (#136)
+
 ## 2.8.0
 
 - Add Dockerfile support (#135)

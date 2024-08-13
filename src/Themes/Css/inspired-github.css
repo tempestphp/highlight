@@ -1,0 +1,95 @@
+pre, code {
+    color: #323232;
+    background-color: #ffffff;
+}
+
+.hl-keyword {
+    color: #a71d5d;
+    font-weight: bold;
+}
+
+.hl-property {
+    color: #795da3;
+}
+
+.hl-attribute {
+    font-style: italic;
+}
+
+.hl-type {
+    color: #0086b3;
+}
+
+.hl-generic {
+    color: #795da3;
+}
+
+.hl-number,
+.hl-literal,
+.hl-value {
+    color: #0086b3;
+}
+
+.hl-variable {
+    color: #323232;
+}
+
+.hl-comment {
+    color: #969896;
+    font-style: italic;
+}
+
+.hl-string {
+    color: #183691;
+}
+
+.hl-function-name {
+    color: #795da3;
+    font-weight: bold;
+}
+
+.hl-tag {
+    color: #63a35c;
+}
+
+.hl-blur {
+    filter: blur(2px);
+}
+
+.hl-strong {
+    font-weight: bold;
+}
+
+.hl-em {
+    font-style: italic;
+}
+
+.hl-addition {
+    display: inline-block;
+    min-width: 100%;
+    background-color: #eaffea;
+}
+
+.hl-deletion {
+    display: inline-block;
+    min-width: 100%;
+    background-color: #ffecec;
+}
+
+.hl-gutter {
+    display: inline-block;
+    font-size: 0.9em;
+    color: #b3b3b3;
+    padding: 0 1ch;
+    user-select: none;
+}
+
+.hl-gutter-addition {
+    background-color: #55a532;
+    color: #fff;
+}
+
+.hl-gutter-deletion {
+    background-color: #bd2c00;
+    color: #fff;
+}

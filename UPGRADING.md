@@ -1,3 +1,7 @@
+## 2.8.2
+
+- Add Inspired GitHub theme (#139)
+
 ## 2.8.1
 
 - Fix unicode tokens bug (#136)

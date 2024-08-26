@@ -34,7 +34,7 @@ final class GutterInjection implements Injection
 
     public function parse(string $content, Highlighter $highlighter): ParsedInjection
     {
-        $lines = preg_split('/\R/', trim($content));
+        $lines = preg_split('/\R/u', trim($content));
 
         $gutterNumbers = [];
         $longestGutterNumber = '';

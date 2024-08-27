@@ -135,6 +135,7 @@ foo()
          * hello */</span>
         <span class="hl-keyword">public</span> <span class="hl-type">?array</span> <span class="hl-property">$chapters</span>,
     </span>) {}'],
+            ['public static function new(mixed ...$params): self;', '<span class="hl-keyword">public</span> <span class="hl-keyword">static</span> <span class="hl-keyword">function</span> <span class="hl-property">new</span>(<span class="hl-injection"><span class="hl-type">mixed</span> ...$params</span>): <span class="hl-type">self</span>;'],
         ];
     }
 }

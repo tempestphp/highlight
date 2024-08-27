@@ -84,6 +84,7 @@ class PhpLanguage extends BaseLanguage
             new OperatorPattern('\|\|'),
             new OperatorPattern('<=>'),
             new OperatorPattern('\?'),
+            new FunctionNamePattern(),
 
             // KEYWORDS
             new KeywordPattern('null'),
@@ -190,7 +191,6 @@ class PhpLanguage extends BaseLanguage
             // PROPERTIES
             new ClassPropertyPattern(),
             new PropertyAccessPattern(),
-            new FunctionNamePattern(),
             new NestedFunctionCallPattern(),
             new FunctionCallPattern(),
             new ConstantPropertyPattern(),

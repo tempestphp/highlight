@@ -1,3 +1,3 @@
 ```php
-public function update(Foo ...$params): self;
-``` 
+public static function new(mixed ...$params): self;
+```

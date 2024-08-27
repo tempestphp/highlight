@@ -6,6 +6,7 @@
 - Fix for attribute in promoted property (#133)
 - Fix for comments in function argument lists (#134)
 - Fix for variadic types (#140)
+- Fix for functions called "new" (#141)
 
 ## 2.8.2
 

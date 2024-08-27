@@ -18,13 +18,14 @@ use Tempest\Highlight\Tokens\TokenTypeEnum;
 #[PatternTest(input: 'public ?Bar $bar', output: '?Bar')]
 #[PatternTest(input: 'public ?Bar|\Foo $bar', output: '?Bar|\Foo')]
 #[PatternTest(input: 'public function bar(mixed $input);', output: null)]
+#[PatternTest(input: 'private static ?Highlighter $web = null;', output: '?Highlighter')]
 final readonly class PropertyTypesPattern implements Pattern
 {
     use IsPattern;
 
     public function getPattern(): string
     {
-        return '(public|private|protected)(\s(?<match>[^\s]*)) (\$[\w]+)';
+        return '(public|private|protected)(\s*static\s*)?(\s(?<match>[^\s]*)) (\$[\w]+)';
     }
 
     public function getTokenType(): TokenTypeEnum

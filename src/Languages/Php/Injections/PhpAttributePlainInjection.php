@@ -23,8 +23,10 @@ final readonly class PhpAttributePlainInjection implements Injection
     {
         $theme = $highlighter->getTheme();
 
+        $parsed = '#[' . $highlighter->parse(str_replace(['#[', ']'], '', $content), 'php') . ']';
+
         return Escape::tokens($theme->before(TokenTypeEnum::ATTRIBUTE))
-            . $content
+            . $parsed
             . Escape::tokens($theme->after(TokenTypeEnum::ATTRIBUTE));
     }
 }

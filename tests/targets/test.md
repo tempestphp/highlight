@@ -1,3 +1,5 @@
 ```php
-private static ?Highlighter $web = null;
+public function __construct(
+    #[Lazy] public Author $author,
+) {}
 ```

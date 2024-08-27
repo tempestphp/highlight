@@ -111,6 +111,11 @@ foo()
             ['new MyClass()::CONSTANT;', '<span class="hl-keyword">new</span> <span class="hl-type">MyClass</span>()::<span class="hl-property">CONSTANT</span>;'],
             ['new MyClass()::$staticProperty;', '<span class="hl-keyword">new</span> <span class="hl-type">MyClass</span>()::<span class="hl-property">$staticProperty</span>;'],
             ['/** @return K */', '<span class="hl-comment">/** <span class="hl-value">@return</span> <span class="hl-type">K </span>*/</span>'],
+            ['public function __construct(
+    #[Lazy] public Author $author,
+) {}', '<span class="hl-keyword">public</span> <span class="hl-keyword">function</span> <span class="hl-property">__construct</span>(<span class="hl-injection">
+    <span class="hl-attribute">#[<span class="hl-type">Lazy</span>]</span> <span class="hl-keyword">public</span> <span class="hl-type">Author</span> <span class="hl-property">$author</span>,
+</span>) {}']
         ];
     }
 }

@@ -3,6 +3,7 @@
 - Fix for promoted property hooks (#110) 
 - Fix for blade echo highlighting within comments (#113) 
 - Fix for static property types (#129)
+- Fix for attribute in promoted property (#133)
 
 ## 2.8.2
 

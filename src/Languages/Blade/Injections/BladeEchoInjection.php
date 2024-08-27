@@ -14,7 +14,7 @@ final readonly class BladeEchoInjection implements Injection
 
     public function getPattern(): string
     {
-        return '({{)(?<match>.*)(}})';
+        return '({{(?!--))(?<match>.*)(}})';
     }
 
     public function parseContent(string $content, Highlighter $highlighter): string

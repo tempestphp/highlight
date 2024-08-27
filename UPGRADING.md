@@ -1,6 +1,7 @@
 ## 2.9.0
 
 - Fix for promoted property hooks (#110) 
+- Fix for blade echo highlighting within comments (#113) 
 
 ## 2.8.2
 

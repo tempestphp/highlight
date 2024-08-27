@@ -25,6 +25,7 @@ class BladeLanguageTest extends TestCase
     {
         return [
             ['{{-- Blade comment --}}', '<span class="hl-comment">{{-- Blade comment --}}</span>'],
+            ['{{-- if --}}', '<span class="hl-comment">{{-- if --}}</span>'],
         ];
     }
 }

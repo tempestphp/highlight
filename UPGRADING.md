@@ -1,3 +1,7 @@
+## 2.10.0
+
+- Support unicode tokens in standardizing line endings (#143)
+
 ## 2.9.0
 
 - Fix for promoted property hooks (#110) 

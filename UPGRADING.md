@@ -4,6 +4,7 @@
 - Fix for blade echo highlighting within comments (#113) 
 - Fix for static property types (#129)
 - Fix for attribute in promoted property (#133)
+- Fix for comments in function argument lists (#134)
 
 ## 2.8.2
 

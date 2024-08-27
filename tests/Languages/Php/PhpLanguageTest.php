@@ -115,7 +115,26 @@ foo()
     #[Lazy] public Author $author,
 ) {}', '<span class="hl-keyword">public</span> <span class="hl-keyword">function</span> <span class="hl-property">__construct</span>(<span class="hl-injection">
     <span class="hl-attribute">#[<span class="hl-type">Lazy</span>]</span> <span class="hl-keyword">public</span> <span class="hl-type">Author</span> <span class="hl-property">$author</span>,
-</span>) {}']
+</span>) {}'],
+            ['    public function __construct(
+        // Allow a union on a special "missing relation" type:
+        public Relation|Author $author,
+
+        // Making the relation nullable would be an option as well:
+        /** @var Chapter[] $chapters */
+        /**
+         * hello */
+        public ?array $chapters,
+    ) {}', '    <span class="hl-keyword">public</span> <span class="hl-keyword">function</span> <span class="hl-property">__construct</span>(<span class="hl-injection">
+        <span class="hl-comment">// Allow a union on a special &quot;missing relation&quot; type:</span>
+        <span class="hl-keyword">public</span> <span class="hl-type">Relation|Author</span> <span class="hl-property">$author</span>,
+
+        <span class="hl-comment">// Making the relation nullable would be an option as well:</span>
+        <span class="hl-comment">/** <span class="hl-value"><span class="hl-value">@var</span></span> <span class="hl-type">Chapter[]</span> <span class="hl-variable"><span class="hl-variable">$chapters</span></span> */</span>
+        <span class="hl-comment">/**
+         * hello */</span>
+        <span class="hl-keyword">public</span> <span class="hl-type">?array</span> <span class="hl-property">$chapters</span>,
+    </span>) {}'],
         ];
     }
 }

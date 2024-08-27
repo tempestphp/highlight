@@ -82,6 +82,10 @@ if (isset($_GET['stylesheet'])) {
             align-items: center;
             /*height: 100vh;*/
         }
+
+        .hl-injection {
+            /*background-color: #f0000044;*/
+        }
     </style>
     <?php if ($stylesheet): ?>
         <link rel="stylesheet" href="<?php echo $stylesheet; ?>">

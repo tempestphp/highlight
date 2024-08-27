@@ -57,6 +57,10 @@ fn (
     ?Foo $post, 
     Bar $bar
 )) => $bar,
+
+public function __construct(
+    public string $username { set => strtolower($value); }
+) {}
 TXT;
 
         $expectedOutput = <<<'TXT'
@@ -105,6 +109,10 @@ TXT;
     <span class="hl-type">?Foo</span> $post, 
     <span class="hl-type">Bar</span> $bar
 )</span>) =&gt; <span class="hl-variable">$bar</span>,
+
+<span class="hl-keyword">public</span> <span class="hl-keyword">function</span> <span class="hl-property">__construct</span>(<span class="hl-injection">
+    <span class="hl-keyword">public</span> <span class="hl-type">string</span> <span class="hl-property">$username</span> </span>{ <span class="hl-keyword">set</span> =&gt; <span class="hl-property">strtolower</span>(<span class="hl-variable">$value</span>); }
+) {}
 TXT;
 
         $highlighter = new Highlighter();

@@ -1,3 +1,7 @@
+## 2.9.0
+
+- Fix for promoted property hooks (#110) 
+
 ## 2.8.2
 
 - Add Inspired GitHub theme (#139)

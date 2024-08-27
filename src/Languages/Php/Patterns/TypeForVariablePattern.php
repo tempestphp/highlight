@@ -15,13 +15,14 @@ use Tempest\Highlight\Tokens\TokenTypeEnum;
 #[PatternTest(input: 'Foo|Bar|null $bar', output: 'Foo|Bar|null')]
 #[PatternTest(input: '(Foo&Bar)|null $bar', output: '(Foo&Bar)|null')]
 #[PatternTest(input: 'string|\Stringable $bar', output: 'string|\Stringable')]
+#[PatternTest(input: 'Foo ...$params', output: 'Foo')]
 final readonly class TypeForVariablePattern implements Pattern
 {
     use IsPattern;
 
     public function getPattern(): string
     {
-        return '(?<match>[\w\&\(\)\|\\\\\?]+)\s+\\$';
+        return '(?<match>[\w\&\(\)\|\\\\\?]+)\s+(\.*)\\$';
     }
 
     public function getTokenType(): TokenTypeEnum

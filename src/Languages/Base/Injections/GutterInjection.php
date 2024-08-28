@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace Tempest\Highlight\Languages\Base\Injections;
 
 use Tempest\Highlight\Escape;
-use Tempest\Highlight\TerminalTheme;
 use Tempest\Highlight\Highlighter;
 use Tempest\Highlight\Injection;
 use Tempest\Highlight\ParsedInjection;
+use Tempest\Highlight\TerminalTheme;
 
 final class GutterInjection implements Injection
 {

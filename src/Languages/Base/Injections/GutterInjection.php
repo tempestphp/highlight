@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Tempest\Highlight\Languages\Base\Injections;
 
 use Tempest\Highlight\Escape;
+use Tempest\Highlight\TerminalTheme;
 use Tempest\Highlight\Highlighter;
 use Tempest\Highlight\Injection;
 use Tempest\Highlight\ParsedInjection;
@@ -62,7 +63,7 @@ final class GutterInjection implements Injection
             $gutterClass = 'hl-gutter' . ($hasClasses ? ' ' . $hasClasses : '');
 
             $lines[$i] = sprintf(
-                Escape::tokens('<span class="%s">%s</span>%s'),
+                Escape::tokens('<span class="%s">%s</span>'.($highlighter->getTheme() instanceof TerminalTheme ? ' ' : '').'%s'),
                 $gutterClass,
                 str_pad(
                     string: (string) $gutterNumber,

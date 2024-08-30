@@ -1,3 +1,7 @@
+## 2.10.2
+
+- Fix for extra added spaces at the start of lines (#145)
+
 ## 2.10.1
 
 - Fix for trimming code when using gutter (#146)

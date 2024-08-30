@@ -81,6 +81,7 @@ pre, code {
     font-size: 0.9em;
     color: #b3b3b3;
     padding: 0 1ch;
+    margin-right: 1ch;
     user-select: none;
 }
 

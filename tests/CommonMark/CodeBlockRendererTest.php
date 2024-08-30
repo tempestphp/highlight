@@ -53,7 +53,7 @@ class Foo {}
 TXT;
 
         $expected = <<<'TXT'
-<pre data-lang="php" class="notranslate"><span class="hl-gutter">10</span> <span class="hl-keyword">class</span> <span class="hl-type">Foo</span> {}</pre>
+<pre data-lang="php" class="notranslate"><span class="hl-gutter">10</span><span class="hl-keyword">class</span> <span class="hl-type">Foo</span> {}</pre>
 
 TXT;
 

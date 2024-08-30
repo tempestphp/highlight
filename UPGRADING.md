@@ -1,3 +1,7 @@
+## 2.10.1
+
+- Fix for trimming code when using gutter (#146)
+
 ## 2.10.0
 
 - Support unicode tokens in standardizing line endings (#143)

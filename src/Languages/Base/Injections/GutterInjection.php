@@ -63,13 +63,14 @@ final class GutterInjection implements Injection
             $gutterClass = 'hl-gutter' . ($hasClasses ? ' ' . $hasClasses : '');
 
             $lines[$i] = sprintf(
-                Escape::tokens('<span class="%s">%s</span>'.($highlighter->getTheme() instanceof TerminalTheme ? ' ' : '').'%s'),
+                Escape::tokens('<span class="%s">%s</span>%s%s'),
                 $gutterClass,
                 str_pad(
                     string: (string) $gutterNumber,
                     length: $gutterWidth,
                     pad_type: STR_PAD_LEFT,
                 ),
+                $highlighter->getTheme() instanceof TerminalTheme ? ' ' : '',
                 $line,
             );
         }

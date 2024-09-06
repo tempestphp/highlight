@@ -11,7 +11,7 @@ use Tempest\Highlight\Tokens\TokenTypeEnum;
 
 #[PatternTest(
     input: 'return "hello"',
-    output: 'hello',
+    output: '"hello"',
 )]
 final readonly class JsDoubleQuoteValuePattern implements Pattern
 {
@@ -19,7 +19,7 @@ final readonly class JsDoubleQuoteValuePattern implements Pattern
 
     public function getPattern(): string
     {
-        return '"(?<match>.*?)"';
+        return '(?<match>"(\\\"|.)*?")';
     }
 
     public function getTokenType(): TokenTypeEnum

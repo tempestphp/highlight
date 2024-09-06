@@ -36,7 +36,7 @@ class TwigLanguageTest extends TestCase
             ["{{ parent() }}", '<span class="hl-injection">{{ <span class="hl-property">parent</span>() }}</span>'],
             ["{{ impersonation_exit_path(path('app.user.list') ) }}", '<span class="hl-injection">{{ <span class="hl-property">impersonation_exit_path</span>(<span class="hl-property">path</span>(\'<span class="hl-value">app.user.list</span>\') ) }}</span>'],
             ["{{ app.user.userIdentifier }}", '<span class="hl-injection">{{ app.<span class="hl-property">user</span>.<span class="hl-property">userIdentifier</span> }}</span>'],
-            ['<script>const mainSearchUrl = "";</script>', '&lt;<span class="hl-keyword">script</span>&gt;<span class="hl-keyword">const</span> mainSearchUrl = &quot;<span class="hl-value"></span>&quot;;&lt;/<span class="hl-keyword">script</span>&gt;'],
+            ['<script>const mainSearchUrl = "";</script>', '&lt;<span class="hl-keyword">script</span>&gt;<span class="hl-keyword">const</span> mainSearchUrl = <span class="hl-value">&quot;&quot;</span>;&lt;/<span class="hl-keyword">script</span>&gt;'],
             ['{% cache "cache key" %}', '<span class="hl-injection">{% <span class="hl-keyword">cache</span> &quot;<span class="hl-value">cache key</span>&quot; %}</span>'],
             ['{{ "<b>foobar</b>"|data_uri(mime="text/html", parameters={charset: "ascii"}) }}', '<span class="hl-injection">{{ &quot;<span class="hl-value">&lt;b&gt;foobar&lt;/b&gt;</span>&quot;|<span class="hl-property">data_uri</span>(<span class="hl-property">mime</span>=&quot;<span class="hl-value">text/html</span>&quot;, <span class="hl-property">parameters</span>={<span class="hl-property">charset</span>: &quot;<span class="hl-value">ascii</span>&quot;}) }}</span>'],
         ];

@@ -11,7 +11,15 @@ use Tempest\Highlight\Tokens\TokenTypeEnum;
 
 #[PatternTest(
     input: "return 'hello';",
-    output: 'hello',
+    output: "'hello'",
+)]
+#[PatternTest(
+    input: "echo 'Yo\\';",
+    output: "'Yo\\'",
+)]
+#[PatternTest(
+    input: "echo 'Very \'long\'\\\'annoying\' string';",
+    output: "'Very \'long\'\\\'annoying\' string'",
 )]
 final readonly class SingleQuoteValuePattern implements Pattern
 {
@@ -19,7 +27,7 @@ final readonly class SingleQuoteValuePattern implements Pattern
 
     public function getPattern(): string
     {
-        return "'(?<match>.*?)'";
+        return "(?<match>'(\\\'|.)*?')";
     }
 
     public function getTokenType(): TokenTypeEnum

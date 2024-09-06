@@ -46,7 +46,7 @@ TXT,
     <span class="hl-value">&quot;&quot;&quot;Print a Fibonacci series up to n.&quot;&quot;&quot;</span>
     a, b <span class="hl-operator">=</span> <span class="hl-number">0</span>, <span class="hl-number">1</span>
     <span class="hl-keyword">while</span> a <span class="hl-operator">&lt;</span> n:
-        <span class="hl-type">print</span>(a, <span class="hl-variable">end</span><span class="hl-operator">=</span>'<span class="hl-value"> </span>')
+        <span class="hl-type">print</span>(a, <span class="hl-variable">end</span><span class="hl-operator">=</span><span class="hl-value">' '</span>)
         a, b <span class="hl-operator">=</span> b, a<span class="hl-operator">+</span>b
     <span class="hl-type">print</span>()
 

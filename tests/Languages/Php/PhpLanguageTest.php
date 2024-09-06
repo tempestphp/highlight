@@ -24,15 +24,15 @@ class PhpLanguageTest extends TestCase
     public static function data(): array
     {
         return [
-            ["'php()'", "'<span class=\"hl-value\">php()</span>'"],
-            ["#[PatternTest(input: 'new Foo()', output: 'Foo')]", '<span class="hl-injection"><span class="hl-attribute">#[<span class="hl-type">PatternTest</span>(<span class="hl-property">input</span>: \'<span class="hl-value">new Foo()</span>\', <span class="hl-property">output</span>: \'<span class="hl-value">Foo</span>\')]</span></span>'],
+            ["'php()'", "<span class=\"hl-value\">'php()'</span>"],
+            ["#[PatternTest(input: 'new Foo()', output: 'Foo')]", '<span class="hl-injection"><span class="hl-attribute">#[<span class="hl-type">PatternTest</span>(<span class="hl-property">input</span>: <span class="hl-value">\'new Foo()\'</span>, <span class="hl-property">output</span>: <span class="hl-value">\'Foo\'</span>)]</span></span>'],
             ['$foo && $bar', '<span class="hl-variable">$foo</span> <span class="hl-operator">&amp;&amp;</span> <span class="hl-variable">$bar</span>'],
             ['$foo || $bar', '<span class="hl-variable">$foo</span> <span class="hl-operator">||</span> <span class="hl-variable">$bar</span>'],
             ['$foo <=> $bar', '<span class="hl-variable">$foo</span> <span class="hl-operator">&lt;=&gt;</span> <span class="hl-variable">$bar</span>'],
-            ["public const string|\Stringable MESSAGE = 'hi';", '<span class="hl-keyword">public</span> <span class="hl-keyword">const</span> <span class="hl-type">string|\Stringable</span> <span class="hl-property">MESSAGE</span> = \'<span class="hl-value">hi</span>\';'],
+            ["public const string|\Stringable MESSAGE = 'hi';", '<span class="hl-keyword">public</span> <span class="hl-keyword">const</span> <span class="hl-type">string|\Stringable</span> <span class="hl-property">MESSAGE</span> = <span class="hl-value">\'hi\'</span>;'],
             ["public string|\Stringable \$message;", '<span class="hl-keyword">public</span> <span class="hl-type">string|\Stringable</span> <span class="hl-property">$message</span>;'],
             ['for($x = 0; $x < 150; $x++) {', '<span class="hl-keyword">for</span>(<span class="hl-variable">$x</span> = 0; <span class="hl-variable">$x</span> &lt; 150; <span class="hl-variable">$x</span>++) {'],
-            ["'namespace ';", "'<span class=\"hl-value\">namespace </span>';"],
+            ["'namespace ';", "<span class=\"hl-value\">'namespace '</span>;"],
             ["static::foo()", '<span class="hl-keyword">static</span>::<span class="hl-property">foo</span>()'],
             ['$class', '<span class="hl-variable">$class</span>'],
             ['protected $resolved = [];', '<span class="hl-keyword">protected</span> <span class="hl-property">$resolved</span> = [];'],
@@ -50,7 +50,7 @@ class PhpLanguageTest extends TestCase
             ['fn&(', '<span class="hl-keyword">fn</span>&amp;('],
             ['enum Foo: string', '<span class="hl-keyword">enum</span> <span class="hl-type">Foo</span>: <span class="hl-type">string</span>'],
             ['case Foo;', '<span class="hl-keyword">case</span> <span class="hl-property">Foo</span>;'],
-            ['$this->extends("View/base.view.php");', '<span class="hl-variable">$this</span>-&gt;<span class="hl-property">extends</span>(&quot;<span class="hl-value">View/base.view.php</span>&quot;);'],
+            ['$this->extends("View/base.view.php");', '<span class="hl-variable">$this</span>-&gt;<span class="hl-property">extends</span>(<span class="hl-value">&quot;View/base.view.php&quot;</span>);'],
             ['$foo = null;', '<span class="hl-variable">$foo</span> = <span class="hl-keyword">null</span>;'],
             ['$foo = true;', '<span class="hl-variable">$foo</span> = <span class="hl-keyword">true</span>;'],
             ['$foo = false;', '<span class="hl-variable">$foo</span> = <span class="hl-keyword">false</span>;'],
@@ -66,8 +66,8 @@ class PhpLanguageTest extends TestCase
                     set (string $value) => $this->first . " " . $this->last;
                 }',
                 '<span class="hl-keyword">public</span> <span class="hl-type">string</span> <span class="hl-property">$fullName</span> {
-                    <span class="hl-keyword">get</span> =&gt; <span class="hl-variable">$this</span>-&gt;<span class="hl-property">first</span> . &quot;<span class="hl-value"> </span>&quot; . <span class="hl-variable">$this</span>-&gt;<span class="hl-property">last</span>;
-                    <span class="hl-keyword">set</span> (<span class="hl-type">string</span> <span class="hl-variable">$value</span>) =&gt; <span class="hl-variable">$this</span>-&gt;<span class="hl-property">first</span> . &quot;<span class="hl-value"> </span>&quot; . <span class="hl-variable">$this</span>-&gt;<span class="hl-property">last</span>;
+                    <span class="hl-keyword">get</span> =&gt; <span class="hl-variable">$this</span>-&gt;<span class="hl-property">first</span> . <span class="hl-value">&quot; &quot;</span> . <span class="hl-variable">$this</span>-&gt;<span class="hl-property">last</span>;
+                    <span class="hl-keyword">set</span> (<span class="hl-type">string</span> <span class="hl-variable">$value</span>) =&gt; <span class="hl-variable">$this</span>-&gt;<span class="hl-property">first</span> . <span class="hl-value">&quot; &quot;</span> . <span class="hl-variable">$this</span>-&gt;<span class="hl-property">last</span>;
                 }',
             ],
             [
@@ -86,9 +86,9 @@ TXT,
 <span class="hl-attribute">#[<span class="hl-type">ConsoleCommand</span>]</span>
 <span class="hl-keyword">public</span> <span class="hl-keyword">function</span> <span class="hl-property">info</span>(<span class="hl-injection">
     </span><span class="hl-injection"><span class="hl-attribute">#[<span class="hl-type">ConsoleArgument</span>(
-        <span class="hl-property">description</span>: '<span class="hl-value"><span class="hl-value">The name of the package</span></span>',
-        <span class="hl-property">help</span>: '<span class="hl-value"><span class="hl-value">Extended help text for this argument</span></span>',
-        <span class="hl-property">aliases</span>: ['<span class="hl-value"><span class="hl-value">n</span></span>'],
+        <span class="hl-property">description</span>: <span class="hl-value"><span class="hl-value">'The name of the package'</span></span>,
+        <span class="hl-property">help</span>: <span class="hl-value"><span class="hl-value">'Extended help text for this argument'</span></span>,
+        <span class="hl-property">aliases</span>: [<span class="hl-value"><span class="hl-value">'n'</span></span>],
     )]</span></span><span class="hl-injection">
     <span class="hl-type">string</span> $name
 </span>): <span class="hl-type">void</span> {}

@@ -19,5 +19,23 @@ class SinglelineDocCommentPatternTest extends TestCase
             content: '$bar // foo',
             expected: '// foo',
         );
+
+        $this->assertMatches(
+            pattern: new SinglelineCommentPattern(),
+            content: "// foo\r\n\$bar",
+            expected: '// foo',
+        );
+
+        $this->assertMatches(
+            pattern: new SinglelineCommentPattern(),
+            content: "// foo\n\$bar",
+            expected: '// foo',
+        );
+
+        $this->assertMatches(
+            pattern: new SinglelineCommentPattern(),
+            content: "// foo\r\$bar",
+            expected: '// foo',
+        );
     }
 }

@@ -16,8 +16,13 @@ trait IsPattern
             $pattern = "/$pattern/";
         }
 
-        preg_match_all($pattern, $content, $matches, PREG_OFFSET_CAPTURE);
+        preg_match_all($pattern, $this->normalizeNewline($content), $matches, PREG_OFFSET_CAPTURE);
 
         return $matches;
+    }
+
+    private function normalizeNewline(string $content): string
+    {
+        return preg_replace('~\R~u', "\n", $content);
     }
 }

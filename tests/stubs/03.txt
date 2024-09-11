@@ -1,0 +1,37 @@
+// controller for home
+final readonly class HomeController
+{
+    #[Get(uri: '/home')]
+    public function __invoke(): View
+    {
+        return view('Views/home.view.php')
+            ->data(
+                name: 'Brent',
+                date: new DateTime(),
+            );
+    }
+
+    #[Post(uri: '/home')]
+    public function __invoke(): View
+    {
+    }
+}
+===
+<span class="hl-comment">// controller for home</span>
+<span class="hl-keyword">final</span> <span class="hl-keyword">readonly</span> <span class="hl-keyword">class</span> <span class="hl-type">HomeController</span>
+{
+    <span class="hl-injection"><span class="hl-attribute">#[<span class="hl-type">Get</span>(<span class="hl-property">uri</span>: '<span class="hl-value">/home</span>')]</span></span>
+    <span class="hl-keyword">public</span> <span class="hl-keyword">function</span> <span class="hl-property">__invoke</span>(): <span class="hl-type">View</span>
+    {
+        <span class="hl-keyword">return</span> <span class="hl-property">view</span>('<span class="hl-value">Views/home.view.php</span>')
+            -&gt;<span class="hl-property">data</span>(
+                <span class="hl-property">name</span>: '<span class="hl-value">Brent</span>',
+                <span class="hl-property">date</span>: <span class="hl-keyword">new</span> <span class="hl-type">DateTime</span>(),
+            );
+    }
+
+    <span class="hl-injection"><span class="hl-attribute">#[<span class="hl-type">Post</span>(<span class="hl-property">uri</span>: '<span class="hl-value">/home</span>')]</span></span>
+    <span class="hl-keyword">public</span> <span class="hl-keyword">function</span> <span class="hl-property">__invoke</span>(): <span class="hl-type">View</span>
+    {
+    }
+}

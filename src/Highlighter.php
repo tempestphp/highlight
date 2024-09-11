@@ -93,6 +93,8 @@ final class Highlighter
 
         $this->currentLanguage = $language;
 
+        $content = $this->normalizeNewline($content);
+
         return $this->parseContent($content, $language);
     }
 
@@ -197,5 +199,10 @@ final class Highlighter
         if ($this->gutterInjection) {
             yield $this->gutterInjection;
         }
+    }
+
+    private function normalizeNewline(string $subject): string
+    {
+        return preg_replace('~\R~u', "\n", $subject);
     }
 }

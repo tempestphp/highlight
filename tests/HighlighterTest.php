@@ -56,6 +56,7 @@ class HighlighterTest extends TestCase
         return [
             ['01', 'php'], // general
             ['02', 'html'], // deep injections
+            ['03', 'php'], // windows line endings
         ];
     }
 }

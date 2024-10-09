@@ -9,8 +9,11 @@ use Tempest\Highlight\Languages\Yaml\Patterns\YamlArrayBracketsPattern;
 use Tempest\Highlight\Languages\Yaml\Patterns\YamlColonPattern;
 use Tempest\Highlight\Languages\Yaml\Patterns\YamlCommentPattern;
 use Tempest\Highlight\Languages\Yaml\Patterns\YamlDashPattern;
+use Tempest\Highlight\Languages\Yaml\Patterns\YamlDateTimePattern;
 use Tempest\Highlight\Languages\Yaml\Patterns\YamlDoubleAccoladesValuePattern;
 use Tempest\Highlight\Languages\Yaml\Patterns\YamlDoubleQuoteValuePattern;
+use Tempest\Highlight\Languages\Yaml\Patterns\YamlLogicalValuePattern;
+use Tempest\Highlight\Languages\Yaml\Patterns\YamlNumberPattern;
 use Tempest\Highlight\Languages\Yaml\Patterns\YamlObjectBracketsPattern;
 use Tempest\Highlight\Languages\Yaml\Patterns\YamlPipePattern;
 use Tempest\Highlight\Languages\Yaml\Patterns\YamlPropertyPattern;
@@ -44,8 +47,11 @@ class YamlLanguage extends BaseLanguage
             ...parent::getPatterns(),
             new YamlPropertyPattern(),
             new YamlDashPattern(),
+            new YamlDateTimePattern(),
             new YamlColonPattern(),
             new YamlPipePattern(),
+            new YamlLogicalValuePattern(),
+            new YamlNumberPattern(),
             new YamlVariablePattern(),
             new YamlArrayBracketsPattern(),
             new YamlObjectBracketsPattern(),

@@ -22,7 +22,7 @@ final readonly class PhpHeredocInjection implements Injection
         // First we'll search for all Heredoc open tags,
         // which we need in order to find the close tag, and so the whole Heredoc block
         foreach ($languageMatches['language'] as $language) {
-            preg_match_all('/<<<' . $language . '(?<match>(.|\n)*?)' . $language . ';/', $content, $matches);
+            preg_match_all('/<<<' . $language . '(?<match>(.|\n)*?)' . $language . '(?:;|\s|\))/', $content, $matches);
 
             foreach ($matches['match'] as $key => $match) {
                 $fullMatch = $matches[0][$key];

@@ -126,12 +126,12 @@ TXT,
     <span class="hl-comment">// ...</span>
 
 qq.<span class="hl-property">DeleteFileAjaxRequester</span> = <span class="hl-keyword">function</span>(o) {
-    &quot;<span class="hl-value">use strict</span>&quot;;
+    <span class="hl-value">&quot;use strict&quot;</span>;
 
     <span class="hl-keyword">var</span> requester,
         options = {
-            <span class="hl-property">method</span>: &quot;<span class="hl-value">DELETE</span>&quot;,
-            <span class="hl-property">uuidParamName</span>: &quot;<span class="hl-value">qquuid</span>&quot;,
+            <span class="hl-property">method</span>: <span class="hl-value">&quot;DELETE&quot;</span>,
+            <span class="hl-property">uuidParamName</span>: <span class="hl-value">&quot;qquuid&quot;</span>,
             <span class="hl-property">endpointStore</span>: {},
             <span class="hl-property">maxConnections</span>: 3,
             <span class="hl-property">customHeaders</span>: <span class="hl-keyword">function</span>(id) {<span class="hl-keyword">return</span> {};},
@@ -148,9 +148,9 @@ qq.<span class="hl-property">DeleteFileAjaxRequester</span> = <span class="hl-ke
     qq.<span class="hl-property">extend</span>(options, o);
 
     <span class="hl-keyword">function</span> <span class="hl-property">getMandatedParams</span>() {
-        <span class="hl-keyword">if</span> (options.<span class="hl-property">method</span>.<span class="hl-property">toUpperCase</span>() === &quot;<span class="hl-value">POST</span>&quot;) {
+        <span class="hl-keyword">if</span> (options.<span class="hl-property">method</span>.<span class="hl-property">toUpperCase</span>() === <span class="hl-value">&quot;POST&quot;</span>) {
             <span class="hl-keyword">return</span> {
-                <span class="hl-property">_method</span>: &quot;<span class="hl-value">DELETE</span>&quot;
+                <span class="hl-property">_method</span>: <span class="hl-value">&quot;DELETE&quot;</span>
             };
         }
 
@@ -158,8 +158,8 @@ qq.<span class="hl-property">DeleteFileAjaxRequester</span> = <span class="hl-ke
     }
 
     requester = qq.<span class="hl-property">extend</span>(<span class="hl-keyword">this</span>, <span class="hl-keyword">new</span> qq.<span class="hl-type">AjaxRequester</span>({
-        <span class="hl-property">acceptHeader</span>: &quot;<span class="hl-value">application/json</span>&quot;,
-        <span class="hl-property">validMethods</span>: [&quot;<span class="hl-value">POST</span>&quot;, &quot;<span class="hl-value">DELETE</span>&quot;],
+        <span class="hl-property">acceptHeader</span>: <span class="hl-value">&quot;application/json&quot;</span>,
+        <span class="hl-property">validMethods</span>: [<span class="hl-value">&quot;POST&quot;</span>, <span class="hl-value">&quot;DELETE&quot;</span>],
         <span class="hl-property">method</span>: options.<span class="hl-property">method</span>,
         <span class="hl-property">endpointStore</span>: options.<span class="hl-property">endpointStore</span>,
         <span class="hl-property">paramsStore</span>: options.<span class="hl-property">paramsStore</span>,
@@ -178,9 +178,9 @@ qq.<span class="hl-property">DeleteFileAjaxRequester</span> = <span class="hl-ke
         <span class="hl-property">sendDelete</span>: <span class="hl-keyword">function</span>(id, uuid, additionalMandatedParams) {
             <span class="hl-keyword">var</span> additionalOptions = additionalMandatedParams || {};
 
-            options.<span class="hl-property">log</span>(&quot;<span class="hl-value">Submitting delete file request for </span>&quot; + id);
+            options.<span class="hl-property">log</span>(<span class="hl-value">&quot;Submitting delete file request for &quot;</span> + id);
 
-            <span class="hl-keyword">if</span> (options.<span class="hl-property">method</span> === &quot;<span class="hl-value">DELETE</span>&quot;) {
+            <span class="hl-keyword">if</span> (options.<span class="hl-property">method</span> === <span class="hl-value">&quot;DELETE&quot;</span>) {
                 requester.<span class="hl-property">initTransport</span>(id)
                     .<span class="hl-property">withPath</span>(uuid)
                     .<span class="hl-property">withParams</span>(additionalOptions)
@@ -230,7 +230,7 @@ TXT,
     <span class="hl-keyword">this</span>.<span class="hl-property">y</span> = y;
   }
 
-  <span class="hl-keyword">static</span> <span class="hl-property">displayName</span> = &quot;<span class="hl-value">Point</span>&quot;;
+  <span class="hl-keyword">static</span> <span class="hl-property">displayName</span> = <span class="hl-value">&quot;Point&quot;</span>;
   <span class="hl-keyword">static</span> <span class="hl-property">distance</span>(a, b) {
     <span class="hl-keyword">const</span> dx = a.<span class="hl-property">x</span> - b.<span class="hl-property">x</span>;
     <span class="hl-keyword">const</span> dy = a.<span class="hl-property">y</span> - b.<span class="hl-property">y</span>;

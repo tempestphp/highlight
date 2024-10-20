@@ -34,6 +34,8 @@ use Tempest\Highlight\Languages\Php\Patterns\NamespacePattern;
 use Tempest\Highlight\Languages\Php\Patterns\NestedFunctionCallPattern;
 use Tempest\Highlight\Languages\Php\Patterns\NewObjectPattern;
 use Tempest\Highlight\Languages\Php\Patterns\OperatorPattern;
+use Tempest\Highlight\Languages\Php\Patterns\PhpCloseTagPattern;
+use Tempest\Highlight\Languages\Php\Patterns\PhpOpenTagPattern;
 use Tempest\Highlight\Languages\Php\Patterns\PropertyAccessPattern;
 use Tempest\Highlight\Languages\Php\Patterns\PropertyHookGetPattern;
 use Tempest\Highlight\Languages\Php\Patterns\PropertyHookSetParameterTypePattern;
@@ -76,6 +78,8 @@ class PhpLanguage extends BaseLanguage
         return [
             ...parent::getPatterns(),
 
+            new PhpOpenTagPattern(),
+            new PhpCloseTagPattern(),
             new UseFunctionNamePattern(),
             new UseFunctionPattern(),
             new ClassNamePattern(),

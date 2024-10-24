@@ -25,6 +25,7 @@ class PhpLanguageTest extends TestCase
     {
         return [
             ["'php()'", "<span class=\"hl-value\">'php()'</span>"],
+            ['public private(set) Author $author,', '<span class="hl-keyword">public</span> <span class="hl-keyword">private</span>(<span class="hl-keyword">set</span>) <span class="hl-type">Author</span> <span class="hl-property">$author</span>,'],
             ["#[PatternTest(input: 'new Foo()', output: 'Foo')]", '<span class="hl-injection"><span class="hl-attribute">#[<span class="hl-type">PatternTest</span>(<span class="hl-property">input</span>: <span class="hl-value">\'new Foo()\'</span>, <span class="hl-property">output</span>: <span class="hl-value">\'Foo\'</span>)]</span></span>'],
             ['$foo && $bar', '<span class="hl-variable">$foo</span> <span class="hl-operator">&amp;&amp;</span> <span class="hl-variable">$bar</span>'],
             ['$foo || $bar', '<span class="hl-variable">$foo</span> <span class="hl-operator">||</span> <span class="hl-variable">$bar</span>'],

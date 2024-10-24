@@ -1,3 +1,8 @@
+## 2.10.6
+
+- Support for asymmetric visibility
+- Include quotes in PHP and JS strings
+
 ## 2.10.3
 
 - Normalize newline formats (#150)

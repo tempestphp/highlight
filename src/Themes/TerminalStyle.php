@@ -8,6 +8,13 @@ enum TerminalStyle: string
 {
     case ESC = "\033[";
     case RESET = "0m";
+    case RESET_INTENSITY = "22m";
+    case RESET_ITALIC = "23m";
+    case VISIBLE = "28m";
+    case RESET_UNDERLINE = "24m";
+    case RESET_OVERLINE = "55m";
+    case RESET_STRIKETHROUGH = "29m";
+    case NON_REVERSE_TEXT = "27m";
 
     case FG_BLACK = "30m";
     case FG_DARK_RED = "31m";
@@ -44,10 +51,18 @@ enum TerminalStyle: string
     case BG_WHITE = "107m";
 
     case BOLD = "1m";
+    case DIM = "2m";
+    case ITALIC = "3m";
     case UNDERLINE = "4m";
-    case NO_UNDERLINE = "24m";
+    case OVERLINE = "53m";
+    case HIDDEN = "8m";
+    case STRIKETHROUGH = "9m";
     case REVERSE_TEXT = "7m";
-    case NON_REVERSE_TEXT = "27m";
+
+    public static function STYLE(self $style, string $text): string
+    {
+        return self::ESC->value . $style->value . $text;
+    }
 
     public static function RESET(string $text = ''): string
     {
@@ -216,26 +231,41 @@ enum TerminalStyle: string
 
     public static function BOLD(string $text = ''): string
     {
-        return self::ESC->value . self::BOLD->value . $text . self::ESC->value . self::RESET->value;
+        return self::ESC->value . self::BOLD->value . $text . self::ESC->value . self::RESET_INTENSITY->value;
+    }
+
+    public static function DIM(string $text = ''): string
+    {
+        return self::ESC->value . self::DIM->value . $text . self::ESC->value . self::RESET_INTENSITY->value;
+    }
+
+    public static function ITALIC(string $text = ''): string
+    {
+        return self::ESC->value . self::ITALIC->value . $text . self::ESC->value . self::RESET_ITALIC->value;
     }
 
     public static function UNDERLINE(string $text = ''): string
     {
-        return self::ESC->value . self::UNDERLINE->value . $text . self::ESC->value . self::RESET->value;
+        return self::ESC->value . self::UNDERLINE->value . $text . self::ESC->value . self::RESET_UNDERLINE->value;
     }
 
-    public static function NO_UNDERLINE(string $text = ''): string
+    public static function OVERLINE(string $text = ''): string
     {
-        return self::ESC->value . self::NO_UNDERLINE->value . $text . self::ESC->value . self::RESET->value;
+        return self::ESC->value . self::OVERLINE->value . $text . self::ESC->value . self::RESET_OVERLINE->value;
+    }
+
+    public static function HIDDEN(string $text = ''): string
+    {
+        return self::ESC->value . self::HIDDEN->value . $text . self::ESC->value . self::VISIBLE->value;
+    }
+
+    public static function STRIKETHROUGH(string $text = ''): string
+    {
+        return self::ESC->value . self::STRIKETHROUGH->value . $text . self::ESC->value . self::RESET_STRIKETHROUGH->value;
     }
 
     public static function REVERSE_TEXT(string $text = ''): string
     {
-        return self::ESC->value . self::REVERSE_TEXT->value . $text . self::ESC->value . self::RESET->value;
-    }
-
-    public static function NON_REVERSE_TEXT(string $text = ''): string
-    {
-        return self::ESC->value . self::NON_REVERSE_TEXT->value . $text . self::ESC->value . self::RESET->value;
+        return self::ESC->value . self::REVERSE_TEXT->value . $text . self::ESC->value . self::NON_REVERSE_TEXT->value;
     }
 }

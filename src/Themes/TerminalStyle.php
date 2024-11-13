@@ -10,11 +10,13 @@ enum TerminalStyle: string
     case RESET = "0m";
     case RESET_INTENSITY = "22m";
     case RESET_ITALIC = "23m";
-    case VISIBLE = "28m";
     case RESET_UNDERLINE = "24m";
     case RESET_OVERLINE = "55m";
     case RESET_STRIKETHROUGH = "29m";
-    case NON_REVERSE_TEXT = "27m";
+    case RESET_REVERSE_TEXT = "27m";
+    case RESET_BACKGROUND = "49m";
+    case RESET_FOREGROUND = "39m";
+    case VISIBLE = "28m";
 
     case FG_BLACK = "30m";
     case FG_DARK_RED = "31m";
@@ -266,6 +268,6 @@ enum TerminalStyle: string
 
     public static function REVERSE_TEXT(string $text = ''): string
     {
-        return self::ESC->value . self::REVERSE_TEXT->value . $text . self::ESC->value . self::NON_REVERSE_TEXT->value;
+        return self::ESC->value . self::REVERSE_TEXT->value . $text . self::ESC->value . self::RESET_REVERSE_TEXT->value;
     }
 }

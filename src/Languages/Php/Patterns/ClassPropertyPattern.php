@@ -15,13 +15,16 @@ use Tempest\Highlight\Tokens\TokenTypeEnum;
 #[PatternTest(input: 'public Foo|Bar $foo', output: '$foo')]
 #[PatternTest(input: 'public Foo&Bar $foo', output: '$foo')]
 #[PatternTest(input: 'public (Foo&Bar)|null $foo', output: '$foo')]
+#[PatternTest(input: 'private(set) Foo $foo;', output: '$foo')]
+#[PatternTest(input: 'public(set) Foo $foo;', output: '$foo')]
+#[PatternTest(input: 'protected(set) Foo $foo;', output: '$foo')]
 final readonly class ClassPropertyPattern implements Pattern
 {
     use IsPattern;
 
     public function getPattern(): string
     {
-        return '(public|private|protected)(\s(.+?)) (?<match>\\$[\w]+)';
+        return '(public|private|protected)(\(set\))?(\s(.+?)) (?<match>\\$[\w]+)';
     }
 
     public function getTokenType(): TokenTypeEnum

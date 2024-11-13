@@ -12,6 +12,7 @@ use Tempest\Highlight\Languages\Php\Patterns\ClassPropertyPattern;
 use Tempest\Highlight\Languages\Php\Patterns\KeywordPattern;
 use Tempest\Highlight\Languages\Php\Patterns\MultilineSingleDocCommentPattern;
 use Tempest\Highlight\Languages\Php\Patterns\NewObjectPattern;
+use Tempest\Highlight\Languages\Php\Patterns\PhpAsymmetricPropertyPattern;
 use Tempest\Highlight\Languages\Php\Patterns\SinglelineCommentPattern;
 use Tempest\Highlight\Languages\Php\Patterns\TypeForVariablePattern;
 
@@ -53,6 +54,7 @@ final class PhpTypeLanguage extends BaseLanguage
             new TypeForVariablePattern(),
             new ClassPropertyPattern(),
             new NewObjectPattern(),
+            new PhpAsymmetricPropertyPattern(),
         ];
     }
 }

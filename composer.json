@@ -1,5 +1,5 @@
 {
-    "name": "tempest/highlight",
+    "name": "custura/highlight",
     "description": "Fast, extensible, server-side code highlighting",
     "autoload": {
         "psr-4": {

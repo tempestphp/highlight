@@ -7,10 +7,10 @@ namespace Tempest\Highlight\Tokens;
 use Tempest\Highlight\Escape;
 use Tempest\Highlight\Theme;
 
-final class RenderTokens
+final readonly class RenderTokens
 {
     public function __construct(
-        private readonly Theme $theme,
+        private Theme $theme,
     ) {
     }
 

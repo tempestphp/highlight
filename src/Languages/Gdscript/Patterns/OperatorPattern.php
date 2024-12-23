@@ -8,11 +8,11 @@ use Tempest\Highlight\IsPattern;
 use Tempest\Highlight\Pattern;
 use Tempest\Highlight\Tokens\TokenTypeEnum;
 
-final class OperatorPattern implements Pattern
+final readonly class OperatorPattern implements Pattern
 {
     use IsPattern;
 
-    public function __construct(private readonly string $operator)
+    public function __construct(private string $operator)
     {
     }
 

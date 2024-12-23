@@ -12,6 +12,7 @@ use Tempest\Highlight\Tokens\TokenTypeEnum;
 
 final readonly class PhpHeredocInjection implements Injection
 {
+    #[\Override]
     public function parse(string $content, Highlighter $highlighter): ParsedInjection
     {
         $heredocTokenType = TokenTypeEnum::PROPERTY;

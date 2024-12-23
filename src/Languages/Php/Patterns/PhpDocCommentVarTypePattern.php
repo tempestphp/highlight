@@ -17,11 +17,13 @@ final readonly class PhpDocCommentVarTypePattern implements Pattern
 {
     use IsPattern;
 
+    #[\Override]
     public function getPattern(): string
     {
         return '\@var(\s)+(?<match>.*?)( \$|\*|$)';
     }
 
+    #[\Override]
     public function getTokenType(): TokenTypeEnum
     {
         return TokenTypeEnum::TYPE;

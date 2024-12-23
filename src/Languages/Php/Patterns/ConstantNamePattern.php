@@ -25,11 +25,13 @@ final readonly class ConstantNamePattern implements Pattern
 {
     use IsPattern;
 
+    #[\Override]
     public function getPattern(): string
     {
         return '\b(?<match>[A-Z_]+)\b';
     }
 
+    #[\Override]
     public function getTokenType(): TokenTypeEnum
     {
         return TokenTypeEnum::PROPERTY;

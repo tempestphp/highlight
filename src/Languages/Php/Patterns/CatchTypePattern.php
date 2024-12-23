@@ -16,11 +16,13 @@ final readonly class CatchTypePattern implements Pattern
 {
     use IsPattern;
 
+    #[\Override]
     public function getPattern(): string
     {
         return 'catch \((?<match>[\w\||]+)\)';
     }
 
+    #[\Override]
     public function getTokenType(): TokenTypeEnum
     {
         return TokenTypeEnum::TYPE;

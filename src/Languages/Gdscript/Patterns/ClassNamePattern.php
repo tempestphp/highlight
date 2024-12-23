@@ -14,11 +14,13 @@ final readonly class ClassNamePattern implements Pattern
 {
     use IsPattern;
 
+    #[\Override]
     public function getPattern(): string
     {
         return 'class_name\s(?<match>[\w]+)';
     }
 
+    #[\Override]
     public function getTokenType(): TokenTypeEnum
     {
         return TokenTypeEnum::TYPE;

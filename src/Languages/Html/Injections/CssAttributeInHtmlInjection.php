@@ -12,11 +12,13 @@ final readonly class CssAttributeInHtmlInjection implements Injection
 {
     use IsInjection;
 
+    #[\Override]
     public function getPattern(): string
     {
         return 'style="(?<match>(.|\n)*?)"';
     }
 
+    #[\Override]
     public function parseContent(string $content, Highlighter $highlighter): string
     {
         return $highlighter->parse($content, 'css');

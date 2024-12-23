@@ -15,11 +15,13 @@ final readonly class SqlAsTablePattern implements Pattern
 {
     use IsPattern;
 
+    #[\Override]
     public function getPattern(): string
     {
         return '/\bAS (?<match>[\w]+)/i';
     }
 
+    #[\Override]
     public function getTokenType(): TokenTypeEnum
     {
         return TokenTypeEnum::TYPE;

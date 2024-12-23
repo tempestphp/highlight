@@ -25,11 +25,13 @@ final readonly class AttributeTypePattern implements Pattern
 {
     use IsPattern;
 
+    #[\Override]
     public function getPattern(): string
     {
         return '/(^[\s]*|\#\[)(?<match>[\\\\]*[A-Z][\w\\\\]+)/m';
     }
 
+    #[\Override]
     public function getTokenType(): TokenTypeEnum
     {
         return TokenTypeEnum::TYPE;

@@ -29,11 +29,13 @@ final readonly class CssSelectorPattern implements Pattern
 {
     use IsPattern;
 
+    #[\Override]
     public function getPattern(): string
     {
         return '(?<match>[\[\]\'\"\=\@\-\#\.\w\s,\n\+\:\(\)\*]+)\{';
     }
 
+    #[\Override]
     public function getTokenType(): TokenTypeEnum
     {
         return TokenTypeEnum::KEYWORD;

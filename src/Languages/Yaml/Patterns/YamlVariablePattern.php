@@ -14,11 +14,13 @@ final readonly class YamlVariablePattern implements Pattern
 {
     use IsPattern;
 
+    #[\Override]
     public function getPattern(): string
     {
         return '\\$\{\{(?<match>[\w\s\.]+)\}\}';
     }
 
+    #[\Override]
     public function getTokenType(): TokenTypeEnum
     {
         return TokenTypeEnum::PROPERTY;

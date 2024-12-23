@@ -27,11 +27,13 @@ final readonly class PropertyTypesPattern implements Pattern
 {
     use IsPattern;
 
+    #[\Override]
     public function getPattern(): string
     {
         return '(public|private|protected)(\s*static\s*)?(\s*\((get|set)\)\s*)?(\s(?<match>[^\s]*)) (\$[\w]+)';
     }
 
+    #[\Override]
     public function getTokenType(): TokenTypeEnum
     {
         return TokenTypeEnum::TYPE;

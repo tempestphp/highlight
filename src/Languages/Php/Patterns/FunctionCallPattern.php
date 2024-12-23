@@ -12,11 +12,13 @@ final readonly class FunctionCallPattern implements Pattern
 {
     use IsPattern;
 
+    #[\Override]
     public function getPattern(): string
     {
         return '\b(?<match>[a-z][\w]+)\(';
     }
 
+    #[\Override]
     public function getTokenType(): TokenTypeEnum
     {
         return TokenTypeEnum::PROPERTY;

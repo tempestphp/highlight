@@ -18,11 +18,13 @@ final readonly class GenericPattern implements Pattern
     ) {
     }
 
+    #[\Override]
     public function getPattern(): string
     {
         return $this->pattern;
     }
 
+    #[\Override]
     public function getTokenType(): TokenTypeEnum
     {
         return $this->tokenType;

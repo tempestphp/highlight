@@ -17,6 +17,7 @@ final readonly class HighlightExtension implements ExtensionInterface
     ) {
     }
 
+    #[\Override]
     public function register(EnvironmentBuilderInterface $environment): void
     {
         $environment

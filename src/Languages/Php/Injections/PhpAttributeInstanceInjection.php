@@ -14,11 +14,13 @@ final readonly class PhpAttributeInstanceInjection implements Injection
 {
     use IsInjection;
 
+    #[\Override]
     public function getPattern(): string
     {
         return '(?<match>\#\[[\w]+\((.|\n)*?\)\])';
     }
 
+    #[\Override]
     public function parseContent(string $content, Highlighter $highlighter): string
     {
         $theme = $highlighter->getTheme();

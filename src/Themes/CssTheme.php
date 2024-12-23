@@ -13,6 +13,7 @@ final readonly class CssTheme implements WebTheme
 {
     use EscapesWebTheme;
 
+    #[\Override]
     public function before(TokenType $tokenType): string
     {
         if ($tokenType === TokenTypeEnum::HIDDEN) {
@@ -38,16 +39,19 @@ final readonly class CssTheme implements WebTheme
         return "<span class=\"{$class}\">";
     }
 
+    #[\Override]
     public function after(TokenType $tokenType): string
     {
         return "</span>";
     }
 
+    #[\Override]
     public function preBefore(Highlighter $highlighter): string
     {
         return "<pre data-lang=\"{$highlighter->getCurrentLanguage()->getName()}\" class=\"notranslate\">";
     }
 
+    #[\Override]
     public function preAfter(Highlighter $highlighter): string
     {
         return '</pre>';

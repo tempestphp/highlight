@@ -15,11 +15,13 @@ final readonly class SqlJoinTablePattern implements Pattern
 {
     use IsPattern;
 
+    #[\Override]
     public function getPattern(): string
     {
         return '/\bJOIN (?<match>[\w]+)/i';
     }
 
+    #[\Override]
     public function getTokenType(): TokenTypeEnum
     {
         return TokenTypeEnum::TYPE;

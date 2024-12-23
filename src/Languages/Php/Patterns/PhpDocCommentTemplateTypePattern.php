@@ -14,11 +14,13 @@ final readonly class PhpDocCommentTemplateTypePattern implements Pattern
 {
     use IsPattern;
 
+    #[\Override]
     public function getPattern(): string
     {
         return '\@template(\s)+(?<match>[\w]+)';
     }
 
+    #[\Override]
     public function getTokenType(): TokenTypeEnum
     {
         return TokenTypeEnum::GENERIC;

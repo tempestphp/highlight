@@ -13,11 +13,13 @@ use Tempest\Highlight\Languages\Xml\XmlLanguage;
 
 class HtmlLanguage extends XmlLanguage
 {
+    #[\Override]
     public function getName(): string
     {
         return 'html';
     }
 
+    #[\Override]
     public function getInjections(): array
     {
         return [
@@ -30,6 +32,7 @@ class HtmlLanguage extends XmlLanguage
         ];
     }
 
+    #[\Override]
     public function getPatterns(): array
     {
         return [

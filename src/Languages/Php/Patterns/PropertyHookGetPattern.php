@@ -25,11 +25,13 @@ final readonly class PropertyHookGetPattern implements Pattern
 {
     use IsPattern;
 
+    #[\Override]
     public function getPattern(): string
     {
         return '(?<match>get)\s*({|=>|;)';
     }
 
+    #[\Override]
     public function getTokenType(): TokenType
     {
         return TokenTypeEnum::KEYWORD;

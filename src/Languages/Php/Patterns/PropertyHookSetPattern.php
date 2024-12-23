@@ -23,11 +23,13 @@ final readonly class PropertyHookSetPattern implements Pattern
 {
     use IsPattern;
 
+    #[\Override]
     public function getPattern(): string
     {
         return '(?<match>set)\s*({|;|=>|\()';
     }
 
+    #[\Override]
     public function getTokenType(): TokenType
     {
         return TokenTypeEnum::KEYWORD;

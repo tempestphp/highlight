@@ -19,11 +19,13 @@ final readonly class ImageNamePattern implements Pattern
 {
     use IsPattern;
 
+    #[\Override]
     public function getPattern(): string
     {
         return "/^[\s]*FROM[\s](?<match>[\w\/]+)/m";
     }
 
+    #[\Override]
     public function getTokenType(): TokenTypeEnum
     {
         return TokenTypeEnum::VALUE;

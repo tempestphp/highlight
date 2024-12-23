@@ -14,11 +14,13 @@ final readonly class FunctionNamePattern implements Pattern
 {
     use IsPattern;
 
+    #[\Override]
     public function getPattern(): string
     {
         return 'func (?<match>[\w]+)';
     }
 
+    #[\Override]
     public function getTokenType(): TokenTypeEnum
     {
         return TokenTypeEnum::PROPERTY;

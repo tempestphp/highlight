@@ -14,11 +14,13 @@ final readonly class YamlCommentPattern implements Pattern
 {
     use IsPattern;
 
+    #[\Override]
     public function getPattern(): string
     {
         return '(?<match>\#(.)*)';
     }
 
+    #[\Override]
     public function getTokenType(): TokenTypeEnum
     {
         return TokenTypeEnum::COMMENT;

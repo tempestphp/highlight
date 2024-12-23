@@ -15,11 +15,13 @@ final readonly class PhpOpenTagPattern implements Pattern
 {
     use IsPattern;
 
+    #[\Override]
     public function getPattern(): string
     {
         return '(?<match>\<\?[=|php]+)';
     }
 
+    #[\Override]
     public function getTokenType(): TokenTypeEnum
     {
         return TokenTypeEnum::KEYWORD;

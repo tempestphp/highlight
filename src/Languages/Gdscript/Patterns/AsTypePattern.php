@@ -14,11 +14,13 @@ final readonly class AsTypePattern implements Pattern
 {
     use IsPattern;
 
+    #[\Override]
     public function getPattern(): string
     {
         return 'as\s+\b(?<match>[a-zA-Z][a-zA-Z0-9]+)\b';
     }
 
+    #[\Override]
     public function getTokenType(): TokenTypeEnum
     {
         return TokenTypeEnum::TYPE;

@@ -17,6 +17,7 @@ final readonly class PhpAsymmetricPropertyPattern implements Pattern
 {
     use IsPattern;
 
+    #[\Override]
     public function match(string $content): array
     {
         $pattern = $this->getPattern();
@@ -30,11 +31,13 @@ final readonly class PhpAsymmetricPropertyPattern implements Pattern
         return $matches;
     }
 
+    #[\Override]
     public function getPattern(): string
     {
         return '/(public|private|protected)\((?<match>set)\)/';
     }
 
+    #[\Override]
     public function getTokenType(): TokenType
     {
         return TokenTypeEnum::KEYWORD;

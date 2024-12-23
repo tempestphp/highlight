@@ -35,6 +35,7 @@ final class InlineTheme implements Theme, WebTheme
         }
     }
 
+    #[\Override]
     public function before(TokenType $tokenType): string
     {
         if ($tokenType === TokenTypeEnum::HIDDEN) {
@@ -66,11 +67,13 @@ final class InlineTheme implements Theme, WebTheme
         return "<span style=\"{$style}\">";
     }
 
+    #[\Override]
     public function after(TokenType $tokenType): string
     {
         return '</span>';
     }
 
+    #[\Override]
     public function preBefore(Highlighter $highlighter): string
     {
         $preStyle = $this->map['pre'] ?? $this->map['pre, code'] ?? '';
@@ -78,6 +81,7 @@ final class InlineTheme implements Theme, WebTheme
         return "<pre data-lang=\"{$highlighter->getCurrentLanguage()->getName()}\" class=\"notranslate\" style=\"{$preStyle}\">";
     }
 
+    #[\Override]
     public function preAfter(Highlighter $highlighter): string
     {
         return '</pre>';

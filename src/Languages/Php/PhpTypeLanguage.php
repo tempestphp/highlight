@@ -18,11 +18,13 @@ use Tempest\Highlight\Languages\Php\Patterns\TypeForVariablePattern;
 
 final class PhpTypeLanguage extends BaseLanguage
 {
+    #[\Override]
     public function getName(): string
     {
         return 'phptype';
     }
 
+    #[\Override]
     public function getInjections(): array
     {
         return [
@@ -33,6 +35,7 @@ final class PhpTypeLanguage extends BaseLanguage
         ];
     }
 
+    #[\Override]
     public function getPatterns(): array
     {
         return [

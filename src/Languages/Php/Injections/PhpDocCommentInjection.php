@@ -13,11 +13,13 @@ final readonly class PhpDocCommentInjection implements Injection
 {
     use IsInjection;
 
+    #[\Override]
     public function getPattern(): string
     {
         return '/(?<match>\/\*\*(.|\n)*?\*\/)/m';
     }
 
+    #[\Override]
     public function parseContent(string $content, Highlighter $highlighter): string
     {
         return $highlighter->parse($content, new PhpDocCommentLanguage());

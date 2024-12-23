@@ -10,11 +10,13 @@ final readonly class DynamicTokenType implements TokenType
     {
     }
 
+    #[\Override]
     public function getValue(): string
     {
         return $this->value;
     }
 
+    #[\Override]
     public function canContain(TokenType $other): bool
     {
         return $this->getValue() !== $other->getValue();

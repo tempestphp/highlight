@@ -22,16 +22,19 @@ use Tempest\Highlight\Languages\Python\Patterns\PyTripleSingleQuoteStringPattern
 
 class PythonLanguage extends BaseLanguage
 {
+    #[\Override]
     public function getName(): string
     {
         return 'python';
     }
 
+    #[\Override]
     public function getAliases(): array
     {
         return ['py'];
     }
 
+    #[\Override]
     public function getInjections(): array
     {
         return [
@@ -39,6 +42,7 @@ class PythonLanguage extends BaseLanguage
         ];
     }
 
+    #[\Override]
     public function getPatterns(): array
     {
         return [

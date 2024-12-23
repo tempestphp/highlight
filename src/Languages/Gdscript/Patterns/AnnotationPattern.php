@@ -12,6 +12,7 @@ final readonly class AnnotationPattern implements Pattern
 {
     use IsPattern;
 
+    #[\Override]
     public function getPattern(): string
     {
         $variations = join('|@export_', [
@@ -42,6 +43,7 @@ final readonly class AnnotationPattern implements Pattern
         return "(?<match>(@onready|@icon|@export|@export_{$variations}|@rpc|@static_unload|@tool|@warning_ignore))";
     }
 
+    #[\Override]
     public function getTokenType(): TokenTypeEnum
     {
         return TokenTypeEnum::KEYWORD;

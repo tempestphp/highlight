@@ -15,11 +15,13 @@ final readonly class JsStaticClassPattern implements Pattern
 {
     use IsPattern;
 
+    #[\Override]
     public function getPattern(): string
     {
         return '\b(?<match>[A-Z][\w]+)\.';
     }
 
+    #[\Override]
     public function getTokenType(): TokenTypeEnum
     {
         return TokenTypeEnum::TYPE;

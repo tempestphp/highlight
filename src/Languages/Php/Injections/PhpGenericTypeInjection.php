@@ -12,6 +12,7 @@ use Tempest\Highlight\Tokens\TokenTypeEnum;
 
 final readonly class PhpGenericTypeInjection implements Injection
 {
+    #[\Override]
     public function parse(string $content, Highlighter $highlighter): ParsedInjection
     {
         $genericTypes = [];

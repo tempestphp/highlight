@@ -16,11 +16,13 @@ use Tempest\Highlight\Languages\Php\Patterns\PhpDocCommentVarTypePattern;
 
 class PhpDocCommentLanguage extends DocCommentLanguage
 {
+    #[\Override]
     public function getName(): string
     {
         return 'phpdoc';
     }
 
+    #[\Override]
     public function getInjections(): array
     {
         return [
@@ -29,6 +31,7 @@ class PhpDocCommentLanguage extends DocCommentLanguage
         ];
     }
 
+    #[\Override]
     public function getPatterns(): array
     {
         return [

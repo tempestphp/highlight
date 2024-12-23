@@ -13,6 +13,7 @@ use Tempest\Highlight\ParsedInjection;
 #[After]
 final readonly class AdditionInjection implements Injection
 {
+    #[\Override]
     public function parse(string $content, Highlighter $highlighter): ParsedInjection
     {
         // Standardize line endings

@@ -15,11 +15,13 @@ final readonly class PyClassNamePattern implements Pattern
 {
     use IsPattern;
 
+    #[\Override]
     public function getPattern(): string
     {
         return '\bclass\s+(?<match>\w*)(?=[\s*\:(])';
     }
 
+    #[\Override]
     public function getTokenType(): TokenTypeEnum
     {
         return TokenTypeEnum::PROPERTY;

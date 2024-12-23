@@ -17,11 +17,13 @@ final readonly class JsDocParamNamePattern implements Pattern
 {
     use IsPattern;
 
+    #[\Override]
     public function getPattern(): string
     {
         return '@param\s(.*?)\s(?<match>(.*?))(\s|$)';
     }
 
+    #[\Override]
     public function getTokenType(): TokenTypeEnum
     {
         return TokenTypeEnum::VALUE;

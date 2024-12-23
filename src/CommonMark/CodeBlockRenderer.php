@@ -19,6 +19,7 @@ final readonly class CodeBlockRenderer implements NodeRendererInterface
     ) {
     }
 
+    #[\Override]
     public function render(Node $node, ChildNodeRendererInterface $childRenderer)
     {
         if (! $node instanceof FencedCode) {

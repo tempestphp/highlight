@@ -12,11 +12,13 @@ final readonly class BladeRawEchoInjection implements Injection
 {
     use IsInjection;
 
+    #[\Override]
     public function getPattern(): string
     {
         return '({!!)(?<match>.*)(!!})';
     }
 
+    #[\Override]
     public function parseContent(string $content, Highlighter $highlighter): string
     {
         return $highlighter->parse($content, 'php');

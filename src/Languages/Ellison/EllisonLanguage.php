@@ -9,11 +9,13 @@ use Tempest\Highlight\Languages\Ellison\Injections\ParserInjection;
 
 class EllisonLanguage extends BaseLanguage
 {
+    #[\Override]
     public function getName(): string
     {
         return 'ellison';
     }
 
+    #[\Override]
     public function getInjections(): array
     {
         return [

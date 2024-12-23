@@ -16,11 +16,13 @@ final readonly class KeywordPattern implements Pattern
     {
     }
 
+    #[\Override]
     public function getPattern(): string
     {
         return "/^[\s]*(?<match>{$this->keyword})[\s].*/m";
     }
 
+    #[\Override]
     public function getTokenType(): TokenTypeEnum
     {
         return TokenTypeEnum::KEYWORD;

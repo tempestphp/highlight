@@ -16,6 +16,7 @@ final readonly class OperatorPattern implements Pattern
     {
     }
 
+    #[\Override]
     public function getPattern(): string
     {
         $quoted = preg_quote($this->operator, '/');
@@ -23,6 +24,7 @@ final readonly class OperatorPattern implements Pattern
         return "/(?<match>{$quoted})/";
     }
 
+    #[\Override]
     public function getTokenType(): TokenTypeEnum
     {
         return TokenTypeEnum::OPERATOR;

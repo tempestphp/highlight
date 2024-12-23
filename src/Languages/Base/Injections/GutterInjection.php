@@ -33,6 +33,7 @@ final class GutterInjection implements Injection
         return $this;
     }
 
+    #[\Override]
     public function parse(string $content, Highlighter $highlighter): ParsedInjection
     {
         $lines = preg_split('/\R/u', trim($content, "\n"));

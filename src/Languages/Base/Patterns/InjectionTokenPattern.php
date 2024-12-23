@@ -13,11 +13,13 @@ final readonly class InjectionTokenPattern implements Pattern
 {
     use IsPattern;
 
+    #[\Override]
     public function getPattern(): string
     {
         return Escape::INJECTION_TOKEN . '(?<match>(.|\n)*?)' . Escape::INJECTION_TOKEN;
     }
 
+    #[\Override]
     public function getTokenType(): TokenTypeEnum
     {
         return TokenTypeEnum::INJECTION;

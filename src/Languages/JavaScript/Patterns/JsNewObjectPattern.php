@@ -15,11 +15,13 @@ final readonly class JsNewObjectPattern implements Pattern
 {
     use IsPattern;
 
+    #[\Override]
     public function getPattern(): string
     {
         return 'new (\w+\.)*(?<match>[\w]+)(\s)*\(';
     }
 
+    #[\Override]
     public function getTokenType(): TokenTypeEnum
     {
         return TokenTypeEnum::TYPE;

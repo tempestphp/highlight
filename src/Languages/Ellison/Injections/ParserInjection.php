@@ -14,11 +14,13 @@ final readonly class ParserInjection implements Injection
 {
     use IsInjection;
 
+    #[\Override]
     public function getPattern(): string
     {
         return '(?<match>(.|\n)*)';
     }
 
+    #[\Override]
     public function parseContent(string $content, Highlighter $highlighter): string
     {
         $ellison = new Ellison();

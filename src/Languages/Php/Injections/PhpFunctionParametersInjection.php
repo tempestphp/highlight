@@ -14,11 +14,13 @@ final readonly class PhpFunctionParametersInjection implements Injection
 {
     use IsInjection;
 
+    #[\Override]
     public function getPattern(): string
     {
         return '(function|fn)[\s\w]*\((?<match>(.|\n)*?)({|\)[\s]*({|;|:|=>))';
     }
 
+    #[\Override]
     public function parseContent(string $content, Highlighter $highlighter): string
     {
         return Escape::injection(

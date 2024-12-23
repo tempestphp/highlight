@@ -22,11 +22,13 @@ final readonly class TwigCommentPattern implements Pattern
 {
     use IsPattern;
 
+    #[\Override]
     public function getPattern(): string
     {
         return '(?<match>\{#(.|\n)*?#})';
     }
 
+    #[\Override]
     public function getTokenType(): TokenTypeEnum
     {
         return TokenTypeEnum::COMMENT;

@@ -15,11 +15,13 @@ use Tempest\Highlight\Languages\Css\Patterns\CssVariablePattern;
 
 class CssLanguage extends BaseLanguage
 {
+    #[\Override]
     public function getName(): string
     {
         return 'css';
     }
 
+    #[\Override]
     public function getInjections(): array
     {
         return [
@@ -27,6 +29,7 @@ class CssLanguage extends BaseLanguage
         ];
     }
 
+    #[\Override]
     public function getPatterns(): array
     {
         return [

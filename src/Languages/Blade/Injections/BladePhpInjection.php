@@ -12,11 +12,13 @@ final readonly class BladePhpInjection implements Injection
 {
     use IsInjection;
 
+    #[\Override]
     public function getPattern(): string
     {
         return '\@php(?<match>(.|\n)*?)\@endphp';
     }
 
+    #[\Override]
     public function parseContent(string $content, Highlighter $highlighter): string
     {
         return $highlighter->parse($content, 'php');

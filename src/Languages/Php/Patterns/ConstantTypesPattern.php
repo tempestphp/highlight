@@ -16,11 +16,13 @@ final readonly class ConstantTypesPattern implements Pattern
 {
     use IsPattern;
 
+    #[\Override]
     public function getPattern(): string
     {
         return 'const\s(?<match>.+?)\s[\w]+\s=';
     }
 
+    #[\Override]
     public function getTokenType(): TokenTypeEnum
     {
         return TokenTypeEnum::TYPE;

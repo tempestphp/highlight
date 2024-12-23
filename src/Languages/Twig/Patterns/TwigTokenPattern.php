@@ -18,11 +18,13 @@ final readonly class TwigTokenPattern implements Pattern
     ) {
     }
 
+    #[\Override]
     public function getPattern(): string
     {
         return "/(?<match>{$this->regex})/";
     }
 
+    #[\Override]
     public function getTokenType(): TokenTypeEnum
     {
         return $this->type;

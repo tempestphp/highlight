@@ -15,11 +15,13 @@ final readonly class EnumBackedTypePattern implements Pattern
 {
     use IsPattern;
 
+    #[\Override]
     public function getPattern(): string
     {
         return 'enum [\w]+\:(\s)*(?<match>int|string)';
     }
 
+    #[\Override]
     public function getTokenType(): TokenTypeEnum
     {
         return TokenTypeEnum::TYPE;

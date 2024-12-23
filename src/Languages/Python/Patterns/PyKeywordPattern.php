@@ -21,6 +21,7 @@ final readonly class PyKeywordPattern implements Pattern
     {
     }
 
+    #[\Override]
     public function getPattern(): string
     {
         $keywords = implode('|', $this->keywords);
@@ -28,6 +29,7 @@ final readonly class PyKeywordPattern implements Pattern
         return "\b(?<match>(?:_(?=\s*:){$keywords}))\b";
     }
 
+    #[\Override]
     public function getTokenType(): TokenTypeEnum
     {
         return TokenTypeEnum::KEYWORD;

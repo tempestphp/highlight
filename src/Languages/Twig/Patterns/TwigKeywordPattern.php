@@ -16,11 +16,13 @@ final class TwigKeywordPattern implements Pattern
     {
     }
 
+    #[\Override]
     public function getPattern(): string
     {
         return "\b(?<match>{$this->keyword})\b";
     }
 
+    #[\Override]
     public function getTokenType(): TokenTypeEnum
     {
         return TokenTypeEnum::KEYWORD;

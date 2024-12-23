@@ -16,11 +16,13 @@ use Tempest\Highlight\Languages\Html\HtmlLanguage;
 
 class BladeLanguage extends HtmlLanguage
 {
+    #[\Override]
     public function getName(): string
     {
         return 'blade';
     }
 
+    #[\Override]
     public function getInjections(): array
     {
         return [
@@ -32,6 +34,7 @@ class BladeLanguage extends HtmlLanguage
         ];
     }
 
+    #[\Override]
     public function getPatterns(): array
     {
         return [

@@ -13,11 +13,13 @@ final readonly class JavaScriptInHtmlInjection implements Injection
 {
     use IsInjection;
 
+    #[\Override]
     public function getPattern(): string
     {
         return '<script>(?<match>(.|\n)*)<\/script>';
     }
 
+    #[\Override]
     public function parseContent(string $content, Highlighter $highlighter): string
     {
         return $highlighter->parse($content, new JavaScriptLanguage());

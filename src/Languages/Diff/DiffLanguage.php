@@ -10,11 +10,13 @@ use Tempest\Highlight\Languages\Diff\Injections\DiffDeletionInjection;
 
 class DiffLanguage extends BaseLanguage
 {
+    #[\Override]
     public function getName(): string
     {
         return 'diff';
     }
 
+    #[\Override]
     public function getInjections(): array
     {
         return [

@@ -17,11 +17,13 @@ final readonly class JsObjectPropertyPattern implements Pattern
 {
     use IsPattern;
 
+    #[\Override]
     public function getPattern(): string
     {
         return '[\s]*(?<match>[\w]+)\:';
     }
 
+    #[\Override]
     public function getTokenType(): TokenTypeEnum
     {
         return TokenTypeEnum::PROPERTY;

@@ -12,11 +12,13 @@ final readonly class PyLogicalValuePattern implements Pattern
 {
     use IsPattern;
 
+    #[\Override]
     public function getPattern(): string
     {
         return '\b(?<match>(?:False|None|True))\b';
     }
 
+    #[\Override]
     public function getTokenType(): TokenTypeEnum
     {
         return TokenTypeEnum::LITERAL;

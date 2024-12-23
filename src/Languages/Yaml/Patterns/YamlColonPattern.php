@@ -15,11 +15,13 @@ final readonly class YamlColonPattern implements Pattern
 {
     use IsPattern;
 
+    #[\Override]
     public function getPattern(): string
     {
         return '/^[\-\{\s\w]*(?<match>:)/m';
     }
 
+    #[\Override]
     public function getTokenType(): TokenTypeEnum
     {
         return TokenTypeEnum::PROPERTY;

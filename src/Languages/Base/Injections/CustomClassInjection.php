@@ -12,6 +12,7 @@ use Tempest\Highlight\Tokens\Token;
 
 final readonly class CustomClassInjection implements Injection
 {
+    #[\Override]
     public function parse(string $content, Highlighter $highlighter): ParsedInjection
     {
         $pattern = '/(?<start>{\:(?<class>[\w-]+)\:)(?<match>(.|\n)*?)(?<end>:})/';

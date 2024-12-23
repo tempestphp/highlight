@@ -12,6 +12,7 @@ class LightTerminalTheme implements TerminalTheme
 {
     use EscapesTerminalTheme;
 
+    #[\Override]
     public function before(TokenType $tokenType): string
     {
         $style = match ($tokenType) {
@@ -29,6 +30,7 @@ class LightTerminalTheme implements TerminalTheme
         return TerminalStyle::ESC->value . $style->value;
     }
 
+    #[\Override]
     public function after(TokenType $tokenType): string
     {
         return TerminalStyle::ESC->value . TerminalStyle::RESET->value;

@@ -21,11 +21,13 @@ use Tempest\Highlight\Languages\JavaScript\Patterns\JsStaticPropertyPattern;
 
 class JavaScriptLanguage extends BaseLanguage
 {
+    #[\Override]
     public function getName(): string
     {
         return 'js';
     }
 
+    #[\Override]
     public function getAliases(): array
     {
         return [
@@ -34,6 +36,7 @@ class JavaScriptLanguage extends BaseLanguage
         ];
     }
 
+    #[\Override]
     public function getInjections(): array
     {
         return [
@@ -42,6 +45,7 @@ class JavaScriptLanguage extends BaseLanguage
         ];
     }
 
+    #[\Override]
     public function getPatterns(): array
     {
         return [

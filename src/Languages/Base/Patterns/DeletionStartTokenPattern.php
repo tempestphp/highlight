@@ -16,11 +16,13 @@ final readonly class DeletionStartTokenPattern implements Pattern
 {
     use IsPattern;
 
+    #[\Override]
     public function getPattern(): string
     {
         return '/(?<match>{\-)(?!-)/';
     }
 
+    #[\Override]
     public function getTokenType(): TokenType
     {
         return new IgnoreTokenType();

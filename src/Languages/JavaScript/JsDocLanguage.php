@@ -10,11 +10,13 @@ use Tempest\Highlight\Languages\JavaScript\Patterns\JsDocTypePattern;
 
 class JsDocLanguage extends DocCommentLanguage
 {
+    #[\Override]
     public function getName(): string
     {
         return 'jsdoc';
     }
 
+    #[\Override]
     public function getPatterns(): array
     {
         return [

@@ -19,11 +19,13 @@ use Tempest\Highlight\Languages\Yaml\Patterns\YamlVariablePattern;
 
 class YamlLanguage extends BaseLanguage
 {
+    #[\Override]
     public function getName(): string
     {
         return 'yaml';
     }
 
+    #[\Override]
     public function getAliases(): array
     {
         return [
@@ -31,6 +33,7 @@ class YamlLanguage extends BaseLanguage
         ];
     }
 
+    #[\Override]
     public function getInjections(): array
     {
         return [
@@ -38,6 +41,7 @@ class YamlLanguage extends BaseLanguage
         ];
     }
 
+    #[\Override]
     public function getPatterns(): array
     {
         return [

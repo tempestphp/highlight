@@ -19,11 +19,13 @@ use Tempest\Highlight\Languages\Base\Patterns\InjectionTokenPattern;
 
 abstract class BaseLanguage implements Language
 {
+    #[\Override]
     public function getAliases(): array
     {
         return [];
     }
 
+    #[\Override]
     public function getInjections(): array
     {
         return [
@@ -36,6 +38,7 @@ abstract class BaseLanguage implements Language
         ];
     }
 
+    #[\Override]
     public function getPatterns(): array
     {
         return [

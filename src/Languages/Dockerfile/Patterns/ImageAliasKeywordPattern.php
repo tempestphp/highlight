@@ -17,11 +17,13 @@ final readonly class ImageAliasKeywordPattern implements Pattern
 {
     use IsPattern;
 
+    #[\Override]
     public function getPattern(): string
     {
         return "/^[\s]*FROM[\s][\S]+[\s](?<match>AS)[\s][\S]+/m";
     }
 
+    #[\Override]
     public function getTokenType(): TokenTypeEnum
     {
         return TokenTypeEnum::KEYWORD;

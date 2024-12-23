@@ -26,6 +26,7 @@ final readonly class PyBuiltinPattern implements Pattern
     {
     }
 
+    #[\Override]
     public function getPattern(): string
     {
         $builtinFunctions = implode('|', $this->builtinFunctions);
@@ -33,6 +34,7 @@ final readonly class PyBuiltinPattern implements Pattern
         return "\b(?<match>(?:{$builtinFunctions}))\b";
     }
 
+    #[\Override]
     public function getTokenType(): TokenTypeEnum
     {
         return TokenTypeEnum::TYPE;

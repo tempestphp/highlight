@@ -25,6 +25,7 @@ final class KeywordPattern implements Pattern
         return $this;
     }
 
+    #[\Override]
     public function getPattern(): string
     {
         $pattern = "/\b(?<!\\$)(?<!\-\>)(?<match>{$this->keyword})(\$|\,|\)|\;|\:|\s|\()/";
@@ -36,6 +37,7 @@ final class KeywordPattern implements Pattern
         return $pattern;
     }
 
+    #[\Override]
     public function getTokenType(): TokenTypeEnum
     {
         return TokenTypeEnum::KEYWORD;

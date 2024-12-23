@@ -12,11 +12,13 @@ use Tempest\Highlight\Languages\Xml\Patterns\XmlOpenTagPattern;
 
 class XmlLanguage extends BaseLanguage
 {
+    #[\Override]
     public function getName(): string
     {
         return 'xml';
     }
 
+    #[\Override]
     public function getInjections(): array
     {
         return [
@@ -24,6 +26,7 @@ class XmlLanguage extends BaseLanguage
         ];
     }
 
+    #[\Override]
     public function getPatterns(): array
     {
         return [

@@ -15,11 +15,13 @@ final readonly class PhpDocCommentReturnTypePattern implements Pattern
 {
     use IsPattern;
 
+    #[\Override]
     public function getPattern(): string
     {
         return '\@return(\s)+(?<match>.*?)(\*\/|$|\R)';
     }
 
+    #[\Override]
     public function getTokenType(): TokenTypeEnum
     {
         return TokenTypeEnum::TYPE;

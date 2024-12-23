@@ -22,11 +22,13 @@ final readonly class ReturnTypePattern implements Pattern
 {
     use IsPattern;
 
+    #[\Override]
     public function getPattern(): string
     {
         return '\)\s*\:\s*(?<match>[\w\(\)\&\|\?]+)[\s{;\n]';
     }
 
+    #[\Override]
     public function getTokenType(): TokenTypeEnum
     {
         return TokenTypeEnum::TYPE;

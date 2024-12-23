@@ -15,11 +15,13 @@ final readonly class ReturnTypePattern implements Pattern
 {
     use IsPattern;
 
+    #[\Override]
     public function getPattern(): string
     {
         return '\)\s*\-\>\s*(?<match>.+?)[\s*:\n]';
     }
 
+    #[\Override]
     public function getTokenType(): TokenTypeEnum
     {
         return TokenTypeEnum::TYPE;

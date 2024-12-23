@@ -16,11 +16,13 @@ final class OperatorPattern implements Pattern
     {
     }
 
+    #[\Override]
     public function getPattern(): string
     {
         return "/\s(?<!\\$)(?<match>{$this->operator})(\s|\()/";
     }
 
+    #[\Override]
     public function getTokenType(): TokenTypeEnum
     {
         return TokenTypeEnum::OPERATOR;

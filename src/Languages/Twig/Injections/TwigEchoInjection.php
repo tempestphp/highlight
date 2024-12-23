@@ -14,11 +14,13 @@ class TwigEchoInjection implements Injection
 {
     use IsInjection;
 
+    #[\Override]
     public function getPattern(): string
     {
         return '(?<match>({{(.|\n)*?}}))';
     }
 
+    #[\Override]
     public function parseContent(string $content, Highlighter $highlighter): string
     {
         return Escape::injection($highlighter->parse($content, new TwigEchoLanguage()));

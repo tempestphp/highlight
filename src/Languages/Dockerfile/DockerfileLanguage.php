@@ -13,11 +13,13 @@ use Tempest\Highlight\Languages\Dockerfile\Patterns\KeywordPattern;
 
 class DockerfileLanguage extends BaseLanguage
 {
+    #[\Override]
     public function getName(): string
     {
         return 'dockerfile';
     }
 
+    #[\Override]
     public function getAliases(): array
     {
         return [
@@ -25,6 +27,7 @@ class DockerfileLanguage extends BaseLanguage
         ];
     }
 
+    #[\Override]
     public function getPatterns(): array
     {
         return [

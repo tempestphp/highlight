@@ -12,11 +12,13 @@ final readonly class PhpShortEchoInHtmlInjection implements Injection
 {
     use IsInjection;
 
+    #[\Override]
     public function getPattern(): string
     {
         return '/<\?=\s(?<match>.*)\s\?>/';
     }
 
+    #[\Override]
     public function parseContent(string $content, Highlighter $highlighter): string
     {
         return $highlighter->parse($content, 'php');

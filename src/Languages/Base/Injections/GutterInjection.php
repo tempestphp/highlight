@@ -15,7 +15,7 @@ final class GutterInjection implements Injection
     private array $icons = [];
     private array $classes = [];
 
-    public function __construct(private int $startAt = 1)
+    public function __construct(private readonly int $startAt = 1)
     {
     }
 

@@ -15,7 +15,7 @@ use Tempest\Highlight\WebTheme;
 final class CodeBlockRenderer implements NodeRendererInterface
 {
     public function __construct(
-        private Highlighter $highlighter = new Highlighter(),
+        private readonly Highlighter $highlighter = new Highlighter(),
     ) {
     }
 

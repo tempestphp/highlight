@@ -13,7 +13,7 @@ use Tempest\Highlight\Highlighter;
 final class HighlightExtension implements ExtensionInterface
 {
     public function __construct(
-        private ?Highlighter $highlighter = new Highlighter(),
+        private readonly ?Highlighter $highlighter = new Highlighter(),
     ) {
     }
 

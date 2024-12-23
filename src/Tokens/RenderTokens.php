@@ -10,7 +10,7 @@ use Tempest\Highlight\Theme;
 final class RenderTokens
 {
     public function __construct(
-        private Theme $theme,
+        private readonly Theme $theme,
     ) {
     }
 

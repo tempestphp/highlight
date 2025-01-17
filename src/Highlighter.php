@@ -49,13 +49,11 @@ final class Highlighter
             ->addLanguage(new GdscriptLanguage())
             ->addLanguage(new HtmlLanguage())
             ->addLanguage(new JavaScriptLanguage())
-            ->addLanguage(new JavaScriptLanguage())
             ->addLanguage(new JsonLanguage())
             ->addLanguage(new PhpLanguage())
             ->addLanguage(new PythonLanguage())
             ->addLanguage(new SqlLanguage())
             ->addLanguage(new XmlLanguage())
-            ->addLanguage(new YamlLanguage())
             ->addLanguage(new YamlLanguage())
             ->addLanguage(new TwigLanguage());
     }

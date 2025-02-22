@@ -16,7 +16,7 @@ final class RenderTokens
 
     /**
      * @param string $content
-     * @param \Tempest\Highlight\Tokens\Token[] $tokens
+     * @param Token[] $tokens
      * @param int $parsedOffset
      * @return string
      */

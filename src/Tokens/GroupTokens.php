@@ -7,8 +7,8 @@ namespace Tempest\Highlight\Tokens;
 final readonly class GroupTokens
 {
     /**
-     * @param \Tempest\Highlight\Tokens\Token[] $tokens
-     * @return \Tempest\Highlight\Tokens\Token[]
+     * @param Token[] $tokens
+     * @return Token[]
      */
     public function __invoke(array $tokens): array
     {
@@ -22,7 +22,7 @@ final readonly class GroupTokens
         });
 
         // Group tokens by parent and child
-        /** @var \Tempest\Highlight\Tokens\Token[] $groupedTokens */
+        /** @var Token[] $groupedTokens */
         $groupedTokens = [];
 
         while ($token = current($tokens)) {

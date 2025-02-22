@@ -156,7 +156,7 @@ final class Highlighter
 
     /**
      * @param Language $language
-     * @return \Tempest\Highlight\Injection[]
+     * @return Injection[]
      */
     private function getBeforeInjections(Language $language): Generator
     {
@@ -174,7 +174,7 @@ final class Highlighter
 
     /**
      * @param Language $language
-     * @return \Tempest\Highlight\Injection[]
+     * @return Injection[]
      */
     private function getAfterInjections(Language $language): Generator
     {

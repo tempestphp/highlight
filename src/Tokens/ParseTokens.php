@@ -10,7 +10,7 @@ use Tempest\Highlight\Languages\Php\Patterns\GenericPattern;
 final readonly class ParseTokens
 {
     /**
-     * @return \Tempest\Highlight\Tokens\Token[]
+     * @return Token[]
      */
     public function __invoke(string $content, Language $language): array
     {

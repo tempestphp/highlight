@@ -11,7 +11,7 @@ final class Token
     public int $length;
     public int $start;
     public int $end;
-    /** @var \Tempest\Highlight\Tokens\Token[] */
+    /** @var Token[] */
     public array $children = [];
     public ?Token $parent = null;
 

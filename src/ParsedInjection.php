@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Tempest\Highlight;
 
+use Tempest\Highlight\Tokens\Token;
+
 /*
  * A `ParsedInjection` is the result of an injection parsing content.
  * It contains the new content, as well as a list of tokens to be parsed
@@ -17,7 +19,7 @@ final readonly class ParsedInjection
 {
     public function __construct(
         public string $content,
-        /** @var \Tempest\Highlight\Tokens\Token[] */
+        /** @var Token[] */
         public array $tokens = [],
     ) {
     }

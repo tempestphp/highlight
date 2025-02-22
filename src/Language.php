@@ -11,12 +11,12 @@ interface Language
     public function getAliases(): array;
 
     /**
-     * @return \Tempest\Highlight\Injection[]
+     * @return Injection[]
      */
     public function getInjections(): array;
 
     /**
-     * @return \Tempest\Highlight\Pattern[]
+     * @return Pattern[]
      */
     public function getPatterns(): array;
 }

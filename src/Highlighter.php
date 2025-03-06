@@ -40,6 +40,7 @@ final class Highlighter
         private readonly Theme $theme = new CssTheme(),
     ) {
         $this
+            ->addLanguage(new BladeLanguage())
             ->addLanguage(new CssLanguage())
             ->addLanguage(new DiffLanguage())
             ->addLanguage(new DocCommentLanguage())

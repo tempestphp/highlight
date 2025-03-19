@@ -14,7 +14,7 @@ final readonly class SinglelineCommentPattern implements Pattern
 
     public function getPattern(): string
     {
-        return '(?<match>\/\/(.)*)';
+        return '(?<match>(?:\/\/|#[^\[])(.)*)';
     }
 
     public function getTokenType(): TokenTypeEnum

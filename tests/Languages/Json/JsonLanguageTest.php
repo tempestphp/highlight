@@ -30,8 +30,8 @@ class JsonLanguageTest extends TestCase
     "array": ["bar"]
 }',
                 '<span class="hl-property">{</span>
-    <span class="hl-keyword">&quot;key&quot;</span>: <span class="hl-value">&quot;value&quot;</span>,
-    <span class="hl-keyword">&quot;array&quot;</span>: <span class="hl-property">[</span><span class="hl-value">&quot;bar&quot;</span><span class="hl-property">]</span>
+    <span class="hl-keyword">&quot;key&quot;</span><span class="hl-operator">:</span> <span class="hl-value">&quot;value&quot;</span>,
+    <span class="hl-keyword">&quot;array&quot;</span><span class="hl-operator">:</span> <span class="hl-property">[</span><span class="hl-value">&quot;bar&quot;</span><span class="hl-property">]</span>
 <span class="hl-property">}</span>',
             ],
         ];

@@ -18,7 +18,7 @@ final readonly class XmlAttributePattern implements Pattern
 
     public function getPattern(): string
     {
-        return '(?<match>[\w\-]+)="?';
+        return '(?<match>[\w\-]+)="';
     }
 
     public function getTokenType(): TokenTypeEnum

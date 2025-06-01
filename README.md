@@ -15,4 +15,4 @@ $highlighter = new \Tempest\Highlight\Highlighter();
 $code = $highlighter->parse($code, 'php');
 ```
 
-Continue reading in the docs: [https://tempestphp.com/docs/highlight/01-getting-started](https://tempestphp.com/docs/highlight/01-getting-started).
+Continue reading in the docs: [https://tempestphp.com/main/packages/highlight](https://tempestphp.com/main/packages/highlight).

@@ -12,6 +12,7 @@ use Tempest\Highlight\Languages\Css\CssLanguage;
 use Tempest\Highlight\Languages\Diff\DiffLanguage;
 use Tempest\Highlight\Languages\DocComment\DocCommentLanguage;
 use Tempest\Highlight\Languages\Dockerfile\DockerfileLanguage;
+use Tempest\Highlight\Languages\DotEnv\DotEnvLanguage;
 use Tempest\Highlight\Languages\Ellison\EllisonLanguage;
 use Tempest\Highlight\Languages\Gdscript\GdscriptLanguage;
 use Tempest\Highlight\Languages\Html\HtmlLanguage;
@@ -55,6 +56,7 @@ final class Highlighter
             ->addLanguage(new SqlLanguage())
             ->addLanguage(new XmlLanguage())
             ->addLanguage(new YamlLanguage())
+            ->addLanguage(new DotEnvLanguage())
             ->addLanguage(new TwigLanguage());
     }
 

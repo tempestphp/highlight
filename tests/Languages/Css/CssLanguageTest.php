@@ -10,7 +10,7 @@ use Tempest\Highlight\Highlighter;
 
 class CssLanguageTest extends TestCase
 {
-    #[DataProvider('data')]
+    #[DataProvider('provide_highlight_cases')]
     public function test_highlight(string $content, string $expected): void
     {
         $highlighter = new Highlighter();
@@ -21,7 +21,7 @@ class CssLanguageTest extends TestCase
         );
     }
 
-    public static function data(): array
+    public static function provide_highlight_cases(): iterable
     {
         return [
             ['@media only screen and (max-width: 500px) {}', '<span class="hl-keyword">@media only screen and (max-width: 500px) </span>{}'],

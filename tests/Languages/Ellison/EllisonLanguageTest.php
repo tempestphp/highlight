@@ -10,7 +10,7 @@ use Tempest\Highlight\Highlighter;
 
 class EllisonLanguageTest extends TestCase
 {
-    #[DataProvider('data')]
+    #[DataProvider('provide_highlight_cases')]
     public function test_highlight(string $content, string $expected): void
     {
         $highlighter = new Highlighter();
@@ -21,7 +21,7 @@ class EllisonLanguageTest extends TestCase
         );
     }
 
-    public static function data(): array
+    public static function provide_highlight_cases(): iterable
     {
         return [
             ['This is a simple sentence', "<span class='hl-simple-sentence'>This is a simple sentence. </span>"],

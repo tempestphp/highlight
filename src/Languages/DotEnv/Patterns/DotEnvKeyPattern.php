@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tempest\Highlight\Languages\DotEnv\Patterns;
 
 use Tempest\Highlight\IsPattern;

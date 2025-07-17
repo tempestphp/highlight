@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Tempest\Highlight\Tests;
 
-use Generator;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
@@ -17,7 +16,7 @@ final class PatternsTest extends TestCase
     use TestsPatterns;
 
     #[Test]
-    #[DataProvider('patterns')]
+    #[DataProvider('provide_patterns_with_attribute_cases')]
     public function test_patterns_with_attribute(Pattern $pattern, PatternTest $patternTest)
     {
         $this->assertMatches(
@@ -27,7 +26,7 @@ final class PatternsTest extends TestCase
         );
     }
 
-    public static function patterns(): Generator
+    public static function provide_patterns_with_attribute_cases(): iterable
     {
         $patternFiles = glob(__DIR__ . '/../src/Languages/*/Patterns/**.php');
 

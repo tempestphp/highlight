@@ -10,7 +10,7 @@ use Tempest\Highlight\Highlighter;
 
 class TwigLanguageTest extends TestCase
 {
-    #[DataProvider('data')]
+    #[DataProvider('provide_highlight_cases')]
     public function test_highlight(string $content, string $expected): void
     {
         $highlighter = new Highlighter();
@@ -21,7 +21,7 @@ class TwigLanguageTest extends TestCase
         );
     }
 
-    public static function data(): array
+    public static function provide_highlight_cases(): iterable
     {
         return [
             ["{% extends \"admin/empty_base.html.twig\" %}", '<span class="hl-injection">{% <span class="hl-keyword">extends</span> &quot;<span class="hl-value">admin/empty_base.html.twig</span>&quot; %}</span>'],

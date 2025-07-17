@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Languages\Ini;
 
 use PHPUnit\Framework\Attributes\DataProvider;
@@ -8,8 +10,7 @@ use Tempest\Highlight\Highlighter;
 
 final class IniLanguageTest extends TestCase
 {
-
-    #[DataProvider('data')]
+    #[DataProvider('provide_highlight_cases')]
     public function test_highlight(string $content, string $expected): void
     {
         $highlighter = new Highlighter();
@@ -20,7 +21,7 @@ final class IniLanguageTest extends TestCase
         );
     }
 
-    public static function data(): array
+    public static function provide_highlight_cases(): iterable
     {
         return [
             [
@@ -46,7 +47,7 @@ final class IniLanguageTest extends TestCase
 <span class="hl-comment">;;;;;;;;;;;;;;;;;;;</span>
 <span class="hl-comment">; About php.ini   ;</span>
 <span class="hl-comment">;;;;;;;;;;;;;;;;;;;</span>',
-            ]
+            ],
         ];
     }
 }

@@ -13,7 +13,7 @@ use Tempest\Highlight\Themes\InlineTheme;
 class HighlighterTest extends TestCase
 {
     #[Test]
-    #[DataProvider('data')]
+    #[DataProvider('provide_highlight_cases')]
     public function test_highlight(string $slug, string $language): void
     {
         $highlight = new Highlighter();
@@ -51,7 +51,7 @@ class HighlighterTest extends TestCase
         $this->assertTrue(in_array('php', $highlighter->getSupportedLanguageNames()));
     }
 
-    public static function data(): array
+    public static function provide_highlight_cases(): iterable
     {
         return [
             ['01', 'php'], // general

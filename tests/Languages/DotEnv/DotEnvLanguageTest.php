@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Languages\DotEnv;
 
 use PHPUnit\Framework\Attributes\DataProvider;
@@ -8,8 +10,7 @@ use Tempest\Highlight\Highlighter;
 
 final class DotEnvLanguageTest extends TestCase
 {
-
-    #[DataProvider('data')]
+    #[DataProvider('provide_highlight_cases')]
     public function test_highlight(string $content, string $expected): void
     {
         $highlighter = new Highlighter();
@@ -25,7 +26,7 @@ final class DotEnvLanguageTest extends TestCase
         );
     }
 
-    public static function data(): array
+    public static function provide_highlight_cases(): iterable
     {
         return [
             [
@@ -43,7 +44,7 @@ final class DotEnvLanguageTest extends TestCase
 <span class="hl-comment"># Overwrite default log paths (null = default)</span>
 <span class="hl-keyword">DEBUG_LOG_PATH</span>=null
 <span class="hl-keyword">SERVER_LOG_PATH</span>=null',
-            ]
+            ],
         ];
     }
 }

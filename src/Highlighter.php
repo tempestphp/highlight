@@ -16,6 +16,7 @@ use Tempest\Highlight\Languages\DotEnv\DotEnvLanguage;
 use Tempest\Highlight\Languages\Ellison\EllisonLanguage;
 use Tempest\Highlight\Languages\Gdscript\GdscriptLanguage;
 use Tempest\Highlight\Languages\Html\HtmlLanguage;
+use Tempest\Highlight\Languages\Ini\IniLanguage;
 use Tempest\Highlight\Languages\JavaScript\JavaScriptLanguage;
 use Tempest\Highlight\Languages\Json\JsonLanguage;
 use Tempest\Highlight\Languages\Php\PhpLanguage;
@@ -57,6 +58,7 @@ final class Highlighter
             ->addLanguage(new XmlLanguage())
             ->addLanguage(new YamlLanguage())
             ->addLanguage(new DotEnvLanguage())
+            ->addLanguage(new IniLanguage())
             ->addLanguage(new TwigLanguage());
     }
 

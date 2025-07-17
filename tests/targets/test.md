@@ -1,8 +1,12 @@
-```dotenv
-# Enable or disable discovery cache. Can be `true`, `partial` or `false`.
-DISCOVERY_CACHE=false
+```ini
+[PHP]
 
-# Overwrite default log paths (null = default)
-DEBUG_LOG_PATH=null
-SERVER_LOG_PATH=null
+;zend_extension = xdebug
+xdebug.mode = profile
+xdebug.output_dir = /Users/brentroose/Desktop
+xdebug.profiler_output_name = cachegrind.out.%p
+
+;;;;;;;;;;;;;;;;;;;
+; About php.ini   ;
+;;;;;;;;;;;;;;;;;;;
 ```

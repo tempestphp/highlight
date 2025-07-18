@@ -1,5 +1,3 @@
 ```php
-try {
-} catch (HttpRequestFailed $failure) {
-}
+{~'_'~}
 ```

@@ -25,4 +25,14 @@ TXT;
 
         $this->assertSame($expected, Escape::html($parsedInjection->content));
     }
+
+    public function test_null_content_is_prevented(): void
+    {
+        $content = <<<TXT
+{~'_'~}
+TXT;
+        new Highlighter()->parse($content, 'php');
+
+        $this->assertTrue(true);
+    }
 }

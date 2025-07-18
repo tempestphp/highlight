@@ -16,7 +16,7 @@ final readonly class DeletionInjection implements Injection
     public function parse(string $content, Highlighter $highlighter): ParsedInjection
     {
         // Standardize line endings
-        $content = preg_replace('/\R/u', PHP_EOL, $content);
+        $content = preg_replace('/\R/u', PHP_EOL, $content) ?? '';
 
         $content = str_replace('❷span class=❹ignore❹❸{-❷/span❸', '{-', $content);
         $content = str_replace('❷span class=❹ignore❹❸-}❷/span❸', '-}', $content);

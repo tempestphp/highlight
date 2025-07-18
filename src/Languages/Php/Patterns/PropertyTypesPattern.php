@@ -12,6 +12,9 @@ use Tempest\Highlight\Tokens\TokenTypeEnum;
 #[PatternTest(input: 'public Bar $bar', output: 'Bar')]
 #[PatternTest(input: 'protected Bar $bar', output: 'Bar')]
 #[PatternTest(input: 'private Bar $bar', output: 'Bar')]
+#[PatternTest(input: 'private readonly Bar $bar', output: 'Bar')]
+#[PatternTest(input: 'public readonly Bar $bar', output: 'Bar')]
+#[PatternTest(input: 'protected readonly Bar $bar', output: 'Bar')]
 #[PatternTest(input: 'public Foo|Bar $bar', output: 'Foo|Bar')]
 #[PatternTest(input: 'public Foo|Bar&Baz $bar', output: 'Foo|Bar&Baz')]
 #[PatternTest(input: 'public (Bar&Baz)|null $bar', output: '(Bar&Baz)|null')]
@@ -29,7 +32,7 @@ final readonly class PropertyTypesPattern implements Pattern
 
     public function getPattern(): string
     {
-        return '(public|private|protected)(\s*static\s*)?(\s*\((get|set)\)\s*)?(\s(?<match>[^\s]*)) (\$[\w]+)';
+        return '(public|private|protected)(\s*readonly\s*)?(\s*static\s*)?(\s*\((get|set)\)\s*)?(\s(?<match>[^\s]*)) (\$[\w]+)';
     }
 
     public function getTokenType(): TokenTypeEnum

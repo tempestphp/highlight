@@ -139,6 +139,7 @@ foo()
             ['public static function new(mixed ...$params): self;', '<span class="hl-keyword">public</span> <span class="hl-keyword">static</span> <span class="hl-keyword">function</span> <span class="hl-property">new</span>(<span class="hl-injection"><span class="hl-type">mixed</span> ...$params</span>): <span class="hl-type">self</span>;'],
             ['return $this->createOrModify(namespace\push($this->value, $value));', '<span class="hl-keyword">return</span> <span class="hl-variable">$this</span>-&gt;<span class="hl-property">createOrModify</span>(<span class="hl-keyword">namespace</span>\<span class="hl-property">push</span>(<span class="hl-variable">$this</span>-&gt;<span class="hl-property">value</span>, <span class="hl-variable">$value</span>));'],
             ['function () use ($request) {', '<span class="hl-keyword">function</span> (<span class="hl-injection">) </span><span class="hl-keyword">use</span> (<span class="hl-variable">$request</span>) {'],
+            ['Tempest\Http\GenericRouter::Tempest\Http\{closure}()', '<span class="hl-type">Tempest\Http\GenericRouter</span>::<span class="hl-property">Tempest\Http\{closure}</span>()'],
         ];
     }
 }

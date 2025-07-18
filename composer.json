@@ -22,7 +22,7 @@
     },
     "require-dev": {
         "phpunit/phpunit": "^10.0",
-        "phpstan/phpstan": "^1.10.0",
+        "phpstan/phpstan": "^1.12.0",
         "friendsofphp/php-cs-fixer": "^3.84",
         "league/commonmark": "^2.4",
         "assertchris/ellison": "^1.0.2",

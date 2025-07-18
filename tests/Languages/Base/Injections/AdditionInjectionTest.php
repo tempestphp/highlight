@@ -31,7 +31,8 @@ TXT;
         $content = <<<TXT
 {~'_'~}
 TXT;
-        new Highlighter()->parse($content, 'php');
+
+        (new Highlighter())->parse($content, 'php');
 
         $this->assertTrue(true);
     }

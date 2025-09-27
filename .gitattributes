@@ -1,0 +1,9 @@
+# Exclude build/test files from the release
+/tests                  export-ignore
+/.git*                  export-ignore
+/.php-cs-fixer.dist.php export-ignore
+/phpstan.neon.dist      export-ignore
+/phpunit.xml            export-ignore
+/test-server.php        export-ignore
+/test-terminal.php      export-ignore
+/UPGRADING.md           export-ignore

@@ -11,6 +11,7 @@ use Tempest\Highlight\Languages\Php\Injections\PhpDocCommentInjection;
 use Tempest\Highlight\Languages\Php\Injections\PhpFunctionParametersInjection;
 use Tempest\Highlight\Languages\Php\Injections\PhpHeredocInjection;
 use Tempest\Highlight\Languages\Php\Patterns\AttributeTypePattern;
+use Tempest\Highlight\Languages\Php\Patterns\CastPattern;
 use Tempest\Highlight\Languages\Php\Patterns\CatchTypePattern;
 use Tempest\Highlight\Languages\Php\Patterns\ClassNamePattern;
 use Tempest\Highlight\Languages\Php\Patterns\ClassPropertyPattern;
@@ -80,6 +81,8 @@ class PhpLanguage extends BaseLanguage
     {
         return [
             ...parent::getPatterns(),
+
+            new CastPattern(),
 
             new PhpOpenTagPattern(),
             new PhpCloseTagPattern(),

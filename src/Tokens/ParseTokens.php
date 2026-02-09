@@ -15,6 +15,7 @@ final readonly class ParseTokens
     public function __invoke(string $content, Language $language): array
     {
         $tokens = [];
+        $seen = [];
 
         // Match tokens from patterns
         foreach ($language->getPatterns() as $key => $pattern) {
@@ -33,34 +34,30 @@ final readonly class ParseTokens
                 continue;
             }
 
+            $tokenType = $pattern->getTokenType();
+            $tokenTypeValue = $tokenType->getValue();
+
             foreach ($match as $item) {
                 $offset = $item[1];
                 $value = $item[0];
 
-                $token = new Token(
+                $hashKey = $offset . ':' . $tokenTypeValue . ':' . $value;
+
+                if (isset($seen[$hashKey])) {
+                    continue;
+                }
+
+                $seen[$hashKey] = true;
+
+                $tokens[] = new Token(
                     offset: $offset,
                     value: $value,
-                    type: $pattern->getTokenType(),
+                    type: $tokenType,
                     pattern: $pattern,
                 );
-
-                if (! $this->tokenAlreadyPresent($tokens, $token)) {
-                    $tokens[] = $token;
-                }
             }
         }
 
         return $tokens;
-    }
-
-    private function tokenAlreadyPresent(array $tokens, Token $token): bool
-    {
-        foreach ($tokens as $tokenToCompare) {
-            if ($tokenToCompare->equals($token)) {
-                return true;
-            }
-        }
-
-        return false;
     }
 }

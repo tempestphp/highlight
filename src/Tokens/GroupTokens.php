@@ -18,8 +18,10 @@ final readonly class GroupTokens
             return $tokens;
         }
 
+        // Sort tokens in the right order
         $this->sortTokens($tokens);
 
+        // Group tokens by parent and child
         /** @var Token[] $groupedTokens */
         $groupedTokens = [];
         $removed = [];
@@ -33,6 +35,8 @@ final readonly class GroupTokens
             $token->resetHierarchy();
             $tokenEnd = $token->end;
 
+            // Since tokens are sorted by start, only check subsequent tokens
+            // that could overlap (start < token->end)
             for ($j = $i + 1; $j < $count; $j++) {
                 if (isset($removed[$j])) {
                     continue;
@@ -40,10 +44,15 @@ final readonly class GroupTokens
 
                 $compareToken = $tokens[$j];
 
+                // Since tokens are sorted by start position,
+                // once compareToken->start >= token->end, no more overlaps possible
                 if ($compareToken->start >= $tokenEnd) {
                     break;
                 }
 
+                // At this point we know: token->start <= compareToken->start < token->end
+                // and they are not equal (different indices, and sorted order means
+                // same-start tokens differ in end). This means containsOrOverlaps is true.
                 if ($token->canContain($compareToken)) {
                     $token->addChild($compareToken);
                 }

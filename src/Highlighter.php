@@ -37,12 +37,16 @@ final class Highlighter
     private ?GutterInjection $gutterInjection = null;
     private ?Language $currentLanguage = null;
     private bool $isNested = false;
+    private readonly ParseTokens $parseTokens;
+    private readonly GroupTokens $groupTokens;
+    private readonly RenderTokens $renderTokens;
+    private readonly TextLanguage $fallbackLanguage;
+    private array $patterns = [];
+    private array $afterInjections = [];
 
-    public function __construct(
-        private readonly Theme $theme = new CssTheme(),
-    ) {
-        $this
-            ->addLanguage(new BladeLanguage())
+    public function __construct(private readonly Theme $theme = new CssTheme())
+    {
+        $this->addLanguage(new BladeLanguage())
             ->addLanguage(new CssLanguage())
             ->addLanguage(new DiffLanguage())
             ->addLanguage(new DocCommentLanguage())
@@ -60,6 +64,11 @@ final class Highlighter
             ->addLanguage(new DotEnvLanguage())
             ->addLanguage(new IniLanguage())
             ->addLanguage(new TwigLanguage());
+
+        $this->fallbackLanguage = new TextLanguage();
+        $this->parseTokens = new ParseTokens();
+        $this->groupTokens = new GroupTokens();
+        $this->renderTokens = new RenderTokens($this->theme);
     }
 
     public function withGutter(int $startAt = 1): self
@@ -90,7 +99,7 @@ final class Highlighter
     public function parse(string $content, string|Language $language): string
     {
         if (is_string($language)) {
-            $language = $this->languages[$language] ?? new TextLanguage();
+            $language = $this->languages[$language] ?? $this->fallbackLanguage;
         }
 
         $this->currentLanguage = $language;
@@ -132,22 +141,31 @@ final class Highlighter
     private function parseContent(string $content, Language $language): string
     {
         $tokens = [];
+        $nestedHighlighter = $this->nested();
 
         // Before Injections
         foreach ($this->getBeforeInjections($language) as $injection) {
-            $parsedInjection = $injection->parse($content, $this->nested());
+            $parsedInjection = $injection->parse($content, $nestedHighlighter);
             $content = $parsedInjection->content;
-            $tokens = [...$tokens, ...$parsedInjection->tokens];
+
+            foreach ($parsedInjection->tokens as $token) {
+                $tokens[] = $token;
+            }
         }
 
         // Patterns
-        $tokens = [...$tokens, ...(new ParseTokens())($content, $language)];
-        $groupedTokens = (new GroupTokens())($tokens);
-        $content = (new RenderTokens($this->theme))($content, $groupedTokens);
+        foreach (
+            $this->parseTokens->parse($content, $this->getPatterns($language)) as $token
+        ) {
+            $tokens[] = $token;
+        }
+
+        $groupedTokens = ($this->groupTokens)($tokens);
+        $content = ($this->renderTokens)($content, $groupedTokens);
 
         // After Injections
         foreach ($this->getAfterInjections($language) as $injection) {
-            $parsedInjection = $injection->parse($content, $this->nested());
+            $parsedInjection = $injection->parse($content, $nestedHighlighter);
             $content = $parsedInjection->content;
         }
 
@@ -165,7 +183,7 @@ final class Highlighter
     private function getBeforeInjections(Language $language): Generator
     {
         foreach ($language->getInjections() as $injection) {
-            $after = (new ReflectionClass($injection))->getAttributes(After::class)[0] ?? null;
+            $after = $this->isAfterInjection($injection);
 
             if ($after) {
                 continue;
@@ -188,7 +206,7 @@ final class Highlighter
         }
 
         foreach ($language->getInjections() as $injection) {
-            $after = (new ReflectionClass($injection))->getAttributes(After::class)[0] ?? null;
+            $after = $this->isAfterInjection($injection);
 
             if (! $after) {
                 continue;
@@ -205,6 +223,21 @@ final class Highlighter
 
     private function normalizeNewline(string $subject): string
     {
-        return preg_replace('~\R~u', "\n", $subject);
+        return preg_replace("~\R~u", "\n", $subject);
+    }
+
+    private function getPatterns(Language $language): array
+    {
+        $languageId = spl_object_id($language);
+
+        return $this->patterns[$languageId] ??= $language->getPatterns();
+    }
+
+    private function isAfterInjection(Injection $injection): bool
+    {
+        $class = $injection::class;
+
+        return $this->afterInjections[$class] ??=
+            new ReflectionClass($class)->getAttributes(After::class) !== [];
     }
 }

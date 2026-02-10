@@ -14,11 +14,20 @@ final readonly class ParseTokens
      */
     public function __invoke(string $content, Language $language): array
     {
+        return $this->parse($content, $language->getPatterns());
+    }
+
+    /**
+     * @param array<int|string, mixed> $patterns
+     * @return Token[]
+     */
+    public function parse(string $content, array $patterns): array
+    {
         $tokens = [];
         $seen = [];
 
         // Match tokens from patterns
-        foreach ($language->getPatterns() as $key => $pattern) {
+        foreach ($patterns as $key => $pattern) {
             if ($pattern instanceof TokenTypeEnum) {
                 $pattern = new GenericPattern(
                     $key,

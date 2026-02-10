@@ -69,6 +69,9 @@ final readonly class GroupTokens
     }
 
     /**
+     * Sort tokens by start position ascending, then by end position descending,
+     * so that longer/parent tokens come before shorter/child tokens at the same start.
+     *
      * @param Token[] $tokens
      */
     private function sortTokens(array &$tokens): void

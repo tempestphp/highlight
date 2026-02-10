@@ -8,11 +8,11 @@ use Tempest\Highlight\IsPattern;
 use Tempest\Highlight\Pattern;
 use Tempest\Highlight\Tokens\TokenTypeEnum;
 
-final class KeywordPattern implements Pattern
+final readonly class KeywordPattern implements Pattern
 {
     use IsPattern;
 
-    public function __construct(private readonly string $keyword)
+    public function __construct(private string $keyword)
     {
     }
 

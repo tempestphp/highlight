@@ -12,7 +12,7 @@ use League\CommonMark\Renderer\NodeRendererInterface;
 use Tempest\Highlight\Highlighter;
 use Tempest\Highlight\WebTheme;
 
-final class CodeBlockRenderer implements NodeRendererInterface
+final readonly class CodeBlockRenderer implements NodeRendererInterface
 {
     public function __construct(
         private Highlighter $highlighter = new Highlighter(),

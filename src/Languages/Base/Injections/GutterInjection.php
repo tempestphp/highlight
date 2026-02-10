@@ -15,7 +15,7 @@ final class GutterInjection implements Injection
     private array $icons = [];
     private array $classes = [];
 
-    public function __construct(private int $startAt = 1)
+    public function __construct(private readonly int $startAt = 1)
     {
     }
 
@@ -49,7 +49,7 @@ final class GutterInjection implements Injection
 
             $gutterNumbers[$i] = $gutterNumber;
 
-            if (strlen((string) $longestGutterNumber) < strlen((string) $gutterNumber)) {
+            if (strlen($longestGutterNumber) < strlen((string) $gutterNumber)) {
                 $longestGutterNumber = (string) $gutterNumber;
             }
         }

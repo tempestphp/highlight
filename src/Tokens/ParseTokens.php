@@ -63,6 +63,7 @@ final readonly class ParseTokens
                     value: $value,
                     type: $tokenType,
                     pattern: $pattern,
+                    length: strlen((string) $value),
                 );
             }
         }

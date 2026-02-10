@@ -14,16 +14,16 @@ trait IsInjection
     {
         $pattern = $this->getPattern();
 
-        if (! str_starts_with($pattern, '/')) {
+        if (($pattern[0] ?? '') !== '/') {
             $pattern = "/{$pattern}/";
         }
 
         $result = preg_replace_callback(
             pattern: $pattern,
-            callback: function ($matches) use ($highlighter) {
+            callback: function (array $matches) use ($highlighter): string {
                 $content = $matches['match'] ?? '';
 
-                if (! $content) {
+                if ($content === '' || $content === '0') {
                     return $matches[0];
                 }
 

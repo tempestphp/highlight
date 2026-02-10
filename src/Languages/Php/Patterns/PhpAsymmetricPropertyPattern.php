@@ -22,7 +22,7 @@ final readonly class PhpAsymmetricPropertyPattern implements Pattern
         $pattern = $this->getPattern();
 
         if (! str_starts_with($pattern, '/')) {
-            $pattern = "/$pattern/";
+            $pattern = "/{$pattern}/";
         }
 
         preg_match_all($pattern, $content, $matches, PREG_OFFSET_CAPTURE);

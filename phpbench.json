@@ -2,5 +2,8 @@
     "$schema": "./vendor/phpbench/phpbench/phpbench.schema.json",
     "runner.bootstrap": "vendor/autoload.php",
     "runner.path": "tests/Bench",
-    "runner.file_pattern": "*Bench.php"
+    "runner.file_pattern": "*Bench.php",
+    "core.extensions": [
+        "Tempest\\Highlight\\Tests\\Bench\\Extension\\MarkdownExtension"
+    ]
 }

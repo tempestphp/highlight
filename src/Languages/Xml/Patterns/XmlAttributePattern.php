@@ -12,13 +12,14 @@ use Tempest\Highlight\Tokens\TokenTypeEnum;
 #[PatternTest(input: '<x-hello attr="">', output: 'attr')]
 #[PatternTest(input: '<a href="">', output: 'href')]
 #[PatternTest(input: '<a data-type="">', output: 'data-type')]
+#[PatternTest(input: '<xsl xmlns:xsl="http">', output: 'xmlns:xsl')]
 final readonly class XmlAttributePattern implements Pattern
 {
     use IsPattern;
 
     public function getPattern(): string
     {
-        return '(?<match>[\w\-]+)="';
+        return '(?<match>[\w\-\:]+)="';
     }
 
     public function getTokenType(): TokenTypeEnum

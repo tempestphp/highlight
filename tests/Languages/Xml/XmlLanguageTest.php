@@ -38,6 +38,8 @@ TXT,
     <span class="hl-comment">&lt;!-- comment --&gt;</span>
 &lt;/<span class="hl-keyword">tag</span>&gt;
 TXT],
+            ["<ns:tag><tag></tag></ns:tag>", '&lt;<span class="hl-keyword">ns:tag</span>&gt;&lt;<span class="hl-keyword">tag</span>&gt;&lt;/<span class="hl-keyword">tag</span>&gt;&lt;/<span class="hl-keyword">ns:tag</span>&gt;'],
+            ['<root xmlns:ns="...">', '&lt;<span class="hl-keyword">root</span> <span class="hl-property">xmlns:ns</span>=&quot;...&quot;&gt;'],
         ];
     }
 }

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tempest\Highlight\Languages\Blade;
 
+use Override;
 use Tempest\Highlight\Languages\Blade\Injections\BladeEchoInjection;
 use Tempest\Highlight\Languages\Blade\Injections\BladeKeywordInjection;
 use Tempest\Highlight\Languages\Blade\Injections\BladePhpInjection;
@@ -16,11 +17,13 @@ use Tempest\Highlight\Languages\Html\HtmlLanguage;
 
 class BladeLanguage extends HtmlLanguage
 {
+    #[Override]
     public function getName(): string
     {
         return 'blade';
     }
 
+    #[Override]
     public function getInjections(): array
     {
         return [
@@ -32,6 +35,7 @@ class BladeLanguage extends HtmlLanguage
         ];
     }
 
+    #[Override]
     public function getPatterns(): array
     {
         return [

@@ -9,56 +9,77 @@ use Tempest\Highlight\Theme;
 
 final class RenderTokens
 {
+    /** @var array<string, array{string, string}> */
+    private array $tokenMarkup = [];
+
     public function __construct(
-        private Theme $theme,
+        private readonly Theme $theme,
     ) {
     }
 
     /**
-     * @param string $content
      * @param Token[] $tokens
-     * @param int $parsedOffset
-     * @return string
+     * @param int $baseOffset Offset to subtract from token positions (for nested rendering)
      */
     public function __invoke(
         string $content,
         array $tokens,
-        int $parsedOffset = 0
+        int $baseOffset = 0,
     ): string {
-        $output = $content;
+        if ($tokens === []) {
+            return $content;
+        }
+
+        $markup = $this->tokenMarkup;
+        $parts = [];
+        $cursor = 0;
 
         foreach ($tokens as $currentToken) {
-            $value = $currentToken->hasChildren()
+            $relativeOffset = $currentToken->offset - $baseOffset;
+
+            if ($relativeOffset > $cursor) {
+                $parts[] = substr($content, $cursor, $relativeOffset - $cursor);
+            }
+
+            [$beforeMarkup, $afterMarkup] = $this->getTokenMarkup($currentToken, $markup);
+
+            $parts[] = $beforeMarkup;
+            $parts[] = $currentToken->children !== []
                 ? ($this)(
                     content: $currentToken->value,
                     tokens: $currentToken->children,
-                    parsedOffset: -1 * $currentToken->offset,
+                    baseOffset: $currentToken->offset,
                 )
                 : $currentToken->value;
+            $parts[] = $afterMarkup;
 
-            $renderedToken =
-                Escape::tokens($this->theme->before($currentToken->type))
-                . $value
-                . Escape::tokens($this->theme->after($currentToken->type));
-
-            $output = substr_replace(
-                $output,
-                $renderedToken,
-                $currentToken->offset + $parsedOffset,
-                $currentToken->length,
-            );
-
-            foreach ($currentToken->children as $childToken) {
-                $parsedOffset +=
-                    strlen(Escape::tokens($this->theme->before($childToken->type)))
-                    + strlen(Escape::tokens($this->theme->after($childToken->type)));
-            }
-
-            $parsedOffset +=
-                strlen(Escape::tokens($this->theme->before($currentToken->type)))
-                + strlen(Escape::tokens($this->theme->after($currentToken->type)));
+            $cursor = $relativeOffset + $currentToken->length;
         }
 
-        return $output;
+        $contentLength = strlen($content);
+        if ($cursor < $contentLength) {
+            $parts[] = substr($content, $cursor);
+        }
+
+        return implode('', $parts);
+    }
+
+    /**
+     * @param array<string, array{string, string}> $markup
+     * @return array{string, string}
+     */
+    private function getTokenMarkup(Token $token, array &$markup): array
+    {
+        if (isset($markup[$token->typeValue])) {
+            return $markup[$token->typeValue];
+        }
+
+        $beforeMarkup = Escape::tokens($this->theme->before($token->type));
+        $afterMarkup = Escape::tokens($this->theme->after($token->type));
+
+        $markup[$token->typeValue] = [$beforeMarkup, $afterMarkup];
+        $this->tokenMarkup[$token->typeValue] = [$beforeMarkup, $afterMarkup];
+
+        return $markup[$token->typeValue];
     }
 }

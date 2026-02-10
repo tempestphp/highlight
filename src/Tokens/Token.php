@@ -11,6 +11,7 @@ final class Token
     public int $length;
     public int $start;
     public int $end;
+    public readonly string $typeValue;
     /** @var Token[] */
     public array $children = [];
     public ?Token $parent = null;
@@ -20,10 +21,12 @@ final class Token
         public string $value,
         public TokenType $type,
         public ?Pattern $pattern = null,
+        ?int $length = null,
     ) {
-        $this->length = strlen($this->value);
+        $this->length = $length ?? strlen($this->value);
         $this->start = $this->offset;
         $this->end = $this->offset + $this->length;
+        $this->typeValue = $type->getValue();
     }
 
     public function equals(Token $other): bool
@@ -59,6 +62,12 @@ final class Token
         $clone->parent = null;
 
         return $clone;
+    }
+
+    public function resetHierarchy(): void
+    {
+        $this->children = [];
+        $this->parent = null;
     }
 
     public function canContain(Token $otherToken): bool

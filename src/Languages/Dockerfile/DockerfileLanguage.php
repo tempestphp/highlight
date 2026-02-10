@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tempest\Highlight\Languages\Dockerfile;
 
+use Override;
 use Tempest\Highlight\Languages\Base\BaseLanguage;
 use Tempest\Highlight\Languages\Dockerfile\Patterns\ImageAliasKeywordPattern;
 use Tempest\Highlight\Languages\Dockerfile\Patterns\ImageAliasNamePattern;
@@ -18,6 +19,7 @@ class DockerfileLanguage extends BaseLanguage
         return 'dockerfile';
     }
 
+    #[Override]
     public function getAliases(): array
     {
         return [
@@ -25,6 +27,7 @@ class DockerfileLanguage extends BaseLanguage
         ];
     }
 
+    #[Override]
     public function getPatterns(): array
     {
         return [

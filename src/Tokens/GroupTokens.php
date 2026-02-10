@@ -12,27 +12,28 @@ final readonly class GroupTokens
      */
     public function __invoke(array $tokens): array
     {
-        // Sort tokens in the right order
-        usort($tokens, function (Token $a, Token $b) {
-            if ($a->start === $b->start) {
-                return $b->end <=> $a->end;
-            }
+        $count = count($tokens);
 
-            return $a->start <=> $b->start;
-        });
+        if ($count <= 1) {
+            return $tokens;
+        }
+
+        // Sort tokens in the right order
+        $this->sortTokens($tokens);
 
         // Group tokens by parent and child
         /** @var Token[] $groupedTokens */
         $groupedTokens = [];
-
-        $count = count($tokens);
         $removed = [];
+
         for ($i = 0; $i < $count; $i++) {
             if (isset($removed[$i])) {
                 continue;
             }
 
-            $token = $tokens[$i]->cloneWithoutParent();
+            $token = $tokens[$i];
+            $token->resetHierarchy();
+            $tokenEnd = $token->end;
 
             // Since tokens are sorted by start, only check subsequent tokens
             // that could overlap (start < token->end)
@@ -45,7 +46,7 @@ final readonly class GroupTokens
 
                 // Since tokens are sorted by start position,
                 // once compareToken->start >= token->end, no more overlaps possible
-                if ($compareToken->start >= $token->end) {
+                if ($compareToken->start >= $tokenEnd) {
                     break;
                 }
 
@@ -59,11 +60,43 @@ final readonly class GroupTokens
                 $removed[$j] = true;
             }
 
-            if ($token->parent === null) {
+            if (! $token->parent instanceof Token) {
                 $groupedTokens[] = $token;
             }
         }
 
         return $groupedTokens;
+    }
+
+    /**
+     * Sort tokens by start position ascending, then by end position descending,
+     * so that longer/parent tokens come before shorter/child tokens at the same start.
+     *
+     * @param Token[] $tokens
+     */
+    private function sortTokens(array &$tokens): void
+    {
+        $starts = [];
+        $negatedEnds = [];
+        $indices = [];
+
+        foreach ($tokens as $index => $token) {
+            $starts[] = $token->start;
+            $negatedEnds[] = -$token->end;
+            $indices[] = $index;
+        }
+
+        array_multisort(
+            $starts,
+            SORT_ASC,
+            SORT_NUMERIC,
+            $negatedEnds,
+            SORT_ASC,
+            SORT_NUMERIC,
+            $indices,
+            SORT_ASC,
+            SORT_NUMERIC,
+            $tokens,
+        );
     }
 }

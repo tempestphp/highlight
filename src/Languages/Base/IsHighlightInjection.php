@@ -26,21 +26,21 @@ trait IsHighlightInjection
 
         $tokens = [];
 
-        foreach ($matches[0] as $key => $original) {
+        foreach (array_keys($matches[0]) as $key) {
             $tokens[] = new Token(
-                offset: (int) $matches['start'][$key][1],
+                offset: (int)$matches['start'][$key][1],
                 value: $matches['start'][$key][0],
                 type: TokenTypeEnum::HIDDEN,
             );
 
             $tokens[] = new Token(
-                offset: (int) $matches['match'][$key][1],
+                offset: (int)$matches['match'][$key][1],
                 value: $matches['match'][$key][0],
                 type: new DynamicTokenType($this->getClassname()),
             );
 
             $tokens[] = new Token(
-                offset: (int) $matches['end'][$key][1],
+                offset: (int)$matches['end'][$key][1],
                 value: $matches['end'][$key][0],
                 type: TokenTypeEnum::HIDDEN,
             );

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tempest\Highlight\Languages\Xml;
 
+use Override;
 use Tempest\Highlight\Languages\Base\BaseLanguage;
 use Tempest\Highlight\Languages\Xml\Patterns\XmlAttributePattern;
 use Tempest\Highlight\Languages\Xml\Patterns\XmlCloseTagPattern;
@@ -17,6 +18,7 @@ class XmlLanguage extends BaseLanguage
         return 'xml';
     }
 
+    #[Override]
     public function getInjections(): array
     {
         return [
@@ -24,6 +26,7 @@ class XmlLanguage extends BaseLanguage
         ];
     }
 
+    #[Override]
     public function getPatterns(): array
     {
         return [

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tempest\Highlight\Languages\Yaml;
 
+use Override;
 use Tempest\Highlight\Languages\Base\BaseLanguage;
 use Tempest\Highlight\Languages\Yaml\Patterns\YamlArrayBracketsPattern;
 use Tempest\Highlight\Languages\Yaml\Patterns\YamlColonPattern;
@@ -24,6 +25,7 @@ class YamlLanguage extends BaseLanguage
         return 'yaml';
     }
 
+    #[Override]
     public function getAliases(): array
     {
         return [
@@ -31,6 +33,7 @@ class YamlLanguage extends BaseLanguage
         ];
     }
 
+    #[Override]
     public function getInjections(): array
     {
         return [
@@ -38,6 +41,7 @@ class YamlLanguage extends BaseLanguage
         ];
     }
 
+    #[Override]
     public function getPatterns(): array
     {
         return [

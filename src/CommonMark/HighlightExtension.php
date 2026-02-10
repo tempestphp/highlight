@@ -10,7 +10,7 @@ use League\CommonMark\Extension\CommonMark\Node\Inline\Code;
 use League\CommonMark\Extension\ExtensionInterface;
 use Tempest\Highlight\Highlighter;
 
-final class HighlightExtension implements ExtensionInterface
+final readonly class HighlightExtension implements ExtensionInterface
 {
     public function __construct(
         private ?Highlighter $highlighter = new Highlighter(),

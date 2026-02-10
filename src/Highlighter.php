@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Tempest\Highlight;
 
-use Generator;
 use ReflectionClass;
 use Tempest\Highlight\Languages\Base\Injections\GutterInjection;
 use Tempest\Highlight\Languages\Blade\BladeLanguage;
@@ -38,12 +37,21 @@ final class Highlighter
     private ?GutterInjection $gutterInjection = null;
     private ?Language $currentLanguage = null;
     private bool $isNested = false;
+    private readonly ParseTokens $parseTokens;
+    private readonly GroupTokens $groupTokens;
+    private readonly RenderTokens $renderTokens;
+    private readonly TextLanguage $fallbackLanguage;
+    private array $patterns = [];
+    private array $afterInjections = [];
+    /** @var array<int, Injection[]> */
+    private array $beforeInjectionsCache = [];
+    /** @var array<int, Injection[]> */
+    private array $afterInjectionsCache = [];
+    private ?self $nestedHighlighter = null;
 
-    public function __construct(
-        private readonly Theme $theme = new CssTheme(),
-    ) {
-        $this
-            ->addLanguage(new BladeLanguage())
+    public function __construct(private readonly Theme $theme = new CssTheme())
+    {
+        $this->addLanguage(new BladeLanguage())
             ->addLanguage(new CssLanguage())
             ->addLanguage(new DiffLanguage())
             ->addLanguage(new DocCommentLanguage())
@@ -62,6 +70,11 @@ final class Highlighter
             ->addLanguage(new DotEnvLanguage())
             ->addLanguage(new IniLanguage())
             ->addLanguage(new TwigLanguage());
+
+        $this->fallbackLanguage = new TextLanguage();
+        $this->parseTokens = new ParseTokens();
+        $this->groupTokens = new GroupTokens();
+        $this->renderTokens = new RenderTokens($this->theme);
     }
 
     public function withGutter(int $startAt = 1): self
@@ -69,6 +82,7 @@ final class Highlighter
         $clone = clone $this;
 
         $clone->gutterInjection = new GutterInjection($startAt);
+        $clone->nestedHighlighter = null;
 
         return $clone;
     }
@@ -86,13 +100,15 @@ final class Highlighter
             $this->languages[$alias] = $language;
         }
 
+        $this->nestedHighlighter = null;
+
         return $this;
     }
 
     public function parse(string $content, string|Language $language): string
     {
         if (is_string($language)) {
-            $language = $this->languages[$language] ?? new TextLanguage();
+            $language = $this->languages[$language] ?? $this->fallbackLanguage;
         }
 
         $this->currentLanguage = $language;
@@ -127,29 +143,50 @@ final class Highlighter
         $clone = clone $this;
 
         $clone->isNested = true;
+        $clone->nestedHighlighter = null;
 
         return $clone;
+    }
+
+    private function getNestedHighlighter(): self
+    {
+        if ($this->nestedHighlighter instanceof Highlighter) {
+            return $this->nestedHighlighter;
+        }
+
+        $this->nestedHighlighter = $this->nested();
+
+        return $this->nestedHighlighter;
     }
 
     private function parseContent(string $content, Language $language): string
     {
         $tokens = [];
+        $nestedHighlighter = $this->getNestedHighlighter();
 
         // Before Injections
         foreach ($this->getBeforeInjections($language) as $injection) {
-            $parsedInjection = $injection->parse($content, $this->nested());
+            $parsedInjection = $injection->parse($content, $nestedHighlighter);
             $content = $parsedInjection->content;
-            $tokens = [...$tokens, ...$parsedInjection->tokens];
+
+            foreach ($parsedInjection->tokens as $token) {
+                $tokens[] = $token;
+            }
         }
 
         // Patterns
-        $tokens = [...$tokens, ...(new ParseTokens())($content, $language)];
-        $groupedTokens = (new GroupTokens())($tokens);
-        $content = (new RenderTokens($this->theme))($content, $groupedTokens);
+        foreach (
+            $this->parseTokens->parse($content, $this->getPatterns($language)) as $token
+        ) {
+            $tokens[] = $token;
+        }
+
+        $groupedTokens = ($this->groupTokens)($tokens);
+        $content = ($this->renderTokens)($content, $groupedTokens);
 
         // After Injections
         foreach ($this->getAfterInjections($language) as $injection) {
-            $parsedInjection = $injection->parse($content, $this->nested());
+            $parsedInjection = $injection->parse($content, $nestedHighlighter);
             $content = $parsedInjection->content;
         }
 
@@ -161,52 +198,84 @@ final class Highlighter
     }
 
     /**
-     * @param Language $language
      * @return Injection[]
      */
-    private function getBeforeInjections(Language $language): Generator
+    private function getBeforeInjections(Language $language): array
     {
-        foreach ($language->getInjections() as $injection) {
-            $after = (new ReflectionClass($injection))->getAttributes(After::class)[0] ?? null;
+        $languageId = spl_object_id($language);
 
-            if ($after) {
-                continue;
-            }
-
-            // Only injections without the `After` attribute are allowed
-            yield $injection;
+        if (isset($this->beforeInjectionsCache[$languageId])) {
+            return $this->beforeInjectionsCache[$languageId];
         }
+
+        $this->buildInjectionCaches($language);
+
+        return $this->beforeInjectionsCache[$languageId];
     }
 
     /**
-     * @param Language $language
      * @return Injection[]
      */
-    private function getAfterInjections(Language $language): Generator
+    private function getAfterInjections(Language $language): array
     {
         if ($this->isNested) {
-            // After injections are only parsed at the very end
-            return;
+            return [];
         }
+
+        $languageId = spl_object_id($language);
+
+        if (! isset($this->afterInjectionsCache[$languageId])) {
+            $this->buildInjectionCaches($language);
+        }
+
+        $afterInjections = $this->afterInjectionsCache[$languageId];
+
+        if ($this->gutterInjection instanceof GutterInjection) {
+            $afterInjections[] = $this->gutterInjection;
+        }
+
+        return $afterInjections;
+    }
+
+    private function buildInjectionCaches(Language $language): void
+    {
+        $languageId = spl_object_id($language);
+        $before = [];
+        $after = [];
 
         foreach ($language->getInjections() as $injection) {
-            $after = (new ReflectionClass($injection))->getAttributes(After::class)[0] ?? null;
-
-            if (! $after) {
-                continue;
+            if ($this->isAfterInjection($injection)) {
+                $after[] = $injection;
+            } else {
+                $before[] = $injection;
             }
-
-            yield $injection;
         }
 
-        // The gutter is always the latest injection
-        if ($this->gutterInjection) {
-            yield $this->gutterInjection;
-        }
+        $this->beforeInjectionsCache[$languageId] = $before;
+        $this->afterInjectionsCache[$languageId] = $after;
     }
 
     private function normalizeNewline(string $subject): string
     {
-        return preg_replace('~\R~u', "\n", $subject);
+        if (! str_contains($subject, "\r")) {
+            return $subject;
+        }
+
+        return str_replace(["\r\n", "\r"], "\n", $subject);
+    }
+
+    private function getPatterns(Language $language): array
+    {
+        $languageId = spl_object_id($language);
+
+        return $this->patterns[$languageId] ??= $language->getPatterns();
+    }
+
+    private function isAfterInjection(Injection $injection): bool
+    {
+        $class = $injection::class;
+
+        return $this->afterInjections[$class] ??=
+            new ReflectionClass($class)->getAttributes(After::class) !== [];
     }
 }

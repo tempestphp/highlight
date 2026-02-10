@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tempest\Highlight\Languages\Text;
 
+use Override;
 use Tempest\Highlight\Languages\Base\BaseLanguage;
 
 class TextLanguage extends BaseLanguage
@@ -13,6 +14,7 @@ class TextLanguage extends BaseLanguage
         return 'txt';
     }
 
+    #[Override]
     public function getAliases(): array
     {
         return [

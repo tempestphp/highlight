@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tempest\Highlight\Languages\Python;
 
+use Override;
 use Tempest\Highlight\Languages\Base\BaseLanguage;
 use Tempest\Highlight\Languages\Php\Patterns\DoubleQuoteValuePattern;
 use Tempest\Highlight\Languages\Php\Patterns\SingleQuoteValuePattern;
@@ -27,11 +28,13 @@ class PythonLanguage extends BaseLanguage
         return 'python';
     }
 
+    #[Override]
     public function getAliases(): array
     {
         return ['py'];
     }
 
+    #[Override]
     public function getInjections(): array
     {
         return [
@@ -39,6 +42,7 @@ class PythonLanguage extends BaseLanguage
         ];
     }
 
+    #[Override]
     public function getPatterns(): array
     {
         return [

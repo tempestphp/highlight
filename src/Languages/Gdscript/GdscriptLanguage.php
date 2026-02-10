@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tempest\Highlight\Languages\Gdscript;
 
+use Override;
 use Tempest\Highlight\Languages\Base\BaseLanguage;
 use Tempest\Highlight\Languages\Gdscript\Patterns\AnnotationPattern;
 use Tempest\Highlight\Languages\Gdscript\Patterns\AsTypePattern;
@@ -27,6 +28,7 @@ class GdscriptLanguage extends BaseLanguage
         return 'gdscript';
     }
 
+    #[Override]
     public function getInjections(): array
     {
         return [
@@ -34,6 +36,7 @@ class GdscriptLanguage extends BaseLanguage
         ];
     }
 
+    #[Override]
     public function getPatterns(): array
     {
         return [

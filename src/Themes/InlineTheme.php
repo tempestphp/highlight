@@ -27,7 +27,7 @@ final class InlineTheme implements Theme, WebTheme
 
         preg_match_all('/(?<selector>[\w,\.\s\-]+){(?<style>(.|\n)*?)}/', $contents, $matches);
 
-        foreach ($matches[0] as $key => $match) {
+        foreach (array_keys($matches[0]) as $key) {
             $selector = trim($matches['selector'][$key]);
             $style = str_replace([PHP_EOL, '    ', "\t"], [' ', '', ''], trim($matches['style'][$key]));
 

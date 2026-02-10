@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tempest\Highlight\Languages\Css;
 
+use Override;
 use Tempest\Highlight\Languages\Base\BaseLanguage;
 use Tempest\Highlight\Languages\Css\Patterns\CssAttributePattern;
 use Tempest\Highlight\Languages\Css\Patterns\CssCommentPattern;
@@ -20,6 +21,7 @@ class CssLanguage extends BaseLanguage
         return 'css';
     }
 
+    #[Override]
     public function getInjections(): array
     {
         return [
@@ -27,6 +29,7 @@ class CssLanguage extends BaseLanguage
         ];
     }
 
+    #[Override]
     public function getPatterns(): array
     {
         return [

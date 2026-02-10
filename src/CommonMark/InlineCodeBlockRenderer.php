@@ -11,7 +11,7 @@ use League\CommonMark\Renderer\ChildNodeRendererInterface;
 use League\CommonMark\Renderer\NodeRendererInterface;
 use Tempest\Highlight\Highlighter;
 
-final class InlineCodeBlockRenderer implements NodeRendererInterface
+final readonly class InlineCodeBlockRenderer implements NodeRendererInterface
 {
     public function __construct(
         private Highlighter $highlighter = new Highlighter(),

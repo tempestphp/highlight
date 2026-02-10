@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tempest\Highlight\Languages\Php;
 
+use Override;
 use Tempest\Highlight\Languages\DocComment\DocCommentLanguage;
 use Tempest\Highlight\Languages\Php\Injections\PhpGenericTypeInjection;
 use Tempest\Highlight\Languages\Php\Patterns\PhpDocCommentGenericTypePattern;
@@ -16,11 +17,13 @@ use Tempest\Highlight\Languages\Php\Patterns\PhpDocCommentVarTypePattern;
 
 class PhpDocCommentLanguage extends DocCommentLanguage
 {
+    #[Override]
     public function getName(): string
     {
         return 'phpdoc';
     }
 
+    #[Override]
     public function getInjections(): array
     {
         return [
@@ -29,6 +32,7 @@ class PhpDocCommentLanguage extends DocCommentLanguage
         ];
     }
 
+    #[Override]
     public function getPatterns(): array
     {
         return [

@@ -22,7 +22,14 @@ final readonly class PhpFunctionParametersInjection implements Injection
     public function parseContent(string $content, Highlighter $highlighter): string
     {
         return Escape::injection(
-            $highlighter->parse($content, new PhpTypeLanguage())
+            $highlighter->parse($content, $this->getLanguage())
         );
+    }
+
+    private function getLanguage(): PhpTypeLanguage
+    {
+        static $language = null;
+
+        return $language ??= new PhpTypeLanguage();
     }
 }

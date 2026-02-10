@@ -14,7 +14,7 @@ final readonly class AnnotationPattern implements Pattern
 
     public function getPattern(): string
     {
-        $variations = join('|@export_', [
+        $variations = implode('|@export_', [
             'category',
             'color_no_alpha',
             'dir',

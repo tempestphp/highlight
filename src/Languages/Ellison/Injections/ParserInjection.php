@@ -33,7 +33,7 @@ final readonly class ParserInjection implements Injection
             foreach ($sentences as $sentence) {
                 ['text' => $text, 'type' => $type] = $sentence;
 
-                $text = trim((string) $text);
+                $text = trim($text);
 
                 $parsedParagraph .=
                     Escape::tokens("<span class='hl-{$type}-sentence'>")

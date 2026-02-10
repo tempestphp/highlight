@@ -26,7 +26,8 @@
         "friendsofphp/php-cs-fixer": "^3.84",
         "league/commonmark": "^2.4",
         "assertchris/ellison": "^1.0.2",
-        "symfony/var-dumper": "^6.4|^7.0|^8.0"
+        "symfony/var-dumper": "^6.4|^7.0|^8.0",
+        "phpbench/phpbench": "^1.4"
     },
     "suggest": {
         "assertchris/ellison": "Allows you to analyse sentence complexity",
@@ -40,7 +41,8 @@
             "composer csfixer",
             "composer phpstan",
             "composer phpunit"
-        ]
+        ],
+        "bench": "vendor/bin/phpbench run --report=aggregate"
     },
     "license": "MIT"
 }

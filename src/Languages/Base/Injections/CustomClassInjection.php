@@ -22,7 +22,7 @@ final readonly class CustomClassInjection implements Injection
 
         $additionalOffset = 0;
 
-        foreach ($matches[0] as $key => $match) {
+        foreach (array_keys($matches[0]) as $key) {
             $startToken = $matches['start'][$key][0];
             $endToken = $matches['end'][$key][0];
             $className = $matches['class'][$key][0];
@@ -30,7 +30,7 @@ final readonly class CustomClassInjection implements Injection
             $additionalOffset += strlen($startToken);
 
             $tokens[] = new Token(
-                offset: (int) $matches['match'][$key][1] - $additionalOffset,
+                offset: $matches['match'][$key][1] - $additionalOffset,
                 value: $matches['match'][$key][0],
                 type: new DynamicTokenType($className),
             );

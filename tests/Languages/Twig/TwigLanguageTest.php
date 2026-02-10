@@ -39,6 +39,7 @@ class TwigLanguageTest extends TestCase
             ['<script>const mainSearchUrl = "";</script>', '&lt;<span class="hl-keyword">script</span>&gt;<span class="hl-keyword">const</span> mainSearchUrl = <span class="hl-value">&quot;&quot;</span>;&lt;/<span class="hl-keyword">script</span>&gt;'],
             ['{% cache "cache key" %}', '<span class="hl-injection">{% <span class="hl-keyword">cache</span> &quot;<span class="hl-value">cache key</span>&quot; %}</span>'],
             ['{{ "<b>foobar</b>"|data_uri(mime="text/html", parameters={charset: "ascii"}) }}', '<span class="hl-injection">{{ &quot;<span class="hl-value">&lt;b&gt;foobar&lt;/b&gt;</span>&quot;|<span class="hl-property">data_uri</span>(<span class="hl-property">mime</span>=&quot;<span class="hl-value">text/html</span>&quot;, <span class="hl-property">parameters</span>={<span class="hl-property">charset</span>: &quot;<span class="hl-value">ascii</span>&quot;}) }}</span>'],
+            ['{{- block(outerBlocks.content) -}}', '<span class="hl-injection">{{- <span class="hl-property">block</span>(outerBlocks.<span class="hl-property">content</span>) -}}</span>'],
         ];
     }
 }

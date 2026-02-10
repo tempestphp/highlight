@@ -9,82 +9,77 @@ use Tempest\Highlight\Theme;
 
 final class RenderTokens
 {
+    /** @var array<string, array{string, string}> */
     private array $tokenMarkup = [];
-    private array $tokenMarkupLengths = [];
 
     public function __construct(
-        private Theme $theme,
+        private readonly Theme $theme,
     ) {
     }
 
     /**
-     * @param string $content
      * @param Token[] $tokens
-     * @param int $parsedOffset
-     * @return string
+     * @param int $baseOffset Offset to subtract from token positions (for nested rendering)
      */
     public function __invoke(
         string $content,
         array $tokens,
-        int $parsedOffset = 0
+        int $baseOffset = 0,
     ): string {
-        $output = $content;
+        if ($tokens === []) {
+            return $content;
+        }
+
+        $markup = $this->tokenMarkup;
+        $parts = [];
+        $cursor = 0;
 
         foreach ($tokens as $currentToken) {
-            [$before, $after] = $this->getTokenMarkup($currentToken->type);
+            $relativeOffset = $currentToken->offset - $baseOffset;
 
-            $value = $currentToken->hasChildren()
+            if ($relativeOffset > $cursor) {
+                $parts[] = substr($content, $cursor, $relativeOffset - $cursor);
+            }
+
+            [$beforeMarkup, $afterMarkup] = $this->getTokenMarkup($currentToken, $markup);
+
+            $parts[] = $beforeMarkup;
+            $parts[] = $currentToken->children !== []
                 ? ($this)(
                     content: $currentToken->value,
                     tokens: $currentToken->children,
-                    parsedOffset: -1 * $currentToken->offset,
+                    baseOffset: $currentToken->offset,
                 )
                 : $currentToken->value;
+            $parts[] = $afterMarkup;
 
-            $renderedToken = $before . $value . $after;
-
-            $output = substr_replace(
-                $output,
-                $renderedToken,
-                $currentToken->offset + $parsedOffset,
-                $currentToken->length,
-            );
-
-            foreach ($currentToken->children as $childToken) {
-                $parsedOffset += $this->getTokenMarkupLength($childToken->type);
-            }
-
-            $parsedOffset += $this->getTokenMarkupLength($currentToken->type);
+            $cursor = $relativeOffset + $currentToken->length;
         }
 
-        return $output;
+        $contentLength = strlen($content);
+        if ($cursor < $contentLength) {
+            $parts[] = substr($content, $cursor);
+        }
+
+        return implode('', $parts);
     }
 
-    private function getTokenMarkup(TokenType $tokenType): array
+    /**
+     * @param array<string, array{string, string}> $markup
+     * @return array{string, string}
+     */
+    private function getTokenMarkup(Token $token, array &$markup): array
     {
-        $tokenId = spl_object_id($tokenType);
-
-        if (isset($this->tokenMarkup[$tokenId])) {
-            return $this->tokenMarkup[$tokenId];
+        if (isset($markup[$token->typeValue])) {
+            return $markup[$token->typeValue];
         }
 
-        $before = Escape::tokens($this->theme->before($tokenType));
-        $after = Escape::tokens($this->theme->after($tokenType));
+        $beforeMarkup = Escape::tokens($this->theme->before($token->type));
+        $afterMarkup = Escape::tokens($this->theme->after($token->type));
 
-        $this->tokenMarkup[$tokenId] = [$before, $after];
-        $this->tokenMarkupLengths[$tokenId] = strlen($before) + strlen($after);
+        $markup[$token->typeValue] = [$beforeMarkup, $afterMarkup];
+        $this->tokenMarkup[$token->typeValue] = [$beforeMarkup, $afterMarkup];
 
-        return $this->tokenMarkup[$tokenId];
-    }
-
-    private function getTokenMarkupLength(TokenType $tokenType): int
-    {
-        $tokenId = spl_object_id($tokenType);
-
-        if (! isset($this->tokenMarkupLengths[$tokenId])) {
-            $this->getTokenMarkup($tokenType);
-        }
-
-        return $this->tokenMarkupLengths[$tokenId];
+        return $markup[$token->typeValue];
     }
 }

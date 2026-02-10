@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tempest\Highlight\Languages\Json;
 
+use Override;
 use Tempest\Highlight\Languages\Base\BaseLanguage;
 use Tempest\Highlight\Languages\Json\Patterns\JsonAccoladesPattern;
 use Tempest\Highlight\Languages\Json\Patterns\JsonArrayBracketsPattern;
@@ -17,6 +18,7 @@ class JsonLanguage extends BaseLanguage
         return 'json';
     }
 
+    #[Override]
     public function getInjections(): array
     {
         return [
@@ -24,6 +26,7 @@ class JsonLanguage extends BaseLanguage
         ];
     }
 
+    #[Override]
     public function getPatterns(): array
     {
         return [

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tempest\Highlight\Languages\Twig;
 
+use Override;
 use Tempest\Highlight\Languages\Base\BaseLanguage;
 use Tempest\Highlight\Languages\Twig\Patterns\TwigArrayKeyPattern;
 use Tempest\Highlight\Languages\Twig\Patterns\TwigDoubleQuoteValuePattern;
@@ -21,6 +22,7 @@ final class TwigTagLanguage extends BaseLanguage
         return 'twigTag';
     }
 
+    #[Override]
     public function getPatterns(): array
     {
         return [

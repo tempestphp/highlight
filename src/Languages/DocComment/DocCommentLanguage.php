@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tempest\Highlight\Languages\DocComment;
 
+use Override;
 use Tempest\Highlight\Languages\Base\BaseLanguage;
 use Tempest\Highlight\Languages\DocComment\Patterns\DocCommentTagPattern;
 
@@ -14,6 +15,7 @@ class DocCommentLanguage extends BaseLanguage
         return 'doc';
     }
 
+    #[Override]
     public function getInjections(): array
     {
         return [
@@ -21,6 +23,7 @@ class DocCommentLanguage extends BaseLanguage
         ];
     }
 
+    #[Override]
     public function getPatterns(): array
     {
         return [

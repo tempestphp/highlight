@@ -1,0 +1,95 @@
+class_name Player
+extends CharacterBody2D
+
+@export var speed: float = 200.0
+@export var jump_velocity: float = -400.0
+@export var max_health: int = 100
+
+@onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
+@onready var collision_shape: CollisionShape2D = $CollisionShape2D
+
+var health: int = max_health
+var is_attacking: bool = false
+var gravity: float = ProjectSettings.get_setting("physics/2d/default_gravity")
+
+signal health_changed(new_health: int)
+signal died
+
+enum State {
+    IDLE,
+    RUNNING,
+    JUMPING,
+    FALLING,
+    ATTACKING,
+}
+
+var current_state: State = State.IDLE
+
+func _ready() -> void:
+    health = max_health
+    animated_sprite.animation_finished.connect(_on_animation_finished)
+
+func _physics_process(delta: float) -> void:
+    if not is_on_floor():
+        velocity.y += gravity * delta
+
+    if Input.is_action_just_pressed("jump") and is_on_floor():
+        velocity.y = jump_velocity
+        current_state = State.JUMPING
+
+    var direction := Input.get_axis("move_left", "move_right")
+
+    if direction != 0:
+        velocity.x = direction * speed
+        animated_sprite.flip_h = direction < 0
+        if is_on_floor():
+            current_state = State.RUNNING
+    else:
+        velocity.x = move_toward(velocity.x, 0, speed)
+        if is_on_floor():
+            current_state = State.IDLE
+
+    if Input.is_action_just_pressed("attack") and not is_attacking:
+        _perform_attack()
+
+    move_and_slide()
+    _update_animation()
+
+func take_damage(amount: int) -> void:
+    health = clamp(health - amount, 0, max_health)
+    health_changed.emit(health)
+
+    if health <= 0:
+        _die()
+
+func _perform_attack() -> void:
+    is_attacking = true
+    current_state = State.ATTACKING
+    animated_sprite.play("attack")
+
+    var enemies := get_tree().get_nodes_in_group("enemies")
+    for enemy in enemies:
+        if global_position.distance_to(enemy.global_position) < 50.0:
+            enemy.take_damage(25)
+
+func _die() -> void:
+    died.emit()
+    queue_free()
+
+func _update_animation() -> void:
+    if is_attacking:
+        return
+
+    match current_state:
+        State.IDLE:
+            animated_sprite.play("idle")
+        State.RUNNING:
+            animated_sprite.play("run")
+        State.JUMPING:
+            animated_sprite.play("jump")
+        State.FALLING:
+            animated_sprite.play("fall")
+
+func _on_animation_finished() -> void:
+    if animated_sprite.animation == "attack":
+        is_attacking = false

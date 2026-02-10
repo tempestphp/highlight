@@ -1,0 +1,65 @@
+@extends('layouts.app')
+
+@section('title', 'User Dashboard')
+
+@push('styles')
+    <link rel="stylesheet" href="{{ asset('css/dashboard.css') }}">
+@endpush
+
+@section('content')
+    <div class="container mx-auto py-8">
+        <h1 class="text-3xl font-bold mb-6">
+            Welcome, {{ $user->name }}
+        </h1>
+
+        @if($user->isAdmin())
+            <x-admin-panel :stats="$stats" />
+        @elseif($user->isModerator())
+            <div class="bg-yellow-100 border border-yellow-400 p-4 rounded">
+                <p>Moderator tools are available.</p>
+            </div>
+        @else
+            <p class="text-gray-600">You have {{ $notifications->count() }} unread notifications.</p>
+        @endif
+
+        @forelse($orders as $order)
+            <div class="bg-white shadow rounded-lg p-6 mb-4">
+                <h3 class="font-semibold">Order #{{ $order->id }}</h3>
+                <p>Total: ${{ number_format($order->total, 2) }}</p>
+                <span class="badge badge-{{ $order->status }}">
+                    {{ ucfirst($order->status) }}
+                </span>
+
+                @unless($order->isCompleted())
+                    <form method="POST" action="{{ route('orders.cancel', $order) }}">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger">Cancel</button>
+                    </form>
+                @endunless
+            </div>
+        @empty
+            <p class="text-gray-500">No orders found.</p>
+        @endforelse
+
+        @isset($featuredProducts)
+            <h2 class="text-2xl font-bold mt-8 mb-4">Featured Products</h2>
+            @each('partials.product-card', $featuredProducts, 'product')
+        @endisset
+
+        @auth
+            <x-notification-bell :count="$unreadCount" />
+        @endauth
+
+        {{-- This is a Blade comment --}}
+        @include('partials.footer', ['year' => date('Y')])
+    </div>
+@endsection
+
+@push('scripts')
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            console.log('Dashboard loaded');
+        });
+    </script>
+@endpush

@@ -1,0 +1,59 @@
+# User Authentication API
+
+## Overview
+
+This module provides **secure authentication** for the application using JWT tokens and OAuth 2.0 providers. It supports *multiple strategies* including local credentials, Google, and GitHub.
+
+## Installation
+
+```bash
+composer require vendor/auth-module
+```
+
+## Configuration
+
+| Parameter       | Type     | Default | Description                  |
+|-----------------|----------|---------|------------------------------|
+| `token_ttl`     | integer  | 3600    | Token lifetime in seconds    |
+| `refresh_ttl`   | integer  | 86400   | Refresh token lifetime       |
+| `max_attempts`  | integer  | 5       | Max login attempts per hour  |
+| `lockout_time`  | integer  | 900     | Lockout duration in seconds  |
+
+## Usage
+
+### Basic Authentication
+
+To authenticate a user with email and password:
+
+```php
+$auth = new Authenticator($config);
+$token = $auth->attempt([
+    'email' => $request->email,
+    'password' => $request->password,
+]);
+```
+
+### Token Refresh
+
+> **Note:** Refresh tokens are single-use. Each refresh generates a new token pair.
+
+1. Send the refresh token to the endpoint
+2. Receive a new access token and refresh token
+3. Store the new tokens securely
+
+### Error Handling
+
+The module throws the following exceptions:
+
+- `InvalidCredentialsException` - Wrong email or password
+- `AccountLockedException` - Too many failed attempts
+- `TokenExpiredException` - The JWT token has expired
+- `RateLimitExceededException` - API rate limit reached
+
+## Links
+
+For more details, see the [full documentation](https://docs.example.com/auth) or visit the [GitHub repository](https://github.com/example/auth-module).
+
+---
+
+*Last updated: 2025-01-15*

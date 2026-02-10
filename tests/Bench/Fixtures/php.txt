@@ -1,0 +1,97 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Services;
+
+use App\Models\User;
+use App\Contracts\Repository;
+use Illuminate\Support\Collection;
+
+#[AsService]
+final readonly class UserService implements Repository
+{
+    public function __construct(
+        private UserRepository $repository,
+        private CacheManager $cache,
+        private EventDispatcher $events,
+    ) {}
+
+    public function findById(int $id): ?User
+    {
+        return $this->cache->remember("user.{$id}", 3600, function () use ($id) {
+            $user = $this->repository->find($id);
+
+            if ($user === null) {
+                throw new UserNotFoundException("User {$id} not found");
+            }
+
+            $this->events->dispatch(new UserAccessed($user));
+
+            return $user;
+        });
+    }
+
+    public function getAllActive(): Collection
+    {
+        return $this->repository
+            ->query()
+            ->where('status', '=', 'active')
+            ->where('deleted_at', null)
+            ->orderBy('created_at', 'desc')
+            ->get()
+            ->map(fn (User $user) => new UserDTO(
+                id: $user->id,
+                name: $user->name,
+                email: $user->email,
+                role: $user->role->getValue(),
+                isAdmin: $user->role === Role::ADMIN,
+                createdAt: $user->created_at->toISOString(),
+            ));
+    }
+
+    /**
+     * @param array<string, mixed> $data
+     * @return User
+     * @throws ValidationException
+     */
+    public function create(array $data): User
+    {
+        $validated = $this->validate($data, [
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users',
+            'password' => 'required|min:8',
+        ]);
+
+        $user = new User();
+        $user->name = $validated['name'];
+        $user->email = $validated['email'];
+        $user->password = password_hash($validated['password'], PASSWORD_ARGON2ID);
+        $user->status = 'active';
+        $user->save();
+
+        $this->events->dispatch(new UserCreated($user));
+        $this->cache->forget('users.active');
+
+        return $user;
+    }
+
+    private function validate(array $data, array $rules): array
+    {
+        foreach ($rules as $field => $rule) {
+            $constraints = explode('|', $rule);
+
+            foreach ($constraints as $constraint) {
+                match (true) {
+                    $constraint === 'required' => isset($data[$field]) ?: throw new ValidationException("{$field} is required"),
+                    str_starts_with($constraint, 'max:') => strlen($data[$field] ?? '') <= (int) substr($constraint, 4),
+                    str_starts_with($constraint, 'min:') => strlen($data[$field] ?? '') >= (int) substr($constraint, 4),
+                    $constraint === 'email' => filter_var($data[$field] ?? '', FILTER_VALIDATE_EMAIL) !== false,
+                    default => true,
+                };
+            }
+        }
+
+        return $data;
+    }
+}

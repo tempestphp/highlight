@@ -1,0 +1,29 @@
+CREATE TABLE users (
+    id BIGSERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    email VARCHAR(255) UNIQUE NOT NULL,
+    password_hash TEXT NOT NULL,
+    role VARCHAR(50) DEFAULT 'user',
+    status VARCHAR(20) DEFAULT 'active',
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+);
+
+CREATE INDEX idx_users_email ON users(email);
+CREATE INDEX idx_users_status ON users(status) WHERE status = 'active';
+
+SELECT
+    u.id,
+    u.name,
+    u.email,
+    COUNT(o.id) AS order_count,
+    COALESCE(SUM(o.total), 0) AS total_spent,
+    MAX(o.created_at) AS last_order
+FROM users u
+LEFT JOIN orders o ON o.user_id = u.id AND o.status = 'completed'
+WHERE u.status = 'active'
+    AND u.created_at >= NOW() - INTERVAL '1 year'
+GROUP BY u.id, u.name, u.email
+HAVING COUNT(o.id) > 0
+ORDER BY total_spent DESC
+LIMIT 100;

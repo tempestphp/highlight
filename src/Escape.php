@@ -8,18 +8,9 @@ final readonly class Escape
 {
     public const string INJECTION_TOKEN = '❿';
 
-    private const array TOKENS = [
-        '❶' => '&',
-        '❷' => '<',
-        '❸' => '>',
-        '❹' => '"',
-        // ❺
-        // ❻
-        // ❼
-        // ❽
-        // ❾
-        self::INJECTION_TOKEN => '', // injection token
-    ];
+    private const array TOKEN_KEYS = ['❶', '❷', '❸', '❹', self::INJECTION_TOKEN];
+
+    private const array TOKEN_VALUES = ['&', '<', '>', '"', ''];
 
     public static function injection(string $input): string
     {
@@ -49,8 +40,8 @@ final readonly class Escape
     public static function tokens(string $input): string
     {
         return str_replace(
-            array_values(self::TOKENS),
-            array_keys(self::TOKENS),
+            self::TOKEN_VALUES,
+            self::TOKEN_KEYS,
             $input,
         );
     }
@@ -58,8 +49,8 @@ final readonly class Escape
     private static function reverse(string $input): string
     {
         return str_replace(
-            array_keys(self::TOKENS),
-            array_values(self::TOKENS),
+            self::TOKEN_KEYS,
+            self::TOKEN_VALUES,
             $input,
         );
     }

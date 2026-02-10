@@ -36,7 +36,7 @@ final readonly class PhpGenericTypeInjection implements Injection
                 Escape::tokens($theme->before(TokenTypeEnum::GENERIC))
                 . $genericType
                 . Escape::tokens($theme->after(TokenTypeEnum::GENERIC)),
-                $content,
+                (string) $content,
             );
         }
 

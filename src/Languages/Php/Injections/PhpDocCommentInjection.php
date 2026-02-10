@@ -20,6 +20,13 @@ final readonly class PhpDocCommentInjection implements Injection
 
     public function parseContent(string $content, Highlighter $highlighter): string
     {
-        return $highlighter->parse($content, new PhpDocCommentLanguage());
+        return $highlighter->parse($content, $this->getLanguage());
+    }
+
+    private function getLanguage(): PhpDocCommentLanguage
+    {
+        static $language = null;
+
+        return $language ??= new PhpDocCommentLanguage();
     }
 }

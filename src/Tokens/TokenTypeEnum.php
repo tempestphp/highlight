@@ -31,9 +31,11 @@ enum TokenTypeEnum: string implements TokenType
             return false;
         }
 
+        $otherValue = $other->getValue();
+
         return match ($this) {
-            self::TYPE => ! in_array($other->getValue(), [self::KEYWORD->getValue(), self::PROPERTY->getValue()]),
-            self::GENERIC => ! in_array($other->getValue(), [self::TYPE->getValue()]),
+            self::TYPE => $otherValue !== self::KEYWORD->value && $otherValue !== self::PROPERTY->value,
+            self::GENERIC => $otherValue !== self::TYPE->value,
             self::ATTRIBUTE => true,
             default => false,
         };

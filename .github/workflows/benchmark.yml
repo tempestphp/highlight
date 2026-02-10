@@ -1,11 +1,12 @@
 name: Benchmark
 
 on:
-  pull_request:
+  pull_request_target:
     branches: [main]
 
 permissions:
   pull-requests: write
+  issues: write
 
 jobs:
   benchmark:

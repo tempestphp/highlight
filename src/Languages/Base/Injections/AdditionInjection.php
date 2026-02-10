@@ -13,10 +13,11 @@ use Tempest\Highlight\ParsedInjection;
 #[After]
 final readonly class AdditionInjection implements Injection
 {
+    private const string NEWLINE = "\n";
+
     public function parse(string $content, Highlighter $highlighter): ParsedInjection
     {
-        // Standardize line endings
-        $content = preg_replace('/\R/u', PHP_EOL, $content) ?? '';
+        $content = $this->normalizeLineEndings($content);
 
         $content = str_replace('❷span class=❹ignore❹❸{+❷/span❸', '{+', $content);
         $content = str_replace('❷span class=❹ignore❹❸+}❷/span❸', '+}', $content);
@@ -25,34 +26,30 @@ final readonly class AdditionInjection implements Injection
 
         $parsedOffset = 0;
 
+        $open = Escape::tokens('<span class="hl-addition">');
+        $close = Escape::tokens('</span>');
+
         foreach ($matches[0] as $match) {
             $matchedContent = $match[0];
             $offset = $match[1];
+            $replacementOffset = $offset + $parsedOffset;
 
-            $open = Escape::tokens('<span class="hl-addition">');
-            $close = Escape::tokens('</span>');
-
-            // Replace tags + EOLs with appropriate span tags
             $parsedMatchedContent = str_replace(
-                ['{+', PHP_EOL, '+}'],
-                [$open, $close . PHP_EOL . $open, $close],
+                ['{+', self::NEWLINE, '+}'],
+                [$open, $close . self::NEWLINE . $open, $close],
                 $matchedContent,
             );
 
-            // Inject the parsed match into the content
-            $content = str_replace($matchedContent, $parsedMatchedContent, $content);
-
-            // Configure the gutter,
-            if ($gutter = $highlighter->getGutterInjection()) {
+            if (($gutter = $highlighter->getGutterInjection()) instanceof GutterInjection) {
                 $startingLineNumber = substr_count(
                     haystack: $content,
-                    needle: PHP_EOL,
-                    length: $offset + $parsedOffset,
+                    needle: self::NEWLINE,
+                    length: $replacementOffset,
                 ) + 1;
 
                 $totalAmountOfLines = substr_count(
                     haystack: $parsedMatchedContent,
-                    needle: PHP_EOL,
+                    needle: self::NEWLINE,
                 );
 
                 for ($lineNumber = $startingLineNumber; $lineNumber <= $startingLineNumber + $totalAmountOfLines; $lineNumber++) {
@@ -62,9 +59,25 @@ final readonly class AdditionInjection implements Injection
                 }
             }
 
-            $parsedOffset += strlen($open) + strlen($close);
+            $content = substr_replace(
+                $content,
+                $parsedMatchedContent,
+                $replacementOffset,
+                strlen($matchedContent),
+            );
+
+            $parsedOffset += strlen($parsedMatchedContent) - strlen($matchedContent);
         }
 
         return new ParsedInjection($content);
+    }
+
+    private function normalizeLineEndings(string $content): string
+    {
+        if (! str_contains($content, "\r")) {
+            return $content;
+        }
+
+        return str_replace(["\r\n", "\r"], self::NEWLINE, $content);
     }
 }

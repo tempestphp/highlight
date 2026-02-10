@@ -6,9 +6,10 @@ namespace Tempest\Highlight\Languages\Diff\Injections;
 
 use Tempest\Highlight\Escape;
 use Tempest\Highlight\Highlighter;
+use Tempest\Highlight\Injection;
 use Tempest\Highlight\ParsedInjection;
 
-class DiffAdditionInjection
+class DiffAdditionInjection implements Injection
 {
     public function parse(string $content, Highlighter $highlighter): ParsedInjection
     {

@@ -8,7 +8,11 @@ use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Tempest\Highlight\Highlighter;
+use Tempest\Highlight\Injection;
+use Tempest\Highlight\IsInjection;
+use Tempest\Highlight\Language;
 use Tempest\Highlight\Themes\InlineTheme;
+use Tempest\Highlight\Tokens\TokenTypeEnum;
 
 class HighlighterTest extends TestCase
 {
@@ -49,6 +53,74 @@ class HighlighterTest extends TestCase
         $highlighter = new Highlighter();
 
         $this->assertTrue(in_array('php', $highlighter->getSupportedLanguageNames()));
+    }
+
+    public function test_added_languages_are_available_in_nested_highlighter_after_initial_parse(): void
+    {
+        $highlighter = new Highlighter();
+
+        $highlighter->parse('echo 1', 'php');
+
+        $highlighter
+            ->addLanguage(new class () implements Language {
+                public function getName(): string
+                {
+                    return 'inner';
+                }
+
+                public function getAliases(): array
+                {
+                    return [];
+                }
+
+                public function getInjections(): array
+                {
+                    return [];
+                }
+
+                public function getPatterns(): array
+                {
+                    return ['(?<match>foo)' => TokenTypeEnum::KEYWORD];
+                }
+            })
+            ->addLanguage(new class () implements Language {
+                public function getName(): string
+                {
+                    return 'outer';
+                }
+
+                public function getAliases(): array
+                {
+                    return [];
+                }
+
+                public function getInjections(): array
+                {
+                    return [new class () implements Injection {
+                        use IsInjection;
+
+                        public function getPattern(): string
+                        {
+                            return '(?<match>foo)';
+                        }
+
+                        public function parseContent(string $content, Highlighter $highlighter): string
+                        {
+                            return $highlighter->parse($content, 'inner');
+                        }
+                    }];
+                }
+
+                public function getPatterns(): array
+                {
+                    return [];
+                }
+            });
+
+        $this->assertSame(
+            '<span class="hl-keyword">foo</span>',
+            $highlighter->parse('foo', 'outer'),
+        );
     }
 
     public static function provide_highlight_cases(): iterable

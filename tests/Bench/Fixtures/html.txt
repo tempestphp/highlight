@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="/css/app.css">
+    <script src="/js/app.js" defer></script>
+</head>
+<body class="bg-gray-100 dark:bg-gray-900">
+    <nav class="bg-white shadow-lg">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center py-4">
+                <a href="/" class="text-2xl font-bold text-blue-600">Dashboard</a>
+                <div class="flex items-center space-x-4">
+                    <span class="text-gray-700">Welcome, {{ $user->name }}</span>
+                    <form method="POST" action="/logout">
+                        <button type="submit" class="btn btn-danger">Logout</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <main class="container mx-auto py-8">
+        <div class="grid grid-cols-3 gap-6">
+            <div class="bg-white rounded-lg shadow p-6">
+                <h2 class="text-xl font-semibold mb-4">Statistics</h2>
+                <p class="text-3xl font-bold text-blue-600">{{ $stats['total'] }}</p>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

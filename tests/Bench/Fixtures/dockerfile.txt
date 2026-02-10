@@ -1,0 +1,58 @@
+FROM php:8.4-fpm-alpine AS base
+
+LABEL maintainer="team@example.com"
+LABEL version="1.0"
+
+ARG APP_ENV=production
+ARG NODE_VERSION=20
+
+ENV APP_ENV=${APP_ENV} \
+    APP_DEBUG=false \
+    COMPOSER_ALLOW_SUPERUSER=1 \
+    PHP_OPCACHE_VALIDATE_TIMESTAMPS=0
+
+RUN apk add --no-cache \
+    icu-dev \
+    libzip-dev \
+    libpng-dev \
+    oniguruma-dev \
+    postgresql-dev \
+    && docker-php-ext-install \
+    intl \
+    zip \
+    gd \
+    pdo_pgsql \
+    opcache \
+    mbstring \
+    && rm -rf /var/cache/apk/*
+
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+
+WORKDIR /var/www/html
+
+COPY composer.json composer.lock ./
+RUN composer install --no-dev --no-scripts --no-autoloader --prefer-dist
+
+COPY . .
+RUN composer dump-autoload --optimize --classmap-authoritative
+
+FROM base AS development
+
+RUN apk add --no-cache $PHPIZE_DEPS \
+    && pecl install xdebug \
+    && docker-php-ext-enable xdebug
+
+COPY docker/php/xdebug.ini /usr/local/etc/php/conf.d/xdebug.ini
+
+EXPOSE 9000
+
+FROM base AS production
+
+RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
+USER www-data
+
+HEALTHCHECK --interval=30s --timeout=3s --retries=3 \
+    CMD php-fpm-healthcheck || exit 1
+
+EXPOSE 9000
+CMD ["php-fpm"]

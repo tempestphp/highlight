@@ -1,0 +1,56 @@
+[app]
+name = "My Application"
+version = 1.4.2
+debug = false
+timezone = UTC
+
+[database]
+driver = pgsql
+host = 127.0.0.1
+port = 5432
+name = myapp
+username = admin
+password = secret
+charset = utf8
+prefix =
+pool_size = 10
+ssl_mode = prefer
+
+[cache]
+driver = redis
+host = 127.0.0.1
+port = 6379
+prefix = myapp_cache_
+ttl = 3600
+
+[logging]
+level = warning
+channel = stack
+path = /var/log/myapp/app.log
+max_files = 14
+max_size = 100M
+
+[mail]
+driver = smtp
+host = smtp.mailgun.org
+port = 587
+encryption = tls
+username = postmaster@example.com
+password = secret
+from_address = noreply@example.com
+from_name = "${app.name}"
+
+[session]
+driver = redis
+lifetime = 120
+encrypt = true
+cookie = myapp_session
+domain = .example.com
+secure = true
+http_only = true
+same_site = lax
+
+[queue]
+driver = redis
+retry_after = 90
+max_tries = 3

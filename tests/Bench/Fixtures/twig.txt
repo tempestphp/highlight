@@ -1,0 +1,80 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% block title %}{{ page.title }} - {{ site_name }}{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/dashboard.css') }}">
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1>{{ 'welcome.heading'|trans({'%name%': user.name}) }}</h1>
+
+        {% if user.isAdmin %}
+            <div class="admin-panel">
+                <p>{{ 'admin.message'|trans }}</p>
+            </div>
+        {% elseif user.roles|length > 1 %}
+            <p>You have {{ user.roles|length }} roles assigned.</p>
+        {% endif %}
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>{{ 'table.name'|trans }}</th>
+                    <th>{{ 'table.email'|trans }}</th>
+                    <th>{{ 'table.status'|trans }}</th>
+                    <th>{{ 'table.actions'|trans }}</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for member in team_members %}
+                    <tr class="{{ cycle(['odd', 'even'], loop.index0) }}">
+                        <td>{{ member.name|title }}</td>
+                        <td>
+                            <a href="mailto:{{ member.email }}">
+                                {{ member.email }}
+                            </a>
+                        </td>
+                        <td>
+                            {% if member.isActive %}
+                                <span class="badge badge-success">Active</span>
+                            {% else %}
+                                <span class="badge badge-danger">Inactive</span>
+                            {% endif %}
+                        </td>
+                        <td>
+                            <a href="{{ path('member_edit', {id: member.id}) }}">Edit</a>
+                            {% if member.id != user.id %}
+                                <a href="{{ path('member_delete', {id: member.id}) }}"
+                                   onclick="return confirm('Are you sure?')">
+                                    Delete
+                                </a>
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="4">No team members found.</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        {# Pagination #}
+        {% if members.haveToPaginate %}
+            <nav>
+                {{ pagerfanta(members, 'twitter_bootstrap5') }}
+            </nav>
+        {% endif %}
+
+        {% set total = team_members|reduce((carry, m) => carry + m.score, 0) %}
+        <p>Total score: {{ total|number_format(2, '.', ',') }}</p>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('dashboard') }}
+{% endblock %}

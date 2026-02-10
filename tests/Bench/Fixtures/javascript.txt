@@ -1,0 +1,97 @@
+import { useState, useEffect, useCallback, useMemo } from 'react';
+import { createClient } from '@supabase/supabase-js';
+
+const supabase = createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+);
+
+export function useDataFetcher(tableName, options = {}) {
+    const [data, setData] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+
+    const filters = useMemo(() => ({
+        limit: options.limit ?? 50,
+        offset: options.offset ?? 0,
+        orderBy: options.orderBy ?? 'created_at',
+        ascending: options.ascending ?? false,
+        ...options.filters,
+    }), [options]);
+
+    const fetchData = useCallback(async () => {
+        try {
+            setLoading(true);
+            setError(null);
+
+            let query = supabase
+                .from(tableName)
+                .select('*')
+                .order(filters.orderBy, { ascending: filters.ascending })
+                .range(filters.offset, filters.offset + filters.limit - 1);
+
+            if (filters.status) {
+                query = query.eq('status', filters.status);
+            }
+
+            const { data: result, error: fetchError } = await query;
+
+            if (fetchError) throw fetchError;
+            setData(result ?? []);
+        } catch (err) {
+            setError(err instanceof Error ? err.message : 'Unknown error');
+            console.error(`Failed to fetch from ${tableName}:`, err);
+        } finally {
+            setLoading(false);
+        }
+    }, [tableName, filters]);
+
+    useEffect(() => {
+        fetchData();
+        const interval = setInterval(fetchData, 30000);
+        return () => clearInterval(interval);
+    }, [fetchData]);
+
+    const refetch = useCallback(() => fetchData(), [fetchData]);
+
+    return { data, loading, error, refetch };
+}
+
+class DataProcessor {
+    #cache = new Map();
+    #maxCacheSize;
+
+    constructor(maxCacheSize = 1000) {
+        this.#maxCacheSize = maxCacheSize;
+    }
+
+    process(items) {
+        return items
+            .filter(item => item !== null && item !== undefined)
+            .map(item => this.#transform(item))
+            .reduce((acc, item) => {
+                const key = item.category ?? 'uncategorized';
+                acc[key] = acc[key] ?? [];
+                acc[key].push(item);
+                return acc;
+            }, {});
+    }
+
+    #transform(item) {
+        const cacheKey = JSON.stringify(item);
+        if (this.#cache.has(cacheKey)) {
+            return this.#cache.get(cacheKey);
+        }
+        const result = {
+            ...item,
+            processedAt: new Date().toISOString(),
+            hash: this.#computeHash(item),
+        };
+        if (this.#cache.size >= this.#maxCacheSize) {
+            const firstKey = this.#cache.keys().next().value;
+            this.#cache.delete(firstKey);
+        }
+        this.#cache.set(cacheKey, result);
+        return result;
+    }
+}

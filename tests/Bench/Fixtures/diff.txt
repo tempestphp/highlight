@@ -1,0 +1,39 @@
+diff --git a/src/Services/UserService.php b/src/Services/UserService.php
+index 4a2b3c1..8f7d6e2 100644
+--- a/src/Services/UserService.php
++++ b/src/Services/UserService.php
+@@ -12,6 +12,7 @@ use App\Contracts\Repository;
+ use Illuminate\Support\Collection;
++use Illuminate\Support\Facades\Log;
+ 
+ #[AsService]
+ final readonly class UserService implements Repository
+@@ -20,14 +21,22 @@ final readonly class UserService implements Repository
+     public function __construct(
+         private UserRepository $repository,
+         private CacheManager $cache,
+-        private EventDispatcher $events,
++        private EventDispatcher $events,
++        private RateLimiter $rateLimiter,
+     ) {}
+ 
+     public function findById(int $id): ?User
+     {
+-        return $this->cache->remember("user.{$id}", 3600, function () use ($id) {
+-            $user = $this->repository->find($id);
++        if (!$this->rateLimiter->attempt("user-lookup:{$id}", 60, 10)) {
++            Log::warning('Rate limit exceeded for user lookup', ['id' => $id]);
++            throw new RateLimitExceededException();
++        }
++
++        return $this->cache->remember("user.{$id}", 7200, function () use ($id) {
++            $user = $this->repository->findWithRelations($id, ['profile', 'roles']);
+ 
+             if ($user === null) {
+                 throw new UserNotFoundException("User {$id} not found");
+             }
+ 
++            Log::info('User accessed', ['id' => $id]);
+             $this->events->dispatch(new UserAccessed($user));
+ 
+             return $user;

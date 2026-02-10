@@ -15,7 +15,7 @@ class DiffAdditionInjection implements Injection
     {
         $content = preg_replace_callback(
             '/^\+(.*)$/m',
-            function ($matches) {
+            function (array $matches): string {
                 $open = Escape::tokens('<span class="hl-addition">+ ');
                 $close = Escape::tokens('</span>');
 

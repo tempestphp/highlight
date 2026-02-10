@@ -15,7 +15,7 @@ class DiffDeletionInjection implements Injection
     {
         $content = preg_replace_callback(
             '/^\-(.*)$/m', // Matches lines starting with '+'
-            function ($matches) {
+            function (array $matches): string {
                 $open = Escape::tokens('<span class="hl-deletion">- ');
                 $close = Escape::tokens('</span>');
 

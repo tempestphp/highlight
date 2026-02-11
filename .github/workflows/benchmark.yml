@@ -39,7 +39,7 @@ jobs:
         run: |
           git checkout ${{ github.event.pull_request.head.sha }}
           composer install --no-interaction --prefer-dist --quiet
-          vendor/bin/phpbench run --tag=pr --store --ref=base --report=aggregate --progress=none 2>&1 | tee benchmark-result.txt || true
+          vendor/bin/phpbench run --tag=pr --store --ref=base --report=aggregate --progress=none --output=markdown | tee benchmark-result.txt || true
 
       - name: Prepare artifact
         run: |

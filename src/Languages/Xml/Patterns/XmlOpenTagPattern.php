@@ -14,6 +14,7 @@ use Tempest\Highlight\Tokens\TokenTypeEnum;
 #[PatternTest(input: '<br/>', output: 'br')]
 #[PatternTest(input: '<ns:tag>', output: 'ns:tag')]
 #[PatternTest(input: '<point.x>', output: 'point.x')]
+#[PatternTest(input: '<point_y>', output: 'point_y')]
 final readonly class XmlOpenTagPattern implements Pattern
 {
     use IsPattern;

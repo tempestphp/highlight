@@ -13,6 +13,7 @@ use Tempest\Highlight\Tokens\TokenTypeEnum;
 #[PatternTest(input: '</a>', output: 'a')]
 #[PatternTest(input: '</ns:tag>', output: 'ns:tag')]
 #[PatternTest(input: '</point.x>', output: 'point.x')]
+#[PatternTest(input: '</point_y>', output: 'point_y')]
 final readonly class XmlCloseTagPattern implements Pattern
 {
     use IsPattern;

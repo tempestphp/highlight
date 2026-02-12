@@ -18,13 +18,17 @@ use Tempest\Highlight\Tokens\TokenTypeEnum;
 #[PatternTest(input: '<ns:tag>', output: 'ns:tag')]
 #[PatternTest(input: '<point.x>', output: 'point.x')]
 #[PatternTest(input: '<point_y>', output: 'point_y')]
+#[PatternTest(input: '<_private>', output: '_private')]
+# The following are not valid XML tags
+#[PatternTest(input: '<1tag>', output: null)]
+#[PatternTest(input: '<-tag>', output: null)]
 final readonly class XmlOpenTagPattern implements Pattern
 {
     use IsPattern;
 
     public function getPattern(): string
     {
-        return '<(?<match>[\w\-\:\.]+)';
+        return '<(?<match>[a-zA-Z_][\w\-\:\.]*)';
     }
 
     public function getTokenType(): TokenTypeEnum

@@ -28,6 +28,7 @@ class DockerfileLanguageTest extends TestCase
             ['FROM php AS stage-one', '<span class="hl-keyword">FROM</span> <span class="hl-value">php</span> <span class="hl-keyword">AS</span> <span class="hl-value">stage-one</span>'],
             ['WORKDIR /usr/local/app', '<span class="hl-keyword">WORKDIR</span> /usr/local/app'],
             ['CMD ["node", "./src/index.js"]', '<span class="hl-keyword">CMD</span> [<span class="hl-value">&quot;node&quot;</span>, <span class="hl-value">&quot;./src/index.js&quot;</span>]'],
+            ["CMD ['php', 'index.php']", '<span class="hl-keyword">CMD</span> [<span class="hl-value">\'php\'</span>, <span class="hl-value">\'index.php\'</span>]'],
             ['# This is a comment', '<span class="hl-comment"># This is a comment</span>'],
         ];
     }

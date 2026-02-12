@@ -12,13 +12,14 @@ use Tempest\Highlight\Tokens\TokenTypeEnum;
 #[PatternTest(input: '</x-hello>', output: 'x-hello')]
 #[PatternTest(input: '</a>', output: 'a')]
 #[PatternTest(input: '</ns:tag>', output: 'ns:tag')]
+#[PatternTest(input: '</point.x>', output: 'point.x')]
 final readonly class XmlCloseTagPattern implements Pattern
 {
     use IsPattern;
 
     public function getPattern(): string
     {
-        return '<\/(?<match>[\w\-\:]+)';
+        return '<\/(?<match>[\w\-\:\.]+)';
     }
 
     public function getTokenType(): TokenTypeEnum

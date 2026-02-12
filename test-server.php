@@ -2,4 +2,6 @@
 
 require_once __DIR__ . '/vendor/autoload.php';
 
-passthru("php -S localhost:8000 -t tests/");
+$port = intval($argv[1] ?? 8000);
+
+passthru("php -S localhost:$port -t tests/");

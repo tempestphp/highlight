@@ -12,6 +12,8 @@ use Tempest\Highlight\CommonMark\InlineCodeBlockRenderer;
 use Tempest\Highlight\Highlighter;
 use Tempest\Highlight\Themes\CssTheme;
 
+$tests = glob("./targets/*.md");
+
 $environment = new Environment();
 
 $highlighter = (new Highlighter(new CssTheme()));
@@ -24,7 +26,7 @@ $environment
 
 $markdown = new MarkdownConverter($environment);
 
-$target = 'targets' . DIRECTORY_SEPARATOR . 'test.md';
+$target = 'targets' . DIRECTORY_SEPARATOR . 'php.md';
 
 if (isset($_GET['target'])) {
     $target = $_GET['target'];
@@ -46,7 +48,7 @@ if (isset($_GET['stylesheet'])) {
 
 ?>
 
-<html>
+<html lang="en">
 <head>
     <title>Test</title>
     <style>
@@ -55,6 +57,7 @@ if (isset($_GET['stylesheet'])) {
         body {
             font-size: 15px;
             background-color: #232323;
+            color: #d4d4d4;
         }
 
         code,
@@ -83,6 +86,25 @@ if (isset($_GET['stylesheet'])) {
             /*height: 100vh;*/
         }
 
+        a {
+            color: #5ea8d6;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        a:hover {
+            color: #8ec5e8;
+            text-decoration: underline;
+        }
+
+        a:visited {
+            color: #a78bba;
+        }
+
+        a:active {
+            color: #f0a05a;
+        }
+
         .hl-injection {
             /*background-color: #f0000044;*/
         }
@@ -92,6 +114,13 @@ if (isset($_GET['stylesheet'])) {
     <?php endif; ?>
 </head>
 <body>
+<nav>
+    <ul>
+        <?php foreach ($tests as $test): ?>
+            <li><a href="?target=<?= urlencode($test) ?>"><?= $test ?></a></li>
+        <?php endforeach; ?>
+    </ul>
+</nav>
 <div class="container">
     <?= $contents ?>
 </div>

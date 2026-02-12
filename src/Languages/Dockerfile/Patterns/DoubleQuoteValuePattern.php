@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tempest\Highlight\Languages\Dockerfile\Patterns;
 
 use Tempest\Highlight\IsPattern;
@@ -22,5 +24,4 @@ final readonly class DoubleQuoteValuePattern implements Pattern
     {
         return TokenTypeEnum::VALUE;
     }
-
 }

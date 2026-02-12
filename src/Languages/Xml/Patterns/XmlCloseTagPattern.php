@@ -9,6 +9,9 @@ use Tempest\Highlight\Pattern;
 use Tempest\Highlight\PatternTest;
 use Tempest\Highlight\Tokens\TokenTypeEnum;
 
+#[PatternTest(input: '</simple>', output: 'simple')]
+#[PatternTest(input: '</UPPERCASE>', output: 'UPPERCASE')]
+#[PatternTest(input: '</CamelCase>', output: 'CamelCase')]
 #[PatternTest(input: '</x-hello>', output: 'x-hello')]
 #[PatternTest(input: '</a>', output: 'a')]
 #[PatternTest(input: '</ns:tag>', output: 'ns:tag')]

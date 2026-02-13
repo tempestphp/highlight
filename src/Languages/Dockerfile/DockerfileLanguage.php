@@ -6,11 +6,14 @@ namespace Tempest\Highlight\Languages\Dockerfile;
 
 use Override;
 use Tempest\Highlight\Languages\Base\BaseLanguage;
+use Tempest\Highlight\Languages\Dockerfile\Patterns\CommentPattern;
+use Tempest\Highlight\Languages\Dockerfile\Patterns\DoubleQuoteValuePattern;
 use Tempest\Highlight\Languages\Dockerfile\Patterns\ImageAliasKeywordPattern;
 use Tempest\Highlight\Languages\Dockerfile\Patterns\ImageAliasNamePattern;
 use Tempest\Highlight\Languages\Dockerfile\Patterns\ImageNamePattern;
 use Tempest\Highlight\Languages\Dockerfile\Patterns\ImageTagPattern;
 use Tempest\Highlight\Languages\Dockerfile\Patterns\KeywordPattern;
+use Tempest\Highlight\Languages\Dockerfile\Patterns\SingleQuoteValuePattern;
 
 class DockerfileLanguage extends BaseLanguage
 {
@@ -54,6 +57,9 @@ class DockerfileLanguage extends BaseLanguage
             new ImageAliasKeywordPattern(),
             new ImageAliasNamePattern(),
             new ImageTagPattern(),
+            new SingleQuoteValuePattern(),
+            new DoubleQuoteValuePattern(),
+            new CommentPattern(),
         ];
     }
 }

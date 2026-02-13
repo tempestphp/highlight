@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tempest\Highlight\Languages\Xml\Patterns;
+namespace Tempest\Highlight\Languages\Html\Patterns;
 
 use Tempest\Highlight\IsPattern;
 use Tempest\Highlight\Pattern;
@@ -14,20 +14,20 @@ use Tempest\Highlight\Tokens\TokenTypeEnum;
 #[PatternTest(input: '</CamelCase>', output: 'CamelCase')]
 #[PatternTest(input: '</x-hello>', output: 'x-hello')]
 #[PatternTest(input: '</a>', output: 'a')]
-#[PatternTest(input: '</ns:tag>', output: 'ns:tag')]
-#[PatternTest(input: '</point.x>', output: 'point.x')]
-#[PatternTest(input: '</point_y>', output: 'point_y')]
-#[PatternTest(input: '</_private>', output: '_private')]
-# The following are not valid XML tags
+# The following are not HTML valid
+#[PatternTest(input: '</ns:tag>', output: null)]
+#[PatternTest(input: '</point.x>', output: null)]
+#[PatternTest(input: '</point_y>', output: null)]
+#[PatternTest(input: '</_private>', output: null)]
 #[PatternTest(input: '</1tag>', output: null)]
 #[PatternTest(input: '</-tag>', output: null)]
-final readonly class XmlCloseTagPattern implements Pattern
+final readonly class HtmlCloseTagPattern implements Pattern
 {
     use IsPattern;
 
     public function getPattern(): string
     {
-        return '<\/(?<match>[a-zA-Z_][\w\-\:\.]*)';
+        return '<\/(?<match>[a-zA-Z][a-zA-Z0-9\-]*(?![:_\.\w]))';
     }
 
     public function getTokenType(): TokenTypeEnum

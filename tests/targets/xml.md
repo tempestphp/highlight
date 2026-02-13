@@ -52,6 +52,12 @@
   </a:element>
 
   <!-- Default namespace override and undeclaration -->
+  <coordinates>
+      <point.x>123.45</point.x>
+      <point.y>42,15</point.y>
+  </coordinates>
+
+  <!-- Default namespace override and undeclaration -->
   <container xmlns="http://example.com/override">
     <item xmlns="">Back to no namespace</item>
     <item xmlns="http://example.com/default">Back to original</item>

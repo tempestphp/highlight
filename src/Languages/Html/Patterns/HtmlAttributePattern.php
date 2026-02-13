@@ -12,6 +12,7 @@ use Tempest\Highlight\Tokens\TokenTypeEnum;
 #[PatternTest(input: '<x-hello attr="">', output: 'attr')]
 #[PatternTest(input: '<a href="">', output: 'href')]
 #[PatternTest(input: '<a data-type="">', output: 'data-type')]
+#[PatternTest(input: '<x-post :foreach="$this->posts as $post">', output: ':foreach')]
 #[PatternTest(input: '<xsl xmlns:xsl="http">', output: 'xmlns:xsl')]
 #[PatternTest(input: "<item attr='value'>", output: 'attr')]
 #[PatternTest(input: "<item simple=value>", output: 'simple')]

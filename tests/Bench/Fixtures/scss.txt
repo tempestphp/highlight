@@ -1,0 +1,100 @@
+$primary-color: #3b82f6;
+$secondary-color: #6366f1;
+$spacing-unit: 0.25rem;
+$font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+$breakpoint-md: 768px;
+
+@mixin flex-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@mixin responsive($breakpoint) {
+    @media (max-width: $breakpoint) {
+        @content;
+    }
+}
+
+@function spacing($multiplier) {
+    @return $spacing-unit * $multiplier;
+}
+
+%card-base {
+    background: white;
+    border-radius: 0.75rem;
+    padding: spacing(6);
+}
+
+body {
+    font-family: $font-sans;
+    line-height: 1.6;
+    color: #1f2937;
+    background-color: #f9fafb;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 spacing(4);
+}
+
+.card {
+    @extend %card-base;
+    box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+    transition: transform 0.2s ease-in-out;
+
+    &:hover {
+        transform: translateY(-2px);
+    }
+
+    &__title {
+        font-size: 1.25rem;
+        color: $primary-color;
+    }
+
+    &__body {
+        padding: spacing(4);
+    }
+}
+
+.btn {
+    @include flex-center;
+    padding: spacing(2) spacing(4);
+    border-radius: 0.375rem;
+    cursor: pointer;
+
+    &-primary {
+        background-color: $primary-color;
+        color: white;
+
+        &:hover {
+            background-color: darken($primary-color, 10%);
+        }
+    }
+}
+
+// Responsive utilities
+@each $size in sm, md, lg {
+    .hide-#{$size} {
+        @include responsive($breakpoint-md) {
+            display: none;
+        }
+    }
+}
+
+@if $primary-color == #3b82f6 {
+    .themed {
+        color: $primary-color;
+    }
+} @else {
+    .themed {
+        color: $secondary-color;
+    }
+}
+
+/* Multi-line comment
+   still works in SCSS */
+.fade-in {
+    animation: fadeIn 0.3s ease-out forwards;
+}

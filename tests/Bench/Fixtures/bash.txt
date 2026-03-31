@@ -1,0 +1,60 @@
+#!/bin/bash
+
+# Configuration
+MAX_RETRIES=3
+LOG_FILE="/var/log/deploy.log"
+
+# Function to check service health
+check_health() {
+    local url=$1
+    local timeout=${2:-5}
+
+    if curl --silent --fail --max-time "$timeout" "$url" > /dev/null 2>&1; then
+        echo "Service is healthy"
+        return 0
+    else
+        echo "Service is not responding" >> "$LOG_FILE"
+        return 1
+    fi
+}
+
+# Deploy with retries
+deploy() {
+    local attempt=1
+
+    while [ $attempt -le $MAX_RETRIES ]; do
+        echo "Deployment attempt $attempt of $MAX_RETRIES"
+
+        if docker-compose up -d --build 2>&1 | tee -a "$LOG_FILE"; then
+            echo "Deployment successful"
+            break
+        fi
+
+        attempt=$((attempt + 1))
+        sleep 5
+    done
+
+    if [ $attempt -gt $MAX_RETRIES ]; then
+        echo "Deployment failed after $MAX_RETRIES attempts" >&2
+        exit 1
+    fi
+}
+
+# Parse arguments
+case "$1" in
+    start)
+        deploy
+        ;;
+    status)
+        check_health "http://localhost:8080/health"
+        ;;
+    *)
+        echo "Usage: $0 {start|status}"
+        exit 1
+        ;;
+esac
+
+for service in web api worker; do
+    printf "Checking %s...\n" "$service"
+    systemctl is-active --quiet "$service" && echo "OK" || echo "FAILED"
+done

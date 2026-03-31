@@ -17,6 +17,7 @@ final class HighlighterBench
     private const string FIXTURES_DIR = __DIR__ . '/Fixtures';
 
     public const array LANGUAGES = [
+        'bash' => 'bash.txt',
         'blade' => 'blade.txt',
         'css' => 'css.txt',
         'diff' => 'diff.txt',

@@ -22,6 +22,7 @@ use Tempest\Highlight\Languages\Json\JsonLanguage;
 use Tempest\Highlight\Languages\Markdown\MarkdownLanguage;
 use Tempest\Highlight\Languages\Php\PhpLanguage;
 use Tempest\Highlight\Languages\Python\PythonLanguage;
+use Tempest\Highlight\Languages\Scss\ScssLanguage;
 use Tempest\Highlight\Languages\Sql\SqlLanguage;
 use Tempest\Highlight\Languages\Text\TextLanguage;
 use Tempest\Highlight\Languages\Twig\TwigLanguage;
@@ -66,6 +67,7 @@ final class Highlighter
             ->addLanguage(new MarkdownLanguage())
             ->addLanguage(new PhpLanguage())
             ->addLanguage(new PythonLanguage())
+            ->addLanguage(new ScssLanguage())
             ->addLanguage(new SqlLanguage())
             ->addLanguage(new XmlLanguage())
             ->addLanguage(new YamlLanguage())

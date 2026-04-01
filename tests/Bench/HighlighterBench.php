@@ -34,6 +34,7 @@ final class HighlighterBench
         'python' => 'python.txt',
         'scss' => 'scss.txt',
         'sql' => 'sql.txt',
+        'terminal' => 'terminal.txt',
         'twig' => 'twig.txt',
         'xml' => 'xml.txt',
         'yaml' => 'yaml.txt',

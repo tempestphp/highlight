@@ -1,0 +1,38 @@
+$ npm install --save express
+added 57 packages in 3s
+
+$ git status
+On branch main
+Your branch is up to date with 'origin/main'.
+
+nothing to commit, working tree clean
+
+$ docker ps -a
+CONTAINER ID   IMAGE          STATUS
+abc123         nginx:latest   Up 2 hours
+def456         redis:7        Exited (0) 3 days ago
+
+# apt update && apt install -y curl wget
+Hit:1 http://archive.ubuntu.com/ubuntu jammy InRelease
+Reading package lists... Done
+
+$ echo "Hello $USER, today is $(date)"
+Hello john, today is Mon Apr 1 10:00:00 UTC 2026
+
+$ cat /etc/hosts | grep -i 'localhost'
+127.0.0.1   localhost
+
+% brew install --cask visual-studio-code
+==> Downloading https://update.code.visualstudio.com
+Already downloaded: /Users/john/Library/Caches/Homebrew
+
+> node -v
+v20.11.0
+
+$ ls -la /var/log/*.log
+-rw-r--r-- 1 root root 45231 Apr 1 09:00 /var/log/syslog.log
+
+$ kubectl get pods -n production --output=wide
+NAME                    READY   STATUS    RESTARTS   AGE
+api-7d4b8c6f9-x2k4m    1/1     Running   0          24h
+web-5f6a7b8c9-m3n5p    1/1     Running   0          24h

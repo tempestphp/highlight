@@ -1,0 +1,29 @@
+[b]Bold text[/b]
+[i]Italic text[/i]
+[u]Underlined text[/u]
+[s]Strikethrough[/s]
+
+[url=http://example.com]Click here[/url]
+[img]http://example.com/image.png[/img]
+
+[color=#ff0000]Red text[/color]
+[size=18]Big text[/size]
+
+[quote=John]
+This is a quoted message.
+[/quote]
+
+[code]
+echo "Hello World";
+[/code]
+
+[list]
+[*]First item
+[*]Second item
+[*]Third item
+[/list]
+
+[table]
+[tr][th]Header[/th][th]Header 2[/th][/tr]
+[tr][td]Cell 1[/td][td]Cell 2[/td][/tr]
+[/table]

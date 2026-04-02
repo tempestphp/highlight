@@ -94,6 +94,26 @@ TXT,
 <span class="hl-comment">/* This is a
    multi-line comment */</span>
 TXT],
+            [<<<'TXT'
+resource "aws_iam_policy" "example" {
+  policy = <<-POLICY
+    {
+      "Version": "2012-10-17",
+      "Statement": []
+    }
+  POLICY
+}
+TXT,
+            <<<'TXT'
+<span class="hl-keyword">resource</span> <span class="hl-value">&quot;aws_iam_policy&quot;</span> <span class="hl-value">&quot;example&quot;</span> {
+  <span class="hl-property">policy</span> <span class="hl-operator">=</span> <span class="hl-value">&lt;&lt;-POLICY
+    {
+      &quot;Version&quot;: &quot;2012-10-17&quot;,
+      &quot;Statement&quot;: []
+    }
+  POLICY</span>
+}
+TXT],
         ];
     }
 }

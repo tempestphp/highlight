@@ -36,6 +36,7 @@ final class HighlighterBench
         'scss' => 'scss.txt',
         'sql' => 'sql.txt',
         'terminal' => 'terminal.txt',
+        'terraform' => 'terraform.txt',
         'twig' => 'twig.txt',
         'xml' => 'xml.txt',
         'yaml' => 'yaml.txt',

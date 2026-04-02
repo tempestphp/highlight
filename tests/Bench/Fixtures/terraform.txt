@@ -1,0 +1,54 @@
+# Configure the AWS provider
+provider "aws" {
+  region = "us-east-1"
+}
+
+resource "aws_instance" "web" {
+  ami           = var.ami_id
+  instance_type = "t2.micro"
+  count         = 3
+
+  tags = {
+    Name = "web-${var.environment}"
+  }
+
+  lifecycle {
+    create_before_destroy = true
+  }
+}
+
+variable "instance_type" {
+  type    = string
+  default = "t2.micro"
+}
+
+output "instance_id" {
+  value = module.server.id
+}
+
+// Single-line comment
+/* Multi-line
+   comment */
+
+data "aws_ami" "ubuntu" {
+  most_recent = true
+
+  filter {
+    name   = "name"
+    values = ["ubuntu/images/hvm-ssd/ubuntu-focal-20.04-amd64-server-*"]
+  }
+}
+
+locals {
+  common_tags = {
+    Environment = var.environment
+    Project     = "example"
+  }
+}
+
+module "vpc" {
+  source  = "terraform-aws-modules/vpc/aws"
+  version = "3.0.0"
+
+  cidr = "10.0.0.0/16"
+}

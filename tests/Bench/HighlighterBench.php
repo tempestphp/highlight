@@ -18,6 +18,7 @@ final class HighlighterBench
 
     public const array LANGUAGES = [
         'bash' => 'bash.txt',
+        'bbcode' => 'bbcode.txt',
         'blade' => 'blade.txt',
         'css' => 'css.txt',
         'diff' => 'diff.txt',

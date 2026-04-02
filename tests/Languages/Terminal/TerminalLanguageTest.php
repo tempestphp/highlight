@@ -50,6 +50,23 @@ Hello john
 <span class="hl-comment">#</span> <span class="hl-keyword">docker</span> ps <span class="hl-generic">-a</span>
 CONTAINER ID   IMAGE   STATUS
 TXT],
+
+            [<<<'TXT'
+$ curl -OL https://squizlabs.github.io/PHP_CodeSniffer/phpcbf.phar
+$ pm2 start app.js --log /var/log/my-app.log
+$ npm init @eslint/config
+$ npx eslint --output-file errors.txt app/index.js
+$ npx husky add .husky/pre-commit 'echo "Hello World!"'
+$ brew install hashicorp/tap/terraform
+TXT,
+            <<<'TXT'
+<span class="hl-comment">$</span> <span class="hl-keyword">curl</span> <span class="hl-generic">-OL</span> <span class="hl-value">https://squizlabs.github.io/PHP_CodeSniffer/phpcbf.phar</span>
+<span class="hl-comment">$</span> <span class="hl-keyword">pm2</span> start <span class="hl-property">app.js</span> <span class="hl-generic">--log</span> <span class="hl-property">/var/log/my-app.log</span>
+<span class="hl-comment">$</span> <span class="hl-keyword">npm</span> init <span class="hl-property">@eslint/config</span>
+<span class="hl-comment">$</span> <span class="hl-keyword">npx</span> eslint <span class="hl-generic">--output-file</span> <span class="hl-property">errors.txt</span> <span class="hl-property">app/index.js</span>
+<span class="hl-comment">$</span> <span class="hl-keyword">npx</span> husky add <span class="hl-property">.husky/pre-commit</span> <span class="hl-value">'echo &quot;Hello World!&quot;'</span>
+<span class="hl-comment">$</span> <span class="hl-keyword">brew</span> install <span class="hl-property">hashicorp/tap/terraform</span>
+TXT],
         ];
     }
 }

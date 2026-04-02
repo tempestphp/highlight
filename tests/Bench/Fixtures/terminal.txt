@@ -36,3 +36,10 @@ $ kubectl get pods -n production --output=wide
 NAME                    READY   STATUS    RESTARTS   AGE
 api-7d4b8c6f9-x2k4m    1/1     Running   0          24h
 web-5f6a7b8c9-m3n5p    1/1     Running   0          24h
+
+$ curl -OL https://squizlabs.github.io/PHP_CodeSniffer/phpcbf.phar
+$ pm2 start app.js --log /var/log/my-app.log
+$ npm init @eslint/config
+$ npx eslint --output-file errors.txt app/index.js
+$ npx husky add .husky/pre-commit 'echo "Hello World!"'
+$ brew install hashicorp/tap/terraform

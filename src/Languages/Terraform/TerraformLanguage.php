@@ -13,6 +13,7 @@ use Tempest\Highlight\Languages\JavaScript\Patterns\JsSinglelineCommentPattern;
 use Tempest\Highlight\Languages\Php\Patterns\DoubleQuoteValuePattern;
 use Tempest\Highlight\Languages\Terraform\Patterns\TerraformBlockTypePattern;
 use Tempest\Highlight\Languages\Terraform\Patterns\TerraformBooleanPattern;
+use Tempest\Highlight\Languages\Terraform\Patterns\TerraformHeredocPattern;
 use Tempest\Highlight\Languages\Terraform\Patterns\TerraformInterpolationPattern;
 use Tempest\Highlight\Languages\Terraform\Patterns\TerraformKeywordPattern;
 use Tempest\Highlight\Languages\Terraform\Patterns\TerraformOperatorPattern;
@@ -53,6 +54,7 @@ class TerraformLanguage extends BaseLanguage
             new JsSinglelineCommentPattern(),
 
             // VALUES
+            new TerraformHeredocPattern(),
             new DoubleQuoteValuePattern(),
 
             // BLOCK TYPES

@@ -46,6 +46,15 @@ locals {
   }
 }
 
+resource "aws_iam_policy" "example" {
+  policy = <<-POLICY
+    {
+      "Version": "2012-10-17",
+      "Statement": []
+    }
+  POLICY
+}
+
 module "vpc" {
   source  = "terraform-aws-modules/vpc/aws"
   version = "3.0.0"

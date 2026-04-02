@@ -29,6 +29,11 @@ class TerraformLanguageTest extends TestCase
             $expected,
             $highlighter->parse($content, 'hcl'),
         );
+
+        $this->assertSame(
+            $expected,
+            $highlighter->parse($content, 'terragrunt'),
+        );
     }
 
     public static function provide_highlight_cases(): iterable

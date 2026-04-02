@@ -31,7 +31,7 @@ class TerraformLanguage extends BaseLanguage
     #[Override]
     public function getAliases(): array
     {
-        return ['tf', 'hcl'];
+        return ['tf', 'hcl', 'terragrunt'];
     }
 
     #[Override]

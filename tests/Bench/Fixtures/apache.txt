@@ -1,0 +1,37 @@
+# Apache2 Virtual Host Configuration
+
+<VirtualHost *:80>
+    ServerAdmin webmaster@example.com
+    ServerName example.com
+    ServerAlias www.example.com
+    DocumentRoot /var/www/html
+
+    <Directory /var/www/html>
+        Options -Indexes +FollowSymLinks
+        AllowOverride All
+        Require all granted
+    </Directory>
+
+    ErrorLog ${APACHE_LOG_DIR}/error.log
+    CustomLog ${APACHE_LOG_DIR}/access.log combined
+
+    RewriteEngine on
+    RewriteCond %{HTTPS} off
+    RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+</VirtualHost>
+
+<VirtualHost *:443>
+    ServerName example.com
+    DocumentRoot /var/www/html
+
+    SSLEngine on
+    SSLCertificateFile "/etc/ssl/certs/server.crt"
+    SSLCertificateKeyFile "/etc/ssl/private/server.key"
+
+    <IfModule mod_headers.c>
+        Header always set Strict-Transport-Security "max-age=31536000"
+    </IfModule>
+
+    ProxyPass /api http://localhost:3000
+    ProxyPassReverse /api http://localhost:3000
+</VirtualHost>

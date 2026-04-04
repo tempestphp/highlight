@@ -31,6 +31,7 @@ final class HighlighterBench
         'javascript' => 'javascript.txt',
         'json' => 'json.txt',
         'markdown' => 'markdown.txt',
+        'nginx' => 'nginx.txt',
         'php' => 'php.txt',
         'python' => 'python.txt',
         'scss' => 'scss.txt',

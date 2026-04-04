@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Tempest\Highlight;
 
 use ReflectionClass;
-use Tempest\Highlight\Languages\Base\Injections\GutterInjection;
 use Tempest\Highlight\Languages\Apache\ApacheLanguage;
+use Tempest\Highlight\Languages\Base\Injections\GutterInjection;
 use Tempest\Highlight\Languages\Bash\BashLanguage;
 use Tempest\Highlight\Languages\BBCode\BBCodeLanguage;
 use Tempest\Highlight\Languages\Blade\BladeLanguage;

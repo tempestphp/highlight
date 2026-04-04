@@ -6,6 +6,7 @@ namespace Tempest\Highlight;
 
 use ReflectionClass;
 use Tempest\Highlight\Languages\Base\Injections\GutterInjection;
+use Tempest\Highlight\Languages\Apache\ApacheLanguage;
 use Tempest\Highlight\Languages\Bash\BashLanguage;
 use Tempest\Highlight\Languages\BBCode\BBCodeLanguage;
 use Tempest\Highlight\Languages\Blade\BladeLanguage;
@@ -55,7 +56,8 @@ final class Highlighter
 
     public function __construct(private readonly Theme $theme = new CssTheme())
     {
-        $this->addLanguage(new BashLanguage())
+        $this->addLanguage(new ApacheLanguage())
+            ->addLanguage(new BashLanguage())
             ->addLanguage(new BBCodeLanguage())
             ->addLanguage(new BladeLanguage())
             ->addLanguage(new CssLanguage())

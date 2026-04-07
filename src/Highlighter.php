@@ -22,6 +22,7 @@ use Tempest\Highlight\Languages\Ini\IniLanguage;
 use Tempest\Highlight\Languages\JavaScript\JavaScriptLanguage;
 use Tempest\Highlight\Languages\Json\JsonLanguage;
 use Tempest\Highlight\Languages\Markdown\MarkdownLanguage;
+use Tempest\Highlight\Languages\Nginx\NginxLanguage;
 use Tempest\Highlight\Languages\Php\PhpLanguage;
 use Tempest\Highlight\Languages\Python\PythonLanguage;
 use Tempest\Highlight\Languages\Scss\ScssLanguage;
@@ -71,6 +72,7 @@ final class Highlighter
             ->addLanguage(new JavaScriptLanguage())
             ->addLanguage(new JsonLanguage())
             ->addLanguage(new MarkdownLanguage())
+            ->addLanguage(new NginxLanguage())
             ->addLanguage(new PhpLanguage())
             ->addLanguage(new PythonLanguage())
             ->addLanguage(new ScssLanguage())

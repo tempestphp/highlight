@@ -1,0 +1,57 @@
+/**
+ * User service with basic CRUD operations.
+ */
+import { Injectable } from '@angular/core';
+
+interface User {
+    id: number;
+    name: string;
+    email: string;
+    roles: readonly string[];
+}
+
+type UserId = number;
+
+enum Role {
+    Admin = 'admin',
+    Member = 'member',
+    Guest = 'guest',
+}
+
+@Injectable({ providedIn: 'root' })
+export class UserService<T extends User> {
+    private readonly users: Map<UserId, T> = new Map();
+
+    constructor(private readonly apiUrl: string) {}
+
+    public async findById(id: UserId): Promise<T | undefined> {
+        const user = this.users.get(id);
+        if (user === undefined) {
+            return undefined;
+        }
+        return user;
+    }
+
+    public async create(data: Omit<T, 'id'>): Promise<T> {
+        const id: number = Math.floor(Math.random() * 1_000_000);
+        const user = { id, ...data } as T;
+        this.users.set(id, user);
+        return user;
+    }
+
+    public delete(id: UserId): boolean {
+        return this.users.delete(id);
+    }
+
+    public list(): readonly T[] {
+        return Array.from(this.users.values());
+    }
+}
+
+const service = new UserService<User>('https://api.example.com');
+const admin: User = {
+    id: 1,
+    name: 'Alice',
+    email: 'alice@example.com',
+    roles: ['admin'],
+};

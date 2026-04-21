@@ -31,6 +31,7 @@ use Tempest\Highlight\Languages\Terminal\TerminalLanguage;
 use Tempest\Highlight\Languages\Terraform\TerraformLanguage;
 use Tempest\Highlight\Languages\Text\TextLanguage;
 use Tempest\Highlight\Languages\Twig\TwigLanguage;
+use Tempest\Highlight\Languages\TypeScript\TypeScriptLanguage;
 use Tempest\Highlight\Languages\Xml\XmlLanguage;
 use Tempest\Highlight\Languages\Yaml\YamlLanguage;
 use Tempest\Highlight\Themes\CssTheme;
@@ -79,6 +80,7 @@ final class Highlighter
             ->addLanguage(new SqlLanguage())
             ->addLanguage(new TerminalLanguage())
             ->addLanguage(new TerraformLanguage())
+            ->addLanguage(new TypeScriptLanguage())
             ->addLanguage(new XmlLanguage())
             ->addLanguage(new YamlLanguage())
             ->addLanguage(new DotEnvLanguage())

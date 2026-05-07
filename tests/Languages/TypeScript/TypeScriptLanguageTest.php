@@ -72,6 +72,14 @@ class TypeScriptLanguageTest extends TestCase
                 '<span class="hl-keyword">class</span> <span class="hl-type">Service</span><span class="hl-generic">&lt;K, V <span class="hl-keyword">extends</span> Base&gt;</span> {}',
             ],
             [
+                "let filter: State<'all' | 'active' | 'done'> = 'all';",
+                '<span class="hl-keyword">let</span> <span class="hl-property">filter</span>: <span class="hl-type">State</span><span class="hl-generic">&lt;<span class="hl-value">\'all\'</span> | <span class="hl-value">\'active\'</span> | <span class="hl-value">\'done\'</span>&gt;</span> = <span class="hl-value">\'all\'</span>;',
+            ],
+            [
+                'let filter: State<"all" | "active" | "done"> = "all";',
+                '<span class="hl-keyword">let</span> <span class="hl-property">filter</span>: <span class="hl-type">State</span><span class="hl-generic">&lt;<span class="hl-value">&quot;all&quot;</span> | <span class="hl-value">&quot;active&quot;</span> | <span class="hl-value">&quot;done&quot;</span>&gt;</span> = <span class="hl-value">&quot;all&quot;</span>;',
+            ],
+            [
                 <<<'TXT'
                 @Component({ selector: 'x' })
                 class Foo {}

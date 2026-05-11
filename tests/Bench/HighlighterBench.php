@@ -27,6 +27,7 @@ final class HighlighterBench
         'dotenv' => 'dotenv.txt',
         'ellison' => 'ellison.txt',
         'gdscript' => 'gdscript.txt',
+        'graphql' => 'graphql.txt',
         'html' => 'html.txt',
         'ini' => 'ini.txt',
         'javascript' => 'javascript.txt',

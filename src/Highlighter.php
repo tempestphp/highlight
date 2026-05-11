@@ -17,6 +17,7 @@ use Tempest\Highlight\Languages\Dockerfile\DockerfileLanguage;
 use Tempest\Highlight\Languages\DotEnv\DotEnvLanguage;
 use Tempest\Highlight\Languages\Ellison\EllisonLanguage;
 use Tempest\Highlight\Languages\Gdscript\GdscriptLanguage;
+use Tempest\Highlight\Languages\Graphql\GraphqlLanguage;
 use Tempest\Highlight\Languages\Html\HtmlLanguage;
 use Tempest\Highlight\Languages\Ini\IniLanguage;
 use Tempest\Highlight\Languages\JavaScript\JavaScriptLanguage;
@@ -69,6 +70,7 @@ final class Highlighter
             ->addLanguage(new DockerfileLanguage())
             ->addLanguage(new EllisonLanguage())
             ->addLanguage(new GdscriptLanguage())
+            ->addLanguage(new GraphqlLanguage())
             ->addLanguage(new HtmlLanguage())
             ->addLanguage(new JavaScriptLanguage())
             ->addLanguage(new JsonLanguage())

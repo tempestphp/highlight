@@ -15,7 +15,6 @@ use Tempest\Highlight\Languages\Diff\DiffLanguage;
 use Tempest\Highlight\Languages\DocComment\DocCommentLanguage;
 use Tempest\Highlight\Languages\Dockerfile\DockerfileLanguage;
 use Tempest\Highlight\Languages\DotEnv\DotEnvLanguage;
-use Tempest\Highlight\Languages\Ellison\EllisonLanguage;
 use Tempest\Highlight\Languages\Gdscript\GdscriptLanguage;
 use Tempest\Highlight\Languages\Html\HtmlLanguage;
 use Tempest\Highlight\Languages\Ini\IniLanguage;
@@ -67,7 +66,6 @@ final class Highlighter
             ->addLanguage(new DiffLanguage())
             ->addLanguage(new DocCommentLanguage())
             ->addLanguage(new DockerfileLanguage())
-            ->addLanguage(new EllisonLanguage())
             ->addLanguage(new GdscriptLanguage())
             ->addLanguage(new HtmlLanguage())
             ->addLanguage(new JavaScriptLanguage())

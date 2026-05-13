@@ -25,7 +25,6 @@ final class HighlighterBench
         'diff' => 'diff.txt',
         'dockerfile' => 'dockerfile.txt',
         'dotenv' => 'dotenv.txt',
-        'ellison' => 'ellison.txt',
         'gdscript' => 'gdscript.txt',
         'html' => 'html.txt',
         'ini' => 'ini.txt',

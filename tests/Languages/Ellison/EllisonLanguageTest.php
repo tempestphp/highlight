@@ -7,13 +7,14 @@ namespace Tempest\Highlight\Tests\Languages\Ellison;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Tempest\Highlight\Highlighter;
+use Tempest\Highlight\Languages\Ellison\EllisonLanguage;
 
 class EllisonLanguageTest extends TestCase
 {
     #[DataProvider('provide_highlight_cases')]
     public function test_highlight(string $content, string $expected): void
     {
-        $highlighter = new Highlighter();
+        $highlighter = new Highlighter()->addLanguage(new EllisonLanguage());
 
         $this->assertSame(
             $expected,

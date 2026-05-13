@@ -1,0 +1,40 @@
+# Query users by name
+query UsersByName($name: String!) {
+  users($name: $name) {
+    id
+  }
+}
+
+# ======
+# Schema
+# ======
+
+"""
+A user
+"""
+type User {
+  id: ID!
+  name: String!
+}
+
+type Query {
+  """
+  Query users by name.
+  """
+  users(name: String): [User!]!
+  """
+  Query a user by ID.
+  """
+  user(id: ID!): User
+}
+
+type Mutation {
+  """
+  Create a user
+  """
+  createUser(input: CreateUserInput!): User
+}
+
+input CreateUserInput {
+    name: String!
+}

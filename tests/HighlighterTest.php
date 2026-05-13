@@ -11,6 +11,7 @@ use Tempest\Highlight\Highlighter;
 use Tempest\Highlight\Injection;
 use Tempest\Highlight\IsInjection;
 use Tempest\Highlight\Language;
+use Tempest\Highlight\Languages\Php\PhpLanguage;
 use Tempest\Highlight\Themes\InlineTheme;
 use Tempest\Highlight\Tokens\TokenTypeEnum;
 
@@ -130,5 +131,24 @@ class HighlighterTest extends TestCase
             ['02', 'html'], // deep injections
             ['03', 'php'], // windows line endings
         ];
+    }
+
+    public function test_fallback_language(): void
+    {
+        $highlighter = new Highlighter(fallbackLanguage: new PhpLanguage());
+
+        $highlighted = $highlighter->parse('echo "hi";', null);
+
+        $this->assertSame(
+            '<span class="hl-keyword">echo</span> <span class="hl-value">&quot;hi&quot;</span>;',
+            $highlighted,
+        );
+
+        $highlighted = $highlighter->parse('echo "hi";', 'unknown');
+
+        $this->assertSame(
+            '<span class="hl-keyword">echo</span> <span class="hl-value">&quot;hi&quot;</span>;',
+            $highlighted,
+        );
     }
 }

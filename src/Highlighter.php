@@ -47,7 +47,6 @@ final class Highlighter
     private readonly ParseTokens $parseTokens;
     private readonly GroupTokens $groupTokens;
     private readonly RenderTokens $renderTokens;
-    private readonly TextLanguage $fallbackLanguage;
     private array $patterns = [];
     private array $afterInjections = [];
     /** @var array<int, Injection[]> */
@@ -56,8 +55,10 @@ final class Highlighter
     private array $afterInjectionsCache = [];
     private ?self $nestedHighlighter = null;
 
-    public function __construct(private readonly Theme $theme = new CssTheme())
-    {
+    public function __construct(
+        private readonly Theme $theme = new CssTheme(),
+        private readonly Language|null $fallbackLanguage = new TextLanguage(),
+    ) {
         $this->addLanguage(new ApacheLanguage())
             ->addLanguage(new BashLanguage())
             ->addLanguage(new BBCodeLanguage())
@@ -85,7 +86,6 @@ final class Highlighter
             ->addLanguage(new IniLanguage())
             ->addLanguage(new TwigLanguage());
 
-        $this->fallbackLanguage = new TextLanguage();
         $this->parseTokens = new ParseTokens();
         $this->groupTokens = new GroupTokens();
         $this->renderTokens = new RenderTokens($this->theme);
@@ -119,11 +119,13 @@ final class Highlighter
         return $this;
     }
 
-    public function parse(string $content, string|Language $language): string
+    public function parse(string $content, null|string|Language $language): string
     {
         if (is_string($language)) {
-            $language = $this->languages[$language] ?? $this->fallbackLanguage;
+            $language = $this->languages[$language] ?? null;
         }
+
+        $language ??= $this->fallbackLanguage;
 
         $this->currentLanguage = $language;
 

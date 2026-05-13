@@ -56,8 +56,8 @@ final class Highlighter
     private ?self $nestedHighlighter = null;
 
     public function __construct(
-        private readonly Theme $theme = new CssTheme(),
-        private readonly Language|null $fallbackLanguage = new TextLanguage(),
+        public readonly Theme $theme = new CssTheme(),
+        public readonly Language|null $fallbackLanguage = new TextLanguage(),
     ) {
         $this->addLanguage(new ApacheLanguage())
             ->addLanguage(new BashLanguage())

@@ -14,7 +14,7 @@ final class TsGenericPattern implements Pattern
 
     public function getPattern(): string
     {
-        return '/(?<=\w)(?<match><[A-Z][\w\s,\.\[\]]*>)/';
+        return '/(?<=\w)(?<match><[A-Z\'"][\w\s,\.\[\]\'"|]*>)/';
     }
 
     public function getTokenType(): TokenTypeEnum

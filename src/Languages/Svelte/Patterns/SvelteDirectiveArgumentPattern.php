@@ -14,7 +14,7 @@ final readonly class SvelteDirectiveArgumentPattern implements Pattern
 
     public function getPattern(): string
     {
-        return '(?<=\s(?:bind|use|transition|in|out|animate|on|class|style):)(?<match>[\w-]+)';
+        return '\s(?:bind|use|transition|in|out|animate|on|class|style):(?<match>[\w-]+)';
     }
 
     public function getTokenType(): TokenTypeEnum

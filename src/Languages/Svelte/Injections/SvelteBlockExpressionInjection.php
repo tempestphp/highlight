@@ -7,7 +7,6 @@ namespace Tempest\Highlight\Languages\Svelte\Injections;
 use Tempest\Highlight\Highlighter;
 use Tempest\Highlight\Injection;
 use Tempest\Highlight\IsInjection;
-use Tempest\Highlight\Languages\TypeScript\TypeScriptLanguage;
 
 final class SvelteBlockExpressionInjection implements Injection
 {

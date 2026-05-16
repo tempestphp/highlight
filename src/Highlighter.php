@@ -27,6 +27,7 @@ use Tempest\Highlight\Languages\Php\PhpLanguage;
 use Tempest\Highlight\Languages\Python\PythonLanguage;
 use Tempest\Highlight\Languages\Scss\ScssLanguage;
 use Tempest\Highlight\Languages\Sql\SqlLanguage;
+use Tempest\Highlight\Languages\Svelte\SvelteLanguage;
 use Tempest\Highlight\Languages\Terminal\TerminalLanguage;
 use Tempest\Highlight\Languages\Terraform\TerraformLanguage;
 use Tempest\Highlight\Languages\Text\TextLanguage;
@@ -86,7 +87,8 @@ final class Highlighter
             ->addLanguage(new YamlLanguage())
             ->addLanguage(new DotEnvLanguage())
             ->addLanguage(new IniLanguage())
-            ->addLanguage(new TwigLanguage());
+            ->addLanguage(new TwigLanguage())
+            ->addLanguage(new SvelteLanguage());
 
         $this->parseTokens = new ParseTokens();
         $this->groupTokens = new GroupTokens();

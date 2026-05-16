@@ -65,7 +65,15 @@ class TypeScriptLanguageTest extends TestCase
             ],
             [
                 'function identity<T>(v: T): T {}',
-                '<span class="hl-keyword">function</span> identity<span class="hl-generic">&lt;T&gt;</span>(<span class="hl-property">v</span>: <span class="hl-type">T</span>): <span class="hl-type">T</span> {}',
+                '<span class="hl-keyword">function</span> <span class="hl-property">identity</span><span class="hl-generic">&lt;T&gt;</span>(<span class="hl-property">v</span>: <span class="hl-type">T</span>): <span class="hl-type">T</span> {}',
+            ],
+            [
+                "function getRole<'user' | 'admin'>() {}",
+                "<span class=\"hl-keyword\">function</span> <span class=\"hl-property\">getRole</span><span class=\"hl-generic\">&lt;<span class=\"hl-value\">'user'</span> | <span class=\"hl-value\">'admin'</span>&gt;</span>() {}",
+            ],
+            [
+                'function getRole<user" | "admin">() {}',
+                '<span class="hl-keyword">function</span> getRole&lt;user<span class="hl-value">&quot; | &quot;</span>admin&quot;&gt;() {}',
             ],
             [
                 'class Service<K, V extends Base> {}',

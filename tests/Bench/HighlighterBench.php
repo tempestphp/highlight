@@ -37,6 +37,7 @@ final class HighlighterBench
         'python' => 'python.txt',
         'scss' => 'scss.txt',
         'sql' => 'sql.txt',
+        'svelte' => 'svelte.txt',
         'terminal' => 'terminal.txt',
         'terraform' => 'terraform.txt',
         'typescript' => 'typescript.txt',

@@ -10,13 +10,15 @@ use Tempest\Highlight\PatternTest;
 use Tempest\Highlight\Tokens\TokenTypeEnum;
 
 #[PatternTest(input: 'calcArea() {', output: 'calcArea')]
+#[PatternTest(input: 'calc_area() {', output: 'calc_area')]
+#[PatternTest(input: '$init() {', output: '$init')]
 final readonly class JsMethodPattern implements Pattern
 {
     use IsPattern;
 
     public function getPattern(): string
     {
-        return '(?<match>[\w]+)\(';
+        return '(?<match>[\w\$]+)\(';
     }
 
     public function getTokenType(): TokenTypeEnum

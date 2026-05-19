@@ -10,6 +10,7 @@ use Tempest\Highlight\Languages\JavaScript\Patterns\CombinedJsKeywordPattern;
 use Tempest\Highlight\Languages\TypeScript\Patterns\TsBuiltInTypePattern;
 use Tempest\Highlight\Languages\TypeScript\Patterns\TsDecoratorPattern;
 use Tempest\Highlight\Languages\TypeScript\Patterns\TsGenericPattern;
+use Tempest\Highlight\Languages\TypeScript\Patterns\TsMethodPattern;
 use Tempest\Highlight\Languages\TypeScript\Patterns\TsTypeAnnotationPattern;
 
 class TypeScriptLanguage extends JavaScriptLanguage
@@ -41,6 +42,7 @@ class TypeScriptLanguage extends JavaScriptLanguage
             new TsTypeAnnotationPattern(),
             new TsDecoratorPattern(),
             new TsGenericPattern(),
+            new TsMethodPattern(),
         ];
     }
 }

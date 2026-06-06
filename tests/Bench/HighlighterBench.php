@@ -42,6 +42,7 @@ final class HighlighterBench
         'terraform' => 'terraform.txt',
         'typescript' => 'typescript.txt',
         'twig' => 'twig.txt',
+        'vue' => 'vue.txt',
         'xml' => 'xml.txt',
         'yaml' => 'yaml.txt',
     ];

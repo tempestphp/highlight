@@ -33,6 +33,7 @@ use Tempest\Highlight\Languages\Terraform\TerraformLanguage;
 use Tempest\Highlight\Languages\Text\TextLanguage;
 use Tempest\Highlight\Languages\Twig\TwigLanguage;
 use Tempest\Highlight\Languages\TypeScript\TypeScriptLanguage;
+use Tempest\Highlight\Languages\Vue\VueLanguage;
 use Tempest\Highlight\Languages\Xml\XmlLanguage;
 use Tempest\Highlight\Languages\Yaml\YamlLanguage;
 use Tempest\Highlight\Themes\CssTheme;
@@ -88,7 +89,8 @@ final class Highlighter
             ->addLanguage(new DotEnvLanguage())
             ->addLanguage(new IniLanguage())
             ->addLanguage(new TwigLanguage())
-            ->addLanguage(new SvelteLanguage());
+            ->addLanguage(new SvelteLanguage())
+            ->addLanguage(new VueLanguage());
 
         $this->parseTokens = new ParseTokens();
         $this->groupTokens = new GroupTokens();

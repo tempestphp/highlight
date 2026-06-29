@@ -18,6 +18,7 @@ use Tempest\Highlight\Languages\DotEnv\DotEnvLanguage;
 use Tempest\Highlight\Languages\Gdscript\GdscriptLanguage;
 use Tempest\Highlight\Languages\Graphql\GraphqlLanguage;
 use Tempest\Highlight\Languages\Html\HtmlLanguage;
+use Tempest\Highlight\Languages\Http\HttpLanguage;
 use Tempest\Highlight\Languages\Ini\IniLanguage;
 use Tempest\Highlight\Languages\JavaScript\JavaScriptLanguage;
 use Tempest\Highlight\Languages\Json\JsonLanguage;
@@ -73,6 +74,7 @@ final class Highlighter
             ->addLanguage(new GdscriptLanguage())
             ->addLanguage(new GraphqlLanguage())
             ->addLanguage(new HtmlLanguage())
+            ->addLanguage(new HttpLanguage())
             ->addLanguage(new JavaScriptLanguage())
             ->addLanguage(new JsonLanguage())
             ->addLanguage(new MarkdownLanguage())

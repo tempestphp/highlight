@@ -1,0 +1,12 @@
+### Get all users
+GET https://api.example.com/users
+Accept: application/json
+
+### Create a new user
+POST https://api.example.com/users
+Content-Type: application/json
+
+{
+  "name": "Jane Doe",
+  "email": "jane@example.com"
+}

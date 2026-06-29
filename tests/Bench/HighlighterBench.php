@@ -28,6 +28,7 @@ final class HighlighterBench
         'gdscript' => 'gdscript.txt',
         'graphql' => 'graphql.txt',
         'html' => 'html.txt',
+        'http' => 'http.txt',
         'ini' => 'ini.txt',
         'javascript' => 'javascript.txt',
         'json' => 'json.txt',

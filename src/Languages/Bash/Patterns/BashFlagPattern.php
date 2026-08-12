@@ -11,13 +11,14 @@ use Tempest\Highlight\Tokens\TokenTypeEnum;
 
 #[PatternTest(input: 'ls -la', output: '-la')]
 #[PatternTest(input: 'grep --color=auto', output: '--color')]
+#[PatternTest(input: './tempest mcp:serve demo-server', output: null)]
 final readonly class BashFlagPattern implements Pattern
 {
     use IsPattern;
 
     public function getPattern(): string
     {
-        return '(?<match>--?[a-zA-Z][\w-]*)';
+        return '(?<match>(?<![\w-])--?[a-zA-Z][\w-]*)';
     }
 
     public function getTokenType(): TokenTypeEnum

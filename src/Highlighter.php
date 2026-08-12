@@ -84,6 +84,7 @@ final class Highlighter
             ->addLanguage(new ScssLanguage())
             ->addLanguage(new SqlLanguage())
             ->addLanguage(new TerminalLanguage())
+            ->addLanguage(new TextLanguage())
             ->addLanguage(new TerraformLanguage())
             ->addLanguage(new TypeScriptLanguage())
             ->addLanguage(new XmlLanguage())

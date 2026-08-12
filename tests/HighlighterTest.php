@@ -151,4 +151,14 @@ class HighlighterTest extends TestCase
             $highlighted,
         );
     }
+
+    #[Test]
+    public function text_language_does_not_use_the_configured_fallback_language(): void
+    {
+        $highlighter = new Highlighter(fallbackLanguage: new PhpLanguage());
+
+        $this->assertSame('mcp:list', $highlighter->parse('mcp:list', 'txt'));
+        $this->assertSame('resources/list', $highlighter->parse('resources/list', 'text'));
+        $this->assertSame('Sec-Fetch-Site', $highlighter->parse('Sec-Fetch-Site', 'txt'));
+    }
 }

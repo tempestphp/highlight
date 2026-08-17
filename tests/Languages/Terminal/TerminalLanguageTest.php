@@ -74,7 +74,7 @@ $ echo "hello" || echo "fallback"
 $ mkdir build; cd build
 TXT,
             <<<'TXT'
-<span class="hl-comment">$</span> <span class="hl-keyword">npx</span> husky<span class="hl-generic">-init</span> <span class="hl-operator">&amp;&amp;</span> <span class="hl-keyword">npm</span> install
+<span class="hl-comment">$</span> <span class="hl-keyword">npx</span> husky-init <span class="hl-operator">&amp;&amp;</span> <span class="hl-keyword">npm</span> install
 <span class="hl-comment">$</span> <span class="hl-keyword">echo</span> <span class="hl-value">&quot;hello&quot;</span> <span class="hl-operator">||</span> <span class="hl-keyword">echo</span> <span class="hl-value">&quot;fallback&quot;</span>
 <span class="hl-comment">$</span> <span class="hl-keyword">mkdir</span> build<span class="hl-operator">;</span> <span class="hl-keyword">cd</span> build
 TXT],

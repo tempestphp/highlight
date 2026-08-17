@@ -1,0 +1,3 @@
+Plain text may contain protocol method names such as resources/list and mcp:list.
+It may also contain HTTP header names such as Sec-Fetch-Site.
+No syntax highlighting should be applied to this content.

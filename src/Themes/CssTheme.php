@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Tempest\Highlight\Themes;
 
 use Tempest\Highlight\Highlighter;
+use Tempest\Highlight\Languages\Diff\DiffTokenType;
 use Tempest\Highlight\Tokens\TokenType;
 use Tempest\Highlight\Tokens\TokenTypeEnum;
 use Tempest\Highlight\WebTheme;
@@ -32,6 +33,12 @@ final readonly class CssTheme implements WebTheme
             TokenTypeEnum::LITERAL => 'hl-literal',
             TokenTypeEnum::COMMENT => 'hl-comment',
             TokenTypeEnum::INJECTION => 'hl-injection',
+            DiffTokenType::METADATA, DiffTokenType::SPECIAL => 'hl-comment',
+            DiffTokenType::FILE_HEADER => 'hl-type',
+            DiffTokenType::HUNK_HEADER => 'hl-generic',
+            DiffTokenType::ADDITION => 'hl-addition',
+            DiffTokenType::DELETION => 'hl-deletion',
+            DiffTokenType::CONTEXT => 'hl-diff-context',
             default => $tokenType->getValue(),
         };
 

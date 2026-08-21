@@ -6,6 +6,7 @@ namespace Tempest\Highlight\Themes;
 
 use Exception;
 use Tempest\Highlight\Highlighter;
+use Tempest\Highlight\Languages\Diff\DiffTokenType;
 use Tempest\Highlight\Theme;
 use Tempest\Highlight\Tokens\TokenType;
 use Tempest\Highlight\Tokens\TokenTypeEnum;
@@ -54,6 +55,12 @@ final class InlineTheme implements Theme, WebTheme
             TokenTypeEnum::LITERAL => 'hl-literal',
             TokenTypeEnum::COMMENT => 'hl-comment',
             TokenTypeEnum::INJECTION => 'hl-injection',
+            DiffTokenType::METADATA, DiffTokenType::SPECIAL => 'hl-comment',
+            DiffTokenType::FILE_HEADER => 'hl-type',
+            DiffTokenType::HUNK_HEADER => 'hl-generic',
+            DiffTokenType::ADDITION => 'hl-addition',
+            DiffTokenType::DELETION => 'hl-deletion',
+            DiffTokenType::CONTEXT => 'hl-diff-context',
             default => $tokenType->getValue(),
         };
 

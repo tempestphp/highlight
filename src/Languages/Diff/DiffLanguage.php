@@ -6,8 +6,7 @@ namespace Tempest\Highlight\Languages\Diff;
 
 use Override;
 use Tempest\Highlight\Languages\Base\BaseLanguage;
-use Tempest\Highlight\Languages\Diff\Injections\DiffAdditionInjection;
-use Tempest\Highlight\Languages\Diff\Injections\DiffDeletionInjection;
+use Tempest\Highlight\Languages\Diff\Injections\DiffStructureInjection;
 
 class DiffLanguage extends BaseLanguage
 {
@@ -21,8 +20,7 @@ class DiffLanguage extends BaseLanguage
     {
         return [
             ...parent::getInjections(),
-            new DiffAdditionInjection(),
-            new DiffDeletionInjection(),
+            new DiffStructureInjection(),
         ];
     }
 }

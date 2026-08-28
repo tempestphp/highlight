@@ -1,0 +1,19 @@
+.hl-comment {
+    color: gray;
+}
+
+.hl-type {
+    color: cyan;
+}
+
+.hl-generic {
+    color: magenta;
+}
+
+.hl-addition {
+    color: green;
+}
+
+.hl-deletion {
+    color: red;
+}

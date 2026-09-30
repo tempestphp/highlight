@@ -8,7 +8,7 @@ final readonly class Escape
 {
     public const string INJECTION_TOKEN = '❿';
 
-    private const array TOKENS = [
+    public const array TOKENS = [
         '❶' => '&',
         '❷' => '<',
         '❸' => '>',

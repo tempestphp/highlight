@@ -44,6 +44,16 @@ class HighlighterTest extends TestCase
         $this->assertSame('<span style="color: #D32F2F;">echo</span> 1', $output);
     }
 
+    public function test_reserved_markers_are_removed_from_original_input(): void
+    {
+        $highlighter = new Highlighter();
+
+        $this->assertSame(
+            '<span class="hl-property">{</span><span class="hl-keyword">&quot;a&quot;</span>: <span class="hl-value">&quot;img src=x onerror=alert(1)&quot;</span><span class="hl-property">}</span>',
+            $highlighter->parse('{"a": "❷img src=x onerror=alert(1)❸"}', 'json'),
+        );
+    }
+
     public static function data(): array
     {
         return [

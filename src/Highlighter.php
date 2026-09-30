@@ -89,6 +89,10 @@ final class Highlighter
 
     public function parse(string $content, string|Language $language): string
     {
+        if (! $this->isNested) {
+            $content = str_replace(array_keys(Escape::TOKENS), '', $content);
+        }
+
         if (is_string($language)) {
             $language = $this->languages[$language] ?? new TextLanguage();
         }

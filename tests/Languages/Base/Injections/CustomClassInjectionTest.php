@@ -34,4 +34,24 @@ TXT;
         $this->assertSame(24, $parsed->tokens[2]->end);
         $this->assertSame('hl-type', $parsed->tokens[2]->type->getValue());
     }
+
+    public function test_custom_class_injection_keeps_delimiters_outside_of_blocks()
+    {
+        $content = <<<'TXT'
+{:hl-property:x:} = "{:}".format({:hl-type:y:})
+TXT;
+
+        $expected = <<<'TXT'
+x = "{:}".format(y)
+TXT;
+
+        $parsed = (new CustomClassInjection())->parse($content, new Highlighter());
+
+        $this->assertSame($expected, $parsed->content);
+        $this->assertCount(2, $parsed->tokens);
+        $this->assertSame(0, $parsed->tokens[0]->start);
+        $this->assertSame(1, $parsed->tokens[0]->end);
+        $this->assertSame(17, $parsed->tokens[1]->start);
+        $this->assertSame(18, $parsed->tokens[1]->end);
+    }
 }

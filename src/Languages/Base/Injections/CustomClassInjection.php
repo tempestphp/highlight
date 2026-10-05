@@ -36,9 +36,11 @@ final readonly class CustomClassInjection implements Injection
             );
 
             $additionalOffset += strlen($endToken);
-
-            $content = str_replace([$startToken, $endToken], '', $content);
         }
+
+        // Only strip the delimiters of the matched blocks: a global replacement would also remove
+        // any `{:class:` or `:}` occurring in the code itself, and shift the offsets of the tokens.
+        $content = preg_replace_callback($pattern, static fn (array $match) => $match['match'], $content);
 
         return new ParsedInjection(
             content: $content,

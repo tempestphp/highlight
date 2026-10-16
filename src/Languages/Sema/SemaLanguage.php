@@ -14,7 +14,6 @@ use Tempest\Highlight\Languages\Sema\Patterns\SemaDefinedVariablePattern;
 use Tempest\Highlight\Languages\Sema\Patterns\SemaKeywordPattern;
 use Tempest\Highlight\Languages\Sema\Patterns\SemaLambdaArgumentPattern;
 use Tempest\Highlight\Languages\Sema\Patterns\SemaLiteralPattern;
-use Tempest\Highlight\Languages\Sema\Patterns\SemaMacroPattern;
 use Tempest\Highlight\Languages\Sema\Patterns\SemaNumberPattern;
 use Tempest\Highlight\Languages\Sema\Patterns\SemaOperatorPattern;
 use Tempest\Highlight\Languages\Sema\Patterns\SemaParameterPattern;
@@ -39,13 +38,12 @@ class SemaLanguage extends BaseLanguage
             new SemaCharacterPattern(),
             new SemaDefinedNamePattern(),
             new SemaDefinedVariablePattern(),
+            new SemaParameterPattern(),
             new SemaSpecialFormPattern(),
-            new SemaMacroPattern(),
             new SemaOperatorPattern(),
             new SemaKeywordPattern(),
             new SemaLiteralPattern(),
             new SemaNumberPattern(),
-            new SemaParameterPattern(),
             new SemaCallPattern(),
             new SemaLambdaArgumentPattern(),
         ];

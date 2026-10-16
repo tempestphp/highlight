@@ -19,7 +19,7 @@ final readonly class SemaDefinedVariablePattern implements Pattern
 
     public function getPattern(): string
     {
-        return '/\((?:' . SemaSyntax::alternatives(SemaSyntax::VARIABLE_DEFINITION_FORMS) . ')\s+(?<match>' . SemaSyntax::SYMBOL . '+)/u';
+        return '/\((?:' . SemaSyntax::alternatives(SemaSyntax::VARIABLE_DEFINITION_FORMS) . ')\s+(?<match>' . SemaSyntax::SYMBOL . '++)/u';
     }
 
     public function getTokenType(): TokenTypeEnum

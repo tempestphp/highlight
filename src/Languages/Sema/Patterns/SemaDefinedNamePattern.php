@@ -19,7 +19,7 @@ final readonly class SemaDefinedNamePattern implements Pattern
 
     public function getPattern(): string
     {
-        return '/\((?:(?:' . SemaSyntax::alternatives(SemaSyntax::FUNCTION_DEFINITION_FORMS) . ')\s+\(?|(?:define|def)\s+\()(?<match>' . SemaSyntax::SYMBOL . '+)/u';
+        return '/\((?:(?:' . SemaSyntax::alternatives(SemaSyntax::FUNCTION_DEFINITION_FORMS) . ')\s+\(?|(?:define|def)\s+\()(?<match>' . SemaSyntax::SYMBOL . '++)/u';
     }
 
     public function getTokenType(): TokenTypeEnum

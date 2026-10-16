@@ -14,6 +14,8 @@ use Tempest\Highlight\Tokens\TokenTypeEnum;
 #[PatternTest(input: '#"^[a-z]+$"', output: '#"^[a-z]+$"')]
 #[PatternTest(input: 'f"hi ${name}"', output: 'f"hi ${name}"')]
 #[PatternTest(input: '; say "hi"', output: null)]
+#[PatternTest(input: '(str/f"x")', output: '"x"')]
+#[PatternTest(input: '(f "unterminated', output: '"unterminated')]
 final readonly class SemaStringPattern implements Pattern
 {
     use IsPattern;

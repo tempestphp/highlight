@@ -13,13 +13,16 @@ use Tempest\Highlight\Tokens\TokenTypeEnum;
 #[PatternTest(input: '(lambda (x) x)', output: 'lambda')]
 #[PatternTest(input: '(llm/with-budget b)', output: 'llm/with-budget')]
 #[PatternTest(input: "(list 'if)", output: null)]
+#[PatternTest(input: '(llm/complete prompt message)', output: null)]
+#[PatternTest(input: '(step "fetch" (fetch url))', output: 'step')]
+#[PatternTest(input: '(+ step 1)', output: null)]
 final readonly class SemaSpecialFormPattern implements Pattern
 {
     use IsPattern;
 
     public function getPattern(): string
     {
-        return '/(?<![^\s(\[{])(?<match>(?:' . SemaSyntax::alternatives(SemaSyntax::SPECIAL_FORMS) . '))' . SemaSyntax::ATOM_END . '/u';
+        return SemaSyntax::head(SemaSyntax::alternatives([...SemaSyntax::SPECIAL_FORMS, ...SemaSyntax::PRELUDE_MACROS]));
     }
 
     public function getTokenType(): TokenTypeEnum

@@ -18,7 +18,7 @@ final readonly class SemaKeywordPattern implements Pattern
 
     public function getPattern(): string
     {
-        return '/(?<![^\s(\[{\'`,@\p{L}\p{N}_+\-*\/!?<>=&%^~.#])(?<match>:' . SemaSyntax::SYMBOL . '+)/u';
+        return '/(?<![^\s(\[{\'`,@' . SemaSyntax::SYMBOL_CHARACTERS . '])(?<match>:' . SemaSyntax::SYMBOL . '++)/u';
     }
 
     public function getTokenType(): TokenTypeEnum

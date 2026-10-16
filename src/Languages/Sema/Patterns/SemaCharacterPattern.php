@@ -13,13 +13,14 @@ use Tempest\Highlight\Tokens\TokenTypeEnum;
 #[PatternTest(input: '#\space', output: '#\space')]
 #[PatternTest(input: '#\a', output: '#\a')]
 #[PatternTest(input: '#\alarm', output: null)]
+#[PatternTest(input: '#\;x', output: '#\;')]
 final readonly class SemaCharacterPattern implements Pattern
 {
     use IsPattern;
 
     public function getPattern(): string
     {
-        return SemaSyntax::atom('#\\\\(?:space|newline|tab|return|nul|.)');
+        return '/' . SemaSyntax::ATOM_START . '(?<match>#\\\\(?:(?:space|newline|tab|return|nul|\p{L})' . SemaSyntax::SYMBOL_END . '|[^\p{L}]))/u';
     }
 
     public function getTokenType(): TokenTypeEnum

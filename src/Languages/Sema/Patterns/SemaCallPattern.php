@@ -15,13 +15,15 @@ use Tempest\Highlight\Tokens\TokenTypeEnum;
 #[PatternTest(input: '(1 2)', output: null)]
 #[PatternTest(input: '[a b]', output: null)]
 #[PatternTest(input: "'(a b)", output: null)]
+#[PatternTest(input: '(foo:bar x)', output: 'foo')]
+#[PatternTest(input: '(defmacro m (. body) body)', output: 'defmacro')]
 final readonly class SemaCallPattern implements Pattern
 {
     use IsPattern;
 
     public function getPattern(): string
     {
-        return '/(?<=\()(?<![\'`]\()(?<match>' . SemaSyntax::SYMBOL_START . SemaSyntax::SYMBOL . '*)' . SemaSyntax::ATOM_END . '/u';
+        return '/(?<=\()(?<![\'`]\()(?!\.' . SemaSyntax::SYMBOL_END . ')(?<match>' . SemaSyntax::SYMBOL_START . SemaSyntax::SYMBOL . '*+)/u';
     }
 
     public function getTokenType(): TokenTypeEnum

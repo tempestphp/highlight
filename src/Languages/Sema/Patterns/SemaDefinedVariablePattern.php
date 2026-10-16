@@ -10,15 +10,16 @@ use Tempest\Highlight\Pattern;
 use Tempest\Highlight\PatternTest;
 use Tempest\Highlight\Tokens\TokenTypeEnum;
 
-#[PatternTest(input: '(llm/complete prompt)', output: 'llm/complete')]
-#[PatternTest(input: '(define (gen/int lo) lo)', output: null)]
-final readonly class SemaNamespacedCallPattern implements Pattern
+#[PatternTest(input: '(define cities (list))', output: 'cities')]
+#[PatternTest(input: '(set! count 1)', output: 'count')]
+#[PatternTest(input: '(define (greet name) name)', output: null)]
+final readonly class SemaDefinedVariablePattern implements Pattern
 {
     use IsPattern;
 
     public function getPattern(): string
     {
-        return '/(?<=\()(?<!define \()(?<!def \()(?<match>[\p{L}\p{N}_-]+\/' . SemaSyntax::SYMBOL . '+)/u';
+        return '/\((?:' . SemaSyntax::alternatives(SemaSyntax::VARIABLE_DEFINITION_FORMS) . ')\s+(?<match>' . SemaSyntax::SYMBOL . '+)/u';
     }
 
     public function getTokenType(): TokenTypeEnum

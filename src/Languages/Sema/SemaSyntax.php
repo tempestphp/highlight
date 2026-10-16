@@ -6,9 +6,15 @@ namespace Tempest\Highlight\Languages\Sema;
 
 final class SemaSyntax
 {
+    public const array FUNCTION_DEFINITION_FORMS = [
+        'defn', 'defun', 'defmacro', 'define-syntax', 'define-record-type', 'defagent', 'deftool', 'defworkflow',
+        'defpolicy', 'defmulti', 'defmethod',
+    ];
+
+    public const array VARIABLE_DEFINITION_FORMS = ['define', 'def', 'set!'];
+
     public const array DEFINITION_FORMS = [
-        'define', 'def', 'defn', 'defun', 'defmacro', 'define-syntax', 'define-values', 'define-record-type',
-        'defagent', 'deftool', 'defworkflow', 'defpolicy', 'defmulti', 'defmethod',
+        'define', 'def', 'define-values', ...self::FUNCTION_DEFINITION_FORMS,
     ];
 
     public const array SPECIAL_FORMS = [
@@ -22,6 +28,16 @@ final class SemaSyntax
         'term/with-bracketed-paste', 'term/with-focus-events', 'term/with-kitty-keys', '->', '->>', 'as->', 'some->',
     ];
 
+    public const array PRELUDE_MACROS = [
+        'approval', 'async/map', 'async/pool-map', 'async/spawn-all', 'checkpoint', 'parallel', 'parallel-settled',
+        'phase', 'pipeline', 'pipeline-settled', 'settled-partition', 'settled/err?', 'settled/ok?', 'step',
+        'workflow/run-form', 'ws/listen',
+    ];
+
+    public const array OPERATORS = ['+', '-', '*', '/', '%', '=', '>', '<', '>=', '<=', 'eq?', 'equal?', 'eqv?'];
+
+    public const string SYMBOL_START = '[\p{L}+\-*\/!?<>=_&%^~.]';
+
     public const string SYMBOL = '[\p{L}\p{N}_+\-*\/!?<>=&%^~.#]';
 
     public const string STRING = '"(?:[^"\\\\]|\\\\.)*"|#"(?:[^"\\\\]|\\\\.)*"'
@@ -32,6 +48,11 @@ final class SemaSyntax
     public const string ATOM_START = '(?<![^\s(\[{\'`,@])';
 
     public const string ATOM_END = '(?![^\s()\[\]{}";\'`,])';
+
+    public static function head(string $alternatives): string
+    {
+        return '/(?<=\()(?<match>(?:' . $alternatives . '))' . self::ATOM_END . '/u';
+    }
 
     public static function atom(string $alternatives): string
     {

@@ -23,6 +23,6 @@ final readonly class SemaKeywordPattern implements Pattern
 
     public function getTokenType(): TokenTypeEnum
     {
-        return TokenTypeEnum::PROPERTY;
+        return TokenTypeEnum::LITERAL;
     }
 }

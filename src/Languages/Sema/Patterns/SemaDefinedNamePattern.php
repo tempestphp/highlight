@@ -12,13 +12,14 @@ use Tempest\Highlight\Tokens\TokenTypeEnum;
 
 #[PatternTest(input: '(defagent guide {})', output: 'guide')]
 #[PatternTest(input: '(define (greet name) name)', output: 'greet')]
+#[PatternTest(input: '(define x 1)', output: null)]
 final readonly class SemaDefinedNamePattern implements Pattern
 {
     use IsPattern;
 
     public function getPattern(): string
     {
-        return '/\((?:' . SemaSyntax::alternatives(SemaSyntax::DEFINITION_FORMS) . ')\s+\(?(?<match>' . SemaSyntax::SYMBOL . '+)/u';
+        return '/\((?:(?:' . SemaSyntax::alternatives(SemaSyntax::FUNCTION_DEFINITION_FORMS) . ')\s+\(?|(?:define|def)\s+\()(?<match>' . SemaSyntax::SYMBOL . '+)/u';
     }
 
     public function getTokenType(): TokenTypeEnum

@@ -37,6 +37,7 @@ final class HighlighterBench
         'php' => 'php.txt',
         'python' => 'python.txt',
         'scss' => 'scss.txt',
+        'sema' => 'sema.txt',
         'sql' => 'sql.txt',
         'svelte' => 'svelte.txt',
         'terminal' => 'terminal.txt',

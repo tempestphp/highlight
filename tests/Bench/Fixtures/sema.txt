@@ -14,10 +14,11 @@
 
 (define (ask city)
   (llm/with-budget {:max-cost-usd 0.05}
-    (let ((answer (agent/run guide f"Tell me about ${city}")))
-      (if (string? answer)
-          answer
-          (throw "no answer")))))
+    (fn ()
+      (let ((answer (agent/run guide f"Tell me about ${city}")))
+        (if (string? answer)
+            answer
+            (throw "no answer"))))))
 
 (define cities '("Oslo" "Bergen" "Tromsø"))
 (map #(ask %) cities)

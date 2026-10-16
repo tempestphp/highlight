@@ -43,7 +43,7 @@ class SemaLanguageTest extends TestCase
             'quote character' => ['#\\"', '<span class="hl-value">#\\&quot;</span>'],
             'unknown character name' => ['#\\alarm', '#\\alarm'],
             'special form' => ['(lambda (x) x)', '(<span class="hl-keyword">lambda</span> (<span class="hl-variable">x</span>) x)'],
-            'namespaced special form' => ['(llm/with-budget b)', '(<span class="hl-keyword">llm/with-budget</span> b)'],
+            'namespaced special form' => ['(term/with-mouse (draw))', '(<span class="hl-keyword">term/with-mouse</span> (<span class="hl-property">draw</span>))'],
             'threading macro' => ['(->> xs)', '(<span class="hl-keyword">-&gt;&gt;</span> xs)'],
             'defined name' => ['(defagent guide)', '(<span class="hl-keyword">defagent</span> <span class="hl-type">guide</span>)'],
             'defined function' => ['(define (greet name))', '(<span class="hl-keyword">define</span> (<span class="hl-type">greet</span> <span class="hl-variable">name</span>))'],
@@ -135,8 +135,9 @@ class SemaLanguageTest extends TestCase
 
                 (define (ask city)
                   (llm/with-budget {:max-cost-usd 0.05}
-                    (let ((answer (agent/run guide f"Tell me about ${city}")))
-                      (if (string? answer) answer (throw "no answer")))))
+                    (fn ()
+                      (let ((answer (agent/run guide f"Tell me about ${city}")))
+                        (if (string? answer) answer (throw "no answer"))))))
                 SEMA,
                 <<<'HTML'
                 (<span class="hl-keyword">deftool</span> <span class="hl-type">lookup</span>
@@ -148,9 +149,10 @@ class SemaLanguageTest extends TestCase
                 (<span class="hl-keyword">defagent</span> <span class="hl-type">guide</span> {<span class="hl-literal">:tools</span> [lookup] <span class="hl-literal">:max-turns</span> <span class="hl-number">3</span>})
 
                 (<span class="hl-keyword">define</span> (<span class="hl-type">ask</span> <span class="hl-variable">city</span>)
-                  (<span class="hl-keyword">llm/with-budget</span> {<span class="hl-literal">:max-cost-usd</span> <span class="hl-number">0.05</span>}
-                    (<span class="hl-keyword">let</span> ((<span class="hl-variable">answer</span> (<span class="hl-property">agent/run</span> guide <span class="hl-value">f&quot;Tell me about ${city}&quot;</span>)))
-                      (<span class="hl-keyword">if</span> (<span class="hl-property">string?</span> answer) answer (<span class="hl-keyword">throw</span> <span class="hl-value">&quot;no answer&quot;</span>)))))
+                  (<span class="hl-property">llm/with-budget</span> {<span class="hl-literal">:max-cost-usd</span> <span class="hl-number">0.05</span>}
+                    (<span class="hl-keyword">fn</span> ()
+                      (<span class="hl-keyword">let</span> ((<span class="hl-variable">answer</span> (<span class="hl-property">agent/run</span> guide <span class="hl-value">f&quot;Tell me about ${city}&quot;</span>)))
+                        (<span class="hl-keyword">if</span> (<span class="hl-property">string?</span> answer) answer (<span class="hl-keyword">throw</span> <span class="hl-value">&quot;no answer&quot;</span>))))))
                 HTML,
             ],
         ];

@@ -20,7 +20,7 @@ final class SemaSyntax
         'quasiquote', 'unquote', 'unquote-splicing', 'try', 'catch', 'throw', 'import', 'export', 'module', 'load',
         'eval', 'macroexpand', 'while', 'dotimes', 'for-range', 'guard', 'parameterize', 'delay', 'force', 'async',
         'await', 'prompt', 'message', 'with-retry', 'with-session', 'with-span', 'with-stream', 'with-open',
-        'llm/with-budget', 'policy/without', 'io/with-raw-mode', 'term/with-alt-screen', 'term/with-mouse',
+        'policy/without', 'io/with-raw-mode', 'term/with-alt-screen', 'term/with-mouse',
         'term/with-bracketed-paste', 'term/with-focus-events', 'term/with-kitty-keys', '->', '->>', 'as->', 'some->',
     ];
 

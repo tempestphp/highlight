@@ -11,7 +11,8 @@ use Tempest\Highlight\PatternTest;
 use Tempest\Highlight\Tokens\TokenTypeEnum;
 
 #[PatternTest(input: '(lambda (x) x)', output: 'lambda')]
-#[PatternTest(input: '(llm/with-budget b)', output: 'llm/with-budget')]
+#[PatternTest(input: '(term/with-mouse (draw))', output: 'term/with-mouse')]
+#[PatternTest(input: '(llm/with-budget {} thunk)', output: null)]
 #[PatternTest(input: "(list 'if)", output: null)]
 #[PatternTest(input: '(llm/complete prompt message)', output: null)]
 #[PatternTest(input: '(step "fetch" (fetch url))', output: 'step')]

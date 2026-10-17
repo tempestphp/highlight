@@ -1,0 +1,78 @@
+# frozen_string_literal: true
+
+require "json"
+require_relative "repository"
+
+module Accounts
+  class UserService
+    include Enumerable
+
+    DEFAULT_ROLES = %i[member].freeze
+
+    attr_reader :repository, :logger
+
+    def initialize(repository:, logger: Logger.new($stdout))
+      @repository = repository
+      @logger = logger
+      @@instances ||= 0
+      @@instances += 1
+    end
+
+    def find(id)
+      user = repository.find(id)
+      raise NotFoundError, "User #{id} not found" if user.nil?
+
+      user
+    end
+
+    def each(&block)
+      repository.all.each(&block)
+    end
+
+    def create(name:, email:, roles: DEFAULT_ROLES)
+      return nil unless email.match?(/@/)
+
+      attributes = { name: name, email: email, roles: roles, created_at: Time.now }
+      repository.save(attributes).tap do |user|
+        logger.info("Created user #{user[:id]}")
+      end
+    end
+
+    def active_users(limit = 10)
+      select { |user| user[:active] == true }
+        .sort_by { |user| -user[:score] }
+        .first(limit)
+    end
+
+    def to_json(*args)
+      {
+        "count" => count,
+        "ratio" => 0.75,
+        "mask" => 0xFF,
+      }.to_json(*args)
+    end
+
+    def report
+      <<~TEXT
+        Users: #{count}
+        Generated at #{Time.now}
+      TEXT
+    end
+
+    private
+
+    def admin?(user)
+      user[:roles]&.include?(:admin) || false
+    end
+  end
+end
+
+=begin
+Usage example
+=end
+service = Accounts::UserService.new(repository: Repository.new)
+case service.count
+when 0 then puts "No users"
+when 1..10 then puts 'A few users'
+else puts "Many users"
+end

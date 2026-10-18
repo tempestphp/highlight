@@ -63,4 +63,22 @@ final class KotlinLanguageTest extends TestCase
         yield 'operator' => ['value ?: fallback', '<span class="hl-operator">?:</span>'];
         yield 'punctuation' => ['return value;', '<span class="hl-operator">;</span>'];
     }
+
+    #[Test]
+    public function it_preserves_and_escapes_the_complete_source(): void
+    {
+        $source = "class Markup {\r\n"
+            . "    val value = \"<&copy;> ❷img src=x onerror=alert(1)❸ ❶❹❿\"\r"
+            . "    val script = \"<script>alert('x')</script>\"\r\n"
+            . "}\r\n";
+
+        $highlighted = (new Highlighter())->parse($source, 'kotlin');
+        $renderedSource = html_entity_decode(strip_tags($highlighted), ENT_QUOTES | ENT_HTML5);
+
+        $this->assertSame($source, $renderedSource);
+        $this->assertStringNotContainsString('<script>', $highlighted);
+        $this->assertStringNotContainsString('<img', $highlighted);
+        $this->assertStringContainsString('&lt;script&gt;', $highlighted);
+        $this->assertStringContainsString('&amp;copy;', $highlighted);
+    }
 }

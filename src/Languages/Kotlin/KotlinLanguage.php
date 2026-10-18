@@ -17,8 +17,9 @@ use Tempest\Highlight\Languages\Kotlin\Patterns\KotlinOperatorPattern;
 use Tempest\Highlight\Languages\Kotlin\Patterns\KotlinPropertyPattern;
 use Tempest\Highlight\Languages\Kotlin\Patterns\KotlinStringPattern;
 use Tempest\Highlight\Languages\Kotlin\Patterns\KotlinTypePattern;
+use Tempest\Highlight\SourcePreservingLanguage;
 
-final class KotlinLanguage extends BaseLanguage
+final class KotlinLanguage extends BaseLanguage implements SourcePreservingLanguage
 {
     public function getName(): string
     {

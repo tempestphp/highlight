@@ -16,8 +16,9 @@ use Tempest\Highlight\Languages\Java\Patterns\JavaNamespacePattern;
 use Tempest\Highlight\Languages\Java\Patterns\JavaNumberPattern;
 use Tempest\Highlight\Languages\Java\Patterns\JavaStringPattern;
 use Tempest\Highlight\Languages\Java\Patterns\JavaTypePattern;
+use Tempest\Highlight\SourcePreservingLanguage;
 
-final class JavaLanguage extends BaseLanguage
+final class JavaLanguage extends BaseLanguage implements SourcePreservingLanguage
 {
     public function getName(): string
     {

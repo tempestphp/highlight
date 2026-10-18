@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tempest\Highlight\Tests\Languages\Java;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Tempest\Highlight\Highlighter;
@@ -21,5 +22,41 @@ final class JavaLanguageTest extends TestCase
         $highlighter->parse('', 'java');
 
         $this->assertInstanceOf(JavaLanguage::class, $highlighter->getCurrentLanguage());
+    }
+
+    #[Test]
+    #[DataProvider('provide_it_highlights_representative_syntax_cases')]
+    public function it_highlights_representative_syntax(string $source, string $expected): void
+    {
+        $highlighted = (new Highlighter())->parse($source, 'java');
+
+        $this->assertStringContainsString($expected, $highlighted);
+    }
+
+    public static function provide_it_highlights_representative_syntax_cases(): iterable
+    {
+        yield 'package keyword' => ['package com.example;', '<span class="hl-keyword">package</span>'];
+        yield 'package name' => ['package com.example;', '<span class="hl-type">com<span class="hl-operator">.</span>example</span>'];
+        yield 'import' => ['import java.util.List;', '<span class="hl-keyword">import</span>'];
+        yield 'annotation' => ['@Override', '<span class="hl-attribute">@Override</span>'];
+        yield 'line comment' => ['// note', '<span class="hl-comment">// note</span>'];
+        yield 'Javadoc' => ['/** note */', '<span class="hl-comment">/** note */</span>'];
+        yield 'string' => ['"hello\\n"', '<span class="hl-value">&quot;hello\\n&quot;</span>'];
+        yield 'text block' => ['"""hello\nworld"""', '<span class="hl-value">&quot;&quot;&quot;hello\nworld&quot;&quot;&quot;</span>'];
+        yield 'character' => ["'x'", '<span class="hl-value">\'x\'</span>'];
+        yield 'number' => ['0xCAFE_F00DL', '<span class="hl-number">0xCAFE_F00DL</span>'];
+        yield 'keyword' => ['return', '<span class="hl-keyword">return</span>'];
+        yield 'modifier' => ['public', '<span class="hl-keyword">public</span>'];
+        yield 'built-in type' => ['int', '<span class="hl-type">int</span>'];
+        yield 'class' => ['class Widget {}', '<span class="hl-type">Widget</span>'];
+        yield 'interface' => ['interface Service {}', '<span class="hl-type">Service</span>'];
+        yield 'enum' => ['enum Status {}', '<span class="hl-type">Status</span>'];
+        yield 'record' => ['record Point(int x, int y) {}', '<span class="hl-type">Point</span>'];
+        yield 'generic type' => ['class Box<T> {}', '<span class="hl-type">T</span>'];
+        yield 'literal' => ['return null;', '<span class="hl-literal">null</span>'];
+        yield 'method' => ['render();', '<span class="hl-property">render</span>'];
+        yield 'lambda' => ['value -> value + 1', '<span class="hl-operator">-&gt;</span>'];
+        yield 'operator' => ['left instanceof Widget', '<span class="hl-keyword">instanceof</span>'];
+        yield 'punctuation' => ['return value;', '<span class="hl-operator">;</span>'];
     }
 }

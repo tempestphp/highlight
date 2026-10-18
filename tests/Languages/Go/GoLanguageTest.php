@@ -76,6 +76,17 @@ final class GoLanguageTest extends TestCase
     }
 
     #[Test]
+    public function it_preserves_annotation_like_text(): void
+    {
+        $source = 'var annotations = `{+added+} {-removed-} {~blur~} {_em_} {*strong*} {:custom-class:styled:}`';
+
+        $highlighted = (new Highlighter())->parse($source, 'go');
+        $renderedSource = html_entity_decode(strip_tags($highlighted), ENT_QUOTES | ENT_HTML5);
+
+        $this->assertSame($source, $renderedSource);
+    }
+
+    #[Test]
     public function it_has_non_empty_benchmark_and_visual_fixtures(): void
     {
         $this->assertSame('go.txt', HighlighterBench::LANGUAGES['go'] ?? null);

@@ -30,6 +30,12 @@ final class GoLanguage extends BaseLanguage implements SourcePreservingLanguage
     }
 
     #[Override]
+    public function getInjections(): array
+    {
+        return [];
+    }
+
+    #[Override]
     public function getPatterns(): array
     {
         return [

@@ -48,6 +48,9 @@ final class RustLanguageTest extends TestCase
         yield 'lifetime' => ["'a", '<span class="hl-type">\'a</span>'];
         yield 'number' => ['42_u8', '<span class="hl-number">42_u8</span>'];
         yield 'keyword' => ['async', '<span class="hl-keyword">async</span>'];
+        yield 'self keyword' => ['self', '<span class="hl-keyword">self</span>'];
+        yield 'Self keyword' => ['Self', '<span class="hl-keyword">Self</span>'];
+        yield 'super keyword' => ['super', '<span class="hl-keyword">super</span>'];
         yield 'type' => ['String', '<span class="hl-type">String</span>'];
         yield 'macro' => ['println!', '<span class="hl-property">println!</span>'];
         yield 'function' => ['run()', '<span class="hl-property">run</span>'];

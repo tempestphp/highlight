@@ -17,8 +17,8 @@ final readonly class RustKeywordPattern implements Pattern
         'continue', 'crate', 'do', 'dyn', 'else', 'enum', 'extern', 'final',
         'fn', 'for', 'gen', 'if', 'impl', 'in', 'let', 'loop', 'macro', 'match',
         'mod', 'move', 'mut', 'override', 'priv', 'pub', 'ref', 'return', 'static',
-        'struct', 'trait', 'try', 'type', 'typeof', 'union', 'unsafe', 'unsized',
-        'use', 'virtual', 'where', 'while', 'yield',
+        'self', 'Self', 'struct', 'super', 'trait', 'try', 'type', 'typeof',
+        'union', 'unsafe', 'unsized', 'use', 'virtual', 'where', 'while', 'yield',
     ];
 
     public function getPattern(): string

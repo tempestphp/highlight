@@ -23,6 +23,7 @@ final class HighlighterBench
         'blade' => 'blade.txt',
         'c' => 'c.txt',
         'cpp' => 'cpp.txt',
+        'csharp' => 'csharp.txt',
         'css' => 'css.txt',
         'diff' => 'diff.txt',
         'dockerfile' => 'dockerfile.txt',

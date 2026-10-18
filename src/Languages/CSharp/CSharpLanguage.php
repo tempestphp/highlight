@@ -20,8 +20,9 @@ use Tempest\Highlight\Languages\CSharp\Patterns\CSharpPreprocessorPattern;
 use Tempest\Highlight\Languages\CSharp\Patterns\CSharpPropertyPattern;
 use Tempest\Highlight\Languages\CSharp\Patterns\CSharpStringPattern;
 use Tempest\Highlight\Languages\CSharp\Patterns\CSharpTypePattern;
+use Tempest\Highlight\SourcePreservingLanguage;
 
-final class CSharpLanguage extends BaseLanguage
+final class CSharpLanguage extends BaseLanguage implements SourcePreservingLanguage
 {
     public function getName(): string
     {

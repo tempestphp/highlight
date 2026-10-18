@@ -9,6 +9,7 @@ use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Tempest\Highlight\Highlighter;
 use Tempest\Highlight\Languages\Java\JavaLanguage;
+use Tempest\Highlight\Tests\Bench\HighlighterBench;
 
 final class JavaLanguageTest extends TestCase
 {
@@ -76,5 +77,16 @@ final class JavaLanguageTest extends TestCase
         $this->assertStringNotContainsString('<img', $highlighted);
         $this->assertStringContainsString('&lt;script&gt;', $highlighted);
         $this->assertStringContainsString('&amp;copy;', $highlighted);
+    }
+
+    #[Test]
+    public function it_has_non_empty_benchmark_and_visual_fixtures(): void
+    {
+        $this->assertSame('java.txt', HighlighterBench::LANGUAGES['java'] ?? null);
+
+        foreach ([__DIR__ . '/../../Bench/Fixtures/java.txt', __DIR__ . '/../../targets/java.md'] as $fixture) {
+            $this->assertFileExists($fixture);
+            $this->assertNotSame('', trim((string) file_get_contents($fixture)));
+        }
     }
 }

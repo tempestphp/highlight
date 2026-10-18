@@ -9,6 +9,7 @@ use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Tempest\Highlight\Highlighter;
 use Tempest\Highlight\Languages\Kotlin\KotlinLanguage;
+use Tempest\Highlight\Tests\Bench\HighlighterBench;
 
 final class KotlinLanguageTest extends TestCase
 {
@@ -80,5 +81,16 @@ final class KotlinLanguageTest extends TestCase
         $this->assertStringNotContainsString('<img', $highlighted);
         $this->assertStringContainsString('&lt;script&gt;', $highlighted);
         $this->assertStringContainsString('&amp;copy;', $highlighted);
+    }
+
+    #[Test]
+    public function it_has_non_empty_benchmark_and_visual_fixtures(): void
+    {
+        $this->assertSame('kotlin.txt', HighlighterBench::LANGUAGES['kotlin'] ?? null);
+
+        foreach ([__DIR__ . '/../../Bench/Fixtures/kotlin.txt', __DIR__ . '/../../targets/kotlin.md'] as $fixture) {
+            $this->assertFileExists($fixture);
+            $this->assertNotSame('', trim((string) file_get_contents($fixture)));
+        }
     }
 }

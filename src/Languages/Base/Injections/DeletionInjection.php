@@ -9,6 +9,7 @@ use Tempest\Highlight\Escape;
 use Tempest\Highlight\Highlighter;
 use Tempest\Highlight\Injection;
 use Tempest\Highlight\ParsedInjection;
+use Tempest\Highlight\SourcePreservingLanguage;
 
 #[After]
 final readonly class DeletionInjection implements Injection
@@ -17,7 +18,9 @@ final readonly class DeletionInjection implements Injection
 
     public function parse(string $content, Highlighter $highlighter): ParsedInjection
     {
-        $content = $this->normalizeLineEndings($content);
+        if (! ($highlighter->getCurrentLanguage() instanceof SourcePreservingLanguage)) {
+            $content = $this->normalizeLineEndings($content);
+        }
 
         $content = str_replace('❷span class=❹ignore❹❸{-❷/span❸', '{-', $content);
         $content = str_replace('❷span class=❹ignore❹❸-}❷/span❸', '-}', $content);

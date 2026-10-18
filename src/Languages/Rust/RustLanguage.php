@@ -19,8 +19,9 @@ use Tempest\Highlight\Languages\Rust\Patterns\RustOperatorPattern;
 use Tempest\Highlight\Languages\Rust\Patterns\RustPunctuationPattern;
 use Tempest\Highlight\Languages\Rust\Patterns\RustStringPattern;
 use Tempest\Highlight\Languages\Rust\Patterns\RustTypePattern;
+use Tempest\Highlight\SourcePreservingLanguage;
 
-final class RustLanguage extends BaseLanguage
+final class RustLanguage extends BaseLanguage implements SourcePreservingLanguage
 {
     public function getName(): string
     {

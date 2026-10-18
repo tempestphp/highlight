@@ -12,6 +12,14 @@ final readonly class Escape
 
     private const array TOKEN_VALUES = ['&', '<', '>', '"', ''];
 
+    private const array SOURCE_TOKEN_TERMINATORS = [
+        "\u{E010}",
+        "\u{E011}",
+        "\u{E012}",
+        "\u{E013}",
+        "\u{E014}",
+    ];
+
     public static function injection(string $input): string
     {
         return self::INJECTION_TOKEN . $input . self::INJECTION_TOKEN;
@@ -44,6 +52,51 @@ final readonly class Escape
             self::TOKEN_KEYS,
             $input,
         );
+    }
+
+    /**
+     * @return array{string, array<string, string>}
+     */
+    public static function protectReservedTokens(string $input): array
+    {
+        $replacements = self::createReservedTokenReplacements($input);
+
+        return [
+            strtr($input, $replacements),
+            array_flip($replacements),
+        ];
+    }
+
+    /**
+     * @param array<string, string> $replacements
+     */
+    public static function restoreReservedTokens(string $input, array $replacements): string
+    {
+        return strtr($input, $replacements);
+    }
+
+    /**
+     * @return array<string, string>
+     */
+    private static function createReservedTokenReplacements(string $input): array
+    {
+        $delimiter = "\u{E000}";
+        $padding = "\u{E001}";
+        $nonce = 1;
+
+        do {
+            $replacements = [];
+
+            foreach (self::TOKEN_KEYS as $index => $token) {
+                $replacements[$token] = $delimiter
+                    . str_repeat($padding, $nonce)
+                    . self::SOURCE_TOKEN_TERMINATORS[$index];
+            }
+
+            ++$nonce;
+        } while (array_any($replacements, static fn (string $replacement): bool => str_contains($input, $replacement)));
+
+        return $replacements;
     }
 
     private static function reverse(string $input): string

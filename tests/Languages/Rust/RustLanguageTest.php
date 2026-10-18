@@ -61,19 +61,19 @@ final class RustLanguageTest extends TestCase
     #[Test]
     public function it_preserves_and_escapes_the_complete_source(): void
     {
-        $source = <<<'RUST'
-fn render<'a, T>(value: &'a T) -> &'a str {
-    println!("<&>");
-    "<script>alert('x')</script>"
-}
-RUST;
+        $source = "fn render<'a, T>(value: &'a T) -> &'a str {\r\n"
+            . "    println!(\"<&copy;> ❷img src=x onerror=alert(1)❸ ❶❹❿\");\r"
+            . "    \"<script>alert('x')</script>\"\r\n"
+            . '}';
 
         $highlighted = (new Highlighter())->parse($source, 'rust');
         $renderedSource = html_entity_decode(strip_tags($highlighted), ENT_QUOTES | ENT_HTML5);
 
         $this->assertSame($source, $renderedSource);
         $this->assertStringNotContainsString('<script>', $highlighted);
+        $this->assertStringNotContainsString('<img', $highlighted);
         $this->assertStringContainsString('&lt;script&gt;', $highlighted);
+        $this->assertStringContainsString('&amp;copy;', $highlighted);
     }
 
     #[Test]

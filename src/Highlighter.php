@@ -132,10 +132,6 @@ final class Highlighter
 
     public function parse(string $content, null|string|Language $language): string
     {
-        if (! $this->isNested) {
-            $content = str_replace(Escape::TOKEN_KEYS, '', $content);
-        }
-
         if (is_string($language)) {
             $language = $this->languages[$language] ?? null;
         }
@@ -144,9 +140,23 @@ final class Highlighter
 
         $this->currentLanguage = $language;
 
-        $content = $this->normalizeNewline($content);
+        $reservedTokenReplacements = [];
 
-        return $this->parseContent($content, $language);
+        if (! $this->isNested) {
+            if ($language instanceof SourcePreservingLanguage) {
+                [$content, $reservedTokenReplacements] = Escape::protectReservedTokens($content);
+            } else {
+                $content = str_replace(Escape::TOKEN_KEYS, '', $content);
+            }
+        }
+
+        if (! $language instanceof SourcePreservingLanguage) {
+            $content = $this->normalizeNewline($content);
+        }
+
+        $content = $this->parseContent($content, $language);
+
+        return Escape::restoreReservedTokens($content, $reservedTokenReplacements);
     }
 
     public function getTheme(): Theme
@@ -194,6 +204,7 @@ final class Highlighter
     {
         $tokens = [];
         $nestedHighlighter = $this->getNestedHighlighter();
+        $nestedHighlighter->setCurrentLanguage($language);
 
         // Before Injections
         foreach ($this->getBeforeInjections($language) as $injection) {

@@ -14,7 +14,7 @@ final readonly class CTypePattern implements Pattern
 
     public function getPattern(): string
     {
-        return '(?<match>(?<=\bstruct\s)[A-Za-z_]\w*|(?<=\bunion\s)[A-Za-z_]\w*|(?<=\benum\s)[A-Za-z_]\w*|\b(?:_Bool|_Complex|_Decimal32|_Decimal64|_Decimal128|char|double|float|int|long|short|signed|unsigned|void)\b)';
+        return '(?<match>(?<=\bstruct\s)[A-Za-z_]\w*|(?<=\bunion\s)[A-Za-z_]\w*|(?<=\benum\s)[A-Za-z_]\w*|\b[A-Z](?=[A-Za-z0-9_]*[a-z])[A-Za-z0-9_]*\b|\b[A-Za-z_]\w*\b(?=\s+(?:\*+\s*)?[A-Za-z_]\w*\s*(?:\(|\[|=|,|;))|\b(?:_Bool|_Complex|_Decimal32|_Decimal64|_Decimal128|char|double|float|int|long|short|signed|unsigned|void)\b)';
     }
 
     public function getTokenType(): TokenTypeEnum

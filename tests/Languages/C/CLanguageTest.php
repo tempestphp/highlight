@@ -48,10 +48,22 @@ final class CLanguageTest extends TestCase
         yield 'storage qualifier' => ['static', '<span class="hl-keyword">static</span>'];
         yield 'built-in type' => ['int', '<span class="hl-type">int</span>'];
         yield 'declared type' => ['struct Packet { int id; };', '<span class="hl-type">Packet</span>'];
+        yield 'typedef alias' => ['typedef unsigned long Result;', '<span class="hl-type">Result</span>'];
+        yield 'typedef use' => ['Result make_result(void);', '<span class="hl-type">Result</span>'];
+        yield 'typedef cast' => ['return (Result) value;', '<span class="hl-type">Result</span>'];
         yield 'literal' => ['NULL', '<span class="hl-literal">NULL</span>'];
         yield 'function' => ['render();', '<span class="hl-property">render</span>'];
         yield 'operator' => ['node->next', '<span class="hl-operator">-&gt;</span>'];
         yield 'punctuation' => ['return 0;', '<span class="hl-operator">;</span>'];
+    }
+
+    #[Test]
+    public function it_highlights_declared_types_in_the_benchmark_fixture(): void
+    {
+        $source = (string) file_get_contents(__DIR__ . '/../../Bench/Fixtures/c.txt');
+        $highlighted = (new Highlighter())->parse($source, 'c');
+
+        $this->assertSame(5, substr_count($highlighted, '<span class="hl-type">Result</span>'));
     }
 
     #[Test]
@@ -74,7 +86,14 @@ final class CLanguageTest extends TestCase
     #[Test]
     public function it_avoids_backtracking_errors_for_unterminated_block_comments(): void
     {
-        (new CLikeCommentPattern())->match('/*' . str_repeat('a', 1_000));
+        $commentPattern = array_find(
+            (new CLanguage())->getPatterns(),
+            static fn (object $pattern): bool => $pattern instanceof CLikeCommentPattern,
+        );
+
+        $this->assertInstanceOf(CLikeCommentPattern::class, $commentPattern);
+
+        $commentPattern->match('/*' . str_repeat('a', 1_000));
 
         $this->assertSame(PREG_NO_ERROR, preg_last_error(), preg_last_error_msg());
     }

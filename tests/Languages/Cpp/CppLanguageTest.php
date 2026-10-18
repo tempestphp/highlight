@@ -55,9 +55,27 @@ final class CppLanguageTest extends TestCase
         yield 'namespace' => ['namespace demo {}', '<span class="hl-type">demo</span>'];
         yield 'template' => ['template<typename T>', '<span class="hl-keyword">template</span>'];
         yield 'template type parameter' => ['template<typename T>', '<span class="hl-type">T</span>'];
+        yield 'template type parameter use' => ['const T& value', '<span class="hl-type">T</span>'];
+        yield 'qualified namespace use' => ['std::string label', '<span class="hl-type">std</span>'];
+        yield 'qualified standard type use' => ['std::string label', '<span class="hl-type">string</span>'];
+        yield 'qualified project namespace use' => ['demo::Result result', '<span class="hl-type">demo</span>'];
+        yield 'qualified class use' => ['demo::Result result', '<span class="hl-type">Result</span>'];
         yield 'function' => ['render();', '<span class="hl-property">render</span>'];
         yield 'operator' => ['std::move(value)', '<span class="hl-operator">::</span>'];
         yield 'punctuation' => ['return {};', '<span class="hl-operator">;</span>'];
+    }
+
+    #[Test]
+    public function it_highlights_declared_types_and_namespaces_in_the_benchmark_fixture(): void
+    {
+        $source = (string) file_get_contents(__DIR__ . '/../../Bench/Fixtures/cpp.txt');
+        $highlighted = (new Highlighter())->parse($source, 'cpp');
+
+        $this->assertSame(5, substr_count($highlighted, '<span class="hl-type">std</span>'));
+        $this->assertSame(3, substr_count($highlighted, '<span class="hl-type">string</span>'));
+        $this->assertSame(2, substr_count($highlighted, '<span class="hl-type">demo</span>'));
+        $this->assertSame(2, substr_count($highlighted, '<span class="hl-type">Result</span>'));
+        $this->assertSame(2, substr_count($highlighted, '<span class="hl-type">T</span>'));
     }
 
     #[Test]
@@ -80,7 +98,14 @@ final class CppLanguageTest extends TestCase
     #[Test]
     public function it_avoids_backtracking_errors_for_unterminated_block_comments(): void
     {
-        (new CLikeCommentPattern())->match('/*' . str_repeat('a', 1_000));
+        $commentPattern = array_find(
+            (new CppLanguage())->getPatterns(),
+            static fn (object $pattern): bool => $pattern instanceof CLikeCommentPattern,
+        );
+
+        $this->assertInstanceOf(CLikeCommentPattern::class, $commentPattern);
+
+        $commentPattern->match('/*' . str_repeat('a', 1_000));
 
         $this->assertSame(PREG_NO_ERROR, preg_last_error(), preg_last_error_msg());
     }

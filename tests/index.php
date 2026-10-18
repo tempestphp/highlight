@@ -167,5 +167,39 @@ if ($themeCss === false) {
         <h1 class="capture-header"><?= htmlspecialchars($targetName, ENT_QUOTES | ENT_HTML5) ?></h1>
         <?= $contents ?>
     </main>
+    <script id="visual-harness-probe">
+        (() => {
+            const capture = document.querySelector('[data-screenshot-target="highlight-preview"]');
+            const codeSurface = capture.querySelector('pre, code');
+            const captureRect = capture.getBoundingClientRect();
+            const captureStyle = getComputedStyle(capture);
+            const codeStyle = getComputedStyle(codeSurface);
+            const resources = performance
+                .getEntriesByType('resource')
+                .map((entry) => new URL(entry.name, location.href).origin);
+
+            const state = {
+                target: <?= json_encode($targetName, JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_TAG) ?>,
+                capture: {
+                    x: captureRect.x,
+                    y: captureRect.y,
+                    width: captureRect.width,
+                    height: captureRect.height,
+                },
+                styles: {
+                    colorScheme: getComputedStyle(document.documentElement).colorScheme,
+                    captureBackground: captureStyle.backgroundColor,
+                    codeBackground: codeStyle.backgroundColor,
+                },
+                resourceOrigins: [...new Set(resources)],
+            };
+
+            const record = document.createElement('script');
+            record.id = 'visual-harness-state';
+            record.type = 'application/json';
+            record.textContent = JSON.stringify(state).replaceAll('<', '\\u003c');
+            document.body.append(record);
+        })();
+    </script>
 </body>
 </html>

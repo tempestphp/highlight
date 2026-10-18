@@ -10,15 +10,24 @@ use PHPUnit\Framework\TestCase;
 final class VisualHarnessTest extends TestCase
 {
     #[Test]
-    public function it_uses_a_local_dark_theme_and_a_stable_capture_area(): void
+    public function it_renders_a_deterministic_local_dark_capture(): void
     {
-        $source = (string) file_get_contents(__DIR__ . '/index.php');
+        $query = ['target' => 'rust.md', 'capture' => '1'];
+        $firstRender = $this->renderHarness($query);
+        $secondRender = $this->renderHarness($query);
 
-        $this->assertStringContainsString('highlight-dark-lite.css', $source);
-        $this->assertStringContainsString('color-scheme: dark', $source);
-        $this->assertStringContainsString('data-screenshot-target="highlight-preview"', $source);
-        $this->assertStringContainsString('width: 1024px', $source);
-        $this->assertStringNotContainsString('<link rel="stylesheet" href=', $source);
+        $this->assertSame($firstRender, $secondRender);
+        $this->assertStringContainsString('<h1 class="capture-header">rust.md</h1>', $firstRender);
+        $this->assertStringContainsString('color-scheme: dark', $firstRender);
+        $this->assertStringContainsString('background-color: #0c0c0c', $firstRender);
+        $this->assertStringContainsString('data-screenshot-target="highlight-preview"', $firstRender);
+        $this->assertStringContainsString('width: 1024px', $firstRender);
+        $this->assertStringContainsString('id="visual-harness-probe"', $firstRender);
+        $this->assertDoesNotMatchRegularExpression(
+            '/<(?:iframe|img|link|script|source)\b[^>]+(?:href|src)=["\']https?:/i',
+            $firstRender,
+        );
+        $this->assertDoesNotMatchRegularExpression('/(?:@import|url\()[^;}]*(?:https?:)?\/\//i', $firstRender);
     }
 
     #[Test]
@@ -28,5 +37,18 @@ final class VisualHarnessTest extends TestCase
 
         $this->assertFileExists($fixture);
         $this->assertNotSame('', trim((string) file_get_contents($fixture)));
+    }
+
+    /**
+     * @param array<string, string> $query
+     */
+    private function renderHarness(array $query): string
+    {
+        $_GET = $query;
+
+        ob_start();
+        require __DIR__ . '/index.php';
+
+        return (string) ob_get_clean();
     }
 }

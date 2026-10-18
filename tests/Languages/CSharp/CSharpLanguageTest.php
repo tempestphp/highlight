@@ -8,7 +8,9 @@ use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Tempest\Highlight\Highlighter;
+use Tempest\Highlight\Languages\CLike\Patterns\CLikeCommentPattern;
 use Tempest\Highlight\Languages\CSharp\CSharpLanguage;
+use Tempest\Highlight\Languages\CSharp\Patterns\CSharpStringPattern;
 use Tempest\Highlight\Tests\Bench\HighlighterBench;
 
 final class CSharpLanguageTest extends TestCase
@@ -98,6 +100,33 @@ final class CSharpLanguageTest extends TestCase
         foreach ([__DIR__ . '/../../Bench/Fixtures/csharp.txt', __DIR__ . '/../../targets/csharp.md'] as $fixture) {
             $this->assertFileExists($fixture);
             $this->assertNotSame('', trim((string) file_get_contents($fixture)));
+        }
+    }
+
+    #[Test]
+    public function it_avoids_backtracking_errors_for_unterminated_comments_and_strings(): void
+    {
+        $patterns = (new CSharpLanguage())->getPatterns();
+        $commentPattern = array_find(
+            $patterns,
+            static fn (object $pattern): bool => $pattern instanceof CLikeCommentPattern,
+        );
+        $stringPattern = array_find(
+            $patterns,
+            static fn (object $pattern): bool => $pattern instanceof CSharpStringPattern,
+        );
+
+        $this->assertInstanceOf(CLikeCommentPattern::class, $commentPattern);
+        $this->assertInstanceOf(CSharpStringPattern::class, $stringPattern);
+
+        foreach ([
+            [$commentPattern, '/*' . str_repeat('a', 1_000)],
+            [$stringPattern, '"""' . str_repeat('a', 1_000)],
+            [$stringPattern, '$"' . str_repeat('a', 1_000)],
+        ] as [$pattern, $source]) {
+            $pattern->match($source);
+
+            $this->assertSame(PREG_NO_ERROR, preg_last_error(), preg_last_error_msg());
         }
     }
 }

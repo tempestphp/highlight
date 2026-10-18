@@ -8,6 +8,7 @@ use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Tempest\Highlight\Highlighter;
+use Tempest\Highlight\Languages\Rust\Patterns\RustCommentPattern;
 use Tempest\Highlight\Languages\Rust\RustLanguage;
 use Tempest\Highlight\Tests\Bench\HighlighterBench;
 
@@ -74,6 +75,14 @@ final class RustLanguageTest extends TestCase
         $this->assertStringNotContainsString('<img', $highlighted);
         $this->assertStringContainsString('&lt;script&gt;', $highlighted);
         $this->assertStringContainsString('&amp;copy;', $highlighted);
+    }
+
+    #[Test]
+    public function it_avoids_backtracking_errors_for_unterminated_block_comments(): void
+    {
+        (new RustCommentPattern())->match('/*' . str_repeat('a', 1_000));
+
+        $this->assertSame(PREG_NO_ERROR, preg_last_error(), preg_last_error_msg());
     }
 
     #[Test]

@@ -14,7 +14,7 @@ final readonly class RustCommentPattern implements Pattern
 
     public function getPattern(): string
     {
-        return '/(?<match>\/\/[^\r\n]*|(?&block))(?(DEFINE)(?<block>\/\*(?:[^*\/]+|\/(?!\*)|\*(?!\/)|(?&block))*\*\/))/s';
+        return '/(?<match>\/\/[^\r\n]*|(?&block))(?(DEFINE)(?<block>\/\*(?:[^*\/]++|\/(?!\*)|\*(?!\/)|(?&block))*\*\/))/s';
     }
 
     public function getTokenType(): TokenTypeEnum

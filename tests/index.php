@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 require_once __DIR__ . '/../vendor/autoload.php';
 
 use League\CommonMark\Environment\Environment;
@@ -12,117 +14,158 @@ use Tempest\Highlight\CommonMark\InlineCodeBlockRenderer;
 use Tempest\Highlight\Highlighter;
 use Tempest\Highlight\Themes\CssTheme;
 
-$tests = glob("./targets/*.md");
+$targetPaths = glob(__DIR__ . '/targets/*.md') ?: [];
+sort($targetPaths);
+
+$targets = [];
+
+foreach ($targetPaths as $path) {
+    $targets[basename($path)] = $path;
+}
+
+$defaultTarget = 'rust.md';
+$targetName = (string) ($_GET['target'] ?? $defaultTarget);
+$targetPath = $targets[$targetName] ?? $targets[$defaultTarget] ?? reset($targets);
+
+if (! is_string($targetPath)) {
+    http_response_code(404);
+    exit('No visual test fixtures are available.');
+}
+
+$source = file_get_contents($targetPath);
+
+if ($source === false) {
+    http_response_code(500);
+    exit('The selected visual test fixture could not be read.');
+}
 
 $environment = new Environment();
-
-$highlighter = (new Highlighter(new CssTheme()));
+$highlighter = new Highlighter(new CssTheme());
 
 $environment
     ->addExtension(new CommonMarkCoreExtension())
     ->addRenderer(FencedCode::class, new CodeBlockRenderer($highlighter))
-    ->addRenderer(Code::class, new InlineCodeBlockRenderer($highlighter))
-;
+    ->addRenderer(Code::class, new InlineCodeBlockRenderer($highlighter));
 
-$markdown = new MarkdownConverter($environment);
+$contents = (new MarkdownConverter($environment))->convert($source)->getContent();
+$themeCss = file_get_contents(__DIR__ . '/../src/Themes/Css/highlight-dark-lite.css');
+$wrap = ($_GET['wrap'] ?? null) === '1';
+$capture = isset($_GET['capture']);
 
-$target = 'targets' . DIRECTORY_SEPARATOR . 'php.md';
-
-if (isset($_GET['target'])) {
-    $target = $_GET['target'];
-}
-
-$contents = $markdown->convert(file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . $target))->getContent();
-
-$wrap = false;
-
-if (isset($_GET['wrap'])) {
-    $wrap = (bool) $_GET['wrap'];
-}
-
-$stylesheet = null;
-
-if (isset($_GET['stylesheet'])) {
-    $stylesheet = $_GET['stylesheet'];
+if ($themeCss === false) {
+    http_response_code(500);
+    exit('The local visual test theme could not be read.');
 }
 
 ?>
-
+<!doctype html>
 <html lang="en">
 <head>
-    <title>Test</title>
+    <meta charset="utf-8">
+    <meta name="color-scheme" content="dark">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Highlight visual test: <?= htmlspecialchars($targetName, ENT_QUOTES | ENT_HTML5) ?></title>
     <style>
-        <?= file_get_contents(__DIR__ . '/../src/Themes/Css/highlight-light-lite.css') ?>
+        <?= $themeCss ?>
+
+        :root {
+            color-scheme: dark;
+            background: #090c10;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
 
         body {
-            font-size: 15px;
-            background-color: #232323;
-            color: #d4d4d4;
+            margin: 0;
+            min-width: 1088px;
+            min-height: 100vh;
+            padding: 32px;
+            background: #090c10;
+            color: #c9d1d9;
+            font: 15px/1.6 ui-sans-serif, system-ui, sans-serif;
+        }
+
+        .site-nav {
+            width: 1024px;
+            margin: 0 auto 20px;
+        }
+
+        .site-nav ul {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px 16px;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .site-nav a {
+            color: #79c0ff;
+            text-decoration: none;
+        }
+
+        .site-nav a[aria-current="page"] {
+            color: #f0f6fc;
+            font-weight: 600;
+        }
+
+        .capture {
+            width: 1024px;
+            margin: 0 auto;
+            overflow: hidden;
+            border: 1px solid #30363d;
+            border-radius: 10px;
+            background: #0c0c0c;
+            box-shadow: 0 16px 48px #0008;
+        }
+
+        .capture-header {
+            margin: 0;
+            padding: 12px 20px;
+            border-bottom: 1px solid #30363d;
+            background: #161b22;
+            color: #8b949e;
+            font: 600 13px/1.4 ui-monospace, SFMono-Regular, Consolas, monospace;
+        }
+
+        pre {
+            margin: 0;
+            padding: 28px 32px 32px;
+            overflow-x: auto;
+            border-radius: 0;
         }
 
         code,
         pre {
-            overflow-x: <?php echo $wrap ? 'auto' : 'scroll' ?>;
-            white-space: <?php echo $wrap ? 'normal' : 'pre' ?>;
-            line-height: 1.8em;
-            font-family: "JetBrains Mono", monospace;
-            padding: .1em;
+            white-space: <?= $wrap ? 'pre-wrap' : 'pre' ?>;
+            tab-size: 4;
+            font-family: ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", monospace;
+            font-size: 15px;
+            line-height: 1.65;
         }
 
-        pre {
-            margin: 3em auto;
-            box-shadow: 0 0 10px 0 #00000044;
-            /*padding: 2em 2em 2em 1ch;*/
-            padding: 2em;
-            /*background-color: #fafafa;*/
-            border-radius: 3px;
-            color: #000;
-            background-color: #f3f3f3;
-        }
-
-        .container {
-            display: flex;
-            align-items: center;
-            /*height: 100vh;*/
-        }
-
-        a {
-            color: #5ea8d6;
-            text-decoration: none;
-            transition: color 0.2s;
-        }
-
-        a:hover {
-            color: #8ec5e8;
-            text-decoration: underline;
-        }
-
-        a:visited {
-            color: #a78bba;
-        }
-
-        a:active {
-            color: #f0a05a;
-        }
-
-        .hl-injection {
-            /*background-color: #f0000044;*/
+        .capture-mode .site-nav {
+            display: none;
         }
     </style>
-    <?php if ($stylesheet): ?>
-        <link rel="stylesheet" href="<?php echo $stylesheet; ?>">
-    <?php endif; ?>
 </head>
-<body>
-<nav>
-    <ul>
-        <?php foreach ($tests as $test): ?>
-            <li><a href="?target=<?= urlencode($test) ?>"><?= $test ?></a></li>
-        <?php endforeach; ?>
-    </ul>
-</nav>
-<div class="container">
-    <?= $contents ?>
-</div>
+<body class="<?= $capture ? 'capture-mode' : '' ?>">
+    <nav class="site-nav" aria-label="Visual test fixtures">
+        <ul>
+            <?php foreach ($targets as $name => $path): ?>
+                <li>
+                    <a href="?target=<?= urlencode($name) ?>" <?= $name === $targetName ? 'aria-current="page"' : '' ?>>
+                        <?= htmlspecialchars($name, ENT_QUOTES | ENT_HTML5) ?>
+                    </a>
+                </li>
+            <?php endforeach; ?>
+        </ul>
+    </nav>
+    <main class="capture" data-screenshot-target="highlight-preview">
+        <h1 class="capture-header"><?= htmlspecialchars($targetName, ENT_QUOTES | ENT_HTML5) ?></h1>
+        <?= $contents ?>
+    </main>
 </body>
 </html>

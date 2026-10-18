@@ -8,6 +8,7 @@ use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Tempest\Highlight\Highlighter;
+use Tempest\Highlight\Languages\CLike\Patterns\CLikeCommentPattern;
 use Tempest\Highlight\Languages\Kotlin\KotlinLanguage;
 use Tempest\Highlight\Tests\Bench\HighlighterBench;
 
@@ -92,5 +93,20 @@ final class KotlinLanguageTest extends TestCase
             $this->assertFileExists($fixture);
             $this->assertNotSame('', trim((string) file_get_contents($fixture)));
         }
+    }
+
+    #[Test]
+    public function it_avoids_backtracking_errors_for_unterminated_block_comments(): void
+    {
+        $commentPattern = array_find(
+            (new KotlinLanguage())->getPatterns(),
+            static fn (object $pattern): bool => $pattern instanceof CLikeCommentPattern,
+        );
+
+        $this->assertInstanceOf(CLikeCommentPattern::class, $commentPattern);
+
+        $commentPattern->match('/*' . str_repeat('a', 1_000));
+
+        $this->assertSame(PREG_NO_ERROR, preg_last_error(), preg_last_error_msg());
     }
 }

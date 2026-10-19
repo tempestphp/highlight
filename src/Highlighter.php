@@ -27,6 +27,7 @@ use Tempest\Highlight\Languages\Ini\IniLanguage;
 use Tempest\Highlight\Languages\Java\JavaLanguage;
 use Tempest\Highlight\Languages\JavaScript\JavaScriptLanguage;
 use Tempest\Highlight\Languages\Json\JsonLanguage;
+use Tempest\Highlight\Languages\Jsx\JsxLanguage;
 use Tempest\Highlight\Languages\Kotlin\KotlinLanguage;
 use Tempest\Highlight\Languages\Markdown\MarkdownLanguage;
 use Tempest\Highlight\Languages\Nginx\NginxLanguage;
@@ -39,6 +40,7 @@ use Tempest\Highlight\Languages\Svelte\SvelteLanguage;
 use Tempest\Highlight\Languages\Terminal\TerminalLanguage;
 use Tempest\Highlight\Languages\Terraform\TerraformLanguage;
 use Tempest\Highlight\Languages\Text\TextLanguage;
+use Tempest\Highlight\Languages\Tsx\TsxLanguage;
 use Tempest\Highlight\Languages\Twig\TwigLanguage;
 use Tempest\Highlight\Languages\TypeScript\TypeScriptLanguage;
 use Tempest\Highlight\Languages\Vue\VueLanguage;
@@ -87,6 +89,7 @@ final class Highlighter
             ->addLanguage(new HtmlLanguage())
             ->addLanguage(new HttpLanguage())
             ->addLanguage(new JavaScriptLanguage())
+            ->addLanguage(new JsxLanguage())
             ->addLanguage(new JsonLanguage())
             ->addLanguage(new MarkdownLanguage())
             ->addLanguage(new NginxLanguage())
@@ -99,6 +102,7 @@ final class Highlighter
             ->addLanguage(new TextLanguage())
             ->addLanguage(new TerraformLanguage())
             ->addLanguage(new TypeScriptLanguage())
+            ->addLanguage(new TsxLanguage())
             ->addLanguage(new XmlLanguage())
             ->addLanguage(new YamlLanguage())
             ->addLanguage(new DotEnvLanguage())

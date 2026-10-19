@@ -33,6 +33,22 @@ final class JsxLanguageTest extends TestCase
         $this->assertSame('js', $highlighter->getCurrentLanguage()?->getName());
     }
 
+    public function test_jsx_preserves_and_escapes_the_complete_source(): void
+    {
+        $source = "const view = <script>\r\n"
+            . "    <div title=\"<&copy;> ❷img src=x onerror=alert(1)❸\">❶❹❿</div>\r"
+            . "</script>;\r\n";
+
+        $highlighted = (new Highlighter())->parse($source, 'jsx');
+        $renderedSource = html_entity_decode(strip_tags($highlighted), ENT_QUOTES | ENT_HTML5);
+
+        $this->assertSame($source, $renderedSource);
+        $this->assertStringNotContainsString('<script>', $highlighted);
+        $this->assertStringNotContainsString('<img', $highlighted);
+        $this->assertStringContainsString('&lt;<span class="hl-type">script</span>&gt;', $highlighted);
+        $this->assertStringContainsString('&amp;copy;', $highlighted);
+    }
+
     #[DataProvider('provide_jsx_syntax_cases')]
     public function test_jsx_syntax(string $source, string $expected): void
     {

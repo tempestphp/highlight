@@ -7,6 +7,7 @@ namespace Tempest\Highlight\Tests\Languages\Tsx;
 use PHPUnit\Framework\Attributes\DataProviderExternal;
 use PHPUnit\Framework\TestCase;
 use Tempest\Highlight\Highlighter;
+use Tempest\Highlight\Languages\Tsx\TsxLanguage;
 use Tempest\Highlight\Tests\Bench\HighlighterBench;
 use Tempest\Highlight\Tests\Languages\Jsx\JsxLanguageTest;
 
@@ -56,6 +57,18 @@ final class TsxLanguageTest extends TestCase
         foreach ([__DIR__ . '/../../Bench/Fixtures/tsx.txt', __DIR__ . '/../../targets/tsx.md'] as $fixture) {
             $this->assertFileExists($fixture);
             $this->assertNotSame('', trim((string) file_get_contents($fixture)));
+        }
+    }
+
+    #[DataProviderExternal(JsxLanguageTest::class, 'provide_jsx_avoids_backtracking_errors_for_unterminated_input_cases')]
+    public function test_tsx_avoids_backtracking_errors_for_unterminated_input(string $source): void
+    {
+        foreach ((new TsxLanguage())->getPatterns() as $pattern) {
+            preg_match('//', '');
+
+            $pattern->match($source);
+
+            $this->assertSame(PREG_NO_ERROR, preg_last_error(), $pattern::class . ': ' . preg_last_error_msg());
         }
     }
 

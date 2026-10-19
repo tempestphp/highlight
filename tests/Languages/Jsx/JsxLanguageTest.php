@@ -7,6 +7,7 @@ namespace Tempest\Highlight\Tests\Languages\Jsx;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Tempest\Highlight\Highlighter;
+use Tempest\Highlight\Languages\Jsx\JsxLanguage;
 use Tempest\Highlight\Tests\Bench\HighlighterBench;
 
 final class JsxLanguageTest extends TestCase
@@ -58,6 +59,27 @@ final class JsxLanguageTest extends TestCase
             $this->assertFileExists($fixture);
             $this->assertNotSame('', trim((string) file_get_contents($fixture)));
         }
+    }
+
+    #[DataProvider('provide_jsx_avoids_backtracking_errors_for_unterminated_input_cases')]
+    public function test_jsx_avoids_backtracking_errors_for_unterminated_input(string $source): void
+    {
+        foreach ((new JsxLanguage())->getPatterns() as $pattern) {
+            preg_match('//', '');
+
+            $pattern->match($source);
+
+            $this->assertSame(PREG_NO_ERROR, preg_last_error(), $pattern::class . ': ' . preg_last_error_msg());
+        }
+    }
+
+    public static function provide_jsx_avoids_backtracking_errors_for_unterminated_input_cases(): iterable
+    {
+        return [
+            'tag' => ['<Widget ' . str_repeat('a', 1_000)],
+            'quoted attribute' => ['<Widget title="' . str_repeat('a', 1_000)],
+            'embedded expression' => ['<Widget>{' . str_repeat('a', 1_000)],
+        ];
     }
 
     #[DataProvider('provide_jsx_syntax_cases')]

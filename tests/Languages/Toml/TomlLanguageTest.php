@@ -25,6 +25,23 @@ final class TomlLanguageTest extends TestCase
     }
 
     #[Test]
+    public function it_preserves_and_escapes_the_complete_source(): void
+    {
+        $source = "title = \"<&copy;> ❷img src=x onerror=alert(1)❸ ❶❹❿\"\r\n"
+            . "script = \"<script>alert('x')</script>\"\r"
+            . "enabled = true\r\n";
+
+        $highlighted = (new Highlighter())->parse($source, 'toml');
+        $renderedSource = html_entity_decode(strip_tags($highlighted), ENT_QUOTES | ENT_HTML5);
+
+        $this->assertSame($source, $renderedSource);
+        $this->assertStringNotContainsString('<script>', $highlighted);
+        $this->assertStringNotContainsString('<img', $highlighted);
+        $this->assertStringContainsString('&lt;script&gt;', $highlighted);
+        $this->assertStringContainsString('&amp;copy;', $highlighted);
+    }
+
+    #[Test]
     #[DataProvider('provide_it_highlights_representative_syntax_cases')]
     public function it_highlights_representative_syntax(string $source, string $expected): void
     {

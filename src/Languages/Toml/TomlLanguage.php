@@ -14,8 +14,9 @@ use Tempest\Highlight\Languages\Toml\Patterns\TomlNumberPattern;
 use Tempest\Highlight\Languages\Toml\Patterns\TomlOperatorPattern;
 use Tempest\Highlight\Languages\Toml\Patterns\TomlStringPattern;
 use Tempest\Highlight\Languages\Toml\Patterns\TomlTablePattern;
+use Tempest\Highlight\SourcePreservingLanguage;
 
-final class TomlLanguage extends BaseLanguage
+final class TomlLanguage extends BaseLanguage implements SourcePreservingLanguage
 {
     public function getName(): string
     {

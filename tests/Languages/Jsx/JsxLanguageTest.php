@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tempest\Highlight\Tests\Languages\Jsx;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Tempest\Highlight\Highlighter;
 
@@ -30,5 +31,33 @@ final class JsxLanguageTest extends TestCase
 
         $highlighter->parse('class Point {}', 'node');
         $this->assertSame('js', $highlighter->getCurrentLanguage()?->getName());
+    }
+
+    #[DataProvider('provide_jsx_syntax_cases')]
+    public function test_jsx_syntax(string $source, string $expected): void
+    {
+        $this->assertSame($expected, new Highlighter()->parse($source, 'jsx'));
+    }
+
+    public static function provide_jsx_syntax_cases(): iterable
+    {
+        return [
+            'intrinsic tag, attribute, text, and entity' => [
+                '<div id="root">Hello &amp; welcome</div>',
+                '&lt;<span class="hl-type">div</span> <span class="hl-property">id</span>=<span class="hl-value">&quot;root&quot;</span>&gt;Hello <span class="hl-value">&amp;amp;</span> welcome&lt;/<span class="hl-type">div</span>&gt;',
+            ],
+            'fragment and component tag forms' => [
+                '<> <Button /> <UI.Icon /> <svg:path /> </>',
+                '<span class="hl-keyword">&lt;&gt;</span> &lt;<span class="hl-type">Button</span> /&gt; &lt;<span class="hl-type">UI.Icon</span> /&gt; &lt;<span class="hl-type">svg:path</span> /&gt; <span class="hl-keyword">&lt;/&gt;</span>',
+            ],
+            'spread, expression, and comment' => [
+                "<Widget title='Hi' {...props} disabled>{items.map(render)}{/* note */}</Widget>",
+                '&lt;<span class="hl-type">Widget</span> <span class="hl-property">title</span>=<span class="hl-value">\'Hi\'</span> <span class="hl-attribute">{...<span class="hl-property">props</span>}</span> <span class="hl-property">disabled</span>&gt;{items.<span class="hl-property">map</span>(render)}{<span class="hl-comment">/* note */</span>}&lt;/<span class="hl-type">Widget</span>&gt;',
+            ],
+            'javascript with member component' => [
+                'const view = active ? <Panel.Item /> : null;',
+                '<span class="hl-keyword">const</span> view = active ? &lt;<span class="hl-type">Panel.Item</span> /&gt; : <span class="hl-keyword">null</span>;',
+            ],
+        ];
     }
 }

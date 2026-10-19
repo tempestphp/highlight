@@ -72,6 +72,20 @@ TXT,
 <span class="hl-keyword">let</span> flag = <span class="hl-literal">true</span> &amp;&amp; <span class="hl-literal">nil</span> == <span class="hl-literal">nil</span>
 <span class="hl-keyword">let</span> mask = <span class="hl-number">0xFF</span>
 TXT],
+            [<<<'TXT'
+/* outer /* inner */ return nil */
+let s = """
+    say \""" if
+    """
+let v = "value \(identity("if"))"
+TXT,
+            <<<'TXT'
+<span class="hl-comment">/* outer /* inner */ return nil */</span>
+<span class="hl-keyword">let</span> s = <span class="hl-value">&quot;&quot;&quot;
+    say \&quot;&quot;&quot; if
+    &quot;&quot;&quot;</span>
+<span class="hl-keyword">let</span> v = <span class="hl-value">&quot;value \(identity(&quot;if&quot;))&quot;</span>
+TXT],
         ];
     }
 }

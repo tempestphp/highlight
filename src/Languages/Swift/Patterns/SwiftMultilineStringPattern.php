@@ -17,13 +17,24 @@ Hello, "world"
 Hello, "world"
 """',
 )]
+#[PatternTest(
+    input: 'let text = """
+say \""" if
+"""',
+    output: '"""
+say \""" if
+"""',
+)]
 final readonly class SwiftMultilineStringPattern implements Pattern
 {
     use IsPattern;
 
+    /**
+     * Escapes are consumed first, so an escaped `\"""` doesn't close the string.
+     */
     public function getPattern(): string
     {
-        return '/(?<match>"""(.|\n)*?""")/m';
+        return '/(?<match>"""(?:\\\\[\s\S]|(?!""")[^\\\\])*""")/';
     }
 
     public function getTokenType(): TokenTypeEnum

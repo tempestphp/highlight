@@ -15,13 +15,20 @@ answer */',
     output: '/* the
 answer */',
 )]
+#[PatternTest(
+    input: '/* outer /* inner */ return nil */ let a = 1',
+    output: '/* outer /* inner */ return nil */',
+)]
 final readonly class SwiftMultilineCommentPattern implements Pattern
 {
     use IsPattern;
 
+    /**
+     * Swift block comments nest, so a comment only ends once every comment opened inside it has closed.
+     */
     public function getPattern(): string
     {
-        return '/(?<match>\/\*(.|\n)*?\*\/)/m';
+        return '/(?<match>(?<comment>\/\*(?:[^\/*]|\/(?!\*)|\*(?!\/)|(?&comment))*\*\/))/';
     }
 
     public function getTokenType(): TokenTypeEnum

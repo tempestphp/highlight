@@ -9,6 +9,7 @@ use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Tempest\Highlight\Highlighter;
 use Tempest\Highlight\Languages\Toml\TomlLanguage;
+use Tempest\Highlight\Tests\Bench\HighlighterBench;
 
 final class TomlLanguageTest extends TestCase
 {
@@ -77,5 +78,16 @@ final class TomlLanguageTest extends TestCase
         yield 'inline table delimiters' => ['point = { x = 1, y = 2 }', '<span class="hl-operator">{</span>'];
         yield 'key-value separator' => ['title = "TOML"', '<span class="hl-operator">=</span>'];
         yield 'collection separator' => ['ports = [8000, 8001]', '<span class="hl-operator">,</span>'];
+    }
+
+    #[Test]
+    public function it_has_non_empty_benchmark_and_visual_fixtures(): void
+    {
+        $this->assertSame('toml.txt', HighlighterBench::LANGUAGES['toml'] ?? null);
+
+        foreach ([__DIR__ . '/../../Bench/Fixtures/toml.txt', __DIR__ . '/../../targets/toml.md'] as $fixture) {
+            $this->assertFileExists($fixture);
+            $this->assertNotSame('', trim((string) file_get_contents($fixture)));
+        }
     }
 }

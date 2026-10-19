@@ -49,6 +49,7 @@ final class HighlighterBench
         'svelte' => 'svelte.txt',
         'terminal' => 'terminal.txt',
         'terraform' => 'terraform.txt',
+        'toml' => 'toml.txt',
         'tsx' => 'tsx.txt',
         'typescript' => 'typescript.txt',
         'txt' => 'text.txt',

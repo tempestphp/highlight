@@ -7,6 +7,7 @@ namespace Tempest\Highlight\Tests\Languages\Tsx;
 use PHPUnit\Framework\Attributes\DataProviderExternal;
 use PHPUnit\Framework\TestCase;
 use Tempest\Highlight\Highlighter;
+use Tempest\Highlight\Tests\Bench\HighlighterBench;
 use Tempest\Highlight\Tests\Languages\Jsx\JsxLanguageTest;
 
 final class TsxLanguageTest extends TestCase
@@ -46,6 +47,16 @@ final class TsxLanguageTest extends TestCase
         $this->assertStringNotContainsString('<img', $highlighted);
         $this->assertStringContainsString('&lt;<span class="hl-type">script</span>&gt;', $highlighted);
         $this->assertStringContainsString('&amp;copy;', $highlighted);
+    }
+
+    public function test_tsx_has_non_empty_benchmark_and_visual_fixtures(): void
+    {
+        $this->assertSame('tsx.txt', HighlighterBench::LANGUAGES['tsx'] ?? null);
+
+        foreach ([__DIR__ . '/../../Bench/Fixtures/tsx.txt', __DIR__ . '/../../targets/tsx.md'] as $fixture) {
+            $this->assertFileExists($fixture);
+            $this->assertNotSame('', trim((string) file_get_contents($fixture)));
+        }
     }
 
     #[DataProviderExternal(JsxLanguageTest::class, 'provide_jsx_syntax_cases')]

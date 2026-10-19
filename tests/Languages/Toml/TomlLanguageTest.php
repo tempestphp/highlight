@@ -92,7 +92,7 @@ final class TomlLanguageTest extends TestCase
     }
 
     #[Test]
-    #[DataProvider('provide_unterminated_input_cases')]
+    #[DataProvider('provide_it_avoids_pcre_errors_for_unterminated_input_cases')]
     public function it_avoids_pcre_errors_for_unterminated_input(string $source): void
     {
         foreach ((new TomlLanguage())->getPatterns() as $pattern) {
@@ -104,7 +104,7 @@ final class TomlLanguageTest extends TestCase
         }
     }
 
-    public static function provide_unterminated_input_cases(): iterable
+    public static function provide_it_avoids_pcre_errors_for_unterminated_input_cases(): iterable
     {
         yield 'basic string' => ['value = "' . str_repeat('a', 1_000)];
         yield 'multiline basic string' => ['value = """' . str_repeat('a', 1_000)];

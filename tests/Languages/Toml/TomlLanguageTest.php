@@ -90,4 +90,25 @@ final class TomlLanguageTest extends TestCase
             $this->assertNotSame('', trim((string) file_get_contents($fixture)));
         }
     }
+
+    #[Test]
+    #[DataProvider('provide_unterminated_input_cases')]
+    public function it_avoids_pcre_errors_for_unterminated_input(string $source): void
+    {
+        foreach ((new TomlLanguage())->getPatterns() as $pattern) {
+            preg_match('//', '');
+
+            $pattern->match($source);
+
+            $this->assertSame(PREG_NO_ERROR, preg_last_error(), $pattern::class . ': ' . preg_last_error_msg());
+        }
+    }
+
+    public static function provide_unterminated_input_cases(): iterable
+    {
+        yield 'basic string' => ['value = "' . str_repeat('a', 1_000)];
+        yield 'multiline basic string' => ['value = """' . str_repeat('a', 1_000)];
+        yield 'array' => ['value = [' . str_repeat('1,', 500)];
+        yield 'inline table' => ['value = { key = "' . str_repeat('a', 1_000)];
+    }
 }

@@ -19,7 +19,7 @@ final readonly class BladeCommentPattern implements Pattern
 
     public function getPattern(): string
     {
-        return '(?<match>\{\{\-\-(.|\n)*?\-\-\}\})';
+        return '(?<match>\{\{\-\-[\s\S]*?\-\-\}\})';
     }
 
     public function getTokenType(): TokenTypeEnum

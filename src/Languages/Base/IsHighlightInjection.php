@@ -20,7 +20,7 @@ trait IsHighlightInjection
     {
         $token = '\\' . $this->getToken();
 
-        $pattern = '/(?<start>{' . $token . ')(?<match>(.|\n)*?)(?<end>' . $token . '})(?!})/';
+        $pattern = '/(?<start>{' . $token . ')(?<match>[\s\S]*?)(?<end>' . $token . '})(?!})/';
 
         preg_match_all($pattern, $content, $matches, PREG_OFFSET_CAPTURE);
 

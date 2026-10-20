@@ -22,7 +22,7 @@ final readonly class AdditionInjection implements Injection
         $content = str_replace('❷span class=❹ignore❹❸{+❷/span❸', '{+', $content);
         $content = str_replace('❷span class=❹ignore❹❸+}❷/span❸', '+}', $content);
 
-        preg_match_all('/(\{\+)((.|\n)*?)(\+})/', $content, $matches, PREG_OFFSET_CAPTURE);
+        preg_match_all('/(\{\+)([\s\S]*?)(\+})/', $content, $matches, PREG_OFFSET_CAPTURE);
 
         $parsedOffset = 0;
 

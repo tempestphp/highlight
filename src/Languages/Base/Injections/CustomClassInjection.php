@@ -14,7 +14,7 @@ final readonly class CustomClassInjection implements Injection
 {
     public function parse(string $content, Highlighter $highlighter): ParsedInjection
     {
-        $pattern = '/(?<start>{\:(?<class>[\w-]+)\:)(?<match>(.|\n)*?)(?<end>:})/';
+        $pattern = '/(?<start>{\:(?<class>[\w-]+)\:)(?<match>[\s\S]*?)(?<end>:})/';
 
         $tokens = [];
 

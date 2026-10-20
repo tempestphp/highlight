@@ -15,7 +15,7 @@ final readonly class InjectionTokenPattern implements Pattern
 
     public function getPattern(): string
     {
-        return Escape::INJECTION_TOKEN . '(?<match>(.|\n)*?)' . Escape::INJECTION_TOKEN;
+        return Escape::INJECTION_TOKEN . '(?<match>[\s\S]*?)' . Escape::INJECTION_TOKEN;
     }
 
     public function getTokenType(): TokenTypeEnum

@@ -22,7 +22,7 @@ final readonly class CssCommentPattern implements Pattern
 
     public function getPattern(): string
     {
-        return '/(?<match>\/\*(.|\n)*?\*\/)/m';
+        return '/(?<match>\/\*[\s\S]*?\*\/)/m';
     }
 
     public function getTokenType(): TokenTypeEnum

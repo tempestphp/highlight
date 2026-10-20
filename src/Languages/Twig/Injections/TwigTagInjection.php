@@ -16,7 +16,7 @@ class TwigTagInjection implements Injection
 
     public function getPattern(): string
     {
-        return '(?<match>({%(.|\n)*?%}))';
+        return '(?<match>({%[\s\S]*?%}))';
     }
 
     public function parseContent(string $content, Highlighter $highlighter): string

@@ -26,7 +26,7 @@ final class InlineTheme implements Theme, WebTheme
             throw new Exception("No valid CSS file found at path {$themePath}");
         }
 
-        preg_match_all('/(?<selector>[\w,\.\s\-]+){(?<style>(.|\n)*?)}/', $contents, $matches);
+        preg_match_all('/(?<selector>[\w,\.\s\-]+){(?<style>[\s\S]*?)}/', $contents, $matches);
 
         foreach (array_keys($matches[0]) as $key) {
             $selector = trim($matches['selector'][$key]);

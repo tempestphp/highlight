@@ -24,7 +24,7 @@ final readonly class TwigCommentPattern implements Pattern
 
     public function getPattern(): string
     {
-        return '(?<match>\{#(.|\n)*?#})';
+        return '(?<match>\{#[\s\S]*?#})';
     }
 
     public function getTokenType(): TokenTypeEnum

@@ -26,7 +26,7 @@ final readonly class XmlCommentPattern implements Pattern
 
     public function getPattern(): string
     {
-        return '/(?<match>\<!--(.|\n)*-->)/mU';
+        return '/(?<match>\<!--[\s\S]*-->)/mU';
     }
 
     public function getTokenType(): TokenTypeEnum

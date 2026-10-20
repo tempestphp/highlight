@@ -175,6 +175,31 @@ class HighlighterTest extends TestCase
     }
 
     #[Test]
+    #[DataProvider('provide_large_multiline_blocks_are_highlighted_cases')]
+    public function large_multiline_blocks_are_highlighted(string $language, string $before, string $after, string $expected): void
+    {
+        // Large enough to exhaust the PCRE JIT stack with a `(.|\n)*?` pattern
+        $content = $before . str_repeat("lorem ipsum dolor\n", 6000) . $after;
+
+        $this->assertStringContainsString($expected, new Highlighter()->parse($content, $language));
+    }
+
+    public static function provide_large_multiline_blocks_are_highlighted_cases(): iterable
+    {
+        yield 'php comment' => ['php', "<?php\n/*", "*/\n", '<span class="hl-comment">/*'];
+        yield 'php doc comment' => ['php', "<?php\n/**", "*/\n", '<span class="hl-comment">/**'];
+        yield 'javascript comment' => ['javascript', '/*', '*/', '<span class="hl-comment">/*'];
+        yield 'css comment' => ['css', '/*', '*/', '<span class="hl-comment">/*'];
+        yield 'sql comment' => ['sql', '/*', '*/', '<span class="hl-comment">/*'];
+        yield 'xml comment' => ['xml', '<!--', '-->', '<span class="hl-comment">&lt;!--'];
+        yield 'twig comment' => ['twig', '{#', '#}', '<span class="hl-comment">{#'];
+        yield 'blade comment' => ['blade', '{{--', '--}}', '<span class="hl-comment">{{--'];
+        yield 'python string' => ['python', 'x = """', '"""', '<span class="hl-value">&quot;&quot;&quot;'];
+        yield 'html script' => ['html', '<script>', 'const x = 1;</script>', '<span class="hl-keyword">const</span>'];
+        yield 'addition' => ['php', '{+', '+}', '<span class="hl-addition">'];
+    }
+
+    #[Test]
     public function freed_language_cache_is_not_reused_by_a_new_language(): void
     {
         $base = new Highlighter();

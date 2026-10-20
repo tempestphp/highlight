@@ -14,7 +14,7 @@ final readonly class PyTripleSingleQuoteStringPattern implements Pattern
 
     public function getPattern(): string
     {
-        return '/(?<match>\'\'\'(.|\n)*?\'\'\')/m';
+        return '/(?<match>\'\'\'[\s\S]*?\'\'\')/m';
     }
 
     public function getTokenType(): TokenTypeEnum

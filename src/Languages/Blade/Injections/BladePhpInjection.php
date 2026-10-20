@@ -14,7 +14,7 @@ final readonly class BladePhpInjection implements Injection
 
     public function getPattern(): string
     {
-        return '\@php(?<match>(.|\n)*?)\@endphp';
+        return '\@php(?<match>[\s\S]*?)\@endphp';
     }
 
     public function parseContent(string $content, Highlighter $highlighter): string

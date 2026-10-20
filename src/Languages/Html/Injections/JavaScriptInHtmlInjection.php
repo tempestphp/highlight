@@ -15,7 +15,7 @@ final readonly class JavaScriptInHtmlInjection implements Injection
 
     public function getPattern(): string
     {
-        return '<script>(?<match>(.|\n)*)<\/script>';
+        return '<script>(?<match>[\s\S]*)<\/script>';
     }
 
     public function parseContent(string $content, Highlighter $highlighter): string

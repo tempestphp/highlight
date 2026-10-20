@@ -15,7 +15,7 @@ final readonly class JsDocInjection implements Injection
 
     public function getPattern(): string
     {
-        return '/(?<match>\/\*\*(.|\n)*?\*\/)/m';
+        return '/(?<match>\/\*\*[\s\S]*?\*\/)/m';
     }
 
     public function parseContent(string $content, Highlighter $highlighter): string

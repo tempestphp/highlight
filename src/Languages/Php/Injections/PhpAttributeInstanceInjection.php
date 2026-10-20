@@ -16,7 +16,7 @@ final readonly class PhpAttributeInstanceInjection implements Injection
 
     public function getPattern(): string
     {
-        return '(?<match>\#\[[\w]+\((.|\n)*?\)\])';
+        return '(?<match>\#\[[\w]+\([\s\S]*?\)\])';
     }
 
     public function parseContent(string $content, Highlighter $highlighter): string

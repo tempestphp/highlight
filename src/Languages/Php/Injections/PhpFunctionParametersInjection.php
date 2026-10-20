@@ -16,7 +16,7 @@ final readonly class PhpFunctionParametersInjection implements Injection
 
     public function getPattern(): string
     {
-        return '(function|fn)[\s\w]*\((?<match>(.|\n)*?)(use\s*\(|{|\)[\s]*({|;|:|=>))';
+        return '(function|fn)[\s\w]*\((?<match>[\s\S]*?)(use\s*\(|{|\)[\s]*({|;|:|=>))';
     }
 
     public function parseContent(string $content, Highlighter $highlighter): string

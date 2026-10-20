@@ -38,6 +38,7 @@ final class HighlighterBench
         'python' => 'python.txt',
         'ruby' => 'ruby.txt',
         'scss' => 'scss.txt',
+        'sema' => 'sema.txt',
         'sql' => 'sql.txt',
         'svelte' => 'svelte.txt',
         'terminal' => 'terminal.txt',

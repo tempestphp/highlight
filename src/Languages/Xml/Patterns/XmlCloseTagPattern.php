@@ -18,6 +18,9 @@ use Tempest\Highlight\Tokens\TokenTypeEnum;
 #[PatternTest(input: '</point.x>', output: 'point.x')]
 #[PatternTest(input: '</point_y>', output: 'point_y')]
 #[PatternTest(input: '</_private>', output: '_private')]
+#[PatternTest(input: '</données>', output: 'données')]
+#[PatternTest(input: '</élément>', output: 'élément')]
+#[PatternTest(input: '</数据>', output: '数据')]
 # The following are not valid XML tags
 #[PatternTest(input: '</1tag>', output: null)]
 #[PatternTest(input: '</-tag>', output: null)]
@@ -27,7 +30,7 @@ final readonly class XmlCloseTagPattern implements Pattern
 
     public function getPattern(): string
     {
-        return '<\/(?<match>[a-zA-Z_][\w\-\:\.]*)';
+        return '<\/(?<match>[a-zA-Z_\x80-\xFF][\w\-\:\.\x80-\xFF]*)';
     }
 
     public function getTokenType(): TokenTypeEnum

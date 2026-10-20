@@ -6,8 +6,12 @@ namespace Tempest\Highlight\Languages\Rust\Patterns;
 
 use Tempest\Highlight\IsPattern;
 use Tempest\Highlight\Pattern;
+use Tempest\Highlight\PatternTest;
 use Tempest\Highlight\Tokens\TokenTypeEnum;
 
+#[PatternTest(input: '"hello"', output: '"hello"')]
+#[PatternTest(input: 'r#"hello"#', output: 'r#"hello"#')]
+#[PatternTest(input: 'c"hello"', output: 'c"hello"')]
 final readonly class RustStringPattern implements Pattern
 {
     use IsPattern;

@@ -6,8 +6,11 @@ namespace Tempest\Highlight\Languages\Rust\Patterns;
 
 use Tempest\Highlight\IsPattern;
 use Tempest\Highlight\Pattern;
+use Tempest\Highlight\PatternTest;
 use Tempest\Highlight\Tokens\TokenTypeEnum;
 
+#[PatternTest(input: 'run()', output: 'run')]
+#[PatternTest(input: 'collect::<Vec<_>>()', output: 'collect')]
 final readonly class RustFunctionPattern implements Pattern
 {
     use IsPattern;

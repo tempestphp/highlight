@@ -6,8 +6,11 @@ namespace Tempest\Highlight\Languages\Rust\Patterns;
 
 use Tempest\Highlight\IsPattern;
 use Tempest\Highlight\Pattern;
+use Tempest\Highlight\PatternTest;
 use Tempest\Highlight\Tokens\TokenTypeEnum;
 
+#[PatternTest(input: 'async fn run()', output: 'async')]
+#[PatternTest(input: 'let value = 1;', output: 'let')]
 final readonly class RustKeywordPattern implements Pattern
 {
     use IsPattern;

@@ -6,8 +6,11 @@ namespace Tempest\Highlight\Languages\Rust\Patterns;
 
 use Tempest\Highlight\IsPattern;
 use Tempest\Highlight\Pattern;
+use Tempest\Highlight\PatternTest;
 use Tempest\Highlight\Tokens\TokenTypeEnum;
 
+#[PatternTest(input: 'String', output: 'String')]
+#[PatternTest(input: 'i32', output: 'i32')]
 final readonly class RustTypePattern implements Pattern
 {
     use IsPattern;

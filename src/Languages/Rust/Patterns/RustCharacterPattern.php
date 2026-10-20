@@ -11,6 +11,9 @@ use Tempest\Highlight\Tokens\TokenTypeEnum;
 
 #[PatternTest(input: '\'\\u{41}\'', output: '\'\\u{41}\'')]
 #[PatternTest(input: '\'é\'', output: '\'é\'')]
+#[PatternTest(input: '\'x\'', output: '\'x\'')]
+#[PatternTest(input: '\'\\n\'', output: '\'\\n\'')]
+#[PatternTest(input: 'b\'x\'', output: 'b\'x\'')]
 final readonly class RustCharacterPattern implements Pattern
 {
     use IsPattern;

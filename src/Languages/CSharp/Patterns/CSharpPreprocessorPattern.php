@@ -6,8 +6,11 @@ namespace Tempest\Highlight\Languages\CSharp\Patterns;
 
 use Tempest\Highlight\IsPattern;
 use Tempest\Highlight\Pattern;
+use Tempest\Highlight\PatternTest;
 use Tempest\Highlight\Tokens\TokenTypeEnum;
 
+#[PatternTest(input: '#nullable enable', output: '#nullable')]
+#[PatternTest(input: '#region Setup', output: '#region')]
 final readonly class CSharpPreprocessorPattern implements Pattern
 {
     use IsPattern;

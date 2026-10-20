@@ -6,8 +6,11 @@ namespace Tempest\Highlight\Languages\CSharp\Patterns;
 
 use Tempest\Highlight\IsPattern;
 use Tempest\Highlight\Pattern;
+use Tempest\Highlight\PatternTest;
 use Tempest\Highlight\Tokens\TokenTypeEnum;
 
+#[PatternTest(input: 'namespace Example.App;', output: 'Example.App')]
+#[PatternTest(input: 'using System.Text;', output: 'System.Text')]
 final readonly class CSharpNamespacePattern implements Pattern
 {
     use IsPattern;

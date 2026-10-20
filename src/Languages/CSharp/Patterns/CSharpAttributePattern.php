@@ -6,8 +6,11 @@ namespace Tempest\Highlight\Languages\CSharp\Patterns;
 
 use Tempest\Highlight\IsPattern;
 use Tempest\Highlight\Pattern;
+use Tempest\Highlight\PatternTest;
 use Tempest\Highlight\Tokens\TokenTypeEnum;
 
+#[PatternTest(input: '[Obsolete]', output: 'Obsolete')]
+#[PatternTest(input: '[assembly: Guid("x")]', output: 'Guid')]
 final readonly class CSharpAttributePattern implements Pattern
 {
     use IsPattern;

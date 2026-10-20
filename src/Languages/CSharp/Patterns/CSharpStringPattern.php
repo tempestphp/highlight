@@ -6,8 +6,12 @@ namespace Tempest\Highlight\Languages\CSharp\Patterns;
 
 use Tempest\Highlight\IsPattern;
 use Tempest\Highlight\Pattern;
+use Tempest\Highlight\PatternTest;
 use Tempest\Highlight\Tokens\TokenTypeEnum;
 
+#[PatternTest(input: '$"Hello {name}"', output: '$"Hello {name}"')]
+#[PatternTest(input: '"""hello"""', output: '"""hello"""')]
+#[PatternTest(input: '\'x\'', output: '\'x\'')]
 final readonly class CSharpStringPattern implements Pattern
 {
     use IsPattern;

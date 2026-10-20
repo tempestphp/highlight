@@ -6,8 +6,11 @@ namespace Tempest\Highlight\Languages\CLike\Patterns;
 
 use Tempest\Highlight\IsPattern;
 use Tempest\Highlight\Pattern;
+use Tempest\Highlight\PatternTest;
 use Tempest\Highlight\Tokens\TokenTypeEnum;
 
+#[PatternTest(input: '#define MAX 1', output: 'define')]
+#[PatternTest(input: '#include <stdio.h>', output: 'include')]
 final readonly class CLikePreprocessorKeywordPattern implements Pattern
 {
     use IsPattern;

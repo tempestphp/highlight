@@ -6,8 +6,11 @@ namespace Tempest\Highlight\Languages\CSharp\Patterns;
 
 use Tempest\Highlight\IsPattern;
 use Tempest\Highlight\Pattern;
+use Tempest\Highlight\PatternTest;
 use Tempest\Highlight\Tokens\TokenTypeEnum;
 
+#[PatternTest(input: 'Render()', output: 'Render')]
+#[PatternTest(input: 'Method<int>()', output: 'Method')]
 final readonly class CSharpCallablePattern implements Pattern
 {
     use IsPattern;

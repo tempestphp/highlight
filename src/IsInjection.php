@@ -31,17 +31,26 @@ trait IsInjection
                     return $fullMatch;
                 }
 
-                $replacement = str_replace(
-                    search: $content,
-                    replace: $this->parseContent($content, $highlighter),
-                    subject: $fullMatch,
-                );
+                $parsedContent = $this->parseContent($content, $highlighter);
 
-                if ($replacement !== $fullMatch) {
-                    $replacements[] = [$offset, strlen($fullMatch), strlen($replacement)];
+                if ($parsedContent === $content) {
+                    return $fullMatch;
                 }
 
-                return $replacement;
+                // Only the parsed content is rewritten, the rest of the match stays the same.
+                // Every occurrence that str_replace() will replace is reported on its own.
+                $position = 0;
+
+                while (($position = strpos($fullMatch, $content, $position)) !== false) {
+                    $replacements[] = [$offset + $position, strlen($content), strlen($parsedContent)];
+                    $position += strlen($content);
+                }
+
+                return str_replace(
+                    search: $content,
+                    replace: $parsedContent,
+                    subject: $fullMatch,
+                );
             },
             subject: $content,
             flags: PREG_OFFSET_CAPTURE,

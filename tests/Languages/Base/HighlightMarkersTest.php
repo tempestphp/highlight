@@ -87,6 +87,56 @@ final class HighlightMarkersTest extends TestCase
                 '{_{{ $foo }} @if($x) <b>y</b> @endif_}',
                 '<span style="display: none">{_</span><span class="hl-em">{{ <span class="hl-variable">$foo</span> }} <span class="hl-keyword">@if</span>(<span class="hl-variable">$x</span>) &lt;<span class="hl-keyword">b</span>&gt;y&lt;/<span class="hl-keyword">b</span>&gt; <span class="hl-keyword">@endif</span></span><span style="display: none">_}</span>',
             ],
+            'emphasize inside an identifier' => [
+                'php',
+                'pre{_class_}post',
+                'pre<span style="display: none">{_</span><span class="hl-em">class</span><span style="display: none">_}</span>post',
+            ],
+            'emphasize at the start of an identifier' => [
+                'php',
+                '{_pre_}class',
+                '<span style="display: none">{_</span><span class="hl-em">pre</span><span style="display: none">_}</span>class',
+            ],
+            'custom class next to an injection' => [
+                'php',
+                '{:hl-x:function:} ($test) {}',
+                '<span class="hl-x"><span class="hl-keyword">function</span></span> (<span class="hl-injection">$test</span>) {}',
+            ],
+            'emphasize in a tag next to an embedded script' => [
+                'vue',
+                '<script lang="ts" id="{_demo_}">const x = 1;</script>',
+                '&lt;<span class="hl-keyword">script</span> <span class="hl-property">lang</span>=&quot;ts&quot; <span class="hl-property">id</span>=&quot;<span style="display: none">{_</span><span class="hl-em">demo</span><span style="display: none">_}</span>&quot;&gt;<span class="hl-keyword">const</span> <span class="hl-property">x</span> = 1;&lt;/<span class="hl-keyword">script</span>&gt;',
+            ],
+            'custom class inside an embedded language' => [
+                'html',
+                '<div style="color: {:hl-x:red:}">hi</div>',
+                '&lt;<span class="hl-keyword">div</span> <span class="hl-property">style</span>=&quot;<span class="hl-property">color</span>: <span class="hl-x">red</span>&quot;&gt;hi&lt;/<span class="hl-keyword">div</span>&gt;',
+            ],
+            'custom class around several tokens of an embedded language' => [
+                'html',
+                '<div style="{:hl-x:color: red:}">hi</div>',
+                '&lt;<span class="hl-keyword">div</span> <span class="hl-property">style</span>=&quot;<span class="hl-x"><span class="hl-property">color</span>: red</span>&quot;&gt;hi&lt;/<span class="hl-keyword">div</span>&gt;',
+            ],
+            'custom classes inside function parameters' => [
+                'php',
+                'function foo({:hl-x:$a:}, {:hl-y:$b:}) {}',
+                '<span class="hl-keyword">function</span> <span class="hl-property">foo</span>(<span class="hl-injection"><span class="hl-x">$a</span>, <span class="hl-y">$b</span></span>) {}',
+            ],
+            'custom class around function parameters' => [
+                'php',
+                'function foo({:hl-x:string $bar:}) {}',
+                '<span class="hl-keyword">function</span> <span class="hl-property">foo</span>(<span class="hl-x"><span class="hl-injection"><span class="hl-type">string</span> $bar</span></span>) {}',
+            ],
+            'marker pair split by an embedded language' => [
+                'blade',
+                '{~Welcome, {{~} $user->name }}',
+                '<span style="display: none">{~</span><span class="hl-blur">Welcome, {{</span><span style="display: none">~}</span> <span class="hl-variable">$user</span>-&gt;<span class="hl-property">name</span> }}',
+            ],
+            'custom class starting inside an embedded language' => [
+                'svelte',
+                'let { initial, onchan{:hl-x:ge }: { initi:}al } = $props();',
+                'let { initial, onchan<span class="hl-x">ge }: { initi</span>al } = $props();',
+            ],
         ];
     }
 

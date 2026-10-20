@@ -21,6 +21,9 @@ class TwigTagInjection implements Injection
 
     public function parseContent(string $content, Highlighter $highlighter): string
     {
-        return Escape::injection($highlighter->parse($content, new TwigTagLanguage()));
+        // One shared instance, so the highlighter's per-language caches hit on every match
+        static $language = new TwigTagLanguage();
+
+        return Escape::injection($highlighter->parse($content, $language));
     }
 }

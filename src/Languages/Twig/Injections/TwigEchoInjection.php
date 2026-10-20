@@ -21,6 +21,9 @@ class TwigEchoInjection implements Injection
 
     public function parseContent(string $content, Highlighter $highlighter): string
     {
-        return Escape::injection($highlighter->parse($content, new TwigEchoLanguage()));
+        // One shared instance, so the highlighter's per-language caches hit on every match
+        static $language = new TwigEchoLanguage();
+
+        return Escape::injection($highlighter->parse($content, $language));
     }
 }

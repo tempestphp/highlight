@@ -20,6 +20,9 @@ final readonly class JsDocInjection implements Injection
 
     public function parseContent(string $content, Highlighter $highlighter): string
     {
-        return $highlighter->parse($content, new JsDocLanguage());
+        // One shared instance, so the highlighter's per-language caches hit on every match
+        static $language = new JsDocLanguage();
+
+        return $highlighter->parse($content, $language);
     }
 }

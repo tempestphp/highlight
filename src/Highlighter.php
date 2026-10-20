@@ -46,6 +46,7 @@ use Tempest\Highlight\Themes\CssTheme;
 use Tempest\Highlight\Tokens\GroupTokens;
 use Tempest\Highlight\Tokens\ParseTokens;
 use Tempest\Highlight\Tokens\RenderTokens;
+use WeakMap;
 
 final class Highlighter
 {
@@ -56,12 +57,16 @@ final class Highlighter
     private readonly ParseTokens $parseTokens;
     private readonly GroupTokens $groupTokens;
     private readonly RenderTokens $renderTokens;
-    private array $patterns = [];
+    /**
+     * Per-language caches, keyed by the language instance itself so entries
+     * are dropped when a language is freed and can never be served to a
+     * different language that reuses its object id. Clones share this map,
+     * which is safe because entries depend only on the language.
+     *
+     * @var WeakMap<Language, array{patterns: array<int|string, mixed>, before: Injection[], after: Injection[]}>
+     */
+    private WeakMap $languageCache;
     private array $afterInjections = [];
-    /** @var array<int, Injection[]> */
-    private array $beforeInjectionsCache = [];
-    /** @var array<int, Injection[]> */
-    private array $afterInjectionsCache = [];
     private ?self $nestedHighlighter = null;
 
     public function __construct(
@@ -105,6 +110,7 @@ final class Highlighter
             ->addLanguage(new JsxLanguage())
             ->addLanguage(new TsxLanguage());
 
+        $this->languageCache = new WeakMap();
         $this->parseTokens = new ParseTokens();
         $this->groupTokens = new GroupTokens();
         $this->renderTokens = new RenderTokens($this->theme);
@@ -241,15 +247,7 @@ final class Highlighter
      */
     private function getBeforeInjections(Language $language): array
     {
-        $languageId = spl_object_id($language);
-
-        if (isset($this->beforeInjectionsCache[$languageId])) {
-            return $this->beforeInjectionsCache[$languageId];
-        }
-
-        $this->buildInjectionCaches($language);
-
-        return $this->beforeInjectionsCache[$languageId];
+        return $this->getLanguageCache($language)['before'];
     }
 
     /**
@@ -261,13 +259,7 @@ final class Highlighter
             return [];
         }
 
-        $languageId = spl_object_id($language);
-
-        if (! isset($this->afterInjectionsCache[$languageId])) {
-            $this->buildInjectionCaches($language);
-        }
-
-        $afterInjections = $this->afterInjectionsCache[$languageId];
+        $afterInjections = $this->getLanguageCache($language)['after'];
 
         if ($this->gutterInjection instanceof GutterInjection) {
             $afterInjections[] = $this->gutterInjection;
@@ -276,9 +268,15 @@ final class Highlighter
         return $afterInjections;
     }
 
-    private function buildInjectionCaches(Language $language): void
+    /**
+     * @return array{patterns: array<int|string, mixed>, before: Injection[], after: Injection[]}
+     */
+    private function getLanguageCache(Language $language): array
     {
-        $languageId = spl_object_id($language);
+        if (isset($this->languageCache[$language])) {
+            return $this->languageCache[$language];
+        }
+
         $before = [];
         $after = [];
 
@@ -290,8 +288,11 @@ final class Highlighter
             }
         }
 
-        $this->beforeInjectionsCache[$languageId] = $before;
-        $this->afterInjectionsCache[$languageId] = $after;
+        return $this->languageCache[$language] = [
+            'patterns' => $language->getPatterns(),
+            'before' => $before,
+            'after' => $after,
+        ];
     }
 
     private function normalizeNewline(string $subject): string
@@ -305,9 +306,7 @@ final class Highlighter
 
     private function getPatterns(Language $language): array
     {
-        $languageId = spl_object_id($language);
-
-        return $this->patterns[$languageId] ??= $language->getPatterns();
+        return $this->getLanguageCache($language)['patterns'];
     }
 
     private function isAfterInjection(Injection $injection): bool

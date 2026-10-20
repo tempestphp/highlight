@@ -12,6 +12,8 @@ use Tempest\Highlight\Injection;
 use Tempest\Highlight\IsInjection;
 use Tempest\Highlight\Language;
 use Tempest\Highlight\Languages\Php\PhpLanguage;
+use Tempest\Highlight\Languages\Sql\SqlLanguage;
+use Tempest\Highlight\Languages\Text\TextLanguage;
 use Tempest\Highlight\Themes\InlineTheme;
 use Tempest\Highlight\Tokens\TokenTypeEnum;
 
@@ -170,5 +172,25 @@ class HighlighterTest extends TestCase
         $this->assertSame('mcp:list', $highlighter->parse('mcp:list', 'txt'));
         $this->assertSame('resources/list', $highlighter->parse('resources/list', 'text'));
         $this->assertSame('Sec-Fetch-Site', $highlighter->parse('Sec-Fetch-Site', 'txt'));
+    }
+
+    #[Test]
+    public function freed_language_cache_is_not_reused_by_a_new_language(): void
+    {
+        $base = new Highlighter();
+        $base->parse('SELECT * FROM users', new SqlLanguage());
+
+        $highlighter = $base->withGutter();
+        unset($base);
+
+        // Drops the last reference to the SqlLanguage, so PHP can hand its
+        // object id to the next object, here the PhpLanguage below
+        $highlighter->setCurrentLanguage(new TextLanguage());
+        $highlighted = $highlighter->parse('<?php echo $foo;', new PhpLanguage());
+
+        $this->assertSame(
+            '<span class="hl-gutter">1</span><span class="hl-keyword">&lt;?php</span> <span class="hl-keyword">echo</span> <span class="hl-variable">$foo</span>;',
+            $highlighted,
+        );
     }
 }

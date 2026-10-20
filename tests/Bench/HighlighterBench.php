@@ -26,6 +26,7 @@ final class HighlighterBench
         'dockerfile' => 'dockerfile.txt',
         'dotenv' => 'dotenv.txt',
         'gdscript' => 'gdscript.txt',
+        'go' => 'go.txt',
         'graphql' => 'graphql.txt',
         'html' => 'html.txt',
         'http' => 'http.txt',

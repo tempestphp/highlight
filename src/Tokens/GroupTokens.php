@@ -19,7 +19,7 @@ final readonly class GroupTokens
         }
 
         // Sort tokens in the right order
-        $this->sortTokens($tokens);
+        $tokens = $this->sortTokens($tokens);
 
         // Group tokens by parent and child
         /** @var Token[] $groupedTokens */
@@ -32,7 +32,8 @@ final readonly class GroupTokens
             }
 
             $token = $tokens[$i];
-            $token->resetHierarchy();
+            $token->children = [];
+            $token->parent = null;
             $tokenEnd = $token->end;
 
             // Since tokens are sorted by start, only check subsequent tokens
@@ -72,10 +73,56 @@ final readonly class GroupTokens
      * Sort tokens by start position ascending, then by end position descending,
      * so that longer/parent tokens come before shorter/child tokens at the same start.
      *
+     * Ties keep their original order.
+     *
      * @param Token[] $tokens
+     * @return Token[]
      */
-    private function sortTokens(array &$tokens): void
+    private function sortTokens(array $tokens): array
     {
+        $low = PHP_INT_MAX;
+        $high = PHP_INT_MIN;
+
+        foreach ($tokens as $token) {
+            if ($token->start < $low) {
+                $low = $token->start;
+            }
+
+            if ($token->end < $low) {
+                $low = $token->end;
+            }
+
+            if ($token->start > $high) {
+                $high = $token->start;
+            }
+
+            if ($token->end > $high) {
+                $high = $token->end;
+            }
+        }
+
+        $range = $high - $low + 1;
+
+        // One packed key per token uses far less memory than array_multisort over four arrays.
+        // Both key parts lie in [0, $range), so a key is unique per (start, end) and below $range ** 2.
+        if ($range <= (int) sqrt(PHP_INT_MAX) && array_is_list($tokens)) {
+            $keys = [];
+
+            foreach ($tokens as $token) {
+                $keys[] = ($token->start - $low) * $range + ($high - $token->end);
+            }
+
+            asort($keys, SORT_NUMERIC);
+
+            $sorted = [];
+
+            foreach ($keys as $index => $key) {
+                $sorted[] = $tokens[$index];
+            }
+
+            return $sorted;
+        }
+
         $starts = [];
         $negatedEnds = [];
         $indices = [];
@@ -98,5 +145,7 @@ final readonly class GroupTokens
             SORT_NUMERIC,
             $tokens,
         );
+
+        return $tokens;
     }
 }

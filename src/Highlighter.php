@@ -46,8 +46,17 @@ use Tempest\Highlight\Themes\CssTheme;
 use Tempest\Highlight\Tokens\GroupTokens;
 use Tempest\Highlight\Tokens\ParseTokens;
 use Tempest\Highlight\Tokens\RenderTokens;
+use Tempest\Highlight\Tokens\TokenType;
 use WeakMap;
 
+/**
+ * @phpstan-type LanguageCacheEntry array{
+ *     patterns: array<int|string, array{?string, Pattern, ?TokenType, ?string}>,
+ *     patternRequirements: array<int|string, string[]>,
+ *     before: list<array{Injection, string[]|null}>,
+ *     after: list<array{Injection, string[]|null}>,
+ * }
+ */
 final class Highlighter
 {
     private array $languages = [];
@@ -63,10 +72,12 @@ final class Highlighter
      * different language that reuses its object id. Clones share this map,
      * which is safe because entries depend only on the language.
      *
-     * @var WeakMap<Language, array{patterns: array<int|string, mixed>, before: Injection[], after: Injection[]}>
+     * @var WeakMap<Language, LanguageCacheEntry>
      */
     private WeakMap $languageCache;
     private array $afterInjections = [];
+    /** @var array<class-string, string[]|null> */
+    private array $requiredSubstrings = [];
     private ?self $nestedHighlighter = null;
 
     public function __construct(
@@ -209,8 +220,14 @@ final class Highlighter
         $tokens = [];
         $nestedHighlighter = $this->getNestedHighlighter();
 
+        $languageCache = $this->getLanguageCache($language);
+
         // Before Injections
-        foreach ($this->getBeforeInjections($language) as $injection) {
+        foreach ($languageCache['before'] as [$injection, $requiredSubstrings]) {
+            if ($requiredSubstrings !== null && ! $this->containsAny($content, $requiredSubstrings)) {
+                continue;
+            }
+
             $parsedInjection = $injection->parse($content, $nestedHighlighter);
             $content = $parsedInjection->content;
 
@@ -220,9 +237,15 @@ final class Highlighter
         }
 
         // Patterns
-        foreach (
-            $this->parseTokens->parse($content, $this->getPatterns($language)) as $token
-        ) {
+        $patterns = $languageCache['patterns'];
+
+        foreach ($languageCache['patternRequirements'] as $key => $requiredSubstrings) {
+            if (! $this->containsAny($content, $requiredSubstrings)) {
+                unset($patterns[$key]);
+            }
+        }
+
+        foreach ($this->parseTokens->parseCompiled($content, $patterns) as $token) {
             $tokens[] = $token;
         }
 
@@ -230,9 +253,18 @@ final class Highlighter
         $content = ($this->renderTokens)($content, $groupedTokens);
 
         // After Injections
-        foreach ($this->getAfterInjections($language) as $injection) {
-            $parsedInjection = $injection->parse($content, $nestedHighlighter);
-            $content = $parsedInjection->content;
+        if (! $this->isNested) {
+            foreach ($languageCache['after'] as [$injection, $requiredSubstrings]) {
+                if ($requiredSubstrings !== null && ! $this->containsAny($content, $requiredSubstrings)) {
+                    continue;
+                }
+
+                $content = $injection->parse($content, $nestedHighlighter)->content;
+            }
+
+            if ($this->gutterInjection instanceof GutterInjection) {
+                $content = $this->gutterInjection->parse($content, $nestedHighlighter)->content;
+            }
         }
 
         if ($this->isNested) {
@@ -243,33 +275,7 @@ final class Highlighter
     }
 
     /**
-     * @return Injection[]
-     */
-    private function getBeforeInjections(Language $language): array
-    {
-        return $this->getLanguageCache($language)['before'];
-    }
-
-    /**
-     * @return Injection[]
-     */
-    private function getAfterInjections(Language $language): array
-    {
-        if ($this->isNested) {
-            return [];
-        }
-
-        $afterInjections = $this->getLanguageCache($language)['after'];
-
-        if ($this->gutterInjection instanceof GutterInjection) {
-            $afterInjections[] = $this->gutterInjection;
-        }
-
-        return $afterInjections;
-    }
-
-    /**
-     * @return array{patterns: array<int|string, mixed>, before: Injection[], after: Injection[]}
+     * @return LanguageCacheEntry
      */
     private function getLanguageCache(Language $language): array
     {
@@ -282,14 +288,26 @@ final class Highlighter
 
         foreach ($language->getInjections() as $injection) {
             if ($this->isAfterInjection($injection)) {
-                $after[] = $injection;
+                $after[] = [$injection, $this->getRequiredSubstrings($injection)];
             } else {
-                $before[] = $injection;
+                $before[] = [$injection, $this->getRequiredSubstrings($injection)];
+            }
+        }
+
+        $patterns = $this->parseTokens->compile($language->getPatterns());
+        $patternRequirements = [];
+
+        foreach ($patterns as $key => [, $pattern]) {
+            $requiredSubstrings = $this->getRequiredSubstrings($pattern);
+
+            if ($requiredSubstrings !== null) {
+                $patternRequirements[$key] = $requiredSubstrings;
             }
         }
 
         return $this->languageCache[$language] = [
-            'patterns' => $language->getPatterns(),
+            'patterns' => $patterns,
+            'patternRequirements' => $patternRequirements,
             'before' => $before,
             'after' => $after,
         ];
@@ -304,16 +322,41 @@ final class Highlighter
         return str_replace(["\r\n", "\r"], "\n", $subject);
     }
 
-    private function getPatterns(Language $language): array
-    {
-        return $this->getLanguageCache($language)['patterns'];
-    }
-
     private function isAfterInjection(Injection $injection): bool
     {
         $class = $injection::class;
 
         return $this->afterInjections[$class] ??=
             new ReflectionClass($class)->getAttributes(After::class) !== [];
+    }
+
+    /**
+     * @return string[]|null
+     */
+    private function getRequiredSubstrings(Injection|Pattern $instance): ?array
+    {
+        $class = $instance::class;
+
+        if (! array_key_exists($class, $this->requiredSubstrings)) {
+            $attribute = new ReflectionClass($class)->getAttributes(RequiresSubstring::class)[0] ?? null;
+
+            $this->requiredSubstrings[$class] = $attribute?->newInstance()->substrings ?: null;
+        }
+
+        return $this->requiredSubstrings[$class];
+    }
+
+    /**
+     * @param string[] $substrings
+     */
+    private function containsAny(string $content, array $substrings): bool
+    {
+        foreach ($substrings as $substring) {
+            if (str_contains($content, $substring)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

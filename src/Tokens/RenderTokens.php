@@ -6,10 +6,11 @@ namespace Tempest\Highlight\Tokens;
 
 use Tempest\Highlight\Escape;
 use Tempest\Highlight\Theme;
+use UnitEnum;
 
 final class RenderTokens
 {
-    /** @var array<string, array{string, string}> */
+    /** @var array<class-string, array<string, array{string, string}>> */
     private array $tokenMarkup = [];
 
     public function __construct(
@@ -31,55 +32,53 @@ final class RenderTokens
         }
 
         $markup = $this->tokenMarkup;
-        $parts = [];
+        $output = '';
         $cursor = 0;
 
         foreach ($tokens as $currentToken) {
             $relativeOffset = $currentToken->offset - $baseOffset;
 
             if ($relativeOffset > $cursor) {
-                $parts[] = substr($content, $cursor, $relativeOffset - $cursor);
+                $output .= substr($content, $cursor, $relativeOffset - $cursor);
             }
 
-            [$beforeMarkup, $afterMarkup] = $this->getTokenMarkup($currentToken, $markup);
+            $type = $currentToken->type;
 
-            $parts[] = $beforeMarkup;
-            $parts[] = $currentToken->children !== []
-                ? ($this)(
-                    content: $currentToken->value,
-                    tokens: $currentToken->children,
-                    baseOffset: $currentToken->offset,
-                )
-                : $currentToken->value;
-            $parts[] = $afterMarkup;
+            [$beforeMarkup, $afterMarkup] = $type instanceof UnitEnum && isset($markup[$type::class][$type->name])
+                ? $markup[$type::class][$type->name]
+                : $this->getTokenMarkup($type, $markup);
+
+            $output .= $beforeMarkup
+                . ($currentToken->children !== []
+                    ? $this->__invoke($currentToken->value, $currentToken->children, $currentToken->offset)
+                    : $currentToken->value)
+                . $afterMarkup;
 
             $cursor = $relativeOffset + $currentToken->length;
         }
 
-        $contentLength = strlen($content);
-        if ($cursor < $contentLength) {
-            $parts[] = substr($content, $cursor);
+        if ($cursor < strlen($content)) {
+            $output .= substr($content, $cursor);
         }
 
-        return implode('', $parts);
+        return $output;
     }
 
     /**
-     * @param array<string, array{string, string}> $markup
+     * Only enum types are cached: they are finite and their case identifies the markup.
+     *
+     * @param array<class-string, array<string, array{string, string}>> $markup
      * @return array{string, string}
      */
-    private function getTokenMarkup(Token $token, array &$markup): array
+    private function getTokenMarkup(TokenType $type, array &$markup): array
     {
-        if (isset($markup[$token->typeValue])) {
-            return $markup[$token->typeValue];
+        $tokenMarkup = [Escape::tokens($this->theme->before($type)), Escape::tokens($this->theme->after($type))];
+
+        if ($type instanceof UnitEnum) {
+            $markup[$type::class][$type->name] = $tokenMarkup;
+            $this->tokenMarkup[$type::class][$type->name] = $tokenMarkup;
         }
 
-        $beforeMarkup = Escape::tokens($this->theme->before($token->type));
-        $afterMarkup = Escape::tokens($this->theme->after($token->type));
-
-        $markup[$token->typeValue] = [$beforeMarkup, $afterMarkup];
-        $this->tokenMarkup[$token->typeValue] = [$beforeMarkup, $afterMarkup];
-
-        return $markup[$token->typeValue];
+        return $tokenMarkup;
     }
 }

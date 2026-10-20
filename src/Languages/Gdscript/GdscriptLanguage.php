@@ -9,11 +9,11 @@ use Tempest\Highlight\Languages\Base\BaseLanguage;
 use Tempest\Highlight\Languages\Gdscript\Patterns\AnnotationPattern;
 use Tempest\Highlight\Languages\Gdscript\Patterns\AsTypePattern;
 use Tempest\Highlight\Languages\Gdscript\Patterns\ClassNamePattern;
+use Tempest\Highlight\Languages\Gdscript\Patterns\CombinedGdscriptKeywordPattern;
 use Tempest\Highlight\Languages\Gdscript\Patterns\DoubleQuoteValuePattern;
 use Tempest\Highlight\Languages\Gdscript\Patterns\ExtendsPattern;
 use Tempest\Highlight\Languages\Gdscript\Patterns\FunctionCallPattern;
 use Tempest\Highlight\Languages\Gdscript\Patterns\FunctionNamePattern;
-use Tempest\Highlight\Languages\Gdscript\Patterns\KeywordPattern;
 use Tempest\Highlight\Languages\Gdscript\Patterns\OperatorPattern;
 use Tempest\Highlight\Languages\Gdscript\Patterns\PropertyAccessPattern;
 use Tempest\Highlight\Languages\Gdscript\Patterns\ReturnTypePattern;
@@ -76,42 +76,44 @@ class GdscriptLanguage extends BaseLanguage
             new OperatorPattern('>'),
             new OperatorPattern('!'),
 
-            new KeywordPattern('if'),
-            new KeywordPattern('elif'),
-            new KeywordPattern('else'),
-            new KeywordPattern('for'),
-            new KeywordPattern('while'),
-            new KeywordPattern('match'),
-            new KeywordPattern('break'),
-            new KeywordPattern('continue'),
-            new KeywordPattern('pass'),
-            new KeywordPattern('return'),
-            new KeywordPattern('class'),
-            new KeywordPattern('class_name'),
-            new KeywordPattern('extends'),
-            new KeywordPattern('is'),
-            new KeywordPattern('not'),
-            new KeywordPattern('and'),
-            new KeywordPattern('or'),
-            new KeywordPattern('in'),
-            new KeywordPattern('as'),
-            new KeywordPattern('self'),
-            new KeywordPattern('signal'),
-            new KeywordPattern('func'),
-            new KeywordPattern('static'),
-            new KeywordPattern('const'),
-            new KeywordPattern('enum'),
-            new KeywordPattern('var'),
-            new KeywordPattern('breakpoint'),
-            new KeywordPattern('preload'),
-            new KeywordPattern('await'),
-            new KeywordPattern('yield'),
-            new KeywordPattern('assert'),
-            new KeywordPattern('super'),
-            new KeywordPattern('PI'),
-            new KeywordPattern('INF'),
-            new KeywordPattern('TAU'),
-            new KeywordPattern('NAN'),
+            new CombinedGdscriptKeywordPattern([
+                'if',
+                'elif',
+                'else',
+                'for',
+                'while',
+                'match',
+                'break',
+                'continue',
+                'pass',
+                'return',
+                'class',
+                'class_name',
+                'extends',
+                'is',
+                'not',
+                'and',
+                'or',
+                'in',
+                'as',
+                'self',
+                'signal',
+                'func',
+                'static',
+                'const',
+                'enum',
+                'var',
+                'breakpoint',
+                'preload',
+                'await',
+                'yield',
+                'assert',
+                'super',
+                'PI',
+                'INF',
+                'TAU',
+                'NAN',
+            ]),
 
             new SinglelineCommentPattern(),
 

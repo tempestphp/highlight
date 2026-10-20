@@ -26,15 +26,26 @@ final readonly class Escape
         );
     }
 
+    /**
+     * Escapes HTML special characters and turns tokens back into raw markup in a single pass.
+     * The escape and token keys are disjoint and strtr never rescans replaced text,
+     * so this equals escaping first and reversing the tokens afterwards.
+     */
+    private const array HTML_MAP = [
+        '&' => '&amp;',
+        '<' => '&lt;',
+        '>' => '&gt;',
+        '"' => '&quot;',
+        '❶' => '&',
+        '❷' => '<',
+        '❸' => '>',
+        '❹' => '"',
+        self::INJECTION_TOKEN => '',
+    ];
+
     public static function html(string $input): string
     {
-        return self::reverse(
-            str_replace(
-                ['&', '<', '>', '"'],
-                ['&amp;', '&lt;', '&gt;', '&quot;'],
-                $input,
-            ),
-        );
+        return strtr($input, self::HTML_MAP);
     }
 
     public static function tokens(string $input): string
@@ -42,15 +53,6 @@ final readonly class Escape
         return str_replace(
             self::TOKEN_VALUES,
             self::TOKEN_KEYS,
-            $input,
-        );
-    }
-
-    private static function reverse(string $input): string
-    {
-        return str_replace(
-            self::TOKEN_KEYS,
-            self::TOKEN_VALUES,
             $input,
         );
     }

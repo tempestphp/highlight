@@ -1,0 +1,10 @@
+interface ListProps<T> {
+    items: T[];
+    render(item: T): React.ReactNode;
+}
+
+export const List = <T extends { id: string },>({ items, render }: ListProps<T>) => (
+    <ul className="items">
+        {items.map((item) => <li key={item.id}>{render(item)}</li>)}
+    </ul>
+);

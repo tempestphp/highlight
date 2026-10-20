@@ -36,6 +36,7 @@ final class HighlighterBench
         'nginx' => 'nginx.txt',
         'php' => 'php.txt',
         'python' => 'python.txt',
+        'ruby' => 'ruby.txt',
         'scss' => 'scss.txt',
         'sql' => 'sql.txt',
         'svelte' => 'svelte.txt',

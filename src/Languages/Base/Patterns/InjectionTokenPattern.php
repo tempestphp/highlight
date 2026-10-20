@@ -7,8 +7,10 @@ namespace Tempest\Highlight\Languages\Base\Patterns;
 use Tempest\Highlight\Escape;
 use Tempest\Highlight\IsPattern;
 use Tempest\Highlight\Pattern;
+use Tempest\Highlight\RequiresSubstring;
 use Tempest\Highlight\Tokens\TokenTypeEnum;
 
+#[RequiresSubstring(Escape::INJECTION_TOKEN)]
 final readonly class InjectionTokenPattern implements Pattern
 {
     use IsPattern;

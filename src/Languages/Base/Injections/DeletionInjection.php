@@ -9,8 +9,10 @@ use Tempest\Highlight\Escape;
 use Tempest\Highlight\Highlighter;
 use Tempest\Highlight\Injection;
 use Tempest\Highlight\ParsedInjection;
+use Tempest\Highlight\RequiresSubstring;
 
 #[After]
+#[RequiresSubstring('{-', '-}', "\r")]
 final readonly class DeletionInjection implements Injection
 {
     private const string NEWLINE = "\n";
@@ -22,18 +24,30 @@ final readonly class DeletionInjection implements Injection
         $content = str_replace('❷span class=❹ignore❹❸{-❷/span❸', '{-', $content);
         $content = str_replace('❷span class=❹ignore❹❸-}❷/span❸', '-}', $content);
 
-        preg_match_all('/(?<!\{)(\{-)(?!-)([\s\S]*?)(-})(?!})/', $content, $matches, PREG_OFFSET_CAPTURE);
+        $firstOpener = strpos($content, '{-');
+        $lastCloser = $firstOpener === false ? false : strrpos($content, '-}', $firstOpener);
 
-        $parsedOffset = 0;
+        while ($lastCloser !== false && ($content[$lastCloser + 2] ?? '') === '}') {
+            $lastCloser = $lastCloser > 0 ? strrpos($content, '-}', $lastCloser - 1 - strlen($content)) : false;
+        }
+
+        if ($lastCloser === false) {
+            return new ParsedInjection($content);
+        }
+
+        // No match can end after the last valid closer, so unclosed openers past it are never rescanned to the end.
+        // The extra byte keeps the closer's (?!}) lookahead seeing the same character.
+        preg_match_all('/(?<!\{)(\{-)(?!-)([\s\S]*?)(-})(?!})/', substr($content, 0, $lastCloser + 3), $matches, PREG_OFFSET_CAPTURE);
+
+        $parsedContent = '';
+        $parsedUntil = 0;
+        $startingLineNumber = 1;
+        $linesCountedUntil = 0;
 
         $open = Escape::tokens('<span class="hl-deletion">');
         $close = Escape::tokens('</span>');
 
-        foreach ($matches[0] as $match) {
-            $matchedContent = $match[0];
-            $offset = $match[1];
-            $replacementOffset = $offset + $parsedOffset;
-
+        foreach ($matches[0] as [$matchedContent, $offset]) {
             $parsedMatchedContent = str_replace(
                 ['{-', self::NEWLINE, '-}'],
                 [$open, $close . self::NEWLINE . $open, $close],
@@ -41,11 +55,14 @@ final readonly class DeletionInjection implements Injection
             );
 
             if (($gutter = $highlighter->getGutterInjection()) instanceof GutterInjection) {
-                $startingLineNumber = substr_count(
+                $startingLineNumber += substr_count(
                     haystack: $content,
                     needle: self::NEWLINE,
-                    length: $replacementOffset,
-                ) + 1;
+                    offset: $linesCountedUntil,
+                    length: $offset - $linesCountedUntil,
+                );
+
+                $linesCountedUntil = $offset;
 
                 $totalAmountOfLines = substr_count(
                     haystack: $parsedMatchedContent,
@@ -59,17 +76,11 @@ final readonly class DeletionInjection implements Injection
                 }
             }
 
-            $content = substr_replace(
-                $content,
-                $parsedMatchedContent,
-                $replacementOffset,
-                strlen($matchedContent),
-            );
-
-            $parsedOffset += strlen($parsedMatchedContent) - strlen($matchedContent);
+            $parsedContent .= substr($content, $parsedUntil, $offset - $parsedUntil) . $parsedMatchedContent;
+            $parsedUntil = $offset + strlen($matchedContent);
         }
 
-        return new ParsedInjection($content);
+        return new ParsedInjection($parsedContent . substr($content, $parsedUntil));
     }
 
     private function normalizeLineEndings(string $content): string

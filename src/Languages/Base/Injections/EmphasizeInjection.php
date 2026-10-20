@@ -6,7 +6,9 @@ namespace Tempest\Highlight\Languages\Base\Injections;
 
 use Tempest\Highlight\Injection;
 use Tempest\Highlight\Languages\Base\IsHighlightInjection;
+use Tempest\Highlight\RequiresSubstring;
 
+#[RequiresSubstring('{_')]
 final readonly class EmphasizeInjection implements Injection
 {
     use IsHighlightInjection;

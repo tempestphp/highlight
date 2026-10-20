@@ -7,12 +7,14 @@ namespace Tempest\Highlight\Languages\Base\Patterns;
 use Tempest\Highlight\IsPattern;
 use Tempest\Highlight\Pattern;
 use Tempest\Highlight\PatternTest;
+use Tempest\Highlight\RequiresSubstring;
 use Tempest\Highlight\Tokens\IgnoreTokenType;
 use Tempest\Highlight\Tokens\TokenType;
 
 #[PatternTest('{- pull_request_target: -}', '-}')]
 #[PatternTest('{-- pull_request_target: --}', null)]
 #[PatternTest('{{- variable -}}', null)]
+#[RequiresSubstring('-}')]
 final readonly class DeletionEndTokenPattern implements Pattern
 {
     use IsPattern;

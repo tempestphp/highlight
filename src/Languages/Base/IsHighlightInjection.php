@@ -22,7 +22,23 @@ trait IsHighlightInjection
 
         $pattern = '/(?<start>{' . $token . ')(?<match>[\s\S]*?)(?<end>' . $token . '})(?!})/';
 
-        preg_match_all($pattern, $content, $matches, PREG_OFFSET_CAPTURE);
+        $subject = $content;
+        $closer = $this->getToken() . '}';
+
+        // An escaped single non-alphanumeric byte is a literal, so no match can end after the last valid closer
+        // and unclosed openers past it are never rescanned to the end. The extra byte feeds the (?!}) lookahead.
+        if (strlen($closer) === 2 && ! str_contains('0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', $closer[0])) {
+            $firstOpener = strpos($content, '{' . $this->getToken());
+            $lastCloser = $firstOpener === false ? false : strrpos($content, $closer, $firstOpener);
+
+            while ($lastCloser !== false && ($content[$lastCloser + 2] ?? '') === '}') {
+                $lastCloser = $lastCloser > 0 ? strrpos($content, $closer, $lastCloser - 1 - strlen($content)) : false;
+            }
+
+            $subject = $lastCloser === false ? '' : substr($content, 0, $lastCloser + 3);
+        }
+
+        preg_match_all($pattern, $subject, $matches, PREG_OFFSET_CAPTURE);
 
         $tokens = [];
 

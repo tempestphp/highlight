@@ -7,10 +7,12 @@ namespace Tempest\Highlight\Languages\Base\Patterns;
 use Tempest\Highlight\IsPattern;
 use Tempest\Highlight\Pattern;
 use Tempest\Highlight\PatternTest;
+use Tempest\Highlight\RequiresSubstring;
 use Tempest\Highlight\Tokens\IgnoreTokenType;
 use Tempest\Highlight\Tokens\TokenType;
 
 #[PatternTest('{+ pull_request_target: +}', '+}')]
+#[RequiresSubstring('+}')]
 final readonly class AdditionEndTokenPattern implements Pattern
 {
     use IsPattern;

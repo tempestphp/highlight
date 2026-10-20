@@ -35,7 +35,18 @@ final class GutterInjection implements Injection
 
     public function parse(string $content, Highlighter $highlighter): ParsedInjection
     {
-        $lines = preg_split('/\R/u', trim($content, "\n")) ?? '';
+        $icons = $this->icons;
+        $classes = $this->classes;
+
+        // Marks belong to the parse that added them; a reused highlighter must start the next parse clean.
+        $this->icons = [];
+        $this->classes = [];
+
+        $content = trim($content, "\n");
+
+        // Invalid UTF-8 makes the /u split fail; the fallback matches the same line breaks byte by byte.
+        $lines = preg_split('/\R/u', $content)
+            ?: preg_split('/\r\n|[\n\x0B\x0C\r]|\xC2\x85|\xE2\x80[\xA8\xA9]/', $content);
 
         $gutterNumbers = [];
         $longestGutterNumber = '';
@@ -43,7 +54,7 @@ final class GutterInjection implements Injection
         foreach ($lines as $i => $line) {
             $gutterNumber = $i + $this->startAt;
 
-            if ($icon = ($this->icons[$i + $this->startAt] ?? null)) {
+            if ($icon = ($icons[$i + $this->startAt] ?? null)) {
                 $gutterNumber .= ' ' . $icon;
             }
 
@@ -59,7 +70,7 @@ final class GutterInjection implements Injection
         foreach ($lines as $i => $line) {
             $gutterNumber = $gutterNumbers[$i];
 
-            $hasClasses = $this->classes[$i + $this->startAt] ?? '';
+            $hasClasses = $classes[$i + $this->startAt] ?? '';
             $gutterClass = 'hl-gutter' . ($hasClasses ? ' ' . $hasClasses : '');
 
             $lines[$i] = sprintf(

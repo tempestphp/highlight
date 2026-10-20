@@ -7,9 +7,11 @@ namespace Tempest\Highlight\Languages\Base\Injections;
 use Tempest\Highlight\Highlighter;
 use Tempest\Highlight\Injection;
 use Tempest\Highlight\ParsedInjection;
+use Tempest\Highlight\RequiresSubstring;
 use Tempest\Highlight\Tokens\DynamicTokenType;
 use Tempest\Highlight\Tokens\Token;
 
+#[RequiresSubstring('{:')]
 final readonly class CustomClassInjection implements Injection
 {
     public function parse(string $content, Highlighter $highlighter): ParsedInjection
@@ -18,9 +20,14 @@ final readonly class CustomClassInjection implements Injection
 
         $tokens = [];
 
-        preg_match_all($pattern, $content, $matches, PREG_OFFSET_CAPTURE);
+        $firstOpener = strpos($content, '{:');
+        $lastCloser = $firstOpener === false ? false : strrpos($content, ':}', $firstOpener);
+
+        // No match can end after the last closer, so unclosed openers past it are never rescanned to the end.
+        preg_match_all($pattern, $lastCloser === false ? '' : substr($content, 0, $lastCloser + 2), $matches, PREG_OFFSET_CAPTURE);
 
         $additionalOffset = 0;
+        $hasMarkers = true;
 
         foreach (array_keys($matches[0]) as $key) {
             $startToken = $matches['start'][$key][0];
@@ -37,7 +44,12 @@ final readonly class CustomClassInjection implements Injection
 
             $additionalOffset += strlen($endToken);
 
-            $content = str_replace([$startToken, $endToken], '', $content);
+            if ($hasMarkers) {
+                $content = str_replace([$startToken, $endToken], '', $content);
+
+                // Every start token begins with "{:", so once neither "{:" nor ":}" is left the remaining replacements are no-ops.
+                $hasMarkers = str_contains($content, '{:') || str_contains($content, ':}');
+            }
         }
 
         return new ParsedInjection(

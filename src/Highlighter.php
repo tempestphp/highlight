@@ -31,6 +31,7 @@ use Tempest\Highlight\Languages\Scss\ScssLanguage;
 use Tempest\Highlight\Languages\Sema\SemaLanguage;
 use Tempest\Highlight\Languages\Sql\SqlLanguage;
 use Tempest\Highlight\Languages\Svelte\SvelteLanguage;
+use Tempest\Highlight\Languages\Swift\SwiftLanguage;
 use Tempest\Highlight\Languages\Terminal\TerminalLanguage;
 use Tempest\Highlight\Languages\Terraform\TerraformLanguage;
 use Tempest\Highlight\Languages\Text\TextLanguage;
@@ -87,6 +88,7 @@ final class Highlighter
             ->addLanguage(new ScssLanguage())
             ->addLanguage(new SemaLanguage())
             ->addLanguage(new SqlLanguage())
+            ->addLanguage(new SwiftLanguage())
             ->addLanguage(new TerminalLanguage())
             ->addLanguage(new TextLanguage())
             ->addLanguage(new TerraformLanguage())

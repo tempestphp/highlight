@@ -41,6 +41,7 @@ final class HighlighterBench
         'sema' => 'sema.txt',
         'sql' => 'sql.txt',
         'svelte' => 'svelte.txt',
+        'swift' => 'swift.txt',
         'terminal' => 'terminal.txt',
         'terraform' => 'terraform.txt',
         'typescript' => 'typescript.txt',

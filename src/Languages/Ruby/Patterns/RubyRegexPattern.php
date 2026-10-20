@@ -15,9 +15,14 @@ use Tempest\Highlight\Tokens\TokenTypeEnum;
 #[PatternTest(input: 'ratio = total/count', output: null)]
 final readonly class RubyRegexPattern implements Pattern
 {
+    public function __construct(
+        private RubyLexer $lexer = new RubyLexer(),
+    ) {
+    }
+
     public function match(string $content): array
     {
-        return ['match' => new RubyLexer()->lex($content)['regex']];
+        return ['match' => $this->lexer->lex($content)['regex']];
     }
 
     public function getTokenType(): TokenTypeEnum

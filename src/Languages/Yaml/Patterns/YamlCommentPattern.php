@@ -16,7 +16,7 @@ final readonly class YamlCommentPattern implements Pattern
 
     public function getPattern(): string
     {
-        return '(?<match>\#(.)*)';
+        return '(?<match>\#.*)';
     }
 
     public function getTokenType(): TokenTypeEnum

@@ -23,7 +23,7 @@ final readonly class RubyKeywordPattern implements Pattern
 
     public function match(string $content): array
     {
-        return $this->matchContent(new RubyLexer()->code($content));
+        return $this->matchContent($this->lexer->code($content));
     }
 
     public function __construct(private array $keywords = [
@@ -35,7 +35,7 @@ final readonly class RubyKeywordPattern implements Pattern
         'attr_accessor', 'attr_reader', 'attr_writer', 'extend', 'include',
         'module_function', 'prepend', 'private', 'private_constant', 'protected',
         'public', 'raise', 'require', 'require_relative',
-    ])
+    ], private RubyLexer $lexer = new RubyLexer())
     {
     }
 

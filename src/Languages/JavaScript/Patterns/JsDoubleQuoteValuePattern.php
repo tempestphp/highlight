@@ -19,7 +19,7 @@ final readonly class JsDoubleQuoteValuePattern implements Pattern
 
     public function getPattern(): string
     {
-        return '(?<match>"(\\\"|.)*?")';
+        return '(?<match>"(?:[^"\\\\\n]++|\\\\"|\\\\)*+"|"[^\n]*\\\\")';
     }
 
     public function getTokenType(): TokenTypeEnum

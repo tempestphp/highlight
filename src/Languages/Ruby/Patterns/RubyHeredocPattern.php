@@ -26,9 +26,14 @@ SQL'],
 #[PatternTest(input: 'items << item', output: null)]
 final readonly class RubyHeredocPattern implements Pattern
 {
+    public function __construct(
+        private RubyLexer $lexer = new RubyLexer(),
+    ) {
+    }
+
     public function match(string $content): array
     {
-        return ['match' => new RubyLexer()->lex($content)['heredoc']];
+        return ['match' => $this->lexer->lex($content)['heredoc']];
     }
 
     public function getTokenType(): TokenTypeEnum

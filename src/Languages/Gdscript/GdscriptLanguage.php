@@ -68,7 +68,6 @@ class GdscriptLanguage extends BaseLanguage
             new OperatorPattern('+'),
             new OperatorPattern('-'),
             new OperatorPattern('*'),
-            new OperatorPattern('/'),
             new OperatorPattern('&'),
             new OperatorPattern('^'),
             new OperatorPattern('|'),

@@ -37,7 +37,7 @@ final readonly class CombinedKeywordPattern implements Pattern
 
         $flags = $this->caseInsensitive ? 'i' : '';
 
-        $this->compiledPattern = "/\b(?<!\$)(?<!->)(?<match>(?:{$alternation}))(\$|,|\)|;|:|\s|\()/{$flags}";
+        $this->compiledPattern = "/\b(?<!\\$)(?<!->)(?<match>(?:{$alternation}))(\$|,|\)|;|:|\s|\()/{$flags}";
     }
 
     public function match(string $content): array

@@ -18,7 +18,7 @@ final readonly class StaticClassCallPattern implements Pattern
 
     public function getPattern(): string
     {
-        return '(?<!\\$)(?<match>[\\\\\w]+)\:\:';
+        return '(?:(?<=\\$)[\\\\\w]|(?<![\\\\\w$]))(?<match>[\\\\\w]+)\:\:';
     }
 
     public function getTokenType(): TokenTypeEnum

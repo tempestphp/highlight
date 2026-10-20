@@ -21,9 +21,14 @@ x = 'a'", output: "'a'")]
 #[PatternTest(input: "words = %w[it's]", output: null)]
 final readonly class RubyStringPattern implements Pattern
 {
+    public function __construct(
+        private RubyLexer $lexer = new RubyLexer(),
+    ) {
+    }
+
     public function match(string $content): array
     {
-        return ['match' => new RubyLexer()->lex($content)['string']];
+        return ['match' => $this->lexer->lex($content)['string']];
     }
 
     public function getTokenType(): TokenTypeEnum

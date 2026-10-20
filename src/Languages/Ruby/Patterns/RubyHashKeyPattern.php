@@ -23,9 +23,14 @@ final readonly class RubyHashKeyPattern implements Pattern
         match as matchContent;
     }
 
+    public function __construct(
+        private RubyLexer $lexer = new RubyLexer(),
+    ) {
+    }
+
     public function match(string $content): array
     {
-        return $this->matchContent(new RubyLexer()->code($content));
+        return $this->matchContent($this->lexer->code($content));
     }
 
     public function getPattern(): string

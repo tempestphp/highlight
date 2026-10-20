@@ -37,40 +37,42 @@ class RubyLanguage extends BaseLanguage
     #[Override]
     public function getPatterns(): array
     {
+        $lexer = new RubyLexer();
+
         return [
             ...parent::getPatterns(),
 
             // COMMENTS
-            new RubyCommentPattern(),
+            new RubyCommentPattern(lexer: $lexer),
 
             // VALUES
-            new RubyHeredocPattern(),
-            new RubyPercentLiteralPattern(),
-            new RubyStringPattern(),
-            new RubyRegexPattern(),
+            new RubyHeredocPattern(lexer: $lexer),
+            new RubyPercentLiteralPattern(lexer: $lexer),
+            new RubyStringPattern(lexer: $lexer),
+            new RubyRegexPattern(lexer: $lexer),
 
             // PROPERTIES
-            new RubyMethodNamePattern(),
-            new RubyHashKeyPattern(),
+            new RubyMethodNamePattern(lexer: $lexer),
+            new RubyHashKeyPattern(lexer: $lexer),
 
             // KEYWORDS
-            new RubyKeywordPattern(),
+            new RubyKeywordPattern(lexer: $lexer),
 
             // TYPES
-            new RubyConstantPattern(),
+            new RubyConstantPattern(lexer: $lexer),
 
             // LITERALS
-            new RubyLiteralPattern(),
-            new RubySymbolPattern(),
+            new RubyLiteralPattern(lexer: $lexer),
+            new RubySymbolPattern(lexer: $lexer),
 
             // VARIABLES
-            new RubyVariablePattern(),
+            new RubyVariablePattern(lexer: $lexer),
 
             // NUMBERS
-            new RubyNumberPattern(),
+            new RubyNumberPattern(lexer: $lexer),
 
             // OPERATORS
-            new RubyOperatorPattern(),
+            new RubyOperatorPattern(lexer: $lexer),
         ];
     }
 }

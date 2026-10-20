@@ -16,7 +16,7 @@ final class GraphqlFieldPattern implements Pattern
 
     public function getPattern(): string
     {
-        return '(?<match>[_A-Za-z][_0-9A-Za-z]*)(?=\s*:)';
+        return '(?<![_0-9A-Za-z])[0-9]*+(?<match>[_A-Za-z][_0-9A-Za-z]*+)(?=\s*:)';
     }
 
     public function getTokenType(): TokenTypeEnum

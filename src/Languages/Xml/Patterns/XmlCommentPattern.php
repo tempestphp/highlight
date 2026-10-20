@@ -26,7 +26,8 @@ final readonly class XmlCommentPattern implements Pattern
 
     public function getPattern(): string
     {
-        return '/(?<match>\<!--[\s\S]*-->)/mU';
+        // (*COMMIT) stops the search when an opener has no closer: later openers cannot have one either.
+        return '/(?<match>\<!--(?:[\s\S]*-->|(*COMMIT)(*FAIL)))/mU';
     }
 
     public function getTokenType(): TokenTypeEnum

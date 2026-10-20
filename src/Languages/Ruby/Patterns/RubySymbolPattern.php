@@ -24,12 +24,17 @@ final readonly class RubySymbolPattern implements Pattern
         match as matchBareSymbols;
     }
 
+    public function __construct(
+        private RubyLexer $lexer = new RubyLexer(),
+    ) {
+    }
+
     public function match(string $content): array
     {
         return [
             'match' => [
-                ...$this->matchBareSymbols(new RubyLexer()->code($content))['match'] ?? [],
-                ...new RubyLexer()->lex($content)['symbol'],
+                ...$this->matchBareSymbols($this->lexer->code($content))['match'] ?? [],
+                ...$this->lexer->lex($content)['symbol'],
             ],
         ];
     }

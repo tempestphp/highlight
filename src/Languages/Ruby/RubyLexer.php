@@ -44,32 +44,32 @@ final class RubyLexer
     /** @var array<int, ?int> */
     private array $interpolationEnds = [];
 
-    private static ?string $lastContent = null;
+    private ?string $lastContent = null;
 
-    private static array $lastLiterals = [];
+    private array $lastLiterals = [];
 
-    private static ?string $lastCode = null;
+    private ?string $lastCode = null;
 
     /**
      * @return array{comment: list<array{string, int}>, heredoc: list<array{string, int}>, percent: list<array{string, int}>, regex: list<array{string, int}>, string: list<array{string, int}>, symbol: list<array{string, int}>}
      */
     public function lex(string $content): array
     {
-        if ($content !== self::$lastContent) {
-            self::$lastLiterals = $this->scan($content);
-            self::$lastContent = $content;
-            self::$lastCode = null;
+        if ($content !== $this->lastContent) {
+            $this->lastLiterals = $this->scan($content);
+            $this->lastContent = $content;
+            $this->lastCode = null;
         }
 
-        return self::$lastLiterals;
+        return $this->lastLiterals;
     }
 
     public function code(string $content): string
     {
         $literals = $this->lex($content);
 
-        if (self::$lastCode !== null) {
-            return self::$lastCode;
+        if ($this->lastCode !== null) {
+            return $this->lastCode;
         }
 
         $regions = array_merge(...array_values($literals));
@@ -87,7 +87,7 @@ final class RubyLexer
 
         $parts[] = substr($content, $cursor);
 
-        return self::$lastCode = implode('', $parts);
+        return $this->lastCode = implode('', $parts);
     }
 
     private function scan(string $content): array

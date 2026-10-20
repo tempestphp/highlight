@@ -14,7 +14,8 @@ final readonly class MultilineSingleDocCommentPattern implements Pattern
 
     public function getPattern(): string
     {
-        return '/(?<match>\/\*[\s\S]*?\*\/)/m';
+        // (*COMMIT) stops the search when an opener has no closer: later openers cannot have one either.
+        return '/(?<match>\/\*(?:[\s\S]*?\*\/|(*COMMIT)(*FAIL)))/m';
     }
 
     public function getTokenType(): TokenTypeEnum

@@ -17,9 +17,14 @@ use Tempest\Highlight\Tokens\TokenTypeEnum;
 #[PatternTest(input: 'x = 10 %q[0]', output: null)]
 final readonly class RubyPercentLiteralPattern implements Pattern
 {
+    public function __construct(
+        private RubyLexer $lexer = new RubyLexer(),
+    ) {
+    }
+
     public function match(string $content): array
     {
-        return ['match' => new RubyLexer()->lex($content)['percent']];
+        return ['match' => $this->lexer->lex($content)['percent']];
     }
 
     public function getTokenType(): TokenTypeEnum

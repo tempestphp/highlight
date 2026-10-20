@@ -28,9 +28,14 @@ TEXT',
 )]
 final readonly class RubyCommentPattern implements Pattern
 {
+    public function __construct(
+        private RubyLexer $lexer = new RubyLexer(),
+    ) {
+    }
+
     public function match(string $content): array
     {
-        return ['match' => new RubyLexer()->lex($content)['comment']];
+        return ['match' => $this->lexer->lex($content)['comment']];
     }
 
     public function getTokenType(): TokenTypeEnum

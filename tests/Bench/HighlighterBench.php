@@ -50,6 +50,8 @@ final class HighlighterBench
         'vue' => 'vue.txt',
         'xml' => 'xml.txt',
         'yaml' => 'yaml.txt',
+        'jsx' => 'jsx.txt',
+        'tsx' => 'tsx.txt',
     ];
 
     private Highlighter $highlighter;

@@ -22,6 +22,7 @@ use Tempest\Highlight\Languages\Http\HttpLanguage;
 use Tempest\Highlight\Languages\Ini\IniLanguage;
 use Tempest\Highlight\Languages\JavaScript\JavaScriptLanguage;
 use Tempest\Highlight\Languages\Json\JsonLanguage;
+use Tempest\Highlight\Languages\Jsx\JsxLanguage;
 use Tempest\Highlight\Languages\Markdown\MarkdownLanguage;
 use Tempest\Highlight\Languages\Nginx\NginxLanguage;
 use Tempest\Highlight\Languages\Php\PhpLanguage;
@@ -35,6 +36,7 @@ use Tempest\Highlight\Languages\Swift\SwiftLanguage;
 use Tempest\Highlight\Languages\Terminal\TerminalLanguage;
 use Tempest\Highlight\Languages\Terraform\TerraformLanguage;
 use Tempest\Highlight\Languages\Text\TextLanguage;
+use Tempest\Highlight\Languages\Tsx\TsxLanguage;
 use Tempest\Highlight\Languages\Twig\TwigLanguage;
 use Tempest\Highlight\Languages\TypeScript\TypeScriptLanguage;
 use Tempest\Highlight\Languages\Vue\VueLanguage;
@@ -99,7 +101,9 @@ final class Highlighter
             ->addLanguage(new IniLanguage())
             ->addLanguage(new TwigLanguage())
             ->addLanguage(new SvelteLanguage())
-            ->addLanguage(new VueLanguage());
+            ->addLanguage(new VueLanguage())
+            ->addLanguage(new JsxLanguage())
+            ->addLanguage(new TsxLanguage());
 
         $this->parseTokens = new ParseTokens();
         $this->groupTokens = new GroupTokens();

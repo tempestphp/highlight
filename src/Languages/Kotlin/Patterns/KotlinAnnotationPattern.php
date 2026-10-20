@@ -6,8 +6,11 @@ namespace Tempest\Highlight\Languages\Kotlin\Patterns;
 
 use Tempest\Highlight\IsPattern;
 use Tempest\Highlight\Pattern;
+use Tempest\Highlight\PatternTest;
 use Tempest\Highlight\Tokens\TokenTypeEnum;
 
+#[PatternTest(input: '@Inject', output: '@Inject')]
+#[PatternTest(input: '@get:Rule', output: '@get:Rule')]
 final readonly class KotlinAnnotationPattern implements Pattern
 {
     use IsPattern;

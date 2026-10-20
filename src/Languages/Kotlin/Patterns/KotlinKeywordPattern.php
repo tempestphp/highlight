@@ -6,8 +6,11 @@ namespace Tempest\Highlight\Languages\Kotlin\Patterns;
 
 use Tempest\Highlight\IsPattern;
 use Tempest\Highlight\Pattern;
+use Tempest\Highlight\PatternTest;
 use Tempest\Highlight\Tokens\TokenTypeEnum;
 
+#[PatternTest(input: 'data class User()', output: 'data')]
+#[PatternTest(input: 'fun render()', output: 'fun')]
 final readonly class KotlinKeywordPattern implements Pattern
 {
     use IsPattern;

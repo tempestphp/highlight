@@ -6,8 +6,11 @@ namespace Tempest\Highlight\Languages\Kotlin\Patterns;
 
 use Tempest\Highlight\IsPattern;
 use Tempest\Highlight\Pattern;
+use Tempest\Highlight\PatternTest;
 use Tempest\Highlight\Tokens\TokenTypeEnum;
 
+#[PatternTest(input: 'val name: String', output: 'name')]
+#[PatternTest(input: 'var count = 0', output: 'count')]
 final readonly class KotlinPropertyPattern implements Pattern
 {
     use IsPattern;

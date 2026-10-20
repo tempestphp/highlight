@@ -6,8 +6,11 @@ namespace Tempest\Highlight\Languages\Kotlin\Patterns;
 
 use Tempest\Highlight\IsPattern;
 use Tempest\Highlight\Pattern;
+use Tempest\Highlight\PatternTest;
 use Tempest\Highlight\Tokens\TokenTypeEnum;
 
+#[PatternTest(input: 'package com.example.app', output: 'com.example.app')]
+#[PatternTest(input: 'import kotlin.io.*', output: 'kotlin.io.*')]
 final readonly class KotlinNamespacePattern implements Pattern
 {
     use IsPattern;

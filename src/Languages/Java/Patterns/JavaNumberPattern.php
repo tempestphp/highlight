@@ -6,8 +6,11 @@ namespace Tempest\Highlight\Languages\Java\Patterns;
 
 use Tempest\Highlight\IsPattern;
 use Tempest\Highlight\Pattern;
+use Tempest\Highlight\PatternTest;
 use Tempest\Highlight\Tokens\TokenTypeEnum;
 
+#[PatternTest(input: '1_000L', output: '1_000L')]
+#[PatternTest(input: '0xFF', output: '0xFF')]
 final readonly class JavaNumberPattern implements Pattern
 {
     use IsPattern;

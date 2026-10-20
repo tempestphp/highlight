@@ -6,8 +6,11 @@ namespace Tempest\Highlight\Languages\Java\Patterns;
 
 use Tempest\Highlight\IsPattern;
 use Tempest\Highlight\Pattern;
+use Tempest\Highlight\PatternTest;
 use Tempest\Highlight\Tokens\TokenTypeEnum;
 
+#[PatternTest(input: 'final class User {}', output: 'final')]
+#[PatternTest(input: 'public class User {}', output: 'public')]
 final readonly class JavaKeywordPattern implements Pattern
 {
     use IsPattern;

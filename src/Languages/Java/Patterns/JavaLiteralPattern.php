@@ -6,8 +6,11 @@ namespace Tempest\Highlight\Languages\Java\Patterns;
 
 use Tempest\Highlight\IsPattern;
 use Tempest\Highlight\Pattern;
+use Tempest\Highlight\PatternTest;
 use Tempest\Highlight\Tokens\TokenTypeEnum;
 
+#[PatternTest(input: 'true', output: 'true')]
+#[PatternTest(input: 'null', output: 'null')]
 final readonly class JavaLiteralPattern implements Pattern
 {
     use IsPattern;

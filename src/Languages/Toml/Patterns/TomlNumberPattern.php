@@ -6,9 +6,13 @@ namespace Tempest\Highlight\Languages\Toml\Patterns;
 
 use Tempest\Highlight\IsPattern;
 use Tempest\Highlight\Pattern;
+use Tempest\Highlight\PatternTest;
 use Tempest\Highlight\Tokens\TokenType;
 use Tempest\Highlight\Tokens\TokenTypeEnum;
 
+#[PatternTest(input: 'answer = 42', output: '42')]
+#[PatternTest(input: 'color = 0xDEAD_BEEF', output: '0xDEAD_BEEF')]
+#[PatternTest(input: 'limit = +inf', output: '+inf')]
 final class TomlNumberPattern implements Pattern
 {
     use IsPattern;

@@ -14,7 +14,7 @@ final readonly class RustStringPattern implements Pattern
 
     public function getPattern(): string
     {
-        return '/(?<match>b?r(?<hashes>#{0,255})".*?"\k<hashes>|b?"(?:\\\\.|[^"\\\\])*")/s';
+        return '/(?<match>[bc]?r(?<hashes>#{0,255})".*?"\k<hashes>|[bc]?"(?:\\\\.|[^"\\\\])*")/s';
     }
 
     public function getTokenType(): TokenTypeEnum

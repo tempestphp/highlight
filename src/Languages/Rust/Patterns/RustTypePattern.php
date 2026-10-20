@@ -14,7 +14,7 @@ final readonly class RustTypePattern implements Pattern
 
     public function getPattern(): string
     {
-        return '(?<![A-Za-z])(?<match>bool|char|str|f32|f64|i(?:8|16|32|64|128|size)|u(?:8|16|32|64|128|size)|[A-Z][\w]*)(?![\w!])';
+        return '(?<!\w)(?<match>bool|char|str|f32|f64|i(?:8|16|32|64|128|size)|u(?:8|16|32|64|128|size)|[A-Z][\w]*)(?![\w!])';
     }
 
     public function getTokenType(): TokenTypeEnum

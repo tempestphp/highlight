@@ -14,7 +14,7 @@ final readonly class RustFunctionPattern implements Pattern
 
     public function getPattern(): string
     {
-        return '\b(?<match>(?:r#)?[A-Za-z_]\w*)(?=\s*+(?:<[^<>{};()]*>\s*+)?\()';
+        return '\b(?<match>(?:r#)?[A-Za-z_]\w*)(?=\s*+(?:::\s*+)?(?:<(?:(?:->|-(?!>)|[^<>;{}&|\-]++)|<(?:(?:->|-(?!>)|[^<>;{}&|\-]++)|<(?:(?:->|-(?!>)|[^<>;{}&|\-]++)|<(?:->|-(?!>)|[^<>;{}&|\-]++)*+>)*+>)*+>)*+>\s*+)?\()';
     }
 
     public function getTokenType(): TokenTypeEnum

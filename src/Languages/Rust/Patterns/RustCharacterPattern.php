@@ -6,15 +6,18 @@ namespace Tempest\Highlight\Languages\Rust\Patterns;
 
 use Tempest\Highlight\IsPattern;
 use Tempest\Highlight\Pattern;
+use Tempest\Highlight\PatternTest;
 use Tempest\Highlight\Tokens\TokenTypeEnum;
 
+#[PatternTest(input: '\'\\u{41}\'', output: '\'\\u{41}\'')]
+#[PatternTest(input: '\'é\'', output: '\'é\'')]
 final readonly class RustCharacterPattern implements Pattern
 {
     use IsPattern;
 
     public function getPattern(): string
     {
-        return "(?<match>b?'(?:\\\\.|[^'\\\\])')";
+        return "(?<match>b?'(?:\\\\u\\{[0-9A-Fa-f_]{1,6}\\}|\\\\x[0-9A-Fa-f]{2}|\\\\.|[^'\\\\]|[\\xC2-\\xDF][\\x80-\\xBF]|[\\xE0-\\xEF][\\x80-\\xBF]{2}|[\\xF0-\\xF4][\\x80-\\xBF]{3})')";
     }
 
     public function getTokenType(): TokenTypeEnum

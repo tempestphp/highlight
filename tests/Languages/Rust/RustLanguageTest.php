@@ -9,6 +9,7 @@ use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Tempest\Highlight\Highlighter;
 use Tempest\Highlight\Languages\Rust\Patterns\RustCommentPattern;
+use Tempest\Highlight\Languages\Rust\Patterns\RustFunctionPattern;
 use Tempest\Highlight\Languages\Rust\RustLanguage;
 use Tempest\Highlight\Tests\Bench\HighlighterBench;
 
@@ -46,6 +47,12 @@ final class RustLanguageTest extends TestCase
         yield 'string' => ['"hello"', '<span class="hl-value">&quot;hello&quot;</span>'];
         yield 'raw string' => ['r#"hello"#', '<span class="hl-value">r#&quot;hello&quot;#</span>'];
         yield 'character' => ["'x'", '<span class="hl-value">\'x\'</span>'];
+        yield 'character unicode escape' => ["'\\u{41}'", '<span class="hl-value">\'\\u{41}\'</span>'];
+        yield 'character hex escape' => ["'\\x41'", '<span class="hl-value">\'\\x41\'</span>'];
+        yield 'character non ascii' => ["'é'", '<span class="hl-value">\'é\'</span>'];
+        yield 'c string' => ['c"hello"', '<span class="hl-value">c&quot;hello&quot;</span>'];
+        yield 'turbofish function' => ['iter.collect::<Vec<_>>()', '<span class="hl-property">collect</span>'];
+        yield 'nested generics function' => ['fn foo<T: Iterator<Item = Vec<i32>>>()', '<span class="hl-property">foo</span>'];
         yield 'lifetime' => ["'a", '<span class="hl-type">\'a</span>'];
         yield 'number' => ['42_u8', '<span class="hl-number">42_u8</span>'];
         yield 'keyword' => ['async', '<span class="hl-keyword">async</span>'];
@@ -100,9 +107,27 @@ final class RustLanguageTest extends TestCase
     #[Test]
     public function it_avoids_backtracking_errors_for_unterminated_block_comments(): void
     {
-        (new RustCommentPattern())->match('/*' . str_repeat('a', 1_000));
+        (new RustCommentPattern())->match(str_repeat('/*', 1_000) . str_repeat('a', 1_000));
 
         $this->assertSame(PREG_NO_ERROR, preg_last_error(), preg_last_error_msg());
+    }
+
+    #[Test]
+    public function it_avoids_backtracking_errors_for_long_whitespace_before_a_call(): void
+    {
+        (new RustFunctionPattern())->match('run' . str_repeat(' ', 100_000));
+
+        $this->assertSame(PREG_NO_ERROR, preg_last_error(), preg_last_error_msg());
+    }
+
+    #[Test]
+    public function it_does_not_highlight_comparison_operands_or_identifier_tails(): void
+    {
+        $highlighter = new Highlighter();
+
+        $this->assertStringNotContainsString('<span class="hl-property">a</span>', $highlighter->parse('if a < b && c > (d)', 'rust'));
+        $this->assertStringNotContainsString('<span class="hl-type">Foo</span>', $highlighter->parse('_Foo', 'rust'));
+        $this->assertStringNotContainsString('<span class="hl-type">String</span>', $highlighter->parse('my_String', 'rust'));
     }
 
     #[Test]

@@ -6,8 +6,12 @@ namespace Tempest\Highlight\Languages\C\Patterns;
 
 use Tempest\Highlight\IsPattern;
 use Tempest\Highlight\Pattern;
+use Tempest\Highlight\PatternTest;
 use Tempest\Highlight\Tokens\TokenTypeEnum;
 
+#[PatternTest(input: '"hello"', output: '"hello"')]
+#[PatternTest(input: '\'x\'', output: '\'x\'')]
+#[PatternTest(input: 'L"wide"', output: 'L"wide"')]
 final readonly class CStringPattern implements Pattern
 {
     use IsPattern;

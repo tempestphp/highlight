@@ -6,8 +6,11 @@ namespace Tempest\Highlight\Languages\Cpp\Patterns;
 
 use Tempest\Highlight\IsPattern;
 use Tempest\Highlight\Pattern;
+use Tempest\Highlight\PatternTest;
 use Tempest\Highlight\Tokens\TokenTypeEnum;
 
+#[PatternTest(input: 'namespace app {}', output: 'namespace')]
+#[PatternTest(input: 'class User {};', output: 'class')]
 final readonly class CppKeywordPattern implements Pattern
 {
     use IsPattern;

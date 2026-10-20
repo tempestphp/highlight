@@ -6,8 +6,11 @@ namespace Tempest\Highlight\Languages\C\Patterns;
 
 use Tempest\Highlight\IsPattern;
 use Tempest\Highlight\Pattern;
+use Tempest\Highlight\PatternTest;
 use Tempest\Highlight\Tokens\TokenTypeEnum;
 
+#[PatternTest(input: '0xFF', output: '0xFF')]
+#[PatternTest(input: '42UL', output: '42UL')]
 final readonly class CNumberPattern implements Pattern
 {
     use IsPattern;

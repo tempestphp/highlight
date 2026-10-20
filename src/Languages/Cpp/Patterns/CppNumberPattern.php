@@ -6,8 +6,11 @@ namespace Tempest\Highlight\Languages\Cpp\Patterns;
 
 use Tempest\Highlight\IsPattern;
 use Tempest\Highlight\Pattern;
+use Tempest\Highlight\PatternTest;
 use Tempest\Highlight\Tokens\TokenTypeEnum;
 
+#[PatternTest(input: '1\'000\'000', output: '1\'000\'000')]
+#[PatternTest(input: '0b1010', output: '0b1010')]
 final readonly class CppNumberPattern implements Pattern
 {
     use IsPattern;

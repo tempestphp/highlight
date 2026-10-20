@@ -6,8 +6,11 @@ namespace Tempest\Highlight\Languages\Cpp\Patterns;
 
 use Tempest\Highlight\IsPattern;
 use Tempest\Highlight\Pattern;
+use Tempest\Highlight\PatternTest;
 use Tempest\Highlight\Tokens\TokenTypeEnum;
 
+#[PatternTest(input: 'nullptr', output: 'nullptr')]
+#[PatternTest(input: 'true', output: 'true')]
 final readonly class CppLiteralPattern implements Pattern
 {
     use IsPattern;

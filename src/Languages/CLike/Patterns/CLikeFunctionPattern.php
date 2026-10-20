@@ -6,8 +6,11 @@ namespace Tempest\Highlight\Languages\CLike\Patterns;
 
 use Tempest\Highlight\IsPattern;
 use Tempest\Highlight\Pattern;
+use Tempest\Highlight\PatternTest;
 use Tempest\Highlight\Tokens\TokenTypeEnum;
 
+#[PatternTest(input: 'render()', output: 'render')]
+#[PatternTest(input: 'printf(value)', output: 'printf')]
 final readonly class CLikeFunctionPattern implements Pattern
 {
     use IsPattern;

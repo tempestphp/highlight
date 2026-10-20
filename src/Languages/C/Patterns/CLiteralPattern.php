@@ -6,8 +6,11 @@ namespace Tempest\Highlight\Languages\C\Patterns;
 
 use Tempest\Highlight\IsPattern;
 use Tempest\Highlight\Pattern;
+use Tempest\Highlight\PatternTest;
 use Tempest\Highlight\Tokens\TokenTypeEnum;
 
+#[PatternTest(input: 'NULL', output: 'NULL')]
+#[PatternTest(input: 'true', output: 'true')]
 final readonly class CLiteralPattern implements Pattern
 {
     use IsPattern;

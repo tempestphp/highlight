@@ -6,8 +6,12 @@ namespace Tempest\Highlight\Languages\C\Patterns;
 
 use Tempest\Highlight\IsPattern;
 use Tempest\Highlight\Pattern;
+use Tempest\Highlight\PatternTest;
 use Tempest\Highlight\Tokens\TokenTypeEnum;
 
+#[PatternTest(input: 'struct Point value;', output: 'Point')]
+#[PatternTest(input: 'unsigned value;', output: 'unsigned')]
+#[PatternTest(input: 'Point value;', output: 'Point')]
 final readonly class CTypePattern implements Pattern
 {
     use IsPattern;

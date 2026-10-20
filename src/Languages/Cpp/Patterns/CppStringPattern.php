@@ -6,8 +6,12 @@ namespace Tempest\Highlight\Languages\Cpp\Patterns;
 
 use Tempest\Highlight\IsPattern;
 use Tempest\Highlight\Pattern;
+use Tempest\Highlight\PatternTest;
 use Tempest\Highlight\Tokens\TokenTypeEnum;
 
+#[PatternTest(input: '"hello"', output: '"hello"')]
+#[PatternTest(input: 'R"(hello)"', output: 'R"(hello)"')]
+#[PatternTest(input: '\'x\'', output: '\'x\'')]
 final readonly class CppStringPattern implements Pattern
 {
     use IsPattern;

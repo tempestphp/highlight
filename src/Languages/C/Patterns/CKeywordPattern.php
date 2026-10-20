@@ -6,8 +6,11 @@ namespace Tempest\Highlight\Languages\C\Patterns;
 
 use Tempest\Highlight\IsPattern;
 use Tempest\Highlight\Pattern;
+use Tempest\Highlight\PatternTest;
 use Tempest\Highlight\Tokens\TokenTypeEnum;
 
+#[PatternTest(input: 'static int value;', output: 'static')]
+#[PatternTest(input: 'sizeof(value)', output: 'sizeof')]
 final readonly class CKeywordPattern implements Pattern
 {
     use IsPattern;

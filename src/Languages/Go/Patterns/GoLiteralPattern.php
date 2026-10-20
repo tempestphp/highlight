@@ -6,8 +6,11 @@ namespace Tempest\Highlight\Languages\Go\Patterns;
 
 use Tempest\Highlight\IsPattern;
 use Tempest\Highlight\Pattern;
+use Tempest\Highlight\PatternTest;
 use Tempest\Highlight\Tokens\TokenTypeEnum;
 
+#[PatternTest(input: 'true', output: 'true')]
+#[PatternTest(input: 'nil', output: 'nil')]
 final readonly class GoLiteralPattern implements Pattern
 {
     use IsPattern;

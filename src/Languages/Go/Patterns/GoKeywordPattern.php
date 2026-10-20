@@ -6,8 +6,11 @@ namespace Tempest\Highlight\Languages\Go\Patterns;
 
 use Tempest\Highlight\IsPattern;
 use Tempest\Highlight\Pattern;
+use Tempest\Highlight\PatternTest;
 use Tempest\Highlight\Tokens\TokenTypeEnum;
 
+#[PatternTest(input: 'package main', output: 'package')]
+#[PatternTest(input: 'func render()', output: 'func')]
 final readonly class GoKeywordPattern implements Pattern
 {
     use IsPattern;

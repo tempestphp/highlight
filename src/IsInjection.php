@@ -18,24 +18,42 @@ trait IsInjection
             $pattern = "/{$pattern}/";
         }
 
+        $replacements = [];
+
         $result = preg_replace_callback(
             pattern: $pattern,
-            callback: function (array $matches) use ($highlighter): string {
-                $content = $matches['match'] ?? '';
+            callback: function (array $matches) use ($highlighter, &$replacements): string {
+                [$fullMatch, $offset] = $matches[0];
+
+                $content = $matches['match'][0] ?? '';
 
                 if ($content === '' || $content === '0') {
-                    return $matches[0];
+                    return $fullMatch;
                 }
 
-                return str_replace(
+                $replacement = str_replace(
                     search: $content,
                     replace: $this->parseContent($content, $highlighter),
-                    subject: $matches[0],
+                    subject: $fullMatch,
                 );
+
+                if ($replacement !== $fullMatch) {
+                    $replacements[] = [$offset, strlen($fullMatch), strlen($replacement)];
+                }
+
+                return $replacement;
             },
             subject: $content,
+            flags: PREG_OFFSET_CAPTURE,
         );
 
-        return new ParsedInjection($result ?? $content);
+        if ($result === null) {
+            return new ParsedInjection($content);
+        }
+
+        return new ParsedInjection(
+            content: $result,
+            replacements: $replacements,
+        );
     }
 }

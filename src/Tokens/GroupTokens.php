@@ -34,6 +34,8 @@ final readonly class GroupTokens
             $token = $tokens[$i];
             $token->resetHierarchy();
             $tokenEnd = $token->end;
+            $lastChildEnd = 0;
+            $childrenOverlap = false;
 
             // Since tokens are sorted by start, only check subsequent tokens
             // that could overlap (start < token->end)
@@ -53,11 +55,34 @@ final readonly class GroupTokens
                 // At this point we know: token->start <= compareToken->start < token->end
                 // and they are not equal (different indices, and sorted order means
                 // same-start tokens differ in end). This means containsOrOverlaps is true.
-                if ($token->canContain($compareToken)) {
+                // A token that runs past the end of this one can't be nested in it,
+                // so it's dropped like any other token that can't be contained.
+                if (
+                    $compareToken->end <= $tokenEnd
+                    && $token->canContain($compareToken)
+                ) {
+                    if ($compareToken->start < $lastChildEnd) {
+                        $childrenOverlap = true;
+                    }
+
+                    $lastChildEnd = max($lastChildEnd, $compareToken->end);
+
                     $token->addChild($compareToken);
                 }
 
                 $removed[$j] = true;
+            }
+
+            // Children can overlap each other as well (for example, a string and
+            // the keywords inside it, both wrapped in {_ _}), so they need to be
+            // grouped the same way before they can be rendered.
+            if ($childrenOverlap) {
+                $children = $token->children;
+                $token->children = [];
+
+                foreach ($this($children) as $child) {
+                    $token->addChild($child);
+                }
             }
 
             if (! $token->parent instanceof Token) {

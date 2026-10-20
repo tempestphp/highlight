@@ -46,6 +46,8 @@ use Tempest\Highlight\Themes\CssTheme;
 use Tempest\Highlight\Tokens\GroupTokens;
 use Tempest\Highlight\Tokens\ParseTokens;
 use Tempest\Highlight\Tokens\RenderTokens;
+use Tempest\Highlight\Tokens\Token;
+use Tempest\Highlight\Tokens\TokenTypeEnum;
 
 final class Highlighter
 {
@@ -208,16 +210,34 @@ final class Highlighter
             $parsedInjection = $injection->parse($content, $nestedHighlighter);
             $content = $parsedInjection->content;
 
+            if ($tokens !== [] && $parsedInjection->replacements !== []) {
+                $tokens = $this->shiftTokens($tokens, $parsedInjection->replacements, $content);
+            }
+
             foreach ($parsedInjection->tokens as $token) {
                 $tokens[] = $token;
             }
         }
 
         // Patterns
-        foreach (
-            $this->parseTokens->parse($content, $this->getPatterns($language)) as $token
-        ) {
-            $tokens[] = $token;
+        $markers = $this->getMarkers($tokens);
+
+        if ($markers === []) {
+            foreach (
+                $this->parseTokens->parse($content, $this->getPatterns($language)) as $token
+            ) {
+                $tokens[] = $token;
+            }
+        } else {
+            foreach (
+                $this->parseTokens->parse($this->hideMarkers($content, $markers), $this->getPatterns($language)) as $token
+            ) {
+                $token = $this->trimMarkers($token, $markers, $content);
+
+                if ($token instanceof Token) {
+                    $tokens[] = $token;
+                }
+            }
         }
 
         $groupedTokens = ($this->groupTokens)($tokens);
@@ -234,6 +254,135 @@ final class Highlighter
         }
 
         return $this->theme->escape($content);
+    }
+
+    /**
+     * Markers like {_ and _} stay in the content until it's rendered, as hidden tokens.
+     *
+     * @param Token[] $tokens
+     * @return Token[]
+     */
+    private function getMarkers(array $tokens): array
+    {
+        $markers = [];
+
+        foreach ($tokens as $token) {
+            if ($token->type === TokenTypeEnum::HIDDEN) {
+                $markers[] = $token;
+            }
+        }
+
+        if (count($markers) > 2) {
+            usort($markers, static fn (Token $a, Token $b): int => $a->start <=> $b->start);
+        }
+
+        return $markers;
+    }
+
+    /**
+     * Patterns shouldn't see markers: `{_function` should still match the `function` keyword.
+     * They are replaced by spaces of the same length, so that all offsets stay the same.
+     *
+     * @param Token[] $markers
+     */
+    private function hideMarkers(string $content, array $markers): string
+    {
+        foreach ($markers as $marker) {
+            $content = substr_replace($content, str_repeat(' ', $marker->length), $marker->offset, $marker->length);
+        }
+
+        return $content;
+    }
+
+    /**
+     * A token found by a pattern shouldn't start or end on a marker, otherwise it would
+     * swallow the marker and break the highlight around it. Its value is also taken from
+     * the real content again, since it was matched against the content with hidden markers.
+     *
+     * @param Token[] $markers
+     */
+    private function trimMarkers(Token $token, array $markers, string $content): ?Token
+    {
+        $start = $token->start;
+        $end = $token->end;
+
+        foreach ($markers as $marker) {
+            if ($marker->start <= $start && $start < $marker->end) {
+                $start = $marker->end;
+            }
+        }
+
+        foreach (array_reverse($markers) as $marker) {
+            if ($marker->start < $end && $end <= $marker->end) {
+                $end = $marker->start;
+            }
+        }
+
+        if ($start >= $end) {
+            return null;
+        }
+
+        return new Token(
+            offset: $start,
+            value: substr($content, $start, $end - $start),
+            type: $token->type,
+            pattern: $token->pattern,
+        );
+    }
+
+    /**
+     * Moves tokens found by earlier injections (like {_ _} or {:class: :})
+     * so that they still point to the same code after a later injection rewrote parts of it.
+     * Tokens that lie inside a rewritten part, or only partially cover one,
+     * are dropped: the injection already highlighted that part of the code itself.
+     *
+     * @param Token[] $tokens
+     * @param array<array{int, int, int}> $replacements
+     * @return Token[]
+     */
+    private function shiftTokens(array $tokens, array $replacements, string $content): array
+    {
+        $shiftedTokens = [];
+
+        foreach ($tokens as $token) {
+            $startDelta = 0;
+            $endDelta = 0;
+
+            foreach ($replacements as [$offset, $oldLength, $newLength]) {
+                $delta = $newLength - $oldLength;
+
+                if ($offset + $oldLength <= $token->start) {
+                    $startDelta += $delta;
+                    $endDelta += $delta;
+
+                    continue;
+                }
+
+                if ($offset >= $token->end) {
+                    break;
+                }
+
+                if ($offset >= $token->start && $offset + $oldLength <= $token->end) {
+                    $endDelta += $delta;
+
+                    continue;
+                }
+
+                continue 2;
+            }
+
+            $start = $token->start + $startDelta;
+            $end = $token->end + $endDelta;
+
+            $shiftedTokens[] = new Token(
+                offset: $start,
+                value: substr($content, $start, $end - $start),
+                type: $token->type,
+                pattern: $token->pattern,
+            );
+        }
+
+        return $shiftedTokens;
     }
 
     /**

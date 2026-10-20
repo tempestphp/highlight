@@ -7,7 +7,9 @@ namespace Tempest\Highlight\Languages\Vue\Injections;
 use Tempest\Highlight\Highlighter;
 use Tempest\Highlight\Injection;
 use Tempest\Highlight\IsInjection;
+use Tempest\Highlight\RequiresSubstring;
 
+#[RequiresSubstring('</style>')]
 final class VueStyleScopedInjection implements Injection
 {
     use IsInjection;

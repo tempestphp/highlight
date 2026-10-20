@@ -8,11 +8,13 @@ use Tempest\Highlight\Highlighter;
 use Tempest\Highlight\Injection;
 use Tempest\Highlight\IsInjection;
 use Tempest\Highlight\PatternTest;
+use Tempest\Highlight\RequiresSubstring;
 
 #[PatternTest(input: '{role}', output: 'role')]
 #[PatternTest(input: '{role.id}', output: 'role.id')]
 #[PatternTest(input: 'onclick={() => count++}', output: '() => count++')]
 #[PatternTest(input: 'onclick={() => { updateTab() }}', output: '() => { updateTab() }')]
+#[RequiresSubstring('{')]
 final class SvelteExpressionInjection implements Injection
 {
     use IsInjection;

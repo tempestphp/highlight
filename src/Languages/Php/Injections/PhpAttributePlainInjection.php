@@ -8,8 +8,10 @@ use Tempest\Highlight\Escape;
 use Tempest\Highlight\Highlighter;
 use Tempest\Highlight\Injection;
 use Tempest\Highlight\IsInjection;
+use Tempest\Highlight\RequiresSubstring;
 use Tempest\Highlight\Tokens\TokenTypeEnum;
 
+#[RequiresSubstring('#[')]
 final readonly class PhpAttributePlainInjection implements Injection
 {
     use IsInjection;

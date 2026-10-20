@@ -8,8 +8,10 @@ use Tempest\Highlight\Escape;
 use Tempest\Highlight\Highlighter;
 use Tempest\Highlight\Injection;
 use Tempest\Highlight\ParsedInjection;
+use Tempest\Highlight\RequiresSubstring;
 use Tempest\Highlight\Tokens\TokenTypeEnum;
 
+#[RequiresSubstring('<<<')]
 final readonly class PhpHeredocInjection implements Injection
 {
     public function parse(string $content, Highlighter $highlighter): ParsedInjection
@@ -21,8 +23,24 @@ final readonly class PhpHeredocInjection implements Injection
 
         // First we'll search for all Heredoc open tags,
         // which we need in order to find the close tag, and so the whole Heredoc block
+        $unmatched = [];
+
         foreach ($languageMatches['language'] as $language) {
-            preg_match_all('/<<<' . $language . '(?<match>[\s\S]*?)' . $language . '(?:;|\s|\))/', $content, $matches);
+            // Content only changes when a tag matches, so a tag that found nothing finds nothing again until then
+            if (isset($unmatched[$language])) {
+                continue;
+            }
+
+            // (*COMMIT) stops the search when an opener has no closer: later openers cannot have one either.
+            preg_match_all('/<<<' . $language . '(*COMMIT)(?<match>[\s\S]*?)' . $language . '(?:;|\s|\))/', $content, $matches);
+
+            if ($matches['match'] === []) {
+                $unmatched[$language] = true;
+
+                continue;
+            }
+
+            $unmatched = [];
 
             foreach ($matches['match'] as $key => $match) {
                 $fullMatch = $matches[0][$key];

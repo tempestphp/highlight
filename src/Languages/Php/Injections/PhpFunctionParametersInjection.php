@@ -9,14 +9,17 @@ use Tempest\Highlight\Highlighter;
 use Tempest\Highlight\Injection;
 use Tempest\Highlight\IsInjection;
 use Tempest\Highlight\Languages\Php\PhpTypeLanguage;
+use Tempest\Highlight\RequiresSubstring;
 
+#[RequiresSubstring('function', 'fn')]
 final readonly class PhpFunctionParametersInjection implements Injection
 {
     use IsInjection;
 
     public function getPattern(): string
     {
-        return '(function|fn)[\s\w]*\((?<match>[\s\S]*?)(use\s*\(|{|\)[\s]*({|;|:|=>))';
+        // (*COMMIT) stops the search when an opener has no closer: later openers cannot have one either.
+        return '(function|fn)[\s\w]*\((*COMMIT)(?<match>[\s\S]*?)(use\s*\(|{|\)[\s]*({|;|:|=>))';
     }
 
     public function parseContent(string $content, Highlighter $highlighter): string

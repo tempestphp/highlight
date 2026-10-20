@@ -7,14 +7,17 @@ namespace Tempest\Highlight\Languages\Html\Injections;
 use Tempest\Highlight\Highlighter;
 use Tempest\Highlight\Injection;
 use Tempest\Highlight\IsInjection;
+use Tempest\Highlight\RequiresSubstring;
 
+#[RequiresSubstring('<?php')]
 final readonly class PhpInHtmlInjection implements Injection
 {
     use IsInjection;
 
     public function getPattern(): string
     {
-        return '\<\?php(?<match>[\s\S]*?)\?>';
+        // (*COMMIT) stops the search when an opener has no closer: later openers cannot have one either.
+        return '\<\?php(*COMMIT)(?<match>[\s\S]*?)\?>';
     }
 
     public function parseContent(string $content, Highlighter $highlighter): string

@@ -8,14 +8,17 @@ use Tempest\Highlight\Highlighter;
 use Tempest\Highlight\Injection;
 use Tempest\Highlight\IsInjection;
 use Tempest\Highlight\Languages\Php\PhpDocCommentLanguage;
+use Tempest\Highlight\RequiresSubstring;
 
+#[RequiresSubstring('/**')]
 final readonly class PhpDocCommentInjection implements Injection
 {
     use IsInjection;
 
     public function getPattern(): string
     {
-        return '/(?<match>\/\*\*[\s\S]*?\*\/)/m';
+        // (*COMMIT) stops the search when an opener has no closer: later openers cannot have one either.
+        return '/(?<match>\/\*\*(*COMMIT)[\s\S]*?\*\/)/m';
     }
 
     public function parseContent(string $content, Highlighter $highlighter): string

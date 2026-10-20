@@ -8,10 +8,12 @@ use Tempest\Highlight\Highlighter;
 use Tempest\Highlight\Injection;
 use Tempest\Highlight\IsInjection;
 use Tempest\Highlight\PatternTest;
+use Tempest\Highlight\RequiresSubstring;
 
 #[PatternTest(input: '{{ name }}', output: ' name ')]
 #[PatternTest(input: '{{ user.id }}', output: ' user.id ')]
 #[PatternTest(input: '{{ count + 1 }}', output: ' count + 1 ')]
+#[RequiresSubstring('{{')]
 final class VueInterpolationInjection implements Injection
 {
     use IsInjection;

@@ -8,8 +8,10 @@ use Tempest\Highlight\Highlighter;
 use Tempest\Highlight\Injection;
 use Tempest\Highlight\Languages\Diff\DiffTokenType;
 use Tempest\Highlight\ParsedInjection;
+use Tempest\Highlight\RequiresSubstring;
 use Tempest\Highlight\Tokens\Token;
 
+#[RequiresSubstring('-')]
 class DiffDeletionInjection implements Injection
 {
     public function parse(string $content, Highlighter $highlighter): ParsedInjection

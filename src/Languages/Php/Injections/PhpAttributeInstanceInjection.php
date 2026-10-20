@@ -8,15 +8,18 @@ use Tempest\Highlight\Escape;
 use Tempest\Highlight\Highlighter;
 use Tempest\Highlight\Injection;
 use Tempest\Highlight\IsInjection;
+use Tempest\Highlight\RequiresSubstring;
 use Tempest\Highlight\Tokens\TokenTypeEnum;
 
+#[RequiresSubstring('#[')]
 final readonly class PhpAttributeInstanceInjection implements Injection
 {
     use IsInjection;
 
     public function getPattern(): string
     {
-        return '(?<match>\#\[[\w]+\([\s\S]*?\)\])';
+        // (*COMMIT) stops the search when an opener has no closer: later openers cannot have one either.
+        return '(?<match>\#\[[\w]+\((*COMMIT)[\s\S]*?\)\])';
     }
 
     public function parseContent(string $content, Highlighter $highlighter): string

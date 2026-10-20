@@ -7,7 +7,9 @@ namespace Tempest\Highlight\Languages\Html\Injections;
 use Tempest\Highlight\Highlighter;
 use Tempest\Highlight\Injection;
 use Tempest\Highlight\IsInjection;
+use Tempest\Highlight\RequiresSubstring;
 
+#[RequiresSubstring('<?=')]
 final readonly class PhpShortEchoInHtmlInjection implements Injection
 {
     use IsInjection;

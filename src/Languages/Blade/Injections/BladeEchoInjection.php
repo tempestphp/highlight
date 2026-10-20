@@ -7,7 +7,9 @@ namespace Tempest\Highlight\Languages\Blade\Injections;
 use Tempest\Highlight\Highlighter;
 use Tempest\Highlight\Injection;
 use Tempest\Highlight\IsInjection;
+use Tempest\Highlight\RequiresSubstring;
 
+#[RequiresSubstring('{{')]
 final readonly class BladeEchoInjection implements Injection
 {
     use IsInjection;

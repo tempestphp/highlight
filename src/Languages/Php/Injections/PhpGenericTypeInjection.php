@@ -8,8 +8,10 @@ use Tempest\Highlight\Escape;
 use Tempest\Highlight\Highlighter;
 use Tempest\Highlight\Injection;
 use Tempest\Highlight\ParsedInjection;
+use Tempest\Highlight\RequiresSubstring;
 use Tempest\Highlight\Tokens\TokenTypeEnum;
 
+#[RequiresSubstring('@template', '<')]
 final readonly class PhpGenericTypeInjection implements Injection
 {
     public function parse(string $content, Highlighter $highlighter): ParsedInjection
@@ -28,17 +30,22 @@ final readonly class PhpGenericTypeInjection implements Injection
             $genericTypes[$genericMatch] = $genericMatch;
         }
 
-        $theme = $highlighter->getTheme();
-
-        foreach ($genericTypes as $genericType) {
-            $content = preg_replace(
-                '/\b' . $genericType . '\b/',
-                Escape::tokens($theme->before(TokenTypeEnum::GENERIC))
-                . $genericType
-                . Escape::tokens($theme->after(TokenTypeEnum::GENERIC)),
-                (string) $content,
-            );
+        if ($genericTypes === []) {
+            return new ParsedInjection($content);
         }
+
+        $theme = $highlighter->getTheme();
+        $before = Escape::tokens($theme->before(TokenTypeEnum::GENERIC));
+        $after = Escape::tokens($theme->after(TokenTypeEnum::GENERIC));
+
+        // One constant pattern instead of one per type name: user-derived patterns would churn PHP's regex cache
+        $content = preg_replace_callback(
+            '/\w+/',
+            fn (array $match): string => isset($genericTypes[$match[0]])
+                ? $before . $match[0] . $after
+                : $match[0],
+            $content,
+        );
 
         return new ParsedInjection($content);
     }

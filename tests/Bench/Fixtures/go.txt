@@ -1,0 +1,26 @@
+package main
+
+import (
+	"context"
+	"fmt"
+)
+
+type Result[T any] struct {
+	Value T
+	Err   error
+}
+
+func collect[T comparable](ctx context.Context, input <-chan T) []Result[T] {
+	results := make([]Result[T], 0, 16)
+	for value := range input {
+		select {
+		case <-ctx.Done():
+			return append(results, Result[T]{Err: ctx.Err()})
+		default:
+			results = append(results, Result[T]{Value: value})
+		}
+	}
+
+	fmt.Printf("collected %d values\n", len(results))
+	return results
+}

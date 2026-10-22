@@ -14,6 +14,10 @@ use Tempest\Highlight\Tokens\Token;
  * to all other tokens detected by patterns, and thus follow all token rules.
  * They are grouped and checked on whether tokens can be contained by other tokens.
  * This offers more flexibility from the injection's point of view, and in same cases lead to more accurate highlighting.
+ *
+ * When an injection rewrites parts of the content, it can list those parts as replacements
+ * (offset and length in the original content, and the length of what replaced it),
+ * so that tokens found by earlier injections can be moved along with the content.
  */
 final readonly class ParsedInjection
 {
@@ -21,6 +25,8 @@ final readonly class ParsedInjection
         public string $content,
         /** @var Token[] */
         public array $tokens = [],
+        /** @var array<array{int, int, int}> */
+        public array $replacements = [],
     ) {
     }
 }

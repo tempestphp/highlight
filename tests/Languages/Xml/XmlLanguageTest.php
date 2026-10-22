@@ -40,6 +40,8 @@ TXT,
 TXT],
             ["<ns:tag><tag></tag></ns:tag>", '&lt;<span class="hl-keyword">ns:tag</span>&gt;&lt;<span class="hl-keyword">tag</span>&gt;&lt;/<span class="hl-keyword">tag</span>&gt;&lt;/<span class="hl-keyword">ns:tag</span>&gt;'],
             ['<root xmlns:ns="...">', '&lt;<span class="hl-keyword">root</span> <span class="hl-property">xmlns:ns</span>=&quot;...&quot;&gt;'],
+            ['<données>1</données>', '&lt;<span class="hl-keyword">données</span>&gt;1&lt;/<span class="hl-keyword">données</span>&gt;'],
+            ['<élément></élément>', '&lt;<span class="hl-keyword">élément</span>&gt;&lt;/<span class="hl-keyword">élément</span>&gt;'],
         ];
     }
 }

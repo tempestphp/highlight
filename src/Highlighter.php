@@ -28,6 +28,7 @@ use Tempest\Highlight\Languages\Nginx\NginxLanguage;
 use Tempest\Highlight\Languages\Php\PhpLanguage;
 use Tempest\Highlight\Languages\Python\PythonLanguage;
 use Tempest\Highlight\Languages\Ruby\RubyLanguage;
+use Tempest\Highlight\Languages\Rust\RustLanguage;
 use Tempest\Highlight\Languages\Scss\ScssLanguage;
 use Tempest\Highlight\Languages\Sema\SemaLanguage;
 use Tempest\Highlight\Languages\Sql\SqlLanguage;
@@ -87,6 +88,7 @@ final class Highlighter
             ->addLanguage(new PhpLanguage())
             ->addLanguage(new PythonLanguage())
             ->addLanguage(new RubyLanguage())
+            ->addLanguage(new RustLanguage())
             ->addLanguage(new ScssLanguage())
             ->addLanguage(new SemaLanguage())
             ->addLanguage(new SqlLanguage())

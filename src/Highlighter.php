@@ -36,6 +36,7 @@ use Tempest\Highlight\Languages\Swift\SwiftLanguage;
 use Tempest\Highlight\Languages\Terminal\TerminalLanguage;
 use Tempest\Highlight\Languages\Terraform\TerraformLanguage;
 use Tempest\Highlight\Languages\Text\TextLanguage;
+use Tempest\Highlight\Languages\Toml\TomlLanguage;
 use Tempest\Highlight\Languages\Tsx\TsxLanguage;
 use Tempest\Highlight\Languages\Twig\TwigLanguage;
 use Tempest\Highlight\Languages\TypeScript\TypeScriptLanguage;
@@ -94,6 +95,7 @@ final class Highlighter
             ->addLanguage(new TerminalLanguage())
             ->addLanguage(new TextLanguage())
             ->addLanguage(new TerraformLanguage())
+            ->addLanguage(new TomlLanguage())
             ->addLanguage(new TypeScriptLanguage())
             ->addLanguage(new XmlLanguage())
             ->addLanguage(new YamlLanguage())

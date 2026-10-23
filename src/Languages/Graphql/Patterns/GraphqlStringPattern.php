@@ -16,7 +16,8 @@ final class GraphqlStringPattern implements Pattern
 
     public function getPattern(): string
     {
-        return '"(?<match>(?:[^"\\\\]++|\\\\.)*+)"';
+        // An unclosed string would be rescanned from each escaped quote inside it, so skip past it
+        return '"(?<match>(?:[^"\\\\]++|\\\\.)*+)(?:"|(*SKIP)(*FAIL))';
     }
 
     public function getTokenType(): TokenTypeEnum

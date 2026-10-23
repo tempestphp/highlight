@@ -112,7 +112,7 @@ final readonly class GroupTokens
                 $keys[] = ($token->start - $low) * $range + ($high - $token->end);
             }
 
-            asort($keys, SORT_NUMERIC);
+            asort($keys);
 
             $sorted = [];
 

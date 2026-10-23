@@ -46,4 +46,19 @@ class GroupTokensTest extends TestCase
         $this->assertCount(1, $tokens);
         $this->assertCount(3, $tokens[0]->children);
     }
+
+    public function test_longer_token_wins_at_offsets_beyond_float_precision(): void
+    {
+        $tokens = [
+            new Token(0, 'a', TokenTypeEnum::KEYWORD),
+            new Token(100_000_000, '/', TokenTypeEnum::OPERATOR),
+            new Token(100_000_001, '/', TokenTypeEnum::OPERATOR),
+            new Token(100_000_000, '//', TokenTypeEnum::COMMENT),
+        ];
+
+        $grouped = (new GroupTokens())($tokens);
+
+        $this->assertCount(2, $grouped);
+        $this->assertSame(TokenTypeEnum::COMMENT, $grouped[1]->type);
+    }
 }

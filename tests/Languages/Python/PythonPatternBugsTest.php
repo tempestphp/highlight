@@ -29,5 +29,30 @@ final class PythonPatternBugsTest extends TestCase
             'case _:',
             'case <span class="hl-keyword">_</span>:',
         ];
+
+        yield 'wildcard case in match block' => [
+            "match x:\n    case _:\n        pass",
+            "match x:\n    case <span class=\"hl-keyword\">_</span>:\n        <span class=\"hl-keyword\">pass</span>",
+        ];
+
+        yield 'underscore parameter' => [
+            'def consume(_: int): pass',
+            '<span class="hl-keyword">def</span> <span class="hl-property">consume</span>(_: <span class="hl-type">int</span>): <span class="hl-keyword">pass</span>',
+        ];
+
+        yield 'underscore annotated variable' => [
+            '_: int = 1',
+            '_: <span class="hl-type">int</span> <span class="hl-operator">=</span> <span class="hl-number">1</span>',
+        ];
+
+        yield 'underscore dictionary key' => [
+            'mapping = {_: "translated"}',
+            'mapping <span class="hl-operator">=</span> {_: <span class="hl-value">&quot;translated&quot;</span>}',
+        ];
+
+        yield 'underscore lambda parameter' => [
+            'lambda _: 0',
+            '<span class="hl-keyword">lambda</span> _: <span class="hl-number">0</span>',
+        ];
     }
 }

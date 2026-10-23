@@ -25,7 +25,7 @@ final readonly class PyKeywordPattern implements Pattern
     {
         $keywords = implode('|', $this->keywords);
 
-        return "\b(?<match>(?:_(?=\s*:)|{$keywords}))\b";
+        return "\b(?<match>(?:(?<=\bcase\s)_(?=\s*:)|{$keywords}))\b";
     }
 
     public function getTokenType(): TokenTypeEnum

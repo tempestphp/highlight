@@ -12,7 +12,7 @@ final class OperatorPattern implements Pattern
 {
     use IsPattern;
 
-    public function __construct(private string $operator)
+    public function __construct(private readonly string $operator)
     {
     }
 

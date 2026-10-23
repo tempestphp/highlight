@@ -12,7 +12,7 @@ final class TwigKeywordPattern implements Pattern
 {
     use IsPattern;
 
-    public function __construct(private string $keyword)
+    public function __construct(private readonly string $keyword)
     {
     }
 

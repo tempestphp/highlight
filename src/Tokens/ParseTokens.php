@@ -30,7 +30,7 @@ final readonly class ParseTokens
     }
 
     /**
-     * Built-in patterns that use IsPattern::match() get their final regex and token type resolved once.
+     * Patterns from this package that use IsPattern::match() and only hold readonly state get their final regex and token type resolved once.
      * Every other pattern keeps calling its own match() and getTokenType() on each parse.
      *
      * @internal
@@ -142,12 +142,28 @@ final readonly class ParseTokens
         if (! isset($builtIn[$class])) {
             $reflection = new ReflectionClass($class);
 
-            // Anonymous classes are named after their interface, so they would pass the namespace check
-            $builtIn[$class] = str_starts_with($class, 'Tempest\\Highlight\\')
-                && ! $reflection->isAnonymous()
-                && $reflection->getMethod('match')->getFileName() === new ReflectionClass(IsPattern::class)->getFileName();
+            $builtIn[$class] = ! $reflection->isAnonymous()
+                && str_starts_with((string) $reflection->getFileName(), dirname(__DIR__) . DIRECTORY_SEPARATOR)
+                && $reflection->getMethod('match')->getFileName() === new ReflectionClass(IsPattern::class)->getFileName()
+                && $this->hasOnlyReadonlyState($reflection);
         }
 
         return $builtIn[$class];
+    }
+
+    /**
+     * @param ReflectionClass<object> $reflection
+     */
+    private function hasOnlyReadonlyState(ReflectionClass $reflection): bool
+    {
+        do {
+            foreach ($reflection->getProperties() as $property) {
+                if (! $property->isReadOnly()) {
+                    return false;
+                }
+            }
+        } while ($reflection = $reflection->getParentClass());
+
+        return true;
     }
 }

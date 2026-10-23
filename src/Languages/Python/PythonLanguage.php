@@ -10,6 +10,7 @@ use Tempest\Highlight\Languages\Php\Patterns\DoubleQuoteValuePattern;
 use Tempest\Highlight\Languages\Php\Patterns\SingleQuoteValuePattern;
 use Tempest\Highlight\Languages\Python\Patterns\PyArgumentPattern;
 use Tempest\Highlight\Languages\Python\Patterns\PyBuiltinPattern;
+use Tempest\Highlight\Languages\Python\Patterns\PyCaseWildcardPattern;
 use Tempest\Highlight\Languages\Python\Patterns\PyClassNamePattern;
 use Tempest\Highlight\Languages\Python\Patterns\PyCommentPattern;
 use Tempest\Highlight\Languages\Python\Patterns\PyDecoratorPattern;
@@ -50,6 +51,7 @@ class PythonLanguage extends BaseLanguage
 
             // KEYWORDS
             new PyKeywordPattern(),
+            new PyCaseWildcardPattern(),
 
             // PROPERTY
             new PyClassNamePattern(),

@@ -74,4 +74,27 @@ SQL))-&gt;collection()-&gt;to(Book::class);
             currentLanguage: new PhpLanguage(),
         );
     }
+
+    #[Test]
+    public function label_inside_contents(): void
+    {
+        $content = '
+$query = <<<SQL
+    SELECT * FROM Book -- runs on MySQL and SQLite
+    SQL;
+        ';
+
+        $expected = '
+$query = &lt;&lt;&lt;<span class="hl-property">SQL</span>
+    <span class="hl-keyword">SELECT</span> * <span class="hl-keyword">FROM</span> <span class="hl-type">Book</span> <span class="hl-comment">-- runs on MySQL and SQLite</span>
+    <span class="hl-property">SQL</span>;
+        ';
+
+        $this->assertMatches(
+            injection: new PhpHeredocInjection(),
+            content: $content,
+            expectedContent: $expected,
+            currentLanguage: new PhpLanguage(),
+        );
+    }
 }

@@ -42,6 +42,7 @@ final class HighlighterBench
         'php' => 'php.txt',
         'python' => 'python.txt',
         'ruby' => 'ruby.txt',
+        'rust' => 'rust.txt',
         'scss' => 'scss.txt',
         'sema' => 'sema.txt',
         'sql' => 'sql.txt',

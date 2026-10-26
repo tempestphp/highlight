@@ -199,17 +199,26 @@ final class HighlightMarkersTest extends TestCase
     }
 
     #[DataProvider('provide_markers_around_unbalanced_braces_cases')]
-    public function test_markers_around_unbalanced_braces(string $content): void
+    public function test_markers_around_unbalanced_braces(string $content, string $classname): void
     {
-        $this->assertStringContainsString('<span class="hl-em">', (new Highlighter())->parse($content, 'php'));
+        $parsed = (new Highlighter())->parse($content, 'php');
+
+        $this->assertStringContainsString('<span class="' . $classname . '">', $parsed);
+        $visible = strip_tags(preg_replace('/<span style="display: none">.*?<\/span>/', '', $parsed));
+
+        $this->assertDoesNotMatchRegularExpression('/{[_*~]|[_*~]}/', $visible);
     }
 
     public static function provide_markers_around_unbalanced_braces_cases(): iterable
     {
         return [
-            'opening brace' => ["{_function foo() {_}\n    return 1;\n}"],
-            'closing brace' => ["function foo() {\n{_    return 1;\n}_}"],
-            'closing then balanced braces' => ['{_}): Foo {}_}'],
+            'opening brace' => ["{_function foo() {_}\n    return 1;\n}", 'hl-em'],
+            'closing brace' => ["function foo() {\n{_    return 1;\n}_}", 'hl-em'],
+            'closing then balanced braces' => ['{_}): Foo {}_}', 'hl-em'],
+            'else' => ["if (\$x) {\n{_} else {_}\n}", 'hl-em'],
+            'end of a block and else' => ["if (\$x) {\n{_    return 1;\n} else {_}\n}", 'hl-em'],
+            'catch' => ["try {\n    a();\n{*} catch (E \$e) {*}\n}", 'hl-strong'],
+            'finally' => ["try {\n    a();\n{~} finally {~}\n}", 'hl-blur'],
         ];
     }
 

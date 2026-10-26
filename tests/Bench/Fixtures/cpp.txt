@@ -1,0 +1,33 @@
+#include <concepts>
+#include <string>
+#include <utility>
+
+namespace demo {
+
+template<typename T>
+concept Printable = requires(const T& value) {
+    value.render();
+};
+
+class Result final {
+public:
+    constexpr Result(std::string label, unsigned long value)
+        : label_(std::move(label)), value_(value) {}
+
+    [[nodiscard]] std::string render() const {
+        return label_ + ": " + std::to_string(value_);
+    }
+
+private:
+    std::string label_;
+    unsigned long value_;
+};
+
+} // namespace demo
+
+int main()
+{
+    constexpr auto value = 1'000ULL;
+    const demo::Result result{R"(answer)", value};
+    return result.render().empty() ? 1 : 0;
+}

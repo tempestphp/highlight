@@ -11,24 +11,30 @@ use Tempest\Highlight\Languages\Bash\BashLanguage;
 use Tempest\Highlight\Languages\BBCode\BBCodeLanguage;
 use Tempest\Highlight\Languages\Blade\BladeLanguage;
 use Tempest\Highlight\Languages\CSharp\CSharpLanguage;
+use Tempest\Highlight\Languages\C\CLanguage;
+use Tempest\Highlight\Languages\Cpp\CppLanguage;
 use Tempest\Highlight\Languages\Css\CssLanguage;
 use Tempest\Highlight\Languages\Diff\DiffLanguage;
 use Tempest\Highlight\Languages\DocComment\DocCommentLanguage;
 use Tempest\Highlight\Languages\Dockerfile\DockerfileLanguage;
 use Tempest\Highlight\Languages\DotEnv\DotEnvLanguage;
 use Tempest\Highlight\Languages\Gdscript\GdscriptLanguage;
+use Tempest\Highlight\Languages\Go\GoLanguage;
 use Tempest\Highlight\Languages\Graphql\GraphqlLanguage;
 use Tempest\Highlight\Languages\Html\HtmlLanguage;
 use Tempest\Highlight\Languages\Http\HttpLanguage;
 use Tempest\Highlight\Languages\Ini\IniLanguage;
+use Tempest\Highlight\Languages\Java\JavaLanguage;
 use Tempest\Highlight\Languages\JavaScript\JavaScriptLanguage;
 use Tempest\Highlight\Languages\Json\JsonLanguage;
 use Tempest\Highlight\Languages\Jsx\JsxLanguage;
+use Tempest\Highlight\Languages\Kotlin\KotlinLanguage;
 use Tempest\Highlight\Languages\Markdown\MarkdownLanguage;
 use Tempest\Highlight\Languages\Nginx\NginxLanguage;
 use Tempest\Highlight\Languages\Php\PhpLanguage;
 use Tempest\Highlight\Languages\Python\PythonLanguage;
 use Tempest\Highlight\Languages\Ruby\RubyLanguage;
+use Tempest\Highlight\Languages\Rust\RustLanguage;
 use Tempest\Highlight\Languages\Scss\ScssLanguage;
 use Tempest\Highlight\Languages\Sema\SemaLanguage;
 use Tempest\Highlight\Languages\Sql\SqlLanguage;
@@ -74,21 +80,27 @@ final class Highlighter
             ->addLanguage(new BBCodeLanguage())
             ->addLanguage(new BladeLanguage())
             ->addLanguage(new CSharpLanguage())
+            ->addLanguage(new CLanguage())
+            ->addLanguage(new CppLanguage())
             ->addLanguage(new CssLanguage())
             ->addLanguage(new DiffLanguage())
             ->addLanguage(new DocCommentLanguage())
             ->addLanguage(new DockerfileLanguage())
             ->addLanguage(new GdscriptLanguage())
+            ->addLanguage(new GoLanguage())
             ->addLanguage(new GraphqlLanguage())
             ->addLanguage(new HtmlLanguage())
             ->addLanguage(new HttpLanguage())
+            ->addLanguage(new JavaLanguage())
             ->addLanguage(new JavaScriptLanguage())
             ->addLanguage(new JsonLanguage())
+            ->addLanguage(new KotlinLanguage())
             ->addLanguage(new MarkdownLanguage())
             ->addLanguage(new NginxLanguage())
             ->addLanguage(new PhpLanguage())
             ->addLanguage(new PythonLanguage())
             ->addLanguage(new RubyLanguage())
+            ->addLanguage(new RustLanguage())
             ->addLanguage(new ScssLanguage())
             ->addLanguage(new SemaLanguage())
             ->addLanguage(new SqlLanguage())

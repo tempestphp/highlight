@@ -21,6 +21,10 @@ trait IsHighlightInjection
         $start = '{' . $this->getToken();
         $end = $this->getToken() . '}';
 
+        if (! str_contains($content, $start)) {
+            return new ParsedInjection($content);
+        }
+
         $openers = $this->findOffsets('/' . preg_quote($start, '/') . '/', $content);
         $closers = $this->findOffsets('/' . preg_quote($end, '/') . '(?!})/', $content);
 

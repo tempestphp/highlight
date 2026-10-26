@@ -22,33 +22,62 @@ trait IsHighlightInjection
 
         $pattern = '/(?<start>{' . $token . ')(?<match>(.|\n)*?)(?<end>' . $token . '})(?!})/';
 
-        preg_match_all($pattern, $content, $matches, PREG_OFFSET_CAPTURE);
-
         $tokens = [];
+        $offset = 0;
 
-        foreach (array_keys($matches[0]) as $key) {
+        while (preg_match($pattern, $content, $match, PREG_OFFSET_CAPTURE, $offset) === 1) {
+            if ($this->leavesItsBraces($match['match'][0])) {
+                $offset = (int)$match['start'][1] + 1;
+
+                continue;
+            }
+
             $tokens[] = new Token(
-                offset: (int)$matches['start'][$key][1],
-                value: $matches['start'][$key][0],
+                offset: (int)$match['start'][1],
+                value: $match['start'][0],
                 type: TokenTypeEnum::HIDDEN,
             );
 
             $tokens[] = new Token(
-                offset: (int)$matches['match'][$key][1],
-                value: $matches['match'][$key][0],
+                offset: (int)$match['match'][1],
+                value: $match['match'][0],
                 type: new DynamicTokenType($this->getClassname()),
             );
 
             $tokens[] = new Token(
-                offset: (int)$matches['end'][$key][1],
-                value: $matches['end'][$key][0],
+                offset: (int)$match['end'][1],
+                value: $match['end'][0],
                 type: TokenTypeEnum::HIDDEN,
             );
+
+            $offset = (int)$match['end'][1] + strlen($match['end'][0]);
         }
 
         return new ParsedInjection(
             content: $content,
             tokens: $tokens,
         );
+    }
+
+    /**
+     * In code like `const {_id} = a; const {name_} = b;`, the brace of `{_` is closed by the code itself,
+     * so the matched content leaves one pair of braces and ends inside another: `id} = a; const {name`.
+     * Real markers can wrap an unbalanced `{` or `}`, but never a `}` followed by a `{` that stays open.
+     */
+    private function leavesItsBraces(string $match): bool
+    {
+        $depth = 0;
+        $lowestDepth = 0;
+
+        foreach (str_split($match) as $character) {
+            if ($character === '{') {
+                $depth++;
+            } elseif ($character === '}') {
+                $depth--;
+                $lowestDepth = min($lowestDepth, $depth);
+            }
+        }
+
+        return $lowestDepth < 0 && $depth > $lowestDepth;
     }
 }

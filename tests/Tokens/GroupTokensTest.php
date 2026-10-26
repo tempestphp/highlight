@@ -46,4 +46,50 @@ class GroupTokensTest extends TestCase
         $this->assertCount(1, $tokens);
         $this->assertCount(3, $tokens[0]->children);
     }
+
+    public function test_children_are_grouped_as_well(): void
+    {
+        $tokens = [
+            new Token(0, '"SELECT * FROM users"', new DynamicTokenType('hl-em')),
+            new Token(0, '"SELECT * FROM users"', TokenTypeEnum::VALUE),
+            new Token(1, 'SELECT', TokenTypeEnum::PROPERTY),
+            new Token(10, 'FROM', TokenTypeEnum::PROPERTY),
+        ];
+
+        $grouped = (new GroupTokens())($tokens);
+
+        $this->assertCount(1, $grouped);
+        $this->assertCount(1, $grouped[0]->children);
+        $this->assertSame(TokenTypeEnum::VALUE, $grouped[0]->children[0]->type);
+        $this->assertSame([], $grouped[0]->children[0]->children);
+    }
+
+    public function test_token_running_past_its_parent_is_dropped(): void
+    {
+        $tokens = [
+            new Token(0, '$foo = "SEL', new DynamicTokenType('hl-em')),
+            new Token(7, '"SELECT"', TokenTypeEnum::VALUE),
+        ];
+
+        $grouped = (new GroupTokens())($tokens);
+
+        $this->assertCount(1, $grouped);
+        $this->assertSame([], $grouped[0]->children);
+    }
+
+    public function test_markers_can_be_placed_inside_any_token(): void
+    {
+        $tokens = [
+            new Token(0, '"Hello {_world_}"', TokenTypeEnum::VALUE),
+            new Token(7, '{_', TokenTypeEnum::HIDDEN),
+            new Token(9, 'world', new DynamicTokenType('hl-em')),
+            new Token(14, '_}', TokenTypeEnum::HIDDEN),
+        ];
+
+        $grouped = (new GroupTokens())($tokens);
+
+        $this->assertCount(1, $grouped);
+        $this->assertCount(3, $grouped[0]->children);
+        $this->assertSame('hl-em', $grouped[0]->children[1]->type->getValue());
+    }
 }

@@ -51,9 +51,13 @@ use Tempest\Highlight\Languages\Vue\VueLanguage;
 use Tempest\Highlight\Languages\Xml\XmlLanguage;
 use Tempest\Highlight\Languages\Yaml\YamlLanguage;
 use Tempest\Highlight\Themes\CssTheme;
+use Tempest\Highlight\Tokens\DynamicTokenType;
 use Tempest\Highlight\Tokens\GroupTokens;
 use Tempest\Highlight\Tokens\ParseTokens;
 use Tempest\Highlight\Tokens\RenderTokens;
+use Tempest\Highlight\Tokens\ShiftTokens;
+use Tempest\Highlight\Tokens\Token;
+use Tempest\Highlight\Tokens\TokenTypeEnum;
 
 final class Highlighter
 {
@@ -63,6 +67,7 @@ final class Highlighter
     private bool $isNested = false;
     private readonly ParseTokens $parseTokens;
     private readonly GroupTokens $groupTokens;
+    private readonly ShiftTokens $shiftTokens;
     private readonly RenderTokens $renderTokens;
     private array $patterns = [];
     private array $afterInjections = [];
@@ -123,6 +128,7 @@ final class Highlighter
 
         $this->parseTokens = new ParseTokens();
         $this->groupTokens = new GroupTokens();
+        $this->shiftTokens = new ShiftTokens();
         $this->renderTokens = new RenderTokens($this->theme);
     }
 
@@ -222,6 +228,11 @@ final class Highlighter
         // Before Injections
         foreach ($this->getBeforeInjections($language) as $injection) {
             $parsedInjection = $injection->parse($content, $nestedHighlighter);
+
+            if ($tokens !== [] && $parsedInjection->replacements !== []) {
+                $tokens = ($this->shiftTokens)($tokens, $parsedInjection->replacements, $content, $parsedInjection->content);
+            }
+
             $content = $parsedInjection->content;
 
             foreach ($parsedInjection->tokens as $token) {
@@ -230,10 +241,12 @@ final class Highlighter
         }
 
         // Patterns
-        foreach (
-            $this->parseTokens->parse($content, $this->getPatterns($language)) as $token
-        ) {
-            $tokens[] = $token;
+        if ($tokens === []) {
+            $tokens = $this->parseTokens->parse($content, $this->getPatterns($language));
+        } else {
+            foreach ($this->parsePatternsAroundMarkers($content, $tokens, $language) as $token) {
+                $tokens[] = $token;
+            }
         }
 
         $groupedTokens = ($this->groupTokens)($tokens);
@@ -250,6 +263,99 @@ final class Highlighter
         }
 
         return $this->theme->escape($content);
+    }
+
+    /**
+     * Markers like {_ and _} stay in the content until it's rendered, as hidden tokens, but patterns shouldn't
+     * see them: `{_function` should match the `function` keyword, and `pre{_class_}post` shouldn't match `class`.
+     * Patterns run on the content without markers, and the tokens they find are moved back onto the real content.
+     *
+     * Highlighted parts (from markers or custom classes) take precedence: a token that only partially
+     * overlaps one of them is dropped, so that the highlighted part can be rendered as a whole.
+     *
+     * @param Token[] $tokens Tokens found by injections
+     * @return Token[]
+     */
+    private function parsePatternsAroundMarkers(string $content, array $tokens, Language $language): array
+    {
+        $markers = [];
+        $highlights = [];
+
+        foreach ($tokens as $token) {
+            if ($token->type === TokenTypeEnum::HIDDEN) {
+                $markers[] = $token;
+            } elseif ($token->type instanceof DynamicTokenType) {
+                $highlights[] = $token;
+            }
+        }
+
+        usort($markers, static fn (Token $a, Token $b): int => $a->start <=> $b->start);
+
+        $contentWithoutMarkers = '';
+        $removedMarkers = [];
+        $cursor = 0;
+
+        foreach ($markers as $marker) {
+            if ($marker->start < $cursor) {
+                continue;
+            }
+
+            $contentWithoutMarkers .= substr($content, $cursor, $marker->start - $cursor);
+            $removedMarkers[] = $marker;
+            $cursor = $marker->end;
+        }
+
+        $contentWithoutMarkers .= substr($content, $cursor);
+
+        $patternTokens = [];
+
+        foreach ($this->parseTokens->parse($contentWithoutMarkers, $this->getPatterns($language)) as $token) {
+            if ($removedMarkers !== []) {
+                // A marker right at the start of a token comes before it, a marker right at its end comes after it
+                $start = $this->offsetWithMarkers($token->start, $removedMarkers, includeMarkersAtOffset: true);
+                $end = $this->offsetWithMarkers($token->end, $removedMarkers, includeMarkersAtOffset: false);
+
+                $token = new Token(
+                    offset: $start,
+                    value: substr($content, $start, $end - $start),
+                    type: $token->type,
+                    pattern: $token->pattern,
+                );
+            }
+
+            foreach ($highlights as $highlight) {
+                $crossesStart = $token->start < $highlight->start && $highlight->start < $token->end && $token->end < $highlight->end;
+                $crossesEnd = $highlight->start < $token->start && $token->start < $highlight->end && $highlight->end < $token->end;
+
+                if ($crossesStart || $crossesEnd) {
+                    continue 2;
+                }
+            }
+
+            $patternTokens[] = $token;
+        }
+
+        return $patternTokens;
+    }
+
+    /**
+     * @param Token[] $markers
+     */
+    private function offsetWithMarkers(int $offset, array $markers, bool $includeMarkersAtOffset): int
+    {
+        $removedLength = 0;
+
+        foreach ($markers as $marker) {
+            $offsetWithoutMarkers = $marker->start - $removedLength;
+
+            if ($offsetWithoutMarkers > $offset || ($offsetWithoutMarkers === $offset && ! $includeMarkersAtOffset)) {
+                break;
+            }
+
+            $removedLength += $marker->length;
+        }
+
+        return $offset + $removedLength;
     }
 
     /**

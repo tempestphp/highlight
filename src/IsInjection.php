@@ -18,24 +18,51 @@ trait IsInjection
             $pattern = "/{$pattern}/";
         }
 
+        $replacements = [];
+
         $result = preg_replace_callback(
             pattern: $pattern,
-            callback: function (array $matches) use ($highlighter): string {
-                $content = $matches['match'] ?? '';
+            callback: function (array $matches) use ($highlighter, &$replacements): string {
+                [$fullMatch, $offset] = $matches[0];
+
+                $content = $matches['match'][0] ?? '';
 
                 if ($content === '' || $content === '0') {
-                    return $matches[0];
+                    return $fullMatch;
+                }
+
+                $parsedContent = $this->parseContent($content, $highlighter);
+
+                if ($parsedContent === $content) {
+                    return $fullMatch;
+                }
+
+                // Only the parsed content is rewritten, the rest of the match stays the same.
+                // Every occurrence that str_replace() will replace is reported on its own.
+                $position = 0;
+
+                while (($position = strpos($fullMatch, $content, $position)) !== false) {
+                    $replacements[] = [$offset + $position, strlen($content), strlen($parsedContent)];
+                    $position += strlen($content);
                 }
 
                 return str_replace(
                     search: $content,
-                    replace: $this->parseContent($content, $highlighter),
-                    subject: $matches[0],
+                    replace: $parsedContent,
+                    subject: $fullMatch,
                 );
             },
             subject: $content,
+            flags: PREG_OFFSET_CAPTURE,
         );
 
-        return new ParsedInjection($result ?? $content);
+        if ($result === null) {
+            return new ParsedInjection($content);
+        }
+
+        return new ParsedInjection(
+            content: $result,
+            replacements: $replacements,
+        );
     }
 }

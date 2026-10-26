@@ -51,6 +51,7 @@ final class HighlighterBench
         'swift' => 'swift.txt',
         'terminal' => 'terminal.txt',
         'terraform' => 'terraform.txt',
+        'toml' => 'toml.txt',
         'typescript' => 'typescript.txt',
         'txt' => 'text.txt',
         'twig' => 'twig.txt',

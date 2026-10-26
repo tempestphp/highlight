@@ -48,6 +48,8 @@ TXT,
     &lt;?php <span class="hl-property">foo</span>(); ?&gt;
 &lt;/<span class="hl-keyword">tag</span>&gt;
 TXT],
+            ['<math-α></math-α>', '&lt;<span class="hl-keyword">math-α</span>&gt;&lt;/<span class="hl-keyword">math-α</span>&gt;'],
+            ['<emotion-😍-emoji></emotion-😍-emoji>', '&lt;<span class="hl-keyword">emotion-😍-emoji</span>&gt;&lt;/<span class="hl-keyword">emotion-😍-emoji</span>&gt;'],
         ];
     }
 }

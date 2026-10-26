@@ -10,6 +10,7 @@ use Tempest\Highlight\Languages\Base\Injections\GutterInjection;
 use Tempest\Highlight\Languages\Bash\BashLanguage;
 use Tempest\Highlight\Languages\BBCode\BBCodeLanguage;
 use Tempest\Highlight\Languages\Blade\BladeLanguage;
+use Tempest\Highlight\Languages\CSharp\CSharpLanguage;
 use Tempest\Highlight\Languages\C\CLanguage;
 use Tempest\Highlight\Languages\Cpp\CppLanguage;
 use Tempest\Highlight\Languages\Css\CssLanguage;
@@ -78,6 +79,7 @@ final class Highlighter
             ->addLanguage(new BashLanguage())
             ->addLanguage(new BBCodeLanguage())
             ->addLanguage(new BladeLanguage())
+            ->addLanguage(new CSharpLanguage())
             ->addLanguage(new CLanguage())
             ->addLanguage(new CppLanguage())
             ->addLanguage(new CssLanguage())

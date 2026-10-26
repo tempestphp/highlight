@@ -21,6 +21,7 @@ final class HighlighterBench
         'bash' => 'bash.txt',
         'bbcode' => 'bbcode.txt',
         'blade' => 'blade.txt',
+        'csharp' => 'csharp.txt',
         'c' => 'c.txt',
         'cpp' => 'cpp.txt',
         'css' => 'css.txt',

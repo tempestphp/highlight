@@ -36,4 +36,17 @@ TXT;
 
         $this->assertTrue(true);
     }
+
+    public function test_addition_ending_inside_an_embedded_language(): void
+    {
+        $content = "{+<script>+}\n    a;\n</script>";
+
+        $expected = <<<'TXT'
+<span class="hl-addition">&lt;<span class="hl-keyword">script</span>&gt;</span>
+    a;
+&lt;/<span class="hl-keyword">script</span>&gt;
+TXT;
+
+        $this->assertSame($expected, (new Highlighter())->parse($content, 'html'));
+    }
 }

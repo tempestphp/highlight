@@ -168,6 +168,60 @@ final class HighlightMarkersTest extends TestCase
         ];
     }
 
+    #[DataProvider('provide_marker_delimiters_in_ordinary_code_are_not_markers_cases')]
+    public function test_marker_delimiters_in_ordinary_code_are_not_markers(string $language, string $content): void
+    {
+        $parsed = (new Highlighter())->parse($content, $language);
+
+        $this->assertStringNotContainsString('display: none', $parsed);
+        $this->assertStringNotContainsString('hl-em', $parsed);
+        $this->assertStringNotContainsString('hl-strong', $parsed);
+        $this->assertStringNotContainsString('hl-blur', $parsed);
+    }
+
+    public static function provide_marker_delimiters_in_ordinary_code_are_not_markers_cases(): iterable
+    {
+        return [
+            'javascript destructuring (#240)' => ['javascript', 'const {_id} = a; const {name_} = b;'],
+            'python dicts (#240)' => ['python', "a = {_: 1}\nb = {1: _}"],
+            'php braces' => ['php', '$a = "{_id}" . $b . "{name_}";'],
+            'strong' => ['javascript', 'f({*a}, {b*});'],
+            'blur' => ['javascript', 'f({~a}, {b~});'],
+        ];
+    }
+
+    public function test_marker_after_ordinary_code_delimiter_still_works(): void
+    {
+        $this->assertSame(
+            '<span class="hl-keyword">const</span> {_id} = a; <span style="display: none">{_</span><span class="hl-em">b</span><span style="display: none">_}</span>;',
+            (new Highlighter())->parse('const {_id} = a; {_b_};', 'javascript'),
+        );
+    }
+
+    #[DataProvider('provide_markers_around_unbalanced_braces_cases')]
+    public function test_markers_around_unbalanced_braces(string $content, string $classname): void
+    {
+        $parsed = (new Highlighter())->parse($content, 'php');
+
+        $this->assertStringContainsString('<span class="' . $classname . '">', $parsed);
+        $visible = strip_tags(preg_replace('/<span style="display: none">.*?<\/span>/', '', $parsed));
+
+        $this->assertDoesNotMatchRegularExpression('/{[_*~]|[_*~]}/', $visible);
+    }
+
+    public static function provide_markers_around_unbalanced_braces_cases(): iterable
+    {
+        return [
+            'opening brace' => ["{_function foo() {_}\n    return 1;\n}", 'hl-em'],
+            'closing brace' => ["function foo() {\n{_    return 1;\n}_}", 'hl-em'],
+            'closing then balanced braces' => ['{_}): Foo {}_}', 'hl-em'],
+            'else' => ["if (\$x) {\n{_} else {_}\n}", 'hl-em'],
+            'end of a block and else' => ["if (\$x) {\n{_    return 1;\n} else {_}\n}", 'hl-em'],
+            'catch' => ["try {\n    a();\n{*} catch (E \$e) {*}\n}", 'hl-strong'],
+            'finally' => ["try {\n    a();\n{~} finally {~}\n}", 'hl-blur'],
+        ];
+    }
+
     public function test_markers_work_with_gutter(): void
     {
         $highlighter = (new Highlighter())->withGutter();

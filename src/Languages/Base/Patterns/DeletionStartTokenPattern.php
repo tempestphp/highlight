@@ -13,13 +13,15 @@ use Tempest\Highlight\Tokens\TokenType;
 #[PatternTest('{- pull_request_target: -}', '{-')]
 #[PatternTest('{-- pull_request_target: --}', null)]
 #[PatternTest('{{- variable -}}', null)]
+#[PatternTest('❷span class=❹ignore❹❸{-❷/span❸', null)]
 final readonly class DeletionStartTokenPattern implements Pattern
 {
     use IsPattern;
 
     public function getPattern(): string
     {
-        return '/(?<!\{)(?<match>{\-)(?!-)/';
+        // A delimiter that is already ignored comes from code highlighted by a nested highlighter
+        return '/(?<!\{)(?<!❹ignore❹❸)(?<match>{\-)(?!-)/';
     }
 
     public function getTokenType(): TokenType

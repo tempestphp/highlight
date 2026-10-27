@@ -18,37 +18,140 @@ trait IsHighlightInjection
 
     public function parse(string $content, Highlighter $highlighter): ParsedInjection
     {
-        $token = '\\' . $this->getToken();
+        $start = '{' . $this->getToken();
+        $end = $this->getToken() . '}';
 
-        $pattern = '/(?<start>{' . $token . ')(?<match>(.|\n)*?)(?<end>' . $token . '})(?!})/';
+        if (! str_contains($content, $start)) {
+            return new ParsedInjection($content);
+        }
 
-        preg_match_all($pattern, $content, $matches, PREG_OFFSET_CAPTURE);
+        $openers = $this->findOffsets('/' . preg_quote($start, '/') . '/', $content);
+        $closers = $this->findOffsets('/' . preg_quote($end, '/') . '(?!})/', $content);
 
         $tokens = [];
+        $openerIndex = 0;
+        $closerIndex = 0;
+        $cursor = 0;
 
-        foreach (array_keys($matches[0]) as $key) {
+        while ($openerIndex < count($openers)) {
+            if ($openers[$openerIndex] < $cursor) {
+                $openerIndex++;
+
+                continue;
+            }
+
+            $contentStart = $openers[$openerIndex] + strlen($start);
+
+            while ($closerIndex < count($closers) && $closers[$closerIndex] < $contentStart) {
+                $closerIndex++;
+            }
+
+            if ($closerIndex === count($closers)) {
+                break;
+            }
+
+            $closer = $closers[$closerIndex];
+
+            // Every opener before this closer would end with it, the first one that is a real marker wins
+            $candidates = [];
+
+            while ($openerIndex < count($openers) && $openers[$openerIndex] + strlen($start) <= $closer) {
+                $candidates[] = $openers[$openerIndex];
+                $openerIndex++;
+            }
+
+            $opener = $this->findMarkerOpener($content, $candidates, strlen($start), $closer);
+
+            if ($opener === null) {
+                continue;
+            }
+
+            $contentStart = $opener + strlen($start);
+
             $tokens[] = new Token(
-                offset: (int)$matches['start'][$key][1],
-                value: $matches['start'][$key][0],
+                offset: $opener,
+                value: $start,
                 type: TokenTypeEnum::HIDDEN,
             );
 
             $tokens[] = new Token(
-                offset: (int)$matches['match'][$key][1],
-                value: $matches['match'][$key][0],
+                offset: $contentStart,
+                value: substr($content, $contentStart, $closer - $contentStart),
                 type: new DynamicTokenType($this->getClassname()),
             );
 
             $tokens[] = new Token(
-                offset: (int)$matches['end'][$key][1],
-                value: $matches['end'][$key][0],
+                offset: $closer,
+                value: $end,
                 type: TokenTypeEnum::HIDDEN,
             );
+
+            $cursor = $closer + strlen($end);
         }
 
         return new ParsedInjection(
             content: $content,
             tokens: $tokens,
         );
+    }
+
+    /**
+     * @return int[]
+     */
+    private function findOffsets(string $pattern, string $content): array
+    {
+        preg_match_all($pattern, $content, $matches, PREG_OFFSET_CAPTURE);
+
+        return array_map(static fn (array $match): int => (int)$match[1], $matches[0]);
+    }
+
+    /**
+     * In code like `const {_id} = a; const {name_} = b;`, the brace of `{_` is closed by the code itself,
+     * so the content between the delimiters leaves one pair of braces and ends inside another: `id} = a; const {name`.
+     * Real markers can wrap an unbalanced `{` or `}`, and can start right before a closing brace
+     * or end right after an opening brace, like around `} else {`.
+     *
+     * Brace depths are counted backwards from the closer, so that all openers are checked in a single scan.
+     *
+     * @param int[] $openers
+     */
+    private function findMarkerOpener(string $content, array $openers, int $openerLength, int $closer): ?int
+    {
+        $endsWithOpeningBrace = substr(rtrim(substr($content, $openers[0] + $openerLength, $closer - $openers[0] - $openerLength)), -1) === '{';
+
+        $depth = 0;
+        $lowestDepth = 0;
+        $position = $closer;
+        $isMarker = [];
+
+        foreach (array_reverse($openers) as $opener) {
+            $contentStart = $opener + $openerLength;
+
+            while ($position > $contentStart) {
+                $position--;
+
+                if ($content[$position] === '{') {
+                    $depth++;
+                    $lowestDepth = min(0, $lowestDepth + 1);
+                } elseif ($content[$position] === '}') {
+                    $depth--;
+                    $lowestDepth = min(0, $lowestDepth - 1);
+                }
+            }
+
+            $leavesItsBraces = $lowestDepth < 0 && $depth > $lowestDepth;
+
+            $isMarker[$opener] = ! $leavesItsBraces
+                || $endsWithOpeningBrace
+                || str_starts_with(ltrim(substr($content, $contentStart, 1 + strspn($content, " \t\r\n", $contentStart))), '}');
+        }
+
+        foreach ($openers as $opener) {
+            if ($isMarker[$opener]) {
+                return $opener;
+            }
+        }
+
+        return null;
     }
 }

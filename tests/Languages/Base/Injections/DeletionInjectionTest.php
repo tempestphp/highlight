@@ -52,4 +52,17 @@ TXT;
 
         $this->assertSame($content, $parsedInjection->content);
     }
+
+    public function test_deletion_ending_inside_an_embedded_language(): void
+    {
+        $content = "{-<script>-}\n    a;\n</script>";
+
+        $expected = <<<'TXT'
+<span class="hl-deletion">&lt;<span class="hl-keyword">script</span>&gt;</span>
+    a;
+&lt;/<span class="hl-keyword">script</span>&gt;
+TXT;
+
+        $this->assertSame($expected, (new Highlighter())->parse($content, 'html'));
+    }
 }
